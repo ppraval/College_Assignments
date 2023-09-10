@@ -1,0 +1,76 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/CollegeAssignments/Verilog Codes/four_bit_half_adder/simulation/modelsim
+vfour_bit_half_adder
+Z1 !s110 1693457761
+!i10b 1
+!s100 <4gAf8AZ>6<JWClebR[SM1
+I^I>HOPeTN`CWN2@VSA`DO3
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+Z3 w1693457736
+Z4 8D:/CollegeAssignments/Verilog Codes/four_bit_half_adder/four_bit_half_adder.v
+Z5 FD:/CollegeAssignments/Verilog Codes/four_bit_half_adder/four_bit_half_adder.v
+L0 6
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1693457761.000000
+Z8 !s107 D:/CollegeAssignments/Verilog Codes/four_bit_half_adder/four_bit_half_adder.v|
+Z9 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/CollegeAssignments/Verilog Codes/four_bit_half_adder|D:/CollegeAssignments/Verilog Codes/four_bit_half_adder/four_bit_half_adder.v|
+!i113 1
+Z10 o-vlog01compat -work work
+Z11 !s92 -vlog01compat -work work {+incdir+D:/CollegeAssignments/Verilog Codes/four_bit_half_adder}
+Z12 tCvgOpt 0
+vfour_bit_half_adder_test
+!s110 1693457762
+!i10b 1
+!s100 h18DW6;XZ70PI]_kXg=F82
+I8FKn3h_T<[iDBhWSG4]^F2
+R2
+R0
+w1693456001
+8D:/CollegeAssignments/Verilog Codes/four_bit_half_adder/four_bit_half_adder_test.v
+FD:/CollegeAssignments/Verilog Codes/four_bit_half_adder/four_bit_half_adder_test.v
+L0 1
+R6
+r1
+!s85 0
+31
+!s108 1693457762.000000
+!s107 D:/CollegeAssignments/Verilog Codes/four_bit_half_adder/four_bit_half_adder_test.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/CollegeAssignments/Verilog Codes/four_bit_half_adder|D:/CollegeAssignments/Verilog Codes/four_bit_half_adder/four_bit_half_adder_test.v|
+!i113 1
+R10
+R11
+R12
+vhalf_add
+R1
+!i10b 1
+!s100 Vgd^1Y@JCliJKeoRKTngP1
+IhMo`JDoBNc8HaLI9m1knR0
+R2
+R0
+R3
+R4
+R5
+L0 1
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+R12

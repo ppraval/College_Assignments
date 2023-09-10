@@ -1,0 +1,88 @@
+|four_bit_half_adder
+a[0] => a[0].IN1
+a[1] => a[1].IN1
+a[2] => a[2].IN1
+a[3] => a[3].IN1
+b[0] => b[0].IN1
+b[1] => b[1].IN1
+b[2] => b[2].IN1
+b[3] => b[3].IN1
+s[0] <= half_add:ha2.port2
+s[1] <= half_add:ha4.port2
+s[2] <= half_add:ha6.port2
+s[3] <= half_add:ha8.port2
+s[4] <= or4.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|four_bit_half_adder|half_add:ha1
+a => g1.IN0
+a => g2.IN0
+b => g1.IN1
+b => g2.IN1
+s <= g1.DB_MAX_OUTPUT_PORT_TYPE
+c <= g2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|four_bit_half_adder|half_add:ha2
+a => g1.IN0
+a => g2.IN0
+b => g1.IN1
+b => g2.IN1
+s <= g1.DB_MAX_OUTPUT_PORT_TYPE
+c <= g2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|four_bit_half_adder|half_add:ha3
+a => g1.IN0
+a => g2.IN0
+b => g1.IN1
+b => g2.IN1
+s <= g1.DB_MAX_OUTPUT_PORT_TYPE
+c <= g2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|four_bit_half_adder|half_add:ha4
+a => g1.IN0
+a => g2.IN0
+b => g1.IN1
+b => g2.IN1
+s <= g1.DB_MAX_OUTPUT_PORT_TYPE
+c <= g2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|four_bit_half_adder|half_add:ha5
+a => g1.IN0
+a => g2.IN0
+b => g1.IN1
+b => g2.IN1
+s <= g1.DB_MAX_OUTPUT_PORT_TYPE
+c <= g2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|four_bit_half_adder|half_add:ha6
+a => g1.IN0
+a => g2.IN0
+b => g1.IN1
+b => g2.IN1
+s <= g1.DB_MAX_OUTPUT_PORT_TYPE
+c <= g2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|four_bit_half_adder|half_add:ha7
+a => g1.IN0
+a => g2.IN0
+b => g1.IN1
+b => g2.IN1
+s <= g1.DB_MAX_OUTPUT_PORT_TYPE
+c <= g2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|four_bit_half_adder|half_add:ha8
+a => g1.IN0
+a => g2.IN0
+b => g1.IN1
+b => g2.IN1
+s <= g1.DB_MAX_OUTPUT_PORT_TYPE
+c <= g2.DB_MAX_OUTPUT_PORT_TYPE
+
+

@@ -1,0 +1,14 @@
+module eight_by_one_mux_test;
+reg [7:0] i;
+reg a,b,c;
+
+eight_by_one_mux (i0, i1, i2, i3, i4, i5, i6, i7, a, b, c, y);
+integer i;
+initial begin
+	for (i = 0; i < 2048; i = i + 1) 
+		begin
+			{i0, i1, i2, i3, i4, i5, i6, i7, a, b, c} = i;
+			#20;
+		end
+	end
+endmodule

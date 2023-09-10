@@ -1,0 +1,42 @@
+$date
+	Sat Aug 26 23:30:46 2023
+$end
+$version
+	ModelSim Version 10.5b
+$end
+$timescale
+	1ps
+$end
+
+$scope module and_gate_test $end
+$var reg 1 ! a $end
+$var reg 1 " b $end
+$var wire 1 # x $end
+
+$scope module uut $end
+$var wire 1 $ a $end
+$var wire 1 % b $end
+$var wire 1 # x $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0!
+0"
+0#
+0%
+0$
+$end
+#10
+1"
+1%
+#20
+1!
+0"
+1$
+0%
+#30
+1"
+1%
+1#

@@ -1,0 +1,13 @@
+module eight_by_one_mux_test;
+reg s0, s1, s3, i;
+wire y0, y1, y2, y3, y4, y5, y6, y7;
+eight_by_one_mux gate1 (i, s0, s1, s3, y0, y1, y2, y3, y4, y5, y6, y7);
+integer i;
+initial begin
+	for (i = 0; i < 16; i = i + 1) 
+		begin
+			{s0, s1, s3, i} = i;
+			#20;
+		end
+	end
+endmodule

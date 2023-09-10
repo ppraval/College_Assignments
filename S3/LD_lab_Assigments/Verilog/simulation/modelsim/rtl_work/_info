@@ -1,0 +1,54 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/CollegeAssignments/Verilog/simulation/modelsim
+vand_gate
+Z1 !s110 1693072838
+!i10b 1
+!s100 BYH81H38bBeS9[AaMim`11
+IlR@:MnGOEPGMO[[]ljjkk3
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1693072240
+8D:/CollegeAssignments/Verilog/and_gate.v
+FD:/CollegeAssignments/Verilog/and_gate.v
+L0 1
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z4 !s108 1693072838.000000
+!s107 D:/CollegeAssignments/Verilog/and_gate.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/CollegeAssignments/Verilog|D:/CollegeAssignments/Verilog/and_gate.v|
+!i113 1
+Z5 o-vlog01compat -work work
+Z6 !s92 -vlog01compat -work work +incdir+D:/CollegeAssignments/Verilog
+Z7 tCvgOpt 0
+vand_gate_test
+R1
+!i10b 1
+!s100 Hg=`5BZEoP<=`^Ck`KX8g0
+IORS:cYY<79Tgii;bjc;=<0
+R2
+R0
+w1693072801
+8D:/CollegeAssignments/Verilog/and_gate_test.v
+FD:/CollegeAssignments/Verilog/and_gate_test.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 D:/CollegeAssignments/Verilog/and_gate_test.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/CollegeAssignments/Verilog|D:/CollegeAssignments/Verilog/and_gate_test.v|
+!i113 1
+R5
+R6
+R7

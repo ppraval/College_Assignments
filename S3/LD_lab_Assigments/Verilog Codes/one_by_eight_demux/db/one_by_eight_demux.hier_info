@@ -1,0 +1,43 @@
+|one_by_eight_demux
+d => WideAnd0.IN0
+d => WideAnd1.IN0
+d => WideAnd2.IN0
+d => WideAnd3.IN0
+d => WideAnd4.IN0
+d => WideAnd5.IN0
+d => WideAnd6.IN0
+d => WideAnd7.IN0
+s0 => WideAnd4.IN1
+s0 => WideAnd5.IN1
+s0 => WideAnd6.IN1
+s0 => WideAnd7.IN1
+s0 => WideAnd0.IN1
+s0 => WideAnd1.IN1
+s0 => WideAnd2.IN1
+s0 => WideAnd3.IN1
+s1 => WideAnd2.IN2
+s1 => WideAnd3.IN2
+s1 => WideAnd0.IN2
+s1 => WideAnd1.IN2
+s1 => WideAnd4.IN2
+s1 => WideAnd5.IN2
+s1 => WideAnd6.IN2
+s1 => WideAnd7.IN2
+s2 => WideAnd1.IN3
+s2 => WideAnd3.IN3
+s2 => WideAnd0.IN3
+s2 => WideAnd2.IN3
+s2 => WideAnd4.IN3
+s2 => WideAnd5.IN3
+s2 => WideAnd6.IN3
+s2 => WideAnd7.IN3
+y0 <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
+y1 <= WideAnd1.DB_MAX_OUTPUT_PORT_TYPE
+y2 <= WideAnd2.DB_MAX_OUTPUT_PORT_TYPE
+y3 <= WideAnd3.DB_MAX_OUTPUT_PORT_TYPE
+y4 <= WideAnd4.DB_MAX_OUTPUT_PORT_TYPE
+y5 <= WideAnd5.DB_MAX_OUTPUT_PORT_TYPE
+y6 <= WideAnd6.DB_MAX_OUTPUT_PORT_TYPE
+y7 <= WideAnd7.DB_MAX_OUTPUT_PORT_TYPE
+
+
