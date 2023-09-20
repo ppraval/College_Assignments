@@ -7,12 +7,12 @@ b[0] => b[0].IN1
 b[1] => b[1].IN1
 b[2] => b[2].IN1
 b[3] => b[3].IN1
-cin => cin.IN1
-s[0] << full_add:fa1.port3
-s[1] << full_add:fa2.port3
-s[2] << full_add:fa3.port3
-s[3] << full_add:fa4.port3
-s[4] << full_add:fa4.port4
+cin => ~NO_FANOUT~
+s[0] <= full_add:fa1.port3
+s[1] <= full_add:fa2.port3
+s[2] <= full_add:fa3.port3
+s[3] <= full_add:fa4.port3
+s[4] <= full_add:fa4.port4
 
 
 |four_bit_ripple_adder|full_add:fa1

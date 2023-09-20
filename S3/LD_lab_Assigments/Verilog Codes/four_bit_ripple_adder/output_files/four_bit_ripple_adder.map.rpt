@@ -1,5 +1,5 @@
 Analysis & Elaboration report for four_bit_ripple_adder
-Sun Aug 27 11:20:16 2023
+Tue Sep 19 10:19:39 2023
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -10,7 +10,8 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
   2. Analysis & Elaboration Summary
   3. Parallel Compilation
   4. Analysis & Elaboration Settings
-  5. Analysis & Elaboration Messages
+  5. Port Connectivity Checks: "full_add:fa1"
+  6. Analysis & Elaboration Messages
 
 
 
@@ -36,7 +37,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Elaboration Summary                                                   ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Elaboration Status      ; Successful - Sun Aug 27 11:20:16 2023       ;
+; Analysis & Elaboration Status      ; Successful - Tue Sep 19 10:19:39 2023       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; four_bit_ripple_adder                       ;
 ; Top-level Entity Name              ; four_bit_ripple_adder                       ;
@@ -157,29 +158,38 @@ refer to the applicable agreement for further details.
 +------------------------------------------------------------------+-----------------------+-----------------------+
 
 
++------------------------------------------+
+; Port Connectivity Checks: "full_add:fa1" ;
++------+-------+----------+----------------+
+; Port ; Type  ; Severity ; Details        ;
++------+-------+----------+----------------+
+; cin  ; Input ; Info     ; Stuck at GND   ;
++------+-------+----------+----------------+
+
+
 +---------------------------------+
 ; Analysis & Elaboration Messages ;
 +---------------------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Elaboration
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Sun Aug 27 11:20:07 2023
+    Info: Processing started: Tue Sep 19 10:19:30 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off four_bit_ripple_adder -c four_bit_ripple_adder --analysis_and_elaboration
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
 Info (12021): Found 3 design units, including 3 entities, in source file four_bit_ripple_adder.v
-    Info (12023): Found entity 1: half_add File: D:/CollegeAssignments/Verilog Codes/four_bit_ripple_adder/four_bit_ripple_adder.v Line: 2
-    Info (12023): Found entity 2: full_add File: D:/CollegeAssignments/Verilog Codes/four_bit_ripple_adder/four_bit_ripple_adder.v Line: 7
-    Info (12023): Found entity 3: four_bit_ripple_adder File: D:/CollegeAssignments/Verilog Codes/four_bit_ripple_adder/four_bit_ripple_adder.v Line: 15
+    Info (12023): Found entity 1: half_add File: D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/four_bit_ripple_adder/four_bit_ripple_adder.v Line: 2
+    Info (12023): Found entity 2: full_add File: D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/four_bit_ripple_adder/four_bit_ripple_adder.v Line: 7
+    Info (12023): Found entity 3: four_bit_ripple_adder File: D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/four_bit_ripple_adder/four_bit_ripple_adder.v Line: 15
 Info (12021): Found 1 design units, including 1 entities, in source file four_bit_ripple_adder_test.v
-    Info (12023): Found entity 1: four_bit_ripple_adder_test File: D:/CollegeAssignments/Verilog Codes/four_bit_ripple_adder/four_bit_ripple_adder_test.v Line: 1
+    Info (12023): Found entity 1: four_bit_ripple_adder_test File: D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/four_bit_ripple_adder/four_bit_ripple_adder_test.v Line: 1
 Info (12127): Elaborating entity "four_bit_ripple_adder" for the top level hierarchy
-Info (12128): Elaborating entity "full_add" for hierarchy "full_add:fa1" File: D:/CollegeAssignments/Verilog Codes/four_bit_ripple_adder/four_bit_ripple_adder.v Line: 18
-Info (12128): Elaborating entity "half_add" for hierarchy "full_add:fa1|half_add:ha1" File: D:/CollegeAssignments/Verilog Codes/four_bit_ripple_adder/four_bit_ripple_adder.v Line: 10
+Info (12128): Elaborating entity "full_add" for hierarchy "full_add:fa1" File: D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/four_bit_ripple_adder/four_bit_ripple_adder.v Line: 18
+Info (12128): Elaborating entity "half_add" for hierarchy "full_add:fa1|half_add:ha1" File: D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/four_bit_ripple_adder/four_bit_ripple_adder.v Line: 10
 Info: Quartus Prime Analysis & Elaboration was successful. 0 errors, 1 warning
     Info: Peak virtual memory: 4710 megabytes
-    Info: Processing ended: Sun Aug 27 11:20:16 2023
+    Info: Processing ended: Tue Sep 19 10:19:39 2023
     Info: Elapsed time: 00:00:09
-    Info: Total CPU time (on all processors): 00:00:08
+    Info: Total CPU time (on all processors): 00:00:06
 
 

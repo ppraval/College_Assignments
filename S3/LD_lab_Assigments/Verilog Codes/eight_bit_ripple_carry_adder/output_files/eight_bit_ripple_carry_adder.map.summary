@@ -1,0 +1,12 @@
+Analysis & Elaboration Status : Successful - Tue Sep 19 11:02:38 2023
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : eight_bit_ripple_carry_adder
+Top-level Entity Name : eight_bit_ripple_carry_adder
+Family : Cyclone V
+Logic utilization (in ALMs) : N/A until Partition Merge
+Total registers : N/A until Partition Merge
+Total pins : N/A until Partition Merge
+Total virtual pins : N/A until Partition Merge
+Total block memory bits : N/A until Partition Merge
+Total PLLs : N/A until Partition Merge
+Total DLLs : N/A until Partition Merge
