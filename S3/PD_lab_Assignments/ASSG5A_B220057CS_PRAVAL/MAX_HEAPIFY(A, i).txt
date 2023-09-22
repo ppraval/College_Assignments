@@ -1,0 +1,23 @@
+MAX_HEAPIFY(A, i)
+    largest = i
+    left = 2 * i
+    right = 2 * i + 1
+    if left < A.heapsize and A[left] > A[largest]
+       largest = left
+    if right < A.heapsize and A[right] > A[largest]
+       largest = left
+    if largest ! = i
+        swap A[i] and A[largest]
+        MAX_HEAPIFY(A, largest)
+
+
+HEAP_SORT(A)
+    for i = step(A.length/2) downto 1
+        MAX_HEAPIFY(A, i)
+    
+    for i = A.length downto 2
+        swap A[1] with A[i]
+        A.heapsize = A.heapsize - 1
+        MAX_HEAPIFY(A, 1)
+
+    
