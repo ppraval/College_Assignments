@@ -1,0 +1,33 @@
+|bcd_to_excess_three
+bcd[0] => bcd[0].IN1
+bcd[1] => bcd[1].IN1
+bcd[2] => bcd[2].IN1
+bcd[3] => bcd[3].IN1
+ex3[0] <= bcd_to_x3:g1.port1
+ex3[1] <= bcd_to_x3:g1.port1
+ex3[2] <= bcd_to_x3:g1.port1
+ex3[3] <= bcd_to_x3:g1.port1
+
+
+|bcd_to_excess_three|bcd_to_x3:g1
+bcd[0] => a2.IN0
+bcd[0] => a5.IN0
+bcd[0] => xn1.IN0
+bcd[0] => a3.IN0
+bcd[0] => ex3[0].DATAIN
+bcd[1] => a1.IN0
+bcd[1] => a4.IN0
+bcd[1] => xn1.IN1
+bcd[1] => a3.IN1
+bcd[2] => a3.IN2
+bcd[2] => a4.IN1
+bcd[2] => a5.IN1
+bcd[2] => a1.IN1
+bcd[2] => a2.IN1
+bcd[3] => o1.IN2
+ex3[0] <= bcd[0].DB_MAX_OUTPUT_PORT_TYPE
+ex3[1] <= xn1.DB_MAX_OUTPUT_PORT_TYPE
+ex3[2] <= o2.DB_MAX_OUTPUT_PORT_TYPE
+ex3[3] <= o1.DB_MAX_OUTPUT_PORT_TYPE
+
+

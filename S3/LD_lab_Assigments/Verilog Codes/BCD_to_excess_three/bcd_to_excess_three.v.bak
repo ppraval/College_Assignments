@@ -1,0 +1,19 @@
+module bcd_to_excess_three(input [3:0] bcd, output [3:0] ex3);
+	wire w1, w2, w3, w4, w5, w5, b_, c_, d_;
+	not (b_, bcd[2]);
+	not (c_, bcd[1]);
+	not (d_, bcd[0]);
+
+	and(w1, b_, bcd[1]);
+	and(w2, b_, bcd[0]);
+
+	or(ex3[3], bcd[3], w1, w2);
+
+	and(w3, bcd[2], c_, d_);
+
+	or(ex[2], w1, w2, w3);
+
+	xnor(ex3[1], bcd[1], bcd[0]);
+
+	assign ex3[0] = d_;
+endmodule
