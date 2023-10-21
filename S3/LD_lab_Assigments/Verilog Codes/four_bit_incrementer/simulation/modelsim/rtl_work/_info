@@ -1,0 +1,164 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/four_bit_incrementer/simulation/modelsim
+vandgate
+Z1 !s110 1697882544
+!i10b 1
+!s100 Bk]_:=Vg=hM<efEXHG42g3
+IDcoTo7V];WMYneD8KHcTz2
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+Z3 w1697881966
+Z4 8D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/four_bit_incrementer/four_bit_incrementer.v
+Z5 FD:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/four_bit_incrementer/four_bit_incrementer.v
+L0 1
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1697882544.000000
+Z8 !s107 D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/four_bit_incrementer/four_bit_incrementer.v|
+Z9 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/four_bit_incrementer|D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/four_bit_incrementer/four_bit_incrementer.v|
+!i113 1
+Z10 o-vlog01compat -work work
+Z11 !s92 -vlog01compat -work work {+incdir+D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/four_bit_incrementer}
+Z12 tCvgOpt 0
+vfour_bit_incrementer
+R1
+!i10b 1
+!s100 ?dV:VQDdEN:?C`G]no`420
+IN4kb55cA29hSBi9AK@DXB0
+R2
+R0
+R3
+R4
+R5
+L0 36
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+R12
+vfour_bit_incrementer_test
+R1
+!i10b 1
+!s100 0M4PQF>1cV_zK7_ng]ek72
+IIT5SQfS2fbj<ie:]:=gMc1
+R2
+R0
+w1697882515
+8D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/four_bit_incrementer/four_bit_incrementer_test.v
+FD:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/four_bit_incrementer/four_bit_incrementer_test.v
+L0 1
+R6
+r1
+!s85 0
+31
+R7
+!s107 D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/four_bit_incrementer/four_bit_incrementer_test.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/four_bit_incrementer|D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/four_bit_incrementer/four_bit_incrementer_test.v|
+!i113 1
+R10
+R11
+R12
+vfull_add
+R1
+!i10b 1
+!s100 fkYJfSed1fSQP5VHCnzh31
+Il1On?kL3SLKEGb5^Tnb]b1
+R2
+R0
+R3
+R4
+R5
+L0 28
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+R12
+vhalf_add
+R1
+!i10b 1
+!s100 kE:mIaT24[5zoTRSIDmjW3
+I`jR=mgBUN]oTD;WdMGf;>3
+R2
+R0
+R3
+R4
+R5
+L0 23
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+R12
+vorgate
+R1
+!i10b 1
+!s100 WWMnCi;21BTjm1oZE];^11
+IXeM^Nin8Ez^0c?FDzPXZY2
+R2
+R0
+R3
+R4
+R5
+L0 7
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+R12
+vxorgate
+R1
+!i10b 1
+!s100 YeZ3TaYHlYPI>WVeMORj12
+Ic7?lP^^l3EZmPO62`cj:L1
+R2
+R0
+R3
+R4
+R5
+L0 14
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+R12

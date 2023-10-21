@@ -1,0 +1,10 @@
+module notgate(output b, input a);
+	nand n1 (b, a, a)
+endmodule
+
+module four_bit_negator(input [3:0] a, output [3:0] b);
+	notgate n1(b[0],a[0]);
+	notgate n2(b[1],a[2]);
+	notgate n3(b[2],a[2]);
+	notgate n4(b[3],a[3]);
+endmodule

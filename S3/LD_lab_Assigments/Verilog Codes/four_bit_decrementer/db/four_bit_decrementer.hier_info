@@ -1,0 +1,365 @@
+|four_bit_decrementer
+a[0] => a[0].IN1
+a[1] => a[1].IN1
+a[2] => a[2].IN1
+a[3] => a[3].IN1
+cin => ~NO_FANOUT~
+s[0] << full_add:fa1.port3
+s[1] << full_add:fa2.port3
+s[2] << full_add:fa3.port3
+s[3] << full_add:fa4.port3
+s[4] << full_add:fa4.port4
+
+
+|four_bit_decrementer|full_add:fa1
+a => a.IN1
+b => b.IN1
+cin => cin.IN1
+s <= half_add:ha2.port2
+c <= orgate:or1.port0
+
+
+|four_bit_decrementer|full_add:fa1|half_add:ha1
+a => a.IN2
+b => b.IN2
+s <= xorgate:g1.port0
+c <= andgate:g2.port0
+
+
+|four_bit_decrementer|full_add:fa1|half_add:ha1|xorgate:g1
+c <= orgate:o1.port0
+a => a.IN1
+b => b.IN1
+
+
+|four_bit_decrementer|full_add:fa1|half_add:ha1|xorgate:g1|andgate:a1
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa1|half_add:ha1|xorgate:g1|andgate:a2
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa1|half_add:ha1|xorgate:g1|orgate:o1
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|four_bit_decrementer|full_add:fa1|half_add:ha1|andgate:g2
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa1|half_add:ha2
+a => a.IN2
+b => b.IN2
+s <= xorgate:g1.port0
+c <= andgate:g2.port0
+
+
+|four_bit_decrementer|full_add:fa1|half_add:ha2|xorgate:g1
+c <= orgate:o1.port0
+a => a.IN1
+b => b.IN1
+
+
+|four_bit_decrementer|full_add:fa1|half_add:ha2|xorgate:g1|andgate:a1
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa1|half_add:ha2|xorgate:g1|andgate:a2
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa1|half_add:ha2|xorgate:g1|orgate:o1
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|four_bit_decrementer|full_add:fa1|half_add:ha2|andgate:g2
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa1|orgate:or1
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|four_bit_decrementer|full_add:fa2
+a => a.IN1
+b => b.IN1
+cin => cin.IN1
+s <= half_add:ha2.port2
+c <= orgate:or1.port0
+
+
+|four_bit_decrementer|full_add:fa2|half_add:ha1
+a => a.IN2
+b => b.IN2
+s <= xorgate:g1.port0
+c <= andgate:g2.port0
+
+
+|four_bit_decrementer|full_add:fa2|half_add:ha1|xorgate:g1
+c <= orgate:o1.port0
+a => a.IN1
+b => b.IN1
+
+
+|four_bit_decrementer|full_add:fa2|half_add:ha1|xorgate:g1|andgate:a1
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa2|half_add:ha1|xorgate:g1|andgate:a2
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa2|half_add:ha1|xorgate:g1|orgate:o1
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|four_bit_decrementer|full_add:fa2|half_add:ha1|andgate:g2
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa2|half_add:ha2
+a => a.IN2
+b => b.IN2
+s <= xorgate:g1.port0
+c <= andgate:g2.port0
+
+
+|four_bit_decrementer|full_add:fa2|half_add:ha2|xorgate:g1
+c <= orgate:o1.port0
+a => a.IN1
+b => b.IN1
+
+
+|four_bit_decrementer|full_add:fa2|half_add:ha2|xorgate:g1|andgate:a1
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa2|half_add:ha2|xorgate:g1|andgate:a2
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa2|half_add:ha2|xorgate:g1|orgate:o1
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|four_bit_decrementer|full_add:fa2|half_add:ha2|andgate:g2
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa2|orgate:or1
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|four_bit_decrementer|full_add:fa3
+a => a.IN1
+b => b.IN1
+cin => cin.IN1
+s <= half_add:ha2.port2
+c <= orgate:or1.port0
+
+
+|four_bit_decrementer|full_add:fa3|half_add:ha1
+a => a.IN2
+b => b.IN2
+s <= xorgate:g1.port0
+c <= andgate:g2.port0
+
+
+|four_bit_decrementer|full_add:fa3|half_add:ha1|xorgate:g1
+c <= orgate:o1.port0
+a => a.IN1
+b => b.IN1
+
+
+|four_bit_decrementer|full_add:fa3|half_add:ha1|xorgate:g1|andgate:a1
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa3|half_add:ha1|xorgate:g1|andgate:a2
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa3|half_add:ha1|xorgate:g1|orgate:o1
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|four_bit_decrementer|full_add:fa3|half_add:ha1|andgate:g2
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa3|half_add:ha2
+a => a.IN2
+b => b.IN2
+s <= xorgate:g1.port0
+c <= andgate:g2.port0
+
+
+|four_bit_decrementer|full_add:fa3|half_add:ha2|xorgate:g1
+c <= orgate:o1.port0
+a => a.IN1
+b => b.IN1
+
+
+|four_bit_decrementer|full_add:fa3|half_add:ha2|xorgate:g1|andgate:a1
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa3|half_add:ha2|xorgate:g1|andgate:a2
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa3|half_add:ha2|xorgate:g1|orgate:o1
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|four_bit_decrementer|full_add:fa3|half_add:ha2|andgate:g2
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa3|orgate:or1
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|four_bit_decrementer|full_add:fa4
+a => a.IN1
+b => b.IN1
+cin => cin.IN1
+s <= half_add:ha2.port2
+c <= orgate:or1.port0
+
+
+|four_bit_decrementer|full_add:fa4|half_add:ha1
+a => a.IN2
+b => b.IN2
+s <= xorgate:g1.port0
+c <= andgate:g2.port0
+
+
+|four_bit_decrementer|full_add:fa4|half_add:ha1|xorgate:g1
+c <= orgate:o1.port0
+a => a.IN1
+b => b.IN1
+
+
+|four_bit_decrementer|full_add:fa4|half_add:ha1|xorgate:g1|andgate:a1
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa4|half_add:ha1|xorgate:g1|andgate:a2
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa4|half_add:ha1|xorgate:g1|orgate:o1
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|four_bit_decrementer|full_add:fa4|half_add:ha1|andgate:g2
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa4|half_add:ha2
+a => a.IN2
+b => b.IN2
+s <= xorgate:g1.port0
+c <= andgate:g2.port0
+
+
+|four_bit_decrementer|full_add:fa4|half_add:ha2|xorgate:g1
+c <= orgate:o1.port0
+a => a.IN1
+b => b.IN1
+
+
+|four_bit_decrementer|full_add:fa4|half_add:ha2|xorgate:g1|andgate:a1
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa4|half_add:ha2|xorgate:g1|andgate:a2
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa4|half_add:ha2|xorgate:g1|orgate:o1
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|four_bit_decrementer|full_add:fa4|half_add:ha2|andgate:g2
+c <= n1.DB_MAX_OUTPUT_PORT_TYPE
+a => n1.IN0
+b => n1.IN1
+
+
+|four_bit_decrementer|full_add:fa4|orgate:or1
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+

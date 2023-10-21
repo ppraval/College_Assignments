@@ -1,0 +1,58 @@
+# Reading C:/intelFPGA_lite/18.1/modelsim_ase/tcl/vsim/pref.tcl
+# do sixteen_bit_decrementer_run_msim_rtl_verilog.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 10.5b Lib Mapping Utility 2016.10 Oct  5 2016
+# vmap work rtl_work 
+# Copying C:/intelFPGA_lite/18.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vlog -vlog01compat -work work +incdir+D:/College_Assignments/S3/LD_lab_Assigments/Verilog\ Codes/sixteen_bit_decrementer {D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/sixteen_bit_decrementer/sixteen_bit_decrementer.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 15:54:04 on Oct 21,2023
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/sixteen_bit_decrementer" D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/sixteen_bit_decrementer/sixteen_bit_decrementer.v 
+# -- Compiling module andgate
+# -- Compiling module orgate
+# -- Compiling module xorgate
+# -- Compiling module half_add
+# -- Compiling module full_add
+# -- Compiling module sixteen_bit_decrementer
+# 
+# Top level modules:
+# 	sixteen_bit_decrementer
+# End time: 15:54:04 on Oct 21,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vlog -vlog01compat -work work +incdir+D:/College_Assignments/S3/LD_lab_Assigments/Verilog\ Codes/sixteen_bit_decrementer {D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/sixteen_bit_decrementer/sixteen_bit_decrementer_test.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 15:54:05 on Oct 21,2023
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/sixteen_bit_decrementer" D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/sixteen_bit_decrementer/sixteen_bit_decrementer_test.v 
+# -- Compiling module sixteen_bit_decrementer_test
+# 
+# Top level modules:
+# 	sixteen_bit_decrementer_test
+# End time: 15:54:05 on Oct 21,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs="+acc"  sixteen_bit_decrementer_test
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs=""+acc"" sixteen_bit_decrementer_test 
+# Start time: 15:54:05 on Oct 21,2023
+# Loading work.sixteen_bit_decrementer_test
+# Loading work.sixteen_bit_decrementer
+# Loading work.full_add
+# Loading work.half_add
+# Loading work.xorgate
+# Loading work.andgate
+# Loading work.orgate
+# 
+# add wave *
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run -all
+# End time: 15:55:37 on Oct 21,2023, Elapsed time: 0:01:32
+# Errors: 0, Warnings: 0

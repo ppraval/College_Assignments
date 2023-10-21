@@ -1,0 +1,115 @@
+|sixteen_bit_negator
+a[0] => a[0].IN1
+a[1] => a[1].IN1
+a[2] => a[2].IN1
+a[3] => a[3].IN1
+a[4] => a[4].IN1
+a[5] => a[5].IN1
+a[6] => a[6].IN1
+a[7] => a[7].IN1
+a[8] => a[8].IN1
+a[9] => a[9].IN1
+a[10] => a[10].IN1
+a[11] => a[11].IN1
+a[12] => a[12].IN1
+a[13] => a[13].IN1
+a[14] => a[14].IN1
+a[15] => a[15].IN1
+b[0] <= notgate:g1.port0
+b[1] <= notgate:g2.port0
+b[2] <= notgate:g3.port0
+b[3] <= notgate:g4.port0
+b[4] <= notgate:g5.port0
+b[5] <= notgate:g6.port0
+b[6] <= notgate:g7.port0
+b[7] <= notgate:g8.port0
+b[8] <= notgate:g9.port0
+b[9] <= notgate:g10.port0
+b[10] <= notgate:g11.port0
+b[11] <= notgate:g12.port0
+b[12] <= notgate:g13.port0
+b[13] <= notgate:g14.port0
+b[14] <= notgate:g15.port0
+b[15] <= notgate:g16.port0
+
+
+|sixteen_bit_negator|notgate:g1
+b <= a.DB_MAX_OUTPUT_PORT_TYPE
+a => b.DATAIN
+
+
+|sixteen_bit_negator|notgate:g2
+b <= a.DB_MAX_OUTPUT_PORT_TYPE
+a => b.DATAIN
+
+
+|sixteen_bit_negator|notgate:g3
+b <= a.DB_MAX_OUTPUT_PORT_TYPE
+a => b.DATAIN
+
+
+|sixteen_bit_negator|notgate:g4
+b <= a.DB_MAX_OUTPUT_PORT_TYPE
+a => b.DATAIN
+
+
+|sixteen_bit_negator|notgate:g5
+b <= a.DB_MAX_OUTPUT_PORT_TYPE
+a => b.DATAIN
+
+
+|sixteen_bit_negator|notgate:g6
+b <= a.DB_MAX_OUTPUT_PORT_TYPE
+a => b.DATAIN
+
+
+|sixteen_bit_negator|notgate:g7
+b <= a.DB_MAX_OUTPUT_PORT_TYPE
+a => b.DATAIN
+
+
+|sixteen_bit_negator|notgate:g8
+b <= a.DB_MAX_OUTPUT_PORT_TYPE
+a => b.DATAIN
+
+
+|sixteen_bit_negator|notgate:g9
+b <= a.DB_MAX_OUTPUT_PORT_TYPE
+a => b.DATAIN
+
+
+|sixteen_bit_negator|notgate:g10
+b <= a.DB_MAX_OUTPUT_PORT_TYPE
+a => b.DATAIN
+
+
+|sixteen_bit_negator|notgate:g11
+b <= a.DB_MAX_OUTPUT_PORT_TYPE
+a => b.DATAIN
+
+
+|sixteen_bit_negator|notgate:g12
+b <= a.DB_MAX_OUTPUT_PORT_TYPE
+a => b.DATAIN
+
+
+|sixteen_bit_negator|notgate:g13
+b <= a.DB_MAX_OUTPUT_PORT_TYPE
+a => b.DATAIN
+
+
+|sixteen_bit_negator|notgate:g14
+b <= a.DB_MAX_OUTPUT_PORT_TYPE
+a => b.DATAIN
+
+
+|sixteen_bit_negator|notgate:g15
+b <= a.DB_MAX_OUTPUT_PORT_TYPE
+a => b.DATAIN
+
+
+|sixteen_bit_negator|notgate:g16
+b <= a.DB_MAX_OUTPUT_PORT_TYPE
+a => b.DATAIN
+
+

@@ -1,0 +1,76 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/Latches/gated_sr_nor_latch/simulation/modelsim
+vandgate
+Z1 !s110 1697889581
+!i10b 1
+!s100 m8Sn47MhL:>8Shm[KL]Sc3
+IF;MMH@79LHzo5i9bU><ZK1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+Z3 w1697888436
+Z4 8D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/Latches/gated_sr_nor_latch/gated_sr_nor_latch.v
+Z5 FD:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/Latches/gated_sr_nor_latch/gated_sr_nor_latch.v
+L0 1
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1697889581.000000
+Z8 !s107 D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/Latches/gated_sr_nor_latch/gated_sr_nor_latch.v|
+Z9 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/Latches/gated_sr_nor_latch|D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/Latches/gated_sr_nor_latch/gated_sr_nor_latch.v|
+!i113 1
+Z10 o-vlog01compat -work work
+Z11 !s92 -vlog01compat -work work {+incdir+D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/Latches/gated_sr_nor_latch}
+Z12 tCvgOpt 0
+vgated_sr_nor_latch
+R1
+!i10b 1
+!s100 OfjDZe>bkO2`mn9c`Z^eR3
+IbRclTglEShK2GbQa0XoC30
+R2
+R0
+R3
+R4
+R5
+L0 8
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+R12
+vgated_sr_nor_latch_test
+R1
+!i10b 1
+!s100 nGoG?oM_U<SJ@UkI4219:3
+IhOd4BGz<RAUiHVLkAN<ek0
+R2
+R0
+w1697889559
+8D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/Latches/gated_sr_nor_latch/gated_sr_nor_latch_test.v
+FD:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/Latches/gated_sr_nor_latch/gated_sr_nor_latch_test.v
+L0 1
+R6
+r1
+!s85 0
+31
+R7
+!s107 D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/Latches/gated_sr_nor_latch/gated_sr_nor_latch_test.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/Latches/gated_sr_nor_latch|D:/College_Assignments/S3/LD_lab_Assigments/Verilog Codes/Latches/gated_sr_nor_latch/gated_sr_nor_latch_test.v|
+!i113 1
+R10
+R11
+R12

@@ -1,0 +1,147 @@
+|sixteen_bit_or
+a[0] => a[0].IN1
+a[1] => a[1].IN1
+a[2] => a[2].IN1
+a[3] => a[3].IN1
+a[4] => a[4].IN1
+a[5] => a[5].IN1
+a[6] => a[6].IN1
+a[7] => a[7].IN1
+a[8] => a[8].IN1
+a[9] => a[9].IN1
+a[10] => a[10].IN1
+a[11] => a[11].IN1
+a[12] => a[12].IN1
+a[13] => a[13].IN1
+a[14] => a[14].IN1
+a[15] => a[15].IN1
+b[0] => b[0].IN1
+b[1] => b[1].IN1
+b[2] => b[2].IN1
+b[3] => b[3].IN1
+b[4] => b[4].IN1
+b[5] => b[5].IN1
+b[6] => b[6].IN1
+b[7] => b[7].IN1
+b[8] => b[8].IN1
+b[9] => b[9].IN1
+b[10] => b[10].IN1
+b[11] => b[11].IN1
+b[12] => b[12].IN1
+b[13] => b[13].IN1
+b[14] => b[14].IN1
+b[15] => b[15].IN1
+c[0] <= orgate:g1.port0
+c[1] <= orgate:g2.port0
+c[2] <= orgate:g3.port0
+c[3] <= orgate:g4.port0
+c[4] <= orgate:g5.port0
+c[5] <= orgate:g6.port0
+c[6] <= orgate:g7.port0
+c[7] <= orgate:g8.port0
+c[8] <= orgate:g9.port0
+c[9] <= orgate:g10.port0
+c[10] <= orgate:g11.port0
+c[11] <= orgate:g12.port0
+c[12] <= orgate:g13.port0
+c[13] <= orgate:g14.port0
+c[14] <= orgate:g15.port0
+c[15] <= orgate:g16.port0
+
+
+|sixteen_bit_or|orgate:g1
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|sixteen_bit_or|orgate:g2
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|sixteen_bit_or|orgate:g3
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|sixteen_bit_or|orgate:g4
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|sixteen_bit_or|orgate:g5
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|sixteen_bit_or|orgate:g6
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|sixteen_bit_or|orgate:g7
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|sixteen_bit_or|orgate:g8
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|sixteen_bit_or|orgate:g9
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|sixteen_bit_or|orgate:g10
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|sixteen_bit_or|orgate:g11
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|sixteen_bit_or|orgate:g12
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|sixteen_bit_or|orgate:g13
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|sixteen_bit_or|orgate:g14
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|sixteen_bit_or|orgate:g15
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
+|sixteen_bit_or|orgate:g16
+c <= n5.DB_MAX_OUTPUT_PORT_TYPE
+a => n5.IN0
+b => n5.IN1
+
+
