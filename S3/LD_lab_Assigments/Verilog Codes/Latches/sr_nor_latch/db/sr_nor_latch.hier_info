@@ -1,7 +1,0 @@
-|sr_nor_latch
-s => comb.IN0
-r => comb.IN1
-q << q.DB_MAX_OUTPUT_PORT_TYPE
-q_ << comb.DB_MAX_OUTPUT_PORT_TYPE
-
-

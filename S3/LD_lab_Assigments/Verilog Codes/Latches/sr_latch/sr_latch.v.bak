@@ -1,6 +1,0 @@
-module sr_latch(input s, r, output q, q');
-	nor(q', s, q);
-	nor(q, r, q');
-endmodule
-
-	

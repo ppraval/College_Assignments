@@ -1,6 +1,0 @@
-|FirstPain
-a => comb.IN0
-b => comb.IN1
-c <= comb.DB_MAX_OUTPUT_PORT_TYPE
-
-
