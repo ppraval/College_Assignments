@@ -18,5 +18,6 @@ module d_flip_flop_With_async_preset_clear_test;
 					{d, pre, clr} = i;
 					#10;
 				end
+		$finish;
 		end
 endmodule

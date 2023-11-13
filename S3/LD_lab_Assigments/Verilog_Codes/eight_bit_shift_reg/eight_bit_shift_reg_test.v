@@ -21,5 +21,6 @@ module eight_bit_shift_reg_test;
 			in = a[i];
 			#10;
 		end
+		$finish;
   end
 endmodule
