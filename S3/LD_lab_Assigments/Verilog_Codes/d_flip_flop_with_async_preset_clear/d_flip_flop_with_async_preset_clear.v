@@ -1,7 +1,7 @@
 module d_flip_flop_With_async_preset_clear (input d, pre, clr, clk, output reg q, q_);
-	always @ (posedge clk)
+	always @ (*)
 		begin
-			if(pre == 0 && clr == 0)
+			if(pre == 0 && clr == 0 && clk != 0)
 				q <= d;
 			else if(pre == 1 && clr == 1)
 				q <= 1'bx;
