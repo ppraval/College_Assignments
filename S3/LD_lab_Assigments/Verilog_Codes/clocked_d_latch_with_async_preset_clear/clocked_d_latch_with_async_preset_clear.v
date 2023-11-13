@@ -1,5 +1,5 @@
 module clocked_d_latch_with_async_preset_clear(input d, pre, clr, clk, output reg q, q_);
-	always @ (posedge clk)
+	always @ (clk)
 		begin
 			if(pre == 0 && clr == 0)
 				q <= d;
