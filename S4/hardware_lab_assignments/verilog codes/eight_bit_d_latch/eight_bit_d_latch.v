@@ -1,16 +1,19 @@
-module eight_bit_d_latch(input [7:0] d, input en, reset, output reg [7:0] q, q_, output reg zero);
-	always @ (d or en or reset) 
+module eight_bit_d_latch(input [7:0] a, input en, reset, output [7:0] d);
+	always @ (d or en or rstn) 
 	begin
-	  if (!reset) begin
+	
+	  if (!rstn) begin
 		 q <= 0;
 		 zero <= 1;
 	  end
+	  
 	  else 
 	  begin
-		q <= d; 
-		zero <= (d == 0); 
+		 if (en) 
+		 begin
+			q <= d; 
+			zero <= (d == 0); 
+		 end
 	  end
 	end
-	always @ (*) 
-		q_ <= ~q;
 endmodule

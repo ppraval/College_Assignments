@@ -1,12 +1,13 @@
-module eight_bit_alu_tb;
+module eight_bit_adder_tb;
 	reg [7:0] a, b;
 	reg cin;
-	wire[7:0] s, d, x;
-	wire cout, bout;
+	wire[7:0] s;
+	wire cout;
 
-	eight_bit_alu instance1 (a, b, s, d, x, cout, bout);
+	eight_bit_adder instance1 (a, b, cin, s, cout);
 	integer i;
 	initial begin
+		cin = 0;
 		 for(i = 0; i < 256; i = i + 1)
 		 begin
 			a = i;

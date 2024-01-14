@@ -1,10 +1,9 @@
 module eight_bit_alu_tb;
 	reg [7:0] a, b;
-	reg cin;
-	wire[7:0] s, d, x;
+	wire[7:0] sum, diff, exor, left_shift_a, left_shift_b;
 	wire cout, bout;
 
-	eight_bit_alu instance1 (a, b, s, d, x, cout, bout);
+	eight_bit_alu instance1 (a, b, sum, cout, diff, bout, exor, left_shift_a, left_shift_b);
 	integer i;
 	initial begin
 		 for(i = 0; i < 256; i = i + 1)

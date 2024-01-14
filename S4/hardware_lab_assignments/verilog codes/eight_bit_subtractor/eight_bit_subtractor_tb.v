@@ -4,14 +4,13 @@ module eight_bit_subtractor_tb;
 	wire[7:0] d;
 	wire bout;
 
-	eight_bit_subtractor instance1 (a, b, bin, d, bout);
+	eight_bit_subtractor instance1 (a, b, cin, s, bout);
 	integer i;
 	initial begin
 		bin = 0;
 		 for(i = 0; i < 256; i = i + 1)
 		 begin
-			a = i;
-			b = a * i;
+			{a, b} = i;
 			#10;
 		 end
 	end

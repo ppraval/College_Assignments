@@ -1,12 +1,13 @@
-module eight_bit_alu_tb;
+module eight_bit_subtractor_tb;
 	reg [7:0] a, b;
-	reg cin;
-	wire[7:0] s, d, x;
-	wire cout, bout;
+	reg bin;
+	wire[7:0] d;
+	wire bout;
 
-	eight_bit_alu instance1 (a, b, s, d, x, cout, bout);
+	eight_bit_subtractor instance1 (a, b, bin, d, bout);
 	integer i;
 	initial begin
+		bin = 0;
 		 for(i = 0; i < 256; i = i + 1)
 		 begin
 			a = i;
