@@ -13,7 +13,7 @@ endmodule
 
 
 module Timer(input Clock, Start, output Timeout);
-	localparam ten_cycles = 300;
+	localparam ten_cycles = 1000;
 	reg [8:0] q;
 	always @(posedge Clock)
 	begin

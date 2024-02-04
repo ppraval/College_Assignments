@@ -17,7 +17,7 @@ module Timer(input Clock, Start, output Timeout);
 	reg [8:0] q;
 	always @(posedge Clock)
 	begin
-	if (!Start||(q == NUMCLKS))
+	if (!Start||(q == ten_cycles))
 		q <= 9'b0;
 	else
 		q <= q + 1;

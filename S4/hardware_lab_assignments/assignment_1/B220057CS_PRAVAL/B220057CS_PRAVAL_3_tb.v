@@ -38,7 +38,7 @@
 		switches [3] = 1'b1;
 	 
 	 
-	 repeat(400) @(negedge clock);
+	 repeat(1100) @(negedge clock);
 		clear = 1'b1;
 	 repeat(4) @(negedge clock);
 		clear = 1'b0;
