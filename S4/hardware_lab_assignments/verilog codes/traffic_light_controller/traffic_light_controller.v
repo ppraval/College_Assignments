@@ -1,44 +1,38 @@
-module traffic_light_controller(input clk, output reg NS, EW);
-	reg state;
-	wire [1:0] count;
-	three_cycle_counter instance1 (clk, count);
+module traffic_light_contoller(input clk)
+	reg [1:0] state;
+	
 	initial state <= 0;
-	
-	always@(*)
-		begin			
-			if(count == 0)
-				state = ~state;
-		end
-	
-	always@(*)
+	always @(posedge clk)
 		begin
 			if(state == 0)
 				begin
-					NS <= 1;
-					EW <= 0;
+					if(clk == 1)
+						state <= 1;
 				end
-			else
+			if(state == 1)
 				begin
-					NS <= 0;
-					EW <= 1;
+					if(clk == 0)
+						state <= 2;
+				end
+			if(state == 2)
+				begin
+					if(clk == 1)
+						state <= 3;
+				end
+			if(state == 3)
+				begin
+					if(clk == 0)
+						state <= 0;						
 				end
 		end
-endmodule
-
-
-module three_cycle_counter(input clk, output reg [1:0] count);
-	
-	initial count = 0;	
-	
+		
 	always@(posedge clk)
 		begin
-				if(count == 0)
-					count <= 1;
-				if(count == 1)
-					count <= 2;
-				if(count == 2)
-					count <= 0;
+			if(state == 3)
+				out <= 1;
+			else
+				out <= 0;
 		end
 endmodule
 	
-		
+endmodule

@@ -1,4 +1,4 @@
-module sequence_detector(input clk, input i, output out);
+module sequence_detector(input clk, input bit, output reg out);
 	reg [1:0] state;
 	
 	initial
@@ -8,28 +8,28 @@ module sequence_detector(input clk, input i, output out);
 		begin
 			if(state == 0)
 				begin
-					if(i == 0)
+					if(bit == 0)
 						state <= 0;
 					else
 						state <= 1;
 				end
 			if(state == 1)
 				begin
-					if(i == 0)
+					if(bit == 0)
 						state <= 2;
 					else
 						state <= 0;
 				end
 			if(state == 2)
 				begin
-					if(i == 0)
+					if(bit == 0)
 						state <= 0;
 					else
 						state <= 3;
 				end
 			if(state == 3)
 				begin
-					if(i == 0)
+					if(bit == 0)
 						state <= 2;
 					else
 						state <= 1;
