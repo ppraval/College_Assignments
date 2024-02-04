@@ -13,7 +13,7 @@ endmodule
 
 
 module Timer(input Clock, Start, output Timeout);
-	localparam ten_cycles = 300;
+	localparam ten_cycles = 1000;
 	reg [8:0] q;
 	always @(posedge Clock)
 	begin
@@ -97,7 +97,7 @@ endmodule
 
 module comblock(input clock, clear,
 	input [7:0] switches,
-	output alarm, locked,
+	output alarm, locked)
 
 	wire mux_out, anysw, codesw, allsw, entimer, timeout;
 	wire [1:0] selsw;
@@ -114,5 +114,5 @@ module comblock(input clock, clear,
 	
 	Timer t1(.Clock(clock), .Start(entimer), .Timeout(timeout));
 	
-	lockfsm controller(.clock(clock), .reset(clear), .codesw(codesw), .anysw(anysw), .selsw(selsw), .locked(locked), .alarm(alarm), .entimer(entimer),2 .timeout(timeout));
+	lockfsm controller(.clock(clock), .reset(clear), .codesw(codesw), .anysw(anysw), .selsw(selsw), .locked(locked), .alarm(alarm), .entimer(entimer), .timeout(timeout));
 endmodule
