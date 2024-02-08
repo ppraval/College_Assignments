@@ -180,7 +180,7 @@ void intersectionAB(int A[], int m, int B[], int n)
     {
         if(search(table, A[i]) > 1)
         {
-            // printf("%d ", A[i]);
+            // Had to improvise in the last minute but it def has a better solution
             int flag = 0;
             for(int k = 0; k < n; k++)
             {
