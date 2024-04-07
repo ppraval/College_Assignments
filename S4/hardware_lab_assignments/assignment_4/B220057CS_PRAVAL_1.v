@@ -7,11 +7,11 @@ module instruction_mem(input [15:0] pc, output[15:0] instruction);
 		begin		
 //			$readmemb("instr.prog", memory, 0, 7);
 			//#5;
-			memory[0] = 16'b0100000000000010; //LW r0 r0 0
-			memory[1] = 16'b0101000010000001; // SW r3 r0 0
-			memory[2] = 16'b0000000001000000; // ADD r0 r1 r0
-			memory[3] = 16'b0010000000001000; // NDU r0 r0 r1
-			memory[4] = 16'b0000000000000000;
+			memory[0] = 16'b0100000000000001; // LW r0 r0 4 -> works
+			memory[1] = 16'b0101010010010001; // SW r1 r0 0
+			memory[2] = 16'b1100011100000010; // BEQ r3 r4 2
+ 			memory[3] = 16'b0000000001011000; // ADD r0 r1 r0 -> works
+			memory[4] = 16'b0010000000001000; // NDU r0 r0 r1 -> works
 			memory[5] = 16'b0000000000000000;
 			memory[6] = 16'b0000000000000000;
 			memory[7] = 16'b0000000000000000;
@@ -19,29 +19,38 @@ module instruction_mem(input [15:0] pc, output[15:0] instruction);
 	assign instruction = memory[address];
 endmodule
 
-module register_file(input clk, input[15:0] pc, input write_en, input [2:0] write_destination, input [15:0] write_data, input [2:0] read_address_1, output [15:0] read_data_1, input [2:0] read_address_2, output [15:0] read_data_2);
+module register_file(input clk, input[15:0] pc, input write_en, input [2:0] write_destination, input [15:0] write_data, input [2:0] read_address_1, output [15:0] read_data_1, input [2:0] read_address_2, output [15:0] read_data_2, reg_0, reg_1, reg_2, reg_3, reg_4, reg_5, reg_6, reg_7);
 	reg [15:0]reg_array[7:0];
 	integer i;
 	initial begin
 		for(i = 0; i < 7; i = i + 1)
 			begin
 				reg_array[i] = 16'b0;
-				reg_array[7] = pc;
 			end
 	end
 	always@(posedge clk)
 		begin
+			reg_array[7] = pc;
 			if(write_en)
 				begin
 					reg_array[write_destination] = write_data;
 				end
 			end 
 	assign read_data_1 = reg_array[read_address_1];
-	assign read_data_2 = reg_array[read_address_2];	
+	assign read_data_2 = reg_array[read_address_2];
+	
+	assign reg_0 = reg_array[0];
+	assign reg_1 = reg_array[1];
+	assign reg_2 = reg_array[2];
+	assign reg_3 = reg_array[3];
+	assign reg_4 = reg_array[4];
+	assign reg_5 = reg_array[5];
+	assign reg_6 = reg_array[6];
+	assign reg_7 = reg_array[7];
 endmodule
 
 module data_memory(input clk, input mem_read, input [15:0] mem_read_address, input mem_write, input [15:0] mem_write_data, output [15:0] mem_read_data, output [15:0] mem_0, mem_1, mem_2, mem_3, mem_4, mem_5, mem_6, mem_7);
-	reg[15:0]mem[7:0];
+	reg[15:0] mem[7:0];
 	wire[2:0] address = mem_read_address[2:0];
 	integer f;
 	initial 
@@ -74,19 +83,6 @@ module data_memory(input clk, input mem_read, input [15:0] mem_read_address, inp
 		assign mem_6 = mem[6];
 		assign mem_7 = mem[7];
 		
-		
-//	always@(posedge clk)
-//		begin
-//				mem_0 = mem[0];
-//				mem_1 = mem[1];
-//				mem_2 = mem[2];
-//				mem_3 = mem[3];
-//				mem_4 = mem[4];
-//				mem_5 = mem[5];
-//				mem_6 = mem[6];
-//				mem_7 = mem[7];
-//		end
-		
 		assign mem_read_data = (mem_read == 1'b1) ? mem[address] : 16'd0;
 		
 endmodule
@@ -105,7 +101,7 @@ always @(*)
 	assign zero = (result == 16'd0) ? 1'b1 : 1'b0;
 endmodule
 
-module data_path(input clk, input jump, beq, mem_write, mem_read, alu_src, reg_dest, mem_to_reg, reg_write, input[1:0] alu_op, output[3:0] opcode, output [15:0] mem_0, mem_1, mem_2, mem_3, mem_4, mem_5, mem_6, mem_7, curr_instr, reg_1, reg_2, reg_w, alu_calc);
+module data_path(input clk, input jump, beq, mem_write, mem_read, alu_src, reg_dest, mem_to_reg, reg_write, input[1:0] alu_op, output[3:0] opcode, output [15:0] mem_0, mem_1, mem_2, mem_3, mem_4, mem_5, mem_6, mem_7, curr_instr, reg_0, reg_1, reg_2, reg_3, reg_4, reg_5, reg_6, reg_7, alu_calc);
 	reg  [15:0] pc;
 	reg  [15:0] pc_current;
 	wire [15:0] pc_next, pc2;
@@ -137,16 +133,16 @@ module data_path(input clk, input jump, beq, mem_write, mem_read, alu_src, reg_d
 	instruction_mem instance1 (pc_current, instr);
 	
 	assign curr_instr = instr;
-	assign reg_1 = reg_read_data_1;
-	assign reg_2 = reg_read_data_2;
+//	assign reg_1 = reg_read_data_1;
+//	assign reg_2 = reg_read_data_2;
 	assign alu_calc = ALU_out;
 	
-	assign reg_write_dest = (reg_dest == 1'b1) ? instr[5:3] : instr[8:6];
+	assign reg_write_dest = (reg_dest == 1'b1) ? instr[5:3] : instr[11:9];
 	
 	assign reg_read_addr_1 = instr[11:9];
 	assign reg_read_addr_2 = instr[8:6];
 	
-	register_file instance2 (clk, pc_current, reg_write, reg_write_dest, reg_write_data, reg_read_addr_1, reg_read_data_1, reg_read_addr_2, reg_read_data_2); // we havee to make this work somehow too
+	register_file instance2 (clk, pc_current, reg_write, reg_write_dest, reg_write_data, reg_read_addr_1, reg_read_data_1, reg_read_addr_2, reg_read_data_2, reg_0, reg_1, reg_2, reg_3, reg_4, reg_5, reg_6, reg_7); // we havee to make this work somehow too
 	
 	assign ext_im = (jump == 1'b1) ? {{6{instr[8]}},instr[8:0]} : {{10{instr[5]}},instr[5:0]}; 
 	
@@ -156,21 +152,19 @@ module data_path(input clk, input jump, beq, mem_write, mem_read, alu_src, reg_d
 	
 	alu instance3 (reg_read_data_1, read_data_2, alu_op, ALU_out, zero_flag);
 	
-	assign PC_beq = pc_current + ext_im;
+	assign PC_beq = pc_current + (ext_im * 2);
 	
 	assign beq_control = beq & zero_flag;	
 	
 	assign PC_2beq = (beq_control == 1'b1) ? PC_beq : pc2;
 	
-	assign PC_j = pc_current + ext_im;
+	assign PC_j = pc_current + (ext_im * 2);
 	
 	assign #10 pc_next = (jump == 1'b1) ? PC_j : PC_2beq;
 	
 	data_memory instance4 (clk, mem_read, ALU_out, mem_write, reg_read_data_2, mem_read_data, mem_0, mem_1, mem_2, mem_3, mem_4, mem_5, mem_6, mem_7);
 	
 	assign reg_write_data = (mem_to_reg == 1'b1) ? mem_read_data : reg_write_data_another;
-	
-	assign reg_w = reg_write_data;
 	
 	assign opcode = instr[15:12];
 endmodule
@@ -267,11 +261,11 @@ module control_fsm (input[3:0] opcode, output reg [1:0] alu_op, output reg jal, 
 	end
 endmodule
 
-module single_cycle_processor(input clk, output [15:0] mem_0, mem_1, mem_2, mem_3, mem_4, mem_5, mem_6, mem_7, curr_instr, reg_1, reg_2, reg_w, alu_calc);
+module single_cycle_processor(input clk, output [15:0] mem_0, mem_1, mem_2, mem_3, mem_4, mem_5, mem_6, mem_7, curr_instr, reg_0, reg_1, reg_2, reg_3, reg_4, reg_5, reg_6, reg_7, alu_calc);
 	wire jump, beq, mem_write, mem_read, alu_src, reg_dest, mem_to_reg, reg_write;
 	wire[1:0] alu_op;
 	wire[3:0] opcode;
 	
-	data_path instance1 (clk, jump, beq, mem_write, mem_read, alu_src, reg_dest, mem_to_reg, reg_write, alu_op, opcode, mem_0, mem_1,  mem_2, mem_3, mem_4, mem_5, mem_6, mem_7, curr_instr, reg_1, reg_2, reg_w, alu_calc);
-	control_fsm instance2 (opcode, alu_op, jump, beq, mem_write, mem_read, alu_src, reg_dest, mem_to_reg, reg_write);	
+	data_path instance1 (clk, jump, beq, mem_write, mem_read, alu_src, reg_dest, mem_to_reg, reg_write, alu_op, opcode, mem_0, mem_1,  mem_2, mem_3, mem_4, mem_5, mem_6, mem_7, curr_instr, reg_0, reg_1, reg_2, reg_3, reg_4, reg_5, reg_6, reg_7, alu_calc);
+	control_fsm instance2 (opcode, alu_op, jump, beq, mem_read, mem_write, alu_src, reg_dest, mem_to_reg, reg_write);	
 endmodule
