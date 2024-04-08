@@ -19,7 +19,7 @@ input [31:0] write_data,
 output reg [31:0] read_data
 );
     reg [7:0] data_mem [1023:0];
-    initial $readmemh("D:\College_Assignments\S4\hardware_lab_assignments\verilog_codes\sample_single_cycle_processor\data_file.dat", data_mem);
+    initial $readmemh("D:/College_Assignments/S4/hardware_lab_assignments/verilog_codes/sample_single_cycle_processor/data_file.dat", data_mem);
     always@(*) read_data = {data_mem[address], data_mem[address+1], data_mem[address+2], data_mem[address+3]};
     always@(posedge clk)
     begin
