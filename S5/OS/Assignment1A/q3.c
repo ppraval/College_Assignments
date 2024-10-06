@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
-
+//Praval Pattam
+//B220057CS
 int main()
 {
     int id ;
@@ -9,15 +10,15 @@ int main()
     id = fork() ;
     if ( id == 0 )
     {
-            printf ("\nCHILD::PID: %d", getpid());
-            counter = counter+200;
+        printf ("\nCHILD::PID: %d\n", getpid());
+        counter = counter+200;
     }
     else
     {
-            printf ( "\nPARENT::PID: %d", getpid());
-            counter = counter +50;
+        printf ( "\nPARENT::PID: %d\n", getpid());
+        counter = counter +50;
     }
-    printf ("\ncounter: %d, PID: %d", counter, getpid());
+    printf ("\ncounter: %d, PID: %d\n", counter, getpid());
     return 0;
 }
 

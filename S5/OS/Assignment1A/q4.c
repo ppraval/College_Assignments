@@ -2,9 +2,9 @@
 #include<stdlib.h>
 #include<unistd.h>
 #include<sys/types.h>
-#include<sys/wait.h>
 #include<signal.h>
-
+//Praval Pattam
+//B220057CS
 void primes(int start, int end)
 {
     printf("Hello from %d, I have computed prime numbers from <%d, %d>, my parent pid is %d\n", getpid(), start, end, getppid());
@@ -59,7 +59,6 @@ int main()
             grandchild();
         }
         primes(2, k / 2);
-        sleep(10000);
     }
     else
     {
@@ -77,7 +76,6 @@ int main()
                 grandchild();
             }
             primes(k / 2, k);
-            sleep(10000);
         }
         else
         {

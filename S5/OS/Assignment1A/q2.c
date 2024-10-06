@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
-
+//Praval Pattam
+//B220057CS
 int main()
 { 
     int i;
@@ -9,6 +10,6 @@ int main()
     {
         fork();
     }
-    printf("I love her\n");
+    printf("Process\n");
     return 0;
 }
