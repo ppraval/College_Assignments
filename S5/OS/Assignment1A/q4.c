@@ -70,8 +70,8 @@ int main()
             {
                 grandchild();
             }
-            grand_child3 = fork();
-            if(grand_child3 == 0)
+            grand_child4 = fork();
+            if(grand_child4 == 0)
             {
                 grandchild();
             }
@@ -83,8 +83,8 @@ int main()
             // d(i): Wait for all child processes to exit
             while(wait(&parent_status) > 0);
             // d(ii): Do not wait for child processes to exit
-            // printf("Original Parent process is getting executed first\n");
-            // sleep(1);
+            printf("Original Parent process is getting executed first\n");
+            sleep(1);
         }
     }
     return 0;
