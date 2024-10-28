@@ -1,6 +1,7 @@
 ## Make the makefile
-`make clean`
-`make`
+
+```make clean
+make```
 
 ## Insert the char_driver
 `sudo insmod char_driver.ko kernel_version=$(uname -r)`
@@ -9,7 +10,7 @@
 `sudo dmesg | tail`
 
 ## Entering the major number and minor number 
-sudo mknod /dev/char_driver c <major_number> <major_number>
+using the command sudo mknod /dev/char_driver c <major_number> <major_number> where we enter the major and minor number that we get from the kernel logs
 
 `sudo mknod /dev/char_driver c 238 0`
 
@@ -29,5 +30,5 @@ sudo mknod /dev/char_driver c <major_number> <major_number>
 `gcc user_prog.c -o user_prog`
 
 ## Remove the char_driver
-`sudo rm /dev/char_driver`
-`sudo rmmod`
+```sudo rm /dev/char_driver
+sudo rmmod```
