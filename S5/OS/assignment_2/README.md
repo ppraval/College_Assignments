@@ -1,3 +1,5 @@
+# Instructions on how to use the Device driver
+
 ## Make the makefile
 
 ```sh
@@ -16,7 +18,9 @@ sudo dmesg | tail
 ```
 
 ## Entering the major number and minor number 
-Using the command sudo mknod /dev/char_driver c <major_number> <major_number> entering the major and minor number that we get from the kernel logs
+Using the command 
+sudo mknod /dev/char_driver c <major_number> <major_number> 
+entering the major and minor number that we get from the kernel logs
 
 ## For my device
 ```sh
