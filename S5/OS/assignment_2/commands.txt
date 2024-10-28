@@ -1,18 +1,10 @@
 Stuff to do for OS assign 2 to make things work
-
 make clean
 make
-
 sudo insmod char_driver.ko kernel_version=$(uname -r)
-
-sudo dmesg | tail
-
-sudo mknod /dev/char_driver c <major_number> 0
 sudo mknod /dev/char_driver c 238 0
 sudo chmod 666 /dev/char_driver
-
 echo "gmr" > /dev/char_driver
 cat /dev/char_driver
-
 sudo dmesg | tail
 
