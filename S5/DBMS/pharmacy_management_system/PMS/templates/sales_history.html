@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block title %}Sales History{% endblock %}
+
+{% block maincontent %}
+<div class="container mx-auto p-4">
+    <h1 class="text-4xl font-bold mb-8"><i class="fas fa-history text-purple-500"></i> Sales History</h1>
+    <table class="min-w-full bg-white">
+        <thead>
+            <tr>
+                <th class="py-2 px-4 border-b">Sale Date</th>
+                <th class="py-2 px-4 border-b">Quantity</th>
+                <th class="py-2 px-4 border-b">Selling Price</th>
+                <th class="py-2 px-4 border-b text-left">Drug Name</th>
+                <th class="py-2 px-4 border-b">Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sales_history %}
+            <tr class="text-center">
+                <td class="py-2 px-4 border-b">
+                    <i class="fas fa-calendar-alt text-blue-500"></i> {{ sale.date }}
+                </td>
+                <td class="py-2 px-4 border-b">
+                    <i class="fas fa-cubes text-green-500"></i> {{ sale.quantity }}
+                </td>
+                <td class="py-2 px-4 border-b">
+                    <i class="fas fa-rupee-sign text-yellow-500 mr-2"></i>{{ "{:,.2f}".format(sale.price) }}
+                </td>
+                <td class="py-2 px-4 border-b text-left">
+                    <i class="fas fa-pills text-red-500"></i> {{ sale.name }}
+                </td>
+                <td class="py-2 px-4 border-b flex items-center justify-center">
+                    <img src="/static/drug/{{ sale.image_url }}" alt="{{ sale.name }}" class="w-32 h-32">
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block title %}Companies{% endblock %}
+
+{% block maincontent %}
+<div class="bg-gray-100 flex items-center justify-center p-4">
+  <div class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold text-center mb-8">Select company to Buy</h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {% for company in companies %}
+      <a href="/buy_catalog/{{ company.id }}">
+          <div class="bg-white p-6 rounded-lg shadow-lg border border-black flex flex-col text-center items-center justify-center">
+              <img src="static/company/{{ company.image_url }}" alt="{{ company.name }}" class="w-64 h-32 mb-4 rounded-lg">
+              <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
+                <i class="fas fa-hand-pointer"></i>&nbsp;&nbsp;&nbsp; Select
+              </button>              
+          </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

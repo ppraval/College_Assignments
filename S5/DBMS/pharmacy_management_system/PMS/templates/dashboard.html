@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block maincontent %}
+<div class="container mx-auto p-4">
+    <h1 class="text-4xl font-bold text-center mb-8">
+      <i class="fas fa-tachometer-alt text-blue-500 mr-2"></i>Dashboard
+    </h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Buy Card -->
+        <a href="/buy_company">
+            <div class="bg-blue-500 text-white p-6 rounded-lg shadow-lg text-center">
+                <i class="fas fa-shopping-cart text-4xl mb-4"></i>
+                <h3 class="text-xl font-bold">Buy</h3>
+            </div>
+        </a>
+      <!-- Company Card -->
+        {% if session['role'] == 'Admin' %}
+            <a href="/company">
+                <div class="bg-green-500 text-white p-6 rounded-lg shadow-lg text-center">
+                    <i class="fas fa-building text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold">Companies</h3>
+                </div>
+            </a>
+
+        <!-- Catalogue Card -->
+            <a href="/catalog">
+                <div class="bg-yellow-500 text-white p-6 rounded-lg shadow-lg text-center">
+                    <i class="fas fa-book text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold">Catalogue</h3>
+                </div>
+            </a>
+        {% endif %}
+        <!-- Sale Card -->
+        <a href="/sale">
+            <div class="bg-red-500 text-white p-6 rounded-lg shadow-lg text-center">
+                <i class="fas fa-tags text-4xl mb-4"></i>
+                <h3 class="text-xl font-bold">Sale</h3>
+            </div>
+        </a>
+
+        {% if session['role'] == 'Admin' %}
+            <!-- Sale History Card -->
+            <a href="/sales_history">
+                <div class="bg-purple-500 text-white p-6 rounded-lg shadow-lg text-center">
+                    <i class="fas fa-history text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold">Sales History</h3>
+                </div>
+            </a>
+        {% endif %}
+        <!-- Inventory Card -->
+        <a href="/inventory">
+            <div class="bg-gray-500 text-white p-6 rounded-lg shadow-lg text-center">
+                <i class="fas fa-warehouse text-4xl mb-4"></i>
+                <h3 class="text-xl font-bold">Inventory</h3>
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock %}

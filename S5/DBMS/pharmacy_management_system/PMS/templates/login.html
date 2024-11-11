@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title> Login</title>
+    <link rel="icon" type="image/ico" href="favicon.ico" />
+
+    <link rel="stylesheet" href="static/site.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" >
+</head>
+<body>
+    <div class="flex justify-center items-center h-screen">
+        <img class="login-logo" src="static/login_logo.jpg" />
+    </div>
+
+    <div class="login-div">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+            <h2 class="text-2xl font-bold mb-6 text-center"><i class="fas fa-user-circle"></i> Login</h2>
+            <form method="post">
+              <div class="mb-4">
+                <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+                <div class="flex items-center border border-gray-300 rounded-lg">
+                  <i class="fas fa-user p-2 text-gray-500"></i>
+                  <input type="text" id="username" name="username" class="w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-r-lg" placeholder="Enter your username">
+                </div>
+              </div>
+              <div class="mb-6">
+                <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                <div class="flex items-center border border-gray-300 rounded-lg">
+                  <i class="fas fa-lock p-2 text-gray-500"></i>
+                  <input type="password" id="user_password" name="user_password" class="w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-r-lg" placeholder="Enter your password">
+                </div>
+              </div>
+              <button type="submit" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
+                <i class="fas fa-sign-in-alt"></i> Submit
+              </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block title %}Inventory{% endblock %}
+
+{% block maincontent %}
+<div class="container mx-auto p-4">
+    <h1 class="text-4xl font-bold mb-8">
+        <i class="fas fa-warehouse mr-2 text-gray-500"></i>Inventory        
+    </h1>
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white border border-gray-300 text-lg">
+        <thead>
+          <tr class="bg-blue-200 text-black">
+            <th class="py-2 px-4 border-b">Image</th>
+            <th class="py-2 px-4 border-b text-left pl-6">Name</th>
+            <th class="py-2 px-4 border-b">Expiration</th>
+            <th class="py-2 px-4 border-b">Quantity</th>
+            <th class="py-2 px-4 border-b">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in inventory_items %}
+          <tr class="hover:bg-gray-100">
+            <td class="flex py-2 px-4 border-b justify-center">
+              <img src="/static/drug/{{ item.image_url }}" alt="{{ item.name }}" class="w-24 h-24 object-cover rounded-lg">
+            </td>
+            <td class="py-2 px-4 border-b">
+                <i class="fas fa-pills text-blue-500 mr-2"></i>{{ item.name }}
+            </td>
+            <td class="py-2 px-4 border-b text-center">
+                <i class="fas fa-calendar-alt text-green-500 mr-2"></i>{{ item.expiration_date }}
+            </td>
+            <td class="py-2 px-4 border-b text-center">
+                <i class="fas fa-boxes text-yellow-500 mr-2"></i>{{ item.quantity }}
+            </td>
+            <td class="py-2 px-4 border-b text-right">
+                <i class="fas fa-rupee-sign text-red-500 mr-2"></i>{{ "{:,.2f}".format(item.sell_price) }}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endblock %}

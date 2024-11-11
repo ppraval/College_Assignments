@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block title %}Catalogue{% endblock %}
+
+{% block maincontent %}
+<div class="container mx-auto p-4">
+    <div class="flex items-center justify-center mb-8">
+      <img src="/static/company/{{ company.image_url }}" alt="{{ company.name }}" class="w-64 h-32 mr-4">
+      <h1 class="text-4xl font-bold">{{ company.name }}</h1>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {% for item in catalog_items %}
+      <div class="bg-white p-6 rounded-lg shadow-lg text-center border border-black">
+        <div class="flex w-full items-center justify-center">
+          <img src="/static/drug/{{ item.image_url }}" alt="{{ item.drug_name }}" class="w-64 h-64 mb-4 rounded-lg">
+        </div>
+        <h3 class="text-2xl font-bold mb-2">{{ item.name }}</h3>
+        <p class="text-gray-700 mb-4"><i class="fas fa-rupee-sign text-red-500 mr-2"></i>{{ "{:,.2f}".format(item.price) }}</p>
+        <div class="flex items-center justify-center mb-4">
+          <form action="/buy" method="post">
+            <input type="hidden" name="company_id" value="{{ company.id }}" />
+            <input type="hidden" name="drug_code" value="{{ item.drug_code }}" />
+            <input type="number" name="quantity" min="1" class="w-16 p-2 border border-gray-300 rounded-lg text-center mr-2" placeholder="Qty">
+            <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
+              <i class="fas fa-shopping-cart"></i> Buy
+            </button>
+            </form>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+</div>
+{% endblock %}

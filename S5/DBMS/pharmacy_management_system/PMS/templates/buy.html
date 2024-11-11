@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block title %}Buy{% endblock %}
+
+{% block maincontent %}
+<div class="bg-white p-6 rounded-lg shadow-lg text-center border border-black">
+    <h1 class="text-2xl font-bold mb-4"><i class="fas fa-check-circle text-green-500 mr-2"></i>Purchase Successful</h1>
+    <p class="mb-4">The quantity has been successfully bought.</p>
+    <div class="bg-gray-200 p-4 rounded-lg mb-4">
+      <img src="/static/drug/{{ image_url }}" alt="{{ name }}" class="w-32 h-32 object-cover mx-auto mb-4 rounded-lg">
+      <h3 class="text-xl font-bold">{{ name }}</h3>
+      <p class="text-gray-700">Quantity: {{ quantity }}</p>
+    </div>
+    <a href="{{ url_for('inventory') }}" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
+      Go to Inventory <i class="fas fa-arrow-right"></i>
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block title %}Catalogue{% endblock %}
+
+{% block maincontent %}
+<div class="container mx-auto p-4">
+    <h1 class="text-4xl font-bold mb-8"><i class="fas fa-book text-yellow-500"></i> Catalog</h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {% for item in items %}
+        <div class="bg-white shadow-md rounded-lg overflow-hidden flex justify-center items-center">
+            <img src="/static/drug/{{ item.image_url }}" alt="{{ item.name }}" class="w-64 h-64 ">
+            <div class="p-4">
+                <h2 class="text-xl font-bold">{{ item.name }}</h2>
+                <p class="text-gray-700">
+                    <i class="fas fa-rupee-sign text-red-500 mr-2"></i>{{ "{:,.2f}".format(item.price) }}
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

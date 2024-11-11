@@ -1,0 +1,5 @@
+Flask==3.0.3
+Flask-Cors==4.0.2
+pyodbc==5.1.0
+Flask-JWT-Extended==4.6.0
+jsonpickle==3.2.2
