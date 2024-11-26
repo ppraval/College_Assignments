@@ -54,6 +54,6 @@ gcc user_prog.c -o user_prog
 
 ## Remove the device.
 ```sh
+sudo rmmod /dev/char_driver
 sudo rm /dev/char_driver
-sudo rmmod
 ```
