@@ -14,7 +14,6 @@ connection_string = 'DRIVER={ODBC Driver 18 for SQL Server};SERVER=praval.databa
 def dashboard():
     return render_template('dashboard.html')
 
-
 #region login
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -275,5 +274,3 @@ def get_inventory():
 
 if __name__ == '__main__':
     app.run()
-
-
