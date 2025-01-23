@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from sklearn.preprocessing import StandardScaler
 
-df = pd.read_csv("D:\College_Assignments\S5\ML_lab\linear_regression\ecommerce_customers.csv")
+df = pd.read_csv("D:\College_Assignments\S6\ML_lab\linear_regression\ecommerce_customers.csv")
 df.head()
 
 df = df.drop(["Email", "Address", "Avatar"], axis=1)
@@ -42,13 +42,13 @@ class LinearRegression():
         self.X_train = X
         self.y_train = y
         self.w = np.zeros(self.X_train.shape[1])
-        self.w, self.costs_list = self.gradient_decent(self.X_train, self.y_train, self.w)
+        self.w, self.costs_list = self.gradient_descent(self.X_train, self.y_train, self.w)
         return self.w, self.costs_list
     
     def predict(self, X):
         return X.dot(self.w)
     
-    def gradient_decent(self, X, y, w):
+    def gradient_descent(self, X, y, w):
         costs = []
         m = len(y)
         for i in range(self.num_iterations):
