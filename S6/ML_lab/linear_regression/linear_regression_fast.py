@@ -55,9 +55,6 @@ class LinearRegression():
             y_hat = X.dot(w)
             error = y_hat - y
             w = w - (self.lr / m) * error.dot(X).T
-            # w = w - (lr / m) * X.T.dot(error)
-            # print(w)
-            # print(X)
             costs.append(cost_mse(X, y, w))
         return w, costs
     

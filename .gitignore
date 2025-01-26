@@ -8,6 +8,7 @@
 **/*.qsf
 **/*.rpt
 **/*.zip
+**/*.exe
 **/.venv
 **/*.docx
 **/*.pptx
@@ -17,3 +18,5 @@ S3/NSS/team_50_NSS_farm_work_praval_mayank_abhishek_venkatesh_lalithaditya.pdf
 S3/NSS/team_50_NSS_farm_work.docx
 S5/Image_Processing/reports/~$ip_skew_correction.pptx
 S6/ML_lab/Praval Loves Geetha but wont talk to her🤦‍♂️
+S6/Compiler/LEX/lex.yy.c
+S6/Compiler/LEX_exercise/lex.yy.c
