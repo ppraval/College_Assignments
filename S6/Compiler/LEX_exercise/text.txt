@@ -1,0 +1,4 @@
+// This is a single-line comment
+int x = 10; // Another comment
+/* This is a
+   multi-line comment */
