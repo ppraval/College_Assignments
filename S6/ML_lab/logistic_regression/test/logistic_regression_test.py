@@ -6,7 +6,7 @@ from sklearn.metrics import roc_curve, auc, accuracy_score, precision_score, rec
 from matplotlib.colors import ListedColormap
 
 # Load the dataset
-df = pd.read_csv("logistic_regression/WineQT.csv")
+df = pd.read_csv("logistic_regression/test/WineQT.csv")
 
 # Select features and target variable
 X = df[['volatile acidity', 'alcohol']]
@@ -117,25 +117,24 @@ print("Sample Predictions: ", sample_predictions)
 
 # Plot decision boundary for classification
 def plot_decision_boundary(X, y, model):
-    X_set, y_set = X[:, :2], y  # Only take the first two features for plotting
-    X1, X2 = np.meshgrid(np.arange(start=X_set[:, 0].min()-1, stop=X_set[:, 0].max()+1, step=0.01),
-                         np.arange(start=X_set[:, 1].min()-1, stop=X_set[:, 1].max()+1, step=0.01))
+    X_set = X[:, :2]
     
-    # Create a grid with the first two features and add bias
-    grid = np.c_[X1.ravel(), X2.ravel()]
-    grid = np.c_[grid, np.ones(grid.shape[0])]  # Add bias term
+    x_min, x_max = X_set[:, 0].min() - 1, X_set[:, 0].max() + 1
+    y_min, y_max = X_set[:, 1].min() - 1, X_set[:, 1].max() + 1
     
-    # Predict on the grid
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.01),
+                         np.arange(y_min, y_max, 0.01))
+    
+
+    grid = np.c_[xx.ravel(), yy.ravel()]
+    grid = model.add_bias(grid)
+
     Z = model.predict(grid)
-    Z = Z.reshape(X1.shape)
+    Z = Z.reshape(xx.shape)
+
+    plt.contourf(xx, yy, Z, alpha=0.75, cmap=ListedColormap(('red', 'green')))
+    plt.scatter(X_set[:, 0], X_set[:, 1], c=y, cmap=ListedColormap(('red', 'green')), edgecolors='k')
     
-    # Plot the decision boundary
-    plt.contourf(X1, X2, Z, alpha=0.75, cmap=ListedColormap(('red', 'green')))
-    plt.xlim(X1.min(), X1.max())
-    plt.ylim(X2.min(), X2.max())
-    for i, j in enumerate(np.unique(y_set)):
-        plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1],
-                    c=ListedColormap(('red', 'green'))(i), label=j)
     plt.title('Logistic Regression Decision Boundary')
     plt.xlabel('Volatile Acidity')
     plt.ylabel('Alcohol')
