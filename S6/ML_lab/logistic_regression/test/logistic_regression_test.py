@@ -22,7 +22,6 @@ def sigmoid(z):
 # Define log loss function
 def logloss(y_hat_sigmoid, y):
     m = len(y)
-    y_hat_sigmoid = np.clip(y_hat_sigmoid, 1e-15, 1 - 1e-15)  # Clip to avoid log(0)
     cost = (-1 / m) * (np.dot(y, np.log(y_hat_sigmoid)) + np.dot((1 - y), np.log(1 - y_hat_sigmoid)))
     return cost
 

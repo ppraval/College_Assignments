@@ -1,0 +1,663 @@
+Okay, let's tackle these two exercises. I need to write YACC programs for each. Let me start with the first one: recognizing nested IF statements and displaying their nesting levels.
+
+For the first exercise, the goal is to check the syntax of nested IF statements and show how deep each IF is nested. The grammar should handle IF statements that might have other IFs inside their then or else clauses. Each time an IF is encountered, the nesting level increases. When the parser reduces an IF production, I need to track the current level and print it.
+
+Hmm, how to track the nesting level? Maybe using a global variable that increments when an IF is parsed and decrements after processing the corresponding else. Wait, but that might not work because the parser uses a stack, and the nesting is hierarchical. Maybe a better approach is to use a stack-like structure in the code, but perhaps using YACC's built-in value stack with semantic values.
+
+Alternatively, since YACC allows for passing attributes, maybe each production can carry a nesting level. But that might complicate things. Alternatively, using a global variable for the current nesting level, which is incremented when an 'if' is encountered and decremented after the 'else' part. Wait, but the else is optional. So perhaps when entering an 'if', increment the level, and when exiting the entire if statement (after processing then and else), decrement.
+
+Wait, but how to track the nesting correctly. Let me think: each 'if' starts a new nesting level. For example:
+
+if (cond) then ... // level 1
+
+if (cond) then ... // level 2
+
+else ... // this else belongs to the inner if (level 2)
+
+... // back to level 1
+
+So the nesting level should be tracked with a counter that increments on each 'if' and decrements when the if statement is fully parsed (i.e., after the then and else parts). But how to know when to decrement? Because the else is optional. Hmm.
+
+Alternatively, when the parser starts parsing an 'if' statement, it increments the level, and when the entire 'if' (including else if present) is parsed, it decrements. So the nesting level is managed correctly.
+
+But how to represent this in the grammar. Let's outline the grammar rules.
+
+The start symbol could be 'program' which is a list of statements.
+
+statements: statement | statements statement
+
+;
+
+statement: IF '(' condition ')' statement
+
+| IF '(' condition ')' statement ELSE statement
+
+| OTHER_STATEMENT
+
+;
+
+But in YACC, we need to define the grammar. Let's think about the productions.
+
+When the parser reduces a production that represents an 'if' statement, that's when we can print the nesting level. But how to track the current level.
+
+Wait, perhaps using a global variable 'nest_level' that is incremented each time an 'if' is encountered (when the 'if' token is read), and decremented when the corresponding 'else' is processed or when the if statement is closed. But that might not work because the parser is a shift-reduce parser and the order of processing might not correspond directly to the structure.
+
+Alternatively, every time the parser starts processing an 'if' statement, the nest_level increases by 1, and when the entire if (including else) is processed, it decreases by 1. But how to implement that in YACC's rules.
+
+Wait, perhaps when the 'if' is parsed (shifted), the action for the 'if' token would increment the nest_level. But that's in the lexer. Wait, the lexer returns the token when it sees 'if'. So in the lexer's code for 'if', we can increment the nest_level. But then, when the entire if statement is parsed, how to decrement it. Because the parser reduces the 'if' production after processing the then and else parts.
+
+Alternatively, the action associated with the 'if' production can increment the nest_level when the 'if' is parsed, but that would be when the entire if statement is reduced, which is too late.
+
+Wait, maybe the nesting level should be tracked in the parser's stack. But that requires using semantic values. Let's think: each non-terminal can have a nesting level attribute. For example, when an 'if' is parsed, the nesting level of its surrounding context is known. But this might get complicated.
+
+Alternatively, the nesting level can be tracked using a global variable, which is incremented when an 'if' is encountered and decremented when the corresponding 'else' is parsed, or when the 'if' statement is closed. But I'm not sure.
+
+Wait, perhaps when the parser processes the 'if' token, the nest_level is incremented. Then, when the parser reduces the 'if' statement (either with or without else), the nest_level is decremented. But how to know when to decrement.
+
+For example:
+
+When the 'if' is shifted, the lexer returns IF, and in the lexer's code, nest_level is incremented. But that would be too early, because the 'if' is part of a larger structure. For instance, in a nested 'if', the outer 'if' would increment the level, then the inner 'if' would increment again. But the lexer would increment each time it returns an IF token. So in the code:
+
+lexer:
+
+"if" { nest_level++; return IF; }
+
+Then, each 'if' in the input increases nest_level. But when do we decrement? Because the nest_level should decrease once the entire if statement (including then and else) is parsed.
+
+But the problem is that the lexer processes the 'if' tokens as they appear, so for nested ifs, each 'if' increases the level. But the correct time to print the nesting level is when the 'if' is processed, but the nesting level is determined by how many ifs are currently open.
+
+Wait, maybe the approach is to have a stack that tracks the current nesting level. Each time an 'if' is encountered, push a level onto the stack. When the corresponding else or end of statement is reached, pop the level. But how to track this in YACC.
+
+Alternatively, perhaps using a global variable that is incremented when entering an 'if' and decremented when exiting. But how to track exiting.
+
+Wait, perhaps in the action for the 'if' statement production, after the 'if' is parsed, we print the current nesting level. But how to track the correct level.
+
+Alternatively, when the parser reduces a production that corresponds to an 'if' statement, we can note that this is an 'if' at a certain level, which is the current nesting depth. But the nesting depth would be the number of 'if's that have been started but not yet closed.
+
+But how to track that. Let's think of the nest_level as a counter that is incremented each time an 'if' is parsed (shifted), and decremented when the corresponding 'if' statement is fully parsed (reduced). So the lexer increments when it returns the 'if' token, and the parser's action for the 'if' production (after processing the entire statement) decrements the nest_level.
+
+Wait, but the 'if' token is part of the production. For example, the production for an if statement would be:
+
+stmt : IF '(' cond ')' stmt { nest_level--; }
+
+| IF '(' cond ')' stmt ELSE stmt { nest_level--; }
+
+;
+
+But in this case, the nest_level is decremented after processing the entire if statement. However, the lexer would have incremented the nest_level when it saw the 'if' token. But for a nested if, the inner 'if' would have incremented nest_level again. So when the inner if is parsed, the nest_level would be decremented. But the outer if's decrement would come later. This way, during the processing of the inner if's actions, the nest_level would be higher.
+
+Wait, but the order is:
+
+For input "if (cond) if (cond) stmt else stmt":
+
+- The lexer reads the first 'if', nest_level becomes 1.
+
+- Then, when the parser processes the first 'if' as part of the outer if statement's production, the nest_level is decremented (but after processing the inner if).
+
+But this approach might not work because the decrement happens when the entire if statement is reduced. Let me think step by step.
+
+When the outer 'if' is parsed (shifted), nest_level is 1.
+
+Then, inside the outer 'if's then clause, another 'if' is parsed. The lexer increments nest_level to 2.
+
+When the inner 'if' is reduced (parsed completely), the action in the inner if's production decrements nest_level to 1.
+
+Then, the outer 'if's production is reduced, decrementing nest_level to 0.
+
+But during the processing of the inner 'if's actions (like printing the nesting level), nest_level would be 2 before the decrement. So the print would correctly show level 2.
+
+Wait, perhaps this can work.
+
+So the approach is:
+
+- The lexer, when it encounters an 'if', increments nest_level and returns the token.
+
+- The parser, when it reduces a production that corresponds to an 'if' statement (either with or without else), decrements nest_level.
+
+But wait, the nest_level is incremented for each 'if' token, so for nested ifs, each 'if' adds 1. Then, when each if is processed (reduced), the nest_level is decremented.
+
+But when the inner if is processed (reduced), nest_level is decremented, which would affect the outer if's level. Hmm, maybe this isn't the right approach.
+
+Alternatively, maybe the nest_level should be incremented when the 'if' is parsed (shifted), and the action for the 'if' statement (when reduced) prints the current nest_level and then decrements it.
+
+Wait, for example:
+
+When the 'if' is shifted, nest_level is 1. Then, during the processing of the inner 'if', nest_level is 2. When the inner 'if' is reduced, the action prints 2 and decrements to 1. Then, when the outer 'if' is reduced, the action prints 1 and decrements to 0.
+
+But the problem is that each 'if' statement would have its own action that prints the nesting level. So the inner 'if's action would print level 2, the outer's action would print level 1.
+
+But the question is, when should the nesting level be displayed? The problem statement says to display the levels of nesting. So for each 'if', we need to print its nesting level when it is recognized.
+
+So perhaps the action when reducing the 'if' production should print the current nest_level (before decrementing). For example:
+
+stmt : IF '(' cond ')' stmt { printf("Nesting level: %d\n", $1); nest_level--; }
+
+| IF '(' cond ')' stmt ELSE stmt { printf("Nesting level: %d\n", $1); nest_level--; }
+
+;
+
+But how to pass the nesting level. Wait, in this case, the 'IF' token would carry an attribute which is the nest_level when it was encountered. So in the lexer, when 'if' is recognized, nest_level is incremented, and the attribute of the IF token is set to the new nest_level. Then, in the action of the production, we can access $1 (the attribute of the IF token) to get the nesting level at the time the 'if' was parsed.
+
+Yes, this seems better. Because when the 'if' is parsed (shifted), the nest_level is incremented, and the attribute of the 'IF' token is the current nest_level (after incrementing). Then, when the entire 'if' statement is reduced (parsed), the action can use the stored nest_level (from the token) to print it, and then decrement the global nest_level (since that 'if' is now closed).
+
+Wait, but the nest_level is a global variable. So when the lexer processes an 'if', it increments the global nest_level, and sets yylval to that value. Then, the 'IF' token's attribute is the nest_level at the time of lexing. But then, when there are nested ifs, each 'if' would have a higher value.
+
+But how to handle this. Let's outline the code.
+
+In the lexer:
+
+"if"   { nest_level++; yylval = nest_level; return IF; }
+
+Then, in the parser's production:
+
+stmt: IF '(' cond ')' stmt { printf("IF at level %d\n", $1); nest_level--; }
+
+| IF '(' cond ')' stmt ELSE stmt { printf("IF at level %d\n", $1); nest_level--; }
+
+;
+
+But wait, when the lexer returns the 'IF' token, it has already incremented nest_level. So the attribute of the IF token is the new nest_level. However, when the 'if' is part of the production, the action for that production is executed when the entire 'if' statement is parsed. So the attribute $1 holds the nest_level as it was when the 'if' was first encountered (i.e., the value after incrementing). Then, the action prints that value and decrements the global nest_level.
+
+This way, each 'if' token's attribute is the nest_level at the time it was encountered. When the action is executed (when the production is reduced), the nest_level may have been further incremented by nested 'if's. But the stored $1 is the level when the 'if' was started, so printing that gives the correct nesting level for that particular 'if'.
+
+Let's test this logic with an example.
+
+Input:
+
+if (cond) if (cond) stmt else stmt
+
+Processing:
+
+1. Lexer sees first 'if', nest_level becomes 1, returns IF with yylval=1.
+
+2. The parser starts processing the first 'if' statement. But before the production is reduced, the parser processes the inner 'if'.
+
+3. Lexer sees the second 'if', nest_level becomes 2, returns IF with yylval=2.
+
+4. The inner 'if' is processed. When the inner 'if' production is reduced, the action prints $1 (which is 2) and decrements nest_level to 1.
+
+5. Then, the outer 'if' production is reduced. The action prints $1 (which is 1) and decrements nest_level to 0.
+
+So the output would be:
+
+IF at level 2
+
+IF at level 1
+
+Which correctly shows the nesting levels of the inner and outer ifs.
+
+Yes, that makes sense. So this approach should work.
+
+Now, the code for the first exercise.
+
+The YACC program would need:
+
+- Tokens for IF, ELSE, COND (condition), and other statements.
+
+But for simplicity, let's assume that conditions are represented by some token, and other statements are represented by another token. Let's say:
+
+%token IF ELSE COND OTHER
+
+The lexer (yylex) would return these tokens. For the sake of the example, the condition can be a simple 'cond' string, and other statements can be 'stmt' or something. But the actual content is not important for the structure.
+
+The grammar would be something like:
+
+program:
+
+| program stmt
+
+;
+
+stmt:
+
+IF '(' COND ')' stmt
+
+| IF '(' COND ')' stmt ELSE stmt
+
+| OTHER
+
+;
+
+In the actions, we need to print the nesting level when an 'if' is parsed.
+
+But according to the plan, the IF token's attribute is the nest_level when it was encountered.
+
+So, in the lexer:
+
+When "if" is matched, nest_level is incremented, and yylval is set to nest_level, then return IF.
+
+In the parser's rules:
+
+stmt : IF '(' COND ')' stmt { printf("Nesting level %d\n", $1); nest_level--; }
+
+| IF '(' COND ')' stmt ELSE stmt { printf("Nesting level %d\n", $1); nest_level--; }
+
+| OTHER { /* handle other statements */ }
+
+;
+
+But we also need to track the nest_level variable. It's a global variable declared in the C declarations section.
+
+Now, putting it all together.
+
+The YACC code would be:
+
+%{
+
+#include <stdio.h>
+
+#include <stdlib.h>
+
+int nest_level = 0;
+
+%}
+
+%token IF ELSE COND OTHER
+
+%%
+
+program:
+
+| program stmt
+
+;
+
+stmt:
+
+IF '(' COND ')' stmt
+
+{
+
+printf("IF statement at nesting level %d\n", $1);
+
+nest_level--;
+
+}
+
+| IF '(' COND ')' stmt ELSE stmt
+
+{
+
+printf("IF-ELSE statement at nesting level %d\n", $1);
+
+nest_level--;
+
+}
+
+| OTHER
+
+{
+
+// Other statement, do nothing
+
+}
+
+;
+
+%%
+
+yyerror(char *s) {
+
+fprintf(stderr, "Error: %s\n", s);
+
+}
+
+yylex() {
+
+char input[100];
+
+scanf("%s", input);
+
+if (strcmp(input, "if") == 0) {
+
+nest_level++;
+
+yylval = nest_level;
+
+return IF;
+
+} else if (strcmp(input, "else") == 0) {
+
+return ELSE;
+
+} else if (strcmp(input, "cond") == 0) {
+
+return COND;
+
+} else if (strcmp(input, "other") == 0) {
+
+return OTHER;
+
+} else if (input[0] == '(' || input[0] == ')') {
+
+return input[0];
+
+} else {
+
+return 0; // Assume EOF or invalid
+
+}
+
+}
+
+int main() {
+
+yyparse();
+
+return 0;
+
+}
+
+Wait, but this code has some issues. For example, the lexer is reading strings with scanf, but the actual input might have parentheses and other characters. Maybe the lexer should be more precise. Also, the COND token represents the condition, which in reality could be more complex, but for simplicity, we're using 'cond' as a placeholder.
+
+Testing this code with input like:
+
+if ( cond ) other
+
+The lexer would return IF, '(', COND, ')', OTHER. The parser would process the IF production and print the nesting level.
+
+But for nested ifs:
+
+Input:
+
+if ( cond ) if ( cond ) other else other
+
+The lexer would process 'if', increment nest_level to 1, return IF. Then '(', 'cond', ')', 'if' (increment to 2), etc. The inner IF's action would print 2, then decrement to 1. The outer IF's action would print 1 and decrement to 0.
+
+So the output would be:
+
+IF statement at nesting level 2
+
+IF-ELSE statement at nesting level 1
+
+But the actual nesting levels are 1 and 2. Wait, no. The outer if is at level 1, the inner if is at level 2. So the inner if's action should print 2, and the outer's should print 1. Which matches.
+
+This seems correct.
+
+Now, for the second exercise: recognizing a valid variable name starting with a letter followed by letters or digits.
+
+This is a lexical issue, so perhaps a LEX program would be more suitable. But since the user asked for YACC solutions, maybe the YACC program will work with the lexer to check the variable's validity.
+
+But the lexer can be written to recognize the variable names. The regular expression for a valid variable is [a-zA-Z][a-zA-Z0-9]*. So in the lexer, when a token matching this pattern is found, return a VARIABLE token.
+
+But in YACC, the parser's job is to check the syntax. If the input is just a variable, then the parser's job is to accept it. So the grammar could be:
+
+start: VARIABLE { printf("Valid variable\n"); }
+
+;
+
+If the input is a valid variable, the parser reduces to start and prints the message. Otherwise, it reports an error.
+
+But how to integrate this into a YACC program. The lexer needs to return VARIABLE when the input matches the pattern, and other tokens otherwise.
+
+So the YACC code would be:
+
+%{
+
+#include <stdio.h>
+
+#include <ctype.h>
+
+%}
+
+%token VARIABLE
+
+%%
+
+start: VARIABLE { printf("Valid variable\n"); }
+
+;
+
+%%
+
+yyerror(char *s) {
+
+fprintf(stderr, "Error: %s\n", s);
+
+}
+
+yylex() {
+
+int c;
+
+static char buffer[100];
+
+int i = 0;
+
+// Skip whitespace
+
+while ((c = getchar()) == ' ' || c == '\t');
+
+if (c == EOF) {
+
+return 0;
+
+}
+
+if (isalpha(c)) {
+
+buffer[i++] = c;
+
+while ((c = getchar()) != EOF && (isalnum(c))) {
+
+buffer[i++] = c;
+
+}
+
+buffer[i] = '\0';
+
+ungetc(c, stdin); // Put back the non-alnum character
+
+return VARIABLE;
+
+} else {
+
+// Invalid character
+
+return c;
+
+}
+
+}
+
+int main() {
+
+yyparse();
+
+return 0;
+
+}
+
+This code's lexer reads the first character, checks if it's a letter. If yes, reads subsequent letters/digits, forms a token VARIABLE. If the input is a valid variable, the parser's start rule matches and prints "Valid variable". If there's any other character (like starting with a digit), the lexer returns that character, leading to a syntax error.
+
+But for example, input "a123" is valid. Input "123a" is invalid because it starts with a digit.
+
+However, this code has a possible issue: after reading the variable, the lexer puts back the next non-alnum character. But in the case where the input is exactly the variable with no other characters (like end of input), this might cause the next call to yylex() to process EOF. But in the YACC grammar, the start rule expects a VARIABLE followed by nothing (assuming the start symbol is start: VARIABLE followed by nothing? Wait, in the example code, the start rule is:
+
+start: VARIABLE { ... }
+
+Which would require the entire input to be a single VARIABLE token. So the input should be just the variable name, no other characters.
+
+But in reality, after the variable name, there might be a newline or EOF. So the lexer should handle that.
+
+Alternatively, the grammar can be modified to accept VARIABLE followed by a newline.
+
+For example:
+
+start: VARIABLE '\n' { printf("Valid variable\n"); }
+
+;
+
+In this case, the input must be a variable followed by a newline.
+
+The lexer would need to return '\n' as a token.
+
+So modifying the lexer:
+
+In the yylex() function, after reading the variable, the next character (if it's a newline) should be returned as '\n'.
+
+But in the current code, after forming the VARIABLE token, the next character is put back. So when the parser expects the '\n', the next call to yylex() will read the put-back character.
+
+For example, input "abc\n":
+
+- The first call to yylex() reads 'a', 'b', 'c', then the next character is '\n', which is put back.
+
+- The lexer returns VARIABLE.
+
+- Then, the next call to yylex() reads the '\n' (since the put-back character is '\n'), which is returned as '\n' token.
+
+Thus, the start rule matches VARIABLE '\n'.
+
+If the input is "abc123xyz", followed by a newline, the lexer reads the entire "abc123xyz" as a VARIABLE, then the next character is '\n', which is returned as '\n' token. The start rule matches.
+
+But if the input is "abc123xyz123", the lexer reads it as VARIABLE, but if there's no newline, then the parser expects a '\n' and fails.
+
+So to make the input valid, the user must input a variable followed by a newline.
+
+Alternatively, the start rule can be:
+
+start: VARIABLE { ... }
+
+But in this case, after the VARIABLE token, there must be no other tokens. So the input must be exactly the variable, with no extra characters.
+
+But the lexer's current code may have put back a character that's not part of the variable. For example, input "abc$", the lexer reads 'a','b','c', then '$', which is put back. The VARIABLE is returned, and the next token is '$', which is invalid. So the parser would have a syntax error.
+
+Thus, the start rule should require the VARIABLE to be followed by the end of input. How to handle the end of input in YACC? The start symbol should have a production that matches VARIABLE followed by nothing, but YACC automatically adds the end marker. Or perhaps we can have:
+
+start: VARIABLE { printf("Valid\n"); } ;
+
+But in this case, the parser expects the VARIABLE to be the entire input. So the lexer must return VARIABLE followed by EOF.
+
+So modifying the lexer to handle EOF properly.
+
+But the problem is that when the lexer reads the variable and the next character is EOF, the code would put back EOF, which may not be possible. Alternatively, the code can check if the next character is EOF and not put it back in that case.
+
+So modifying the lexer's code:
+
+In the part where it reads after the initial letter:
+
+if (isalpha(c)) {
+
+buffer[i++] = c;
+
+while ((c = getchar()) != EOF && isalnum(c)) {
+
+buffer[i++] = c;
+
+}
+
+buffer[i] = '\0';
+
+if (c != EOF) {
+
+ungetc(c, stdin);
+
+}
+
+return VARIABLE;
+
+}
+
+This way, if the next character after the variable is EOF, it's not put back. So the next call to yylex() will return 0 (EOF token), and the parser would see VARIABLE followed by EOF, which is acceptable if the start rule is start: VARIABLE.
+
+But according to YACC, the input must end with the end marker, which is usually represented by 0. So the start rule should be:
+
+start: VARIABLE { ... } ;
+
+Thus, if the input is a valid variable followed by EOF, the parser will accept it.
+
+In this case, the lexer returns VARIABLE when the variable is read, then returns 0 (EOF). The parser's start rule matches VARIABLE followed by EOF.
+
+So the YACC code for the second exercise would be:
+
+%{
+
+#include <stdio.h>
+
+#include <ctype.h>
+
+%}
+
+%token VARIABLE
+
+%%
+
+start: VARIABLE { printf("Valid variable\n"); }
+
+;
+
+%%
+
+yyerror(char *s) {
+
+fprintf(stderr, "Error: %s\n", s);
+
+}
+
+yylex() {
+
+int c;
+
+static char buffer[100];
+
+int i = 0;
+
+// Skip whitespace
+
+while ((c = getchar()) == ' ' || c == '\t');
+
+if (c == EOF) {
+
+return 0;
+
+}
+
+if (isalpha(c)) {
+
+buffer[i++] = c;
+
+while ((c = getchar()) != EOF && isalnum(c)) {
+
+buffer[i++] = c;
+
+}
+
+buffer[i] = '\0';
+
+if (c != EOF) {
+
+ungetc(c, stdin); // Put back the non-alnum character if not EOF
+
+}
+
+return VARIABLE;
+
+} else {
+
+// Invalid character, return as error
+
+return c;
+
+}
+
+}
+
+int main() {
+
+yyparse();
+
+return 0;
+
+}
+
+Testing this code:
+
+Input "abc123" followed by EOF: valid.
+
+Input "123abc": the lexer reads '1' which is not a letter, returns '1' which is invalid, causing a syntax error.
+
+Input "a_123": the underscore is not alphanumeric, so after 'a', the next character is '_', which is not alnum. So the lexer returns VARIABLE for 'a', then '_', which is returned as a token. The parser expects VARIABLE followed by nothing, but gets '_', leading to error.
+
+This should correctly validate variable names.
+
+So these are the two solutions. The first exercise uses YACC to track nesting levels of IF statements, and the second uses YACC with a lexer to validate variable names.
