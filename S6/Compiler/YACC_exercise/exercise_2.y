@@ -15,7 +15,7 @@ variable: LETTER end
 
 end: LETTER end
     | DIGIT end
-    | /* epsilon */
+    | 
     ;
 
 %%
