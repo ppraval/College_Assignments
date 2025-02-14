@@ -1,0 +1,14 @@
+BcsMain
+{
+    int sum;
+    int i;
+    int n;
+    n = 10;
+    i = 1;
+    sum = 0;
+    while (i < n) {
+        sum = sum + i;
+        i = i + 1
+    };
+    sum = sum * 10
+}
