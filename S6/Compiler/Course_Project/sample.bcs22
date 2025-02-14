@@ -6,7 +6,8 @@ BcsMain
     n = 10;
     i = 1;
     sum = 0;
-    while (i < n) {
+    while (i < n) 
+    {
         sum = sum + i;
         i = i + 1
     };

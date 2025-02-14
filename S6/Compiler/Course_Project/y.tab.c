@@ -1415,6 +1415,6 @@ int main(int argc, char *argv[])
 
 void yyerror(const char *s) 
 {
-    printf(" %d %s Syntax Error\n",yylineno,yytext);
+    printf("Syntax Error at line number %d at %s\n",yylineno,yytext);
     exit(1);
 }
