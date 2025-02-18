@@ -22,7 +22,7 @@ relop           "<"|">"|"<="|">="|"=="|"!="
 {id}        { return ID; }
 {num}       { return NUM; }
 {relop}     { return RELOP; }
-[ \t]+      ; // ignore whitespace
+[ \t]+      ;
 [\n]        { line_num++; }
 ";"         { return SEMICOLON; }
 "="         { return ASSIGN; }

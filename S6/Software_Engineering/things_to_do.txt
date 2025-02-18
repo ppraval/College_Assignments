@@ -1,0 +1,36 @@
+Use case Diagram - 
+Make a use case diagram from the sequence diagram
+
+Class Diagram - This has to have classes with inheritance and all
+Add cardinality - as in one to one, one to many
+Add a User Class
+from User class inherit Student and Admin
+I will send a diagram hand drawn diagram for this
+
+Interaction Diagram - Use the same but add another actor called Admin who interacts with the AdminPanel
+
+UI Screens - make from the sequence diagram
+
+Add alternatives to this
+ChatGPT
+
+I will also send a document which we can use as a template from my dad
+
+How I envision this to look like
+
+Design presentation with evaluation of alternatives
+1 - Problem statement
+2 - Use case diagram
+3 - Class Diagram
+4 - Interaction Diagram
+5 - Module Design 
+    System UI
+    - Here we will put the figma screens 1 or 2
+    AdminPanel
+    - Will talk about the admin panel and what all it does - talk about the methods in the class diagram
+    Server gate
+    - Will talk about what are all the requests that we can send and handle
+    -- Authentication
+    -- Request 
+    -- Request approval
+6 - Alternatives
