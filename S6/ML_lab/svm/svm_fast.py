@@ -88,9 +88,10 @@ def plot_decision_boundary(model, X, y, title):
 
 plot_decision_boundary(svm_rbf_pca, X_train_pca, y_train, 'Decision Boundary of SVM (RBF Kernel)')
 
-param_grid_linear = {'C': [0.1, 1, 10, 100]}
+param_grid_linear = {'C': [0.1, 1, 10, 100], 'gamma': [0.01, 0.1, 1, 10]}
 grid_search_linear = GridSearchCV(SVC(kernel='linear', probability=True, random_state=42), param_grid_linear, cv=3)
 grid_search_linear.fit(X_train, y_train)
+
 print("Best parameters for Linear kernel:", grid_search_linear.best_params_)
 
 best_svm_linear = grid_search_linear.best_estimator_

@@ -1,0 +1,22 @@
+Login Panel
+    - Nav bar About and Features, image at the top right - Profile button
+    - then standard auth for login
+
+Admin Panel
+    - Dashboard - is the landing page
+    - User - show's the users page - user login logs
+    - Requests - Approve/Reject
+    - Issues   - Solved/Pending - We wait for this
+    - Nav bar - Logout, image at the top right - Profile button  
+    Things to Add to the left side of the page
+    - Servers - Should have the fields
+        Server Name, Server IP, Server Uptime (NOTE: this can have Time/ or the word "Maintenence")
+
+User Panel
+    - Dashboard - 
+    - Requests - Raise/Previous
+    - Issues - Raise/Previous
+
+    Things to Add to the left side of the page
+    - Servers - Should have the fields
+        Server Name, Server IP, Server Uptime (NOTE: this can have Time/ or the word "Maintenence")
