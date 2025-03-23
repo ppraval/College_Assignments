@@ -1,0 +1,14 @@
+okay so, what we are supposed to do here is we have 4 virtual switches, vSwitch0, vSwitch1, vSwitch2, vSwitch3
+and we have our three routers connected to vSwitch0, so allocate the first subnet to the network connected to vSwitch0, i.e in the subnet 172.16.20.64/28 i need to give the vSwitch the network address, router 1, router 2, router 3 other addresses in the subnet
+
+each of these routers then have their respective vSwitches, i.e
+router 1 is connected to vSwitch1 router 2 is connected to vSwitch2 and router 3 is connected to vSwitch3
+we also have 3 end point machines which are end_point_1, end_point_2, end_point_2 connected to vSwitch1, vSwitch2, vSwitch3 respectively, so the remaining 3 subnets that we get form the 170.16.20.64/26
+i.e not including 172.16.20.64/28
+allocate these devices i.e the routers and the machines ip addresses in their respective subnets
+also tell me how to allocate each of them in my machines and also how to make those routes
+
+i.e i wanna communicate between end_point_1 and end_point_3
+via the route
+end_point_1 to vSwitch1 to router_1 to vSwitch0 to router_3 to vSwitch2 to end_point_3
+similarly from all end_points to all other end_points via a similar route

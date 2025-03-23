@@ -1,0 +1,198 @@
+in red hat go to system settings the network and then click on new and then add the eth1 
+set the ip addresses to static and assign eth0 ip addresses to the routers from subnet 1 172.16.20.64/28
+
+
+I don't know what to do about the vSwitch0
+
+
+In addition to configuring the static routes, you must enable IP forwarding on both routers.
+sysctl net.ipv4.ip_forward
+sysctl -w net.ipv4.ip_forward=1
+
+router 1
+route add -net 172.16.20.96 netmask 255.255.255.240 gw 172.16.20.66  # Subnet 3 via Router 2
+route add -net 172.16.20.112 netmask 255.255.255.240 gw 172.16.20.67 # Subnet 4 via Router 3
+
+router 2
+route add -net 172.16.20.80 netmask 255.255.255.240 gw 172.16.20.65  # Subnet 2 via Router 1
+route add -net 172.16.20.112 netmask 255.255.255.240 gw 172.16.20.67 # Subnet 4 via Router 3
+
+router 3
+route add -net 172.16.20.80 netmask 255.255.255.240 gw 172.16.20.65  # Subnet 2 via Router 1
+route add -net 172.16.20.96 netmask 255.255.255.240 gw 172.16.20.66  # Subnet 3 via Router 2
+
+command to show tables
+route -n
+(or)
+ip route show
+
+to restart the network
+service network restart
+
+
+We have to install a Router Daemon
+download frr via
+https://rpm.frrouting.org/
+
+export FRRVER=frr-9
+curl -O https://rpm.frrouting.org/repo/$FRRVER-repo-1-0.el9.noarch.rpm
+rpm -ivh ./frr-9-repo-1-0.el9.noarch.rpm
+
+
+exact problem but on a docker
+https://www.reddit.com/r/rhel/comments/h9wb77/how_to_install_dnf_without_dnf_or_yum/
+
+https://superuser.com/questions/476195/how-can-i-install-software-in-linux-with-no-yum-and-no-wget
+
+
+look at this
+https://netref.soe.ucsc.edu/node/22
+
+might have to install this as gpt says this is there
+https://www.unix.com/man_page/redhat/8/routed/
+smt that i found out online
+https://man.freebsd.org/cgi/man.cgi?query=routed&sektion=8
+
+
+mount disk3 in redhat
+mount the drive 
+and in the mounted drive
+/mnt/cdrom/Redhat/RPMS
+find the <routed .rpm file>
+run 
+rpm -ivh ./<routed .rpm file>
+
+
+enable ip forwarding on all routers
+
+and then enter
+routed - to start the service
+service routed start
+service routed status
+
+but i am guessing that we have to run it using
+routed -s (force routers to advertise)
+
+apparently there is a firewall that is blocking udp port no 520 which RIP uses anta maari - found at this link https://www.networkurge.com/2020/05/rip-version2.html
+i found this out by using
+iptables -L -v -n
+look at this tmr
+
+on a side note maybe read this
+https://www.examcollection.com/certification-training/ccnp-configure-verify-and-troubleshoot-ripv2.html
+
+so how to set up RIP - run these on all routers
+sysctl -w net.ipv4.ip_forward=1
+iptables -I RH-Lokkit-0-50-INPUT -p udp --dport 520 -j ACCEPT
+routed -s
+
+use route -n to check the tables
+
+
+pfSense time
+download the iso file somewhere
+then
+in the VM's General Settings type 
+select 
+BSD and then FreeBSD (64-bit)
+then go to system and check
+Enable I/O APIC box
+also give the VM two network cards, one in NAT and the other in intent
+ensure it has atleast 5 gb of disk space
+
+in the pfSense ZFS configuration
+Pool Type/Disks select 
+stripe  disk
+and in Select virtual Device type
+stripe - NO redundancy
+then hit space to select ada0 in VBOX Harddisk
+and go back and install
+click Yes on to overwrite ada0
+
+force unmount the pfSense .iso file 
+then restart the machine
+
+to assign interfaces
+WAN interface le0
+LAN interface le1
+Optional Interface skip for now
+
+then select 2 for setting assigning ip addresses for interfaces
+
+then for LAN assign static ip after skipping by typing n DHCP to assign ip
+192.168.1.1/24
+then assign more IP addreses in that range for a network
+.2/24 subnet and range from .3/24 till .10/24
+
+and then yes for DHCP for LAN
+revert to HTTP as the webConfig
+
+right now looking at pfSense
+for installation
+https://kennethnnorom.com/how-to-install-pfsense-firewall-on-virtualbox/
+
+https://kennethnnorom.com/how-to-configure-firewall-rules-on-pfsense/
+https://docs.netgate.com/pfsense/en/latest/recipes/dynamic-routing-basics.html
+
+
+maybe read through this at some point in time
+https://docs.netgate.com/pfsense/en/latest/packages/frr/index.html
+
+in another VM (ubuntu)
+set it to the same intent as the pfSense machine and then in the ubuntu go to 
+http://192.168.1.1/
+user: admin
+pwd: pfsense
+
+might have to update the pfSense machine using
+pkg update -f
+
+in the pfSense web portal install the frr package
+then
+
+read through this
+https://blog.matrixpost.net/set-up-dynamic-routing-with-frr-free-range-routing-in-pfsense-openbgpd-now-depricated/
+https://pfsense-docs.netlify.app/packages/routing-information-protocol-rip
+
+enable frr in FRR Global on all routers
+while setting WAN and LAN
+le0 -
+le1 - 
+these are /28 subnets don't forget - wasted too much time due to this
+disable firewalls by unchecking two boxes
+scrolling down in the WAN and LAN setup pages in the reserved networks section
+
+set password for frr
+i set the password to = iam (don't forget this)
+and restart both the pfsense vm and the ubuntu vm
+
+don't forget to change the FRR > RIP advertisements addresses
+put both addresses i.e
+for router 1
+172.16.20.64/28
+172.16.20.80/28
+also enable redistribute connected networks
+
+add rules in firewall's WAN via Firewall > Rules > Add
+to allow udp traffic on port 520 with this we can advertise
+to allow all icmp traffic 
+
+netstat -rn (command to check tables in pfSense's shell)
+
+hopefully OSPF is more straight forward
+time for OSPF oh boy
+look at this for the firewall rules
+https://docs.netgate.com/pfsense/en/latest/packages/frr/ospf/example.html
+https://forum.netgate.com/topic/28998/ospf-and-firewall-rules (worthless)
+
+OSPF is the practically the same as RIP
+disable FRR RIP
+enable FRR OSPF
+Check redistribute connected networks
+add the networks 
+for router 1
+172.16.20.64/28 area 0.0.0.0
+172.16.20.80/28 area 0.0.0.0
+add rules in firewall's WAN via Firewall > Rules > Add
+to allow all OSPF traffic on any port
+check routing tables - via netstat -rn
