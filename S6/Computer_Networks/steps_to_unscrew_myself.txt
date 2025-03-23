@@ -1,13 +1,19 @@
 in red hat go to system settings the network and then click on new and then add the eth1 
 set the ip addresses to static and assign eth0 ip addresses to the routers from subnet 1 172.16.20.64/28
 
-
-I don't know what to do about the vSwitch0
-
+setup endpoints
+in the windows xp machines turn off the firewalls
 
 In addition to configuring the static routes, you must enable IP forwarding on both routers.
 sysctl net.ipv4.ip_forward
 sysctl -w net.ipv4.ip_forward=1
+
+172.16.20.64/24
+we subnet into
+vSwitch0 - 172.16.20.64/28
+vSwitch1 - 172.16.20.80/28
+vSwitch2 - 172.16.20.96/28
+vSwitch3 - 172.16.20.112/28
 
 router 1
 route add -net 172.16.20.96 netmask 255.255.255.240 gw 172.16.20.66  # Subnet 3 via Router 2
@@ -29,7 +35,7 @@ ip route show
 to restart the network
 service network restart
 
-
+---------------This part is not necessary------------------------
 We have to install a Router Daemon
 download frr via
 https://rpm.frrouting.org/
@@ -38,12 +44,10 @@ export FRRVER=frr-9
 curl -O https://rpm.frrouting.org/repo/$FRRVER-repo-1-0.el9.noarch.rpm
 rpm -ivh ./frr-9-repo-1-0.el9.noarch.rpm
 
-
 exact problem but on a docker
 https://www.reddit.com/r/rhel/comments/h9wb77/how_to_install_dnf_without_dnf_or_yum/
 
 https://superuser.com/questions/476195/how-can-i-install-software-in-linux-with-no-yum-and-no-wget
-
 
 look at this
 https://netref.soe.ucsc.edu/node/22
@@ -52,8 +56,9 @@ might have to install this as gpt says this is there
 https://www.unix.com/man_page/redhat/8/routed/
 smt that i found out online
 https://man.freebsd.org/cgi/man.cgi?query=routed&sektion=8
+--------------------------------------------------------------------
 
-
+For Route daemon for RIP
 mount disk3 in redhat
 mount the drive 
 and in the mounted drive
@@ -63,7 +68,8 @@ run
 rpm -ivh ./<routed .rpm file>
 
 
-enable ip forwarding on all routers
+enable ip forwarding on all routers via
+sysctl -w net.ipv4.ip_forward=1
 
 and then enter
 routed - to start the service
@@ -73,7 +79,7 @@ service routed status
 but i am guessing that we have to run it using
 routed -s (force routers to advertise)
 
-apparently there is a firewall that is blocking udp port no 520 which RIP uses anta maari - found at this link https://www.networkurge.com/2020/05/rip-version2.html
+apparently there is a firewall that is blocking udp port no 520 which RIP uses anta maari - (found at this link https://www.networkurge.com/2020/05/rip-version2.html)
 i found this out by using
 iptables -L -v -n
 look at this tmr
@@ -89,7 +95,7 @@ routed -s
 use route -n to check the tables
 
 
-pfSense time
+----------------pfSense time-----------------
 download the iso file somewhere
 then
 in the VM's General Settings type 
@@ -177,6 +183,8 @@ add rules in firewall's WAN via Firewall > Rules > Add
 to allow udp traffic on port 520 with this we can advertise
 to allow all icmp traffic 
 
+we have to add the same rules for LAN too
+
 netstat -rn (command to check tables in pfSense's shell)
 
 hopefully OSPF is more straight forward
@@ -196,3 +204,13 @@ for router 1
 add rules in firewall's WAN via Firewall > Rules > Add
 to allow all OSPF traffic on any port
 check routing tables - via netstat -rn
+
+------------------------IPv6------------------------
+total net 2001:5591:DEE6:A00::/56
+
+we subnet into
+vSwitch0 - 2001:5591:DEE6:A00::/64
+vSwitch1 - 2001:5591:DEE6:A01::/64
+vSwitch2 - 2001:5591:DEE6:A02::/64
+vSwitch3 - 2001:5591:DEE6:A03::/64
+
