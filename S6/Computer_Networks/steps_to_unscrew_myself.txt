@@ -15,6 +15,23 @@ vSwitch1 - 172.16.20.80/28
 vSwitch2 - 172.16.20.96/28
 vSwitch3 - 172.16.20.112/28
 
+Router 1
+WAN - 172.16.20.65/28
+LAN - 172.16.20.81/28
+
+Router 2
+WAN - 172.16.20.66/28
+LAN - 172.16.20.97/28
+
+Router 3
+WAN - 172.16.20.67/28
+LAN - 172.16.20.113/28
+
+endpoints_1 - 172.16.20.82/28
+endpoints_2 - 172.16.20.98/28
+endpoints_3 - 172.16.20.114/28
+
+
 router 1
 route add -net 172.16.20.96 netmask 255.255.255.240 gw 172.16.20.66  # Subnet 3 via Router 2
 route add -net 172.16.20.112 netmask 255.255.255.240 gw 172.16.20.67 # Subnet 4 via Router 3
@@ -214,3 +231,18 @@ vSwitch1 - 2001:5591:DEE6:A01::/64
 vSwitch2 - 2001:5591:DEE6:A02::/64
 vSwitch3 - 2001:5591:DEE6:A03::/64
 
+Router 1
+WAN - 2001:5591:DEE6:A00::1/64
+LAN - 2001:5591:DEE6:A01::1/64
+
+Router 2
+WAN - 2001:5591:DEE6:A00::2/64
+LAN - 2001:5591:DEE6:A02::1/64
+
+Router 3
+WAN - 2001:5591:DEE6:A00::3/64
+LAN - 2001:5591:DEE6:A03::1/64
+
+endpoints_1 - 2001:5591:DEE6:A01::2/64
+endpoints_2 - 2001:5591:DEE6:A02::2/64
+endpoints_3 - 2001:5591:DEE6:A03::2/64
