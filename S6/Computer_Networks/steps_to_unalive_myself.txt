@@ -15,6 +15,8 @@ vSwitch1 - 172.16.20.80/28
 vSwitch2 - 172.16.20.96/28
 vSwitch3 - 172.16.20.112/28
 
+here eth0 is WAN, eth1 is LAN
+
 Router 1
 WAN - 172.16.20.65/28
 LAN - 172.16.20.81/28
@@ -30,7 +32,6 @@ LAN - 172.16.20.113/28
 endpoints_1 - 172.16.20.82/28
 endpoints_2 - 172.16.20.98/28
 endpoints_3 - 172.16.20.114/28
-
 
 router 1
 route add -net 172.16.20.96 netmask 255.255.255.240 gw 172.16.20.66  # Subnet 3 via Router 2
@@ -52,7 +53,7 @@ ip route show
 to restart the network
 service network restart
 
----------------This part is not necessary------------------------
+-------------------This part is not necessary-----------------------
 We have to install a Router Daemon
 download frr via
 https://rpm.frrouting.org/
@@ -112,7 +113,7 @@ routed -s
 use route -n to check the tables
 
 
-----------------pfSense time-----------------
+----------------pfSense time----------------------
 download the iso file somewhere
 then
 in the VM's General Settings type 
@@ -138,7 +139,7 @@ then restart the machine
 to assign interfaces
 WAN interface le0
 LAN interface le1
-Optional Interface skip for now
+Optional Interface skip for now (maybe don't be like me and add this too be smart, this is very useful for pfSense)
 
 then select 2 for setting assigning ip addresses for interfaces
 
@@ -168,9 +169,9 @@ user: admin
 pwd: pfsense
 
 might have to update the pfSense machine using
-pkg update -f
+pkg update -f (not needed)
 
-in the pfSense web portal install the frr package
+in the pfSense web portal install the FRR package
 then
 
 read through this
@@ -179,14 +180,14 @@ https://pfsense-docs.netlify.app/packages/routing-information-protocol-rip
 
 enable frr in FRR Global on all routers
 while setting WAN and LAN
-le0 -
-le1 - 
+WAN (le0) -
+LAN (le1) - 
 these are /28 subnets don't forget - wasted too much time due to this
 disable firewalls by unchecking two boxes
 scrolling down in the WAN and LAN setup pages in the reserved networks section
 
 set password for frr
-i set the password to = iam (don't forget this)
+set the password to = iam (don't forget this)
 and restart both the pfsense vm and the ubuntu vm
 
 don't forget to change the FRR > RIP advertisements addresses
@@ -222,7 +223,7 @@ add rules in firewall's WAN via Firewall > Rules > Add
 to allow all OSPF traffic on any port
 check routing tables - via netstat -rn
 
-------------------------IPv6------------------------
+-------------------------------------IPv6---------------------------------------------
 total net 2001:5591:DEE6:A00::/56
 
 we subnet into
@@ -268,7 +269,6 @@ some frr file in
 look for /frr/daemons
 https://colinpaice.blog/2023/01/10/using-frr-routing-program-on-linux/
 ----------------------------------------------------------------------------------
-
 
 check allow IPv6 in System > Advanced > Networking
 also write firewall rules to allow IPv6 UDP on port 521
