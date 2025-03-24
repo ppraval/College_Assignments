@@ -246,3 +246,16 @@ LAN - 2001:5591:DEE6:A03::1/64
 endpoints_1 - 2001:5591:DEE6:A01::2/64
 endpoints_2 - 2001:5591:DEE6:A02::2/64
 endpoints_3 - 2001:5591:DEE6:A03::2/64
+
+apparently something known as RIPng for IPv6?
+https://docs.frrouting.org/en/latest/ripngd.html
+
+which isn't present in the FRR package?
+https://redmine.pfsense.org/issues/11130
+
+check allow IPv6 in System > Advanced > Networking
+also write firewall rules to allow IPv6 UDP on port 521
+maybe we need to allow ping6 on IPv6 too but before that let's setup RIP for IPv6
+
+please don't make me read this
+https://docs.frrouting.org/en/latest/ipv6.html
