@@ -9,7 +9,7 @@ set the ip addresses to static and assign eth0 ip addresses to the routers from 
 setup endpoints
 in the windows xp machines turn off the firewalls
 
-In addition to configuring the static routes, you must enable IP forwarding on both routers.
+In addition to configuring the static routes, you must enable IP forwarding on all routers.
 sysctl net.ipv4.ip_forward
 sysctl -w net.ipv4.ip_forward=1
 
