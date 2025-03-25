@@ -1,3 +1,8 @@
+In the installation of Redhat Linux 9
+in the VM's Harddisk remove the .vdi from SATA and then add it back to IDE
+
+proceed with the installation using the 3 disks
+
 in red hat go to system settings the network and then click on new and then add the eth1 
 set the ip addresses to static and assign eth0 ip addresses to the routers from subnet 1 172.16.20.64/28
 
@@ -139,7 +144,7 @@ then restart the machine
 to assign interfaces
 WAN interface le0
 LAN interface le1
-Optional Interface skip for now (maybe don't be like me and add this too be smart, this is very useful for pfSense)
+Optional Interface skip for now (maybe don't be like me, be smart and add this too, this will make life very easy for pfSense's setup)
 
 then select 2 for setting assigning ip addresses for interfaces
 
