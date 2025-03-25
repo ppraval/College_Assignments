@@ -5,6 +5,7 @@ proceed with the installation using the 3 disks
 
 in red hat go to system settings the network and then click on new and then add the eth1 
 set the ip addresses to static and assign eth0 ip addresses to the routers from subnet 1 172.16.20.64/28
+(remember to hit ctrl + s after any changes in network in redhat)
 
 setup endpoints
 in the windows xp machines turn off the firewalls
@@ -119,7 +120,11 @@ use route -n to check the tables
 
 
 ----------------pfSense time----------------------
-download the iso file somewhere
+
+for installation (follow this for a sensible installation)
+https://kennethnnorom.com/how-to-install-pfsense-firewall-on-virtualbox/
+
+download the iso file from somewhere
 then
 in the VM's General Settings type 
 select 
@@ -144,11 +149,11 @@ then restart the machine
 to assign interfaces
 WAN interface le0
 LAN interface le1
-Optional Interface skip for now (maybe don't be like me, be smart and add this too, this will make life very easy for pfSense's setup)
+Optional Interface skip for now (maybe don't be like me, be smart and add this too along with a third adapter on bridged, this will make life very easy for pfSense's setup)
 
 then select 2 for setting assigning ip addresses for interfaces
 
-then for LAN assign static ip after skipping by typing n DHCP to assign ip
+then for LAN assign static ip after skipping by typing n when asked about DHCP to assign ip
 192.168.1.1/24
 then assign more IP addreses in that range for a network
 .2/24 subnet and range from .3/24 till .10/24
@@ -157,9 +162,6 @@ and then yes for DHCP for LAN
 revert to HTTP as the webConfig
 
 right now looking at pfSense
-for installation
-https://kennethnnorom.com/how-to-install-pfsense-firewall-on-virtualbox/
-
 https://kennethnnorom.com/how-to-configure-firewall-rules-on-pfsense/
 https://docs.netgate.com/pfsense/en/latest/recipes/dynamic-routing-basics.html
 
@@ -167,8 +169,8 @@ https://docs.netgate.com/pfsense/en/latest/recipes/dynamic-routing-basics.html
 maybe read through this at some point in time
 https://docs.netgate.com/pfsense/en/latest/packages/frr/index.html
 
-in another VM (ubuntu)
-set it to the same intent as the pfSense machine and then in the ubuntu go to 
+in another VM (ubuntu or some other distro)
+set it to the same intnet as the pfSense machine and then in the ubuntu go to 
 http://192.168.1.1/
 user: admin
 pwd: pfsense
@@ -192,11 +194,11 @@ disable firewalls by unchecking two boxes
 scrolling down in the WAN and LAN setup pages in the reserved networks section
 
 set password for frr
-set the password to = iam (don't forget this)
+set the password to = <your_password> (don't forget this)
 and restart both the pfsense vm and the ubuntu vm
 
-don't forget to change the FRR > RIP advertisements addresses
-put both addresses i.e
+don't forget to change the FRR > RIP advertisement addresses
+put both addresses to which the router is connected to i.e
 for router 1
 172.16.20.64/28
 172.16.20.80/28
