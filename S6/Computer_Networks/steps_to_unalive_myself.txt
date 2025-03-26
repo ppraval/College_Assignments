@@ -59,6 +59,8 @@ ip route show
 to restart the network
 service network restart
 
+(commands on line 15 and 42-52 have to be run everytime, as these routes disappear on boot, unless set via gui or changed in the config, write a bash file for this to make life easier)
+
 -------------------This part is not necessary-----------------------
 We have to install a Router Daemon
 download frr via
@@ -118,6 +120,7 @@ routed -s
 
 use route -n to check the tables
 
+(commands from line 116-119 have to be run everytime on a new boot, unless changed permanently, write two separate bash files, one for ip forwarding and the other for allowing udp traffic)
 
 ----------------pfSense time----------------------
 
@@ -395,6 +398,6 @@ Finally add Firewall rules for IPv6 ICMP on all the routers
 
 Next OSPF - Should be direct enough
 
-install IPv6 on windows
+install IPv6 on windows xp or use windows 8
 using
 ivp6 install - (Check if this works)
