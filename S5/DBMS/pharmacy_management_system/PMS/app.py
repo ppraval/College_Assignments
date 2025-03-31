@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = 'PMS_Session_key'
 
 # Database connection configuration
-connection_string = 'DRIVER={ODBC Driver 18 for SQL Server};SERVER=praval.database.windows.net;DATABASE=pravaldb;UID=praval;PWD=ninja@123'
+connection_string = 'DRIVER={ODBC Driver 18 for SQL Server};SERVER=pravaldbserver.database.windows.net;DATABASE=PravalDB;UID=praval;PWD=pms@1234'
 
 
 @app.route('/dashboard')

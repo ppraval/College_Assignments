@@ -39,6 +39,9 @@ endpoints_1 - 172.16.20.82/28
 endpoints_2 - 172.16.20.98/28
 endpoints_3 - 172.16.20.114/28
 
+to run these commands on rhl09 we have to be root, which we switch to by
+su -
+
 router 1
 route add -net 172.16.20.96 netmask 255.255.255.240 gw 172.16.20.66  # Subnet 3 via Router 2
 route add -net 172.16.20.112 netmask 255.255.255.240 gw 172.16.20.67 # Subnet 4 via Router 3
@@ -59,7 +62,7 @@ ip route show
 to restart the network
 service network restart
 
-(commands on line 15 and 42-52 have to be run everytime, as these routes disappear on boot, unless set via gui or changed in the config, write a bash file for this to make life easier)
+(commands on line 15 and 42-55 have to be run everytime, as these routes disappear on boot, unless set via gui or changed in the config, write a bash file for this to make life easier)
 
 -------------------This part is not necessary-----------------------
 We have to install a Router Daemon
@@ -108,7 +111,6 @@ routed -s (force routers to advertise)
 apparently there is a firewall that is blocking udp port no 520 which RIP uses anta maari - (found at this link https://www.networkurge.com/2020/05/rip-version2.html)
 i found this out by using
 iptables -L -v -n
-look at this tmr
 
 on a side note maybe read this
 https://www.examcollection.com/certification-training/ccnp-configure-verify-and-troubleshoot-ripv2.html
@@ -120,7 +122,7 @@ routed -s
 
 use route -n to check the tables
 
-(commands from line 116-119 have to be run everytime on a new boot, unless changed permanently, write two separate bash files, one for ip forwarding and the other for allowing udp traffic)
+(commands from line 118-121 have to be run everytime on a new boot, unless changed permanently, write two separate bash files, one for ip forwarding and the other for allowing udp traffic)
 
 ----------------pfSense time----------------------
 
