@@ -296,6 +296,8 @@ frr_daemons="zebra mgmtd static ripd ripngd"
 then restart frr to enable ripngd via
 service frr restart
 
+(this has to be done everytime unless)
+--------------------------Not verified-----------------------
 /usr/local/etc/rc.conf.d
 for some reason the config is getting wiped on reboot
 it has permissions
@@ -305,6 +307,7 @@ using (look at this later)
 chmod 644 /frr
 
 wait (for exactly 5 seconds)
+--------------------------------------------------------------
 
 in FRR > Global Settings > Raw Config
 click on Update Running
@@ -334,8 +337,8 @@ router rip
 !
 router ripng
  redistribute connected
- network 2001:5591:DEE6:A00::1/64
- network 2001:5591:DEE6:A01::1/64
+ network 2001:5591:DEE6:A00::/64
+ network 2001:5591:DEE6:A01::/64
 !
 line vty
 !
@@ -362,8 +365,8 @@ router rip
 !
 router ripng
  redistribute connected
- network 2001:5591:DEE6:A00::2/64
- network 2001:5591:DEE6:A02::1/64
+ network 2001:5591:DEE6:A00::/64
+ network 2001:5591:DEE6:A02::/64
 !
 line vty
 !
@@ -390,16 +393,19 @@ router rip
 !
 router ripng
  redistribute connected
- network 2001:5591:DEE6:A00::3/64
- network 2001:5591:DEE6:A03::1/64
+ network 2001:5591:DEE6:A00::/64
+ network 2001:5591:DEE6:A03::/64
 !
 line vty
 !
 -----------------------------------------------------
+click on copy frr running to saved
+and then save
+
 Finally add Firewall rules for IPv6 ICMP on all the routers
 
 Next OSPF - Should be direct enough
 
-install IPv6 on windows xp or use windows 8
+install IPv6 on windows xp or use windows 8 for the endpoints
 using
-ivp6 install - (Check if this works)
+ivp6 install - (Check if this works for xp)
