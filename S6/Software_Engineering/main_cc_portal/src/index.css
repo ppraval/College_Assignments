@@ -1,0 +1,170 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 222 84% 5%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5% 26%;
+    --sidebar-primary: 240 6% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 5% 96%;
+    --sidebar-accent-foreground: 240 6% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217 91% 60%;
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 217 33% 18%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 18%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 33% 18%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --ring: 213 27% 84%;
+    
+    --sidebar-background: 240 6% 10%;
+    --sidebar-foreground: 240 5% 96%;
+    --sidebar-primary: 224 76% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4% 16%;
+    --sidebar-accent-foreground: 240 5% 96%;
+    --sidebar-border: 240 4% 16%;
+    --sidebar-ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Custom Animation Classes */
+.page-transition-enter {
+  @apply animate-fade-in;
+}
+
+.slide-up-animation {
+  @apply animate-slide-up;
+}
+
+.scale-in-animation {
+  @apply animate-scale-in;
+}
+
+/* Status Badge Styles */
+.status-badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+.status-badge.pending {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+.status-badge.approved {
+  @apply bg-green-100 text-green-800;
+}
+
+.status-badge.rejected {
+  @apply bg-red-100 text-red-800;
+}
+
+.status-badge.open {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+.status-badge.solved {
+  @apply bg-green-100 text-green-800;
+}
+
+.status-badge.online {
+  @apply bg-green-100 text-green-800;
+}
+
+.status-badge.maintenance {
+  @apply bg-indigo-100 text-indigo-800;
+}
+
+/* Glassmorphism */
+.glass {
+  @apply bg-white/80 backdrop-blur-md border border-white/20;
+}
+
+/* Button Hover Effects */
+.button-hover {
+  @apply transition-all duration-300 ease-in-out hover:shadow-md active:scale-95;
+}
+
+table {
+  @apply w-full border-collapse;
+}
+
+th {
+  @apply text-left py-3 px-4 font-medium text-muted-foreground text-sm;
+}
+
+td {
+  @apply py-3 px-4 border-t border-border text-sm;
+}
+
+/* Form Styles */
+input, select, textarea {
+  @apply px-4 py-2 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all duration-200;
+}
