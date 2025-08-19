@@ -1,0 +1,154 @@
+connect the switch to power
+
+get a pfsense virutal machine up and running
+
+we can trunk in and trunk out vlans in a managable switch
+
+we need to create some vlans
+
+from the firewall
+we can create virutal or physical networks
+
+send an incomming line to the switch from the firewall in the laptop
+then in the l2 switch we will untag that incoming line into more networks and then take that to the 
+
+we will make
+1 physical and 3 virtual networks tag them into one rj45 and then 
+
+in the firewall
+
+to create a network vSwitch
+
+go to file > network manager > tools
+
+create another host only network with the DHCP turned off
+since we have an L3 switch that will assign the ip addr to the vSwitch
+
+
+after what we can create a bridge in the firewall to the outside world
+
+for the pfsense, you can name it L3 Router and it's OS is BSD version - FreeBSD 64bit (BSD is a hardened OS)
+
+we need to have
+Adapter  1 - NAT - WAN (generally)
+Adapter  2 - Host-Only - LAN (for management) add the vSwitch that we created earlier
+Adapter  3 - bridged adapter - connected to the network card in the laptop (for internet access)
+
+1 cpu, 512 MB RAM, 40GB HDD, make it dynamically allocated by not selecting allocate fully
+use the ZFS filesystem
+
+we have to select the harddisk 
+"Select Virtual Device Type"
+We don't choose RAID (Redundant Array for Indespsible Disk)
+we choose STRIPE - no redundancy and then choose ada0
+
+in the partitioning scheme use GPT BIOS
+keep Mirror Swap as NO
+
+Proceed to installation and then remove the optical drive before the machine reboots
+
+we don't need to setup vlans
+write (n)
+
+Assign the interfaces
+
+Assign the WAN interface
+Assign the LAN interface
+Assign the OPT1 interface
+
+Set interface ip
+
+(n) to DHCP
+
+enter the ip addr for LAN - 192.168.1.1/24
+no gateway and also no ipv6
+
+enable the DHCP server on the LAN interface (y)
+set the range to 192.168.1.101 - 192.168.1.199
+
+revert to http for the web configurator (y)
+
+
+and in the ubuntu machine
+set it's adapter to the host-only network that we created earlier
+
+in the pfsense web configurator
+username: admin
+password: pfsense
+
+don't block RFC1918 networks - uncheck that option
+don't block bogon networks - uncheck that option
+
+in pfsense
+
+go to interfaces > assignments
+
+in the interfaces
+LAN - rename it to "Management"
+
+OPT1 - we have to check if the switch works
+enable the interface
+rename it to "LAN"
+set the static ip to
+192.168.100.1/24
+
+in the Firewall > Rules
+in LAN
+add a rule to allow Any to Any ipv4 communications
+
+in Services > DHCP Server > LAN
+enable the DHCP server on the LAN interface
+set the range to 192.168.100.101 - 192.168.100.199 
+Reboot the DHCP server
+
+in control panel > network and internet > network connections
+we can see the Ethernet and we can check the IP addresses that were released by Firewall
+
+assignments > interfaces > VLANs > Edit
+Parent Interface: OPT1
+VLAN Tag: 110
+Description: VLAN110
+Save and Apply Changes
+
+in the interfaces > interface assignments
+we can see the VLAN110 interface 
+
+Enable the interface
+rename it to "VLAN110"  
+set the static ip to 192.168.110.1/24
+
+allow all ipv4 traffic in the firewall rules in the new VLAN110 interface
+
+in the DHCP server for VLAN110
+enable the DHCP server on the VLAN110 interface
+set the range to 192.168.110.101 - 192.168.110.199
+Reboot the DHCP server
+
+Now we can connect the switch to the VLAN110 interface
+in the switch we have to check the IP address in from the Manual and also username and the password which is admin and admin
+
+in our local internet connection
+we need to set local internet to the same series of the switch 192.168.110.0/24 so that we can connect to the switch via the web interface
+
+in the web interface of the switch
+VLAN > VLAN > Create VLAN
+VLAN ID: 110 (select the VLAN110 that we created in pfsense in a long ass list)
+
+Check the switch compatibility
+based on the Default VLAN 
+
+VLAN > VLAN > VLAN Configuration
+(if VLAN is Default all the ports are untagged)
+
+select VLAN to VLAN110
+
+if the cable is in port number 1 (incoming) set that port to tagged
+and if we want to untag it into port 3
+we can see that port 3 will become excluded in the default VLAN.
+
+till port 28 all of them are physical
+after that we will have Link Aggregation (LAG) ports.
+
+Remember to Save
+
+now we can connect the cable from port number 3 and then take that into another machine so that we can check the IP address.

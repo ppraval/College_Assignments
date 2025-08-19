@@ -1,0 +1,68 @@
+build/SPARC/gem5.debug --debug-flags=DRAM hello-world_configs/hello_world_cache.py
+
+~/gem5$ build/SPARC/gem5.opt \
+  configs/deprecated/example/se.py \
+  --cmd=/home/ssladmin/gem5/hello_threads \
+  --cpu-type=TimingSimpleCPU \
+  --sys-clock=1GHz \
+  --cpu-clock=1GHz
+
+
+build/SPARC/gem5.opt --stats-file=stat.txt basicmath.py
+
+/home/ssladmin/toolchains/sparc/sparc64--glibc--stable-2020.08-1/bin/sparc64-buildroot-linux-gnu-gcc \
+  -nostdinc \
+  -I$GCC_BASE/include \
+  -I$GCC_BASE/include-fixed \
+  -I$SYSROOT/usr/include \
+  --sysroot=$SYSROOT \
+  -static \
+  -O2 \
+  blocksort.c \
+  huffman.c \
+  crctable.c \
+  randtable.c \
+  compress.c \
+  decompress.c \
+  bzlib.c \
+  bzip2.c \
+  -o bzip2_static.elf
+(base) ssladmin@ssladmin-HP-ProDesk-400-G7-Small-Form-Factor-PC:~/gem5/bzip2-1.0.8$ file bzip2_static.elf 
+bzip2_static.elf: ELF 64-bit MSB executable, SPARC V9, Sun UltraSPARC1 Extensions Required, relaxed memory ordering, version 1 (GNU/Linux), statically linked, for GNU/Linux 4.9.0, with debug_info, not stripped
+
+
+
+
+/home/ssladmin/toolchains/sparc/sparc64--glibc--stable-2020.08-1/sparc64-buildroot-linux-gnu/sysroot/usr/include/linux/stddef.h
+/home/ssladmin/toolchains/sparc/sparc64--glibc--stable-2020.08-1/lib/gcc/sparc64-buildroot-linux-gnu/9.3.0/include/stddef.h
+(base) ssladmin@ssladmin-HP-ProDesk-400-G7-Small-Form-Factor-PC:~/gem5/bzip2-1.0.8$ export GCC_BASE=/home/ssladmin/toolchains/sparc/sparc64--glibc--stable-2020.08-1/lib/gcc/sparc64-buildroot-linux-gnu/9.3.0
+(base) ssladmin@ssladmin-HP-ProDesk-400-G7-Small-Form-Factor-PC:~/gem5/bzip2-1.0.8$ export SYSROOT=/home/ssladmin/toolchains/sparc/sparc64--glibc--stable-2020.08-1/sparc64-buildroot-linux-gnu/sysroot
+(base) ssladmin@ssladmin-HP-ProDesk-400-G7-Small-Form-Factor-PC:~/gem5/bzip2-1.0.8$ /home/ssladmin/toolchains/sparc/sparc64--glibc--stable-2020.08-1/bin/sparc64-buildroot-linux-gnu-gcc \
+  -nostdinc \
+  -I$GCC_BASE/include \
+  -I$GCC_BASE/include-fixed \
+  -I$SYSROOT/usr/include \
+  --sysroot=$SYSROOT \
+  -static \
+  -O2 \
+  blocksort.c \
+  huffman.c \
+  crctable.c \
+  randtable.c \
+  compress.c \
+  decompress.c \
+  bzlib.c \
+  bzip2.c \
+  -o bzip2_static.elf
+  
+  /home/ssladmin/gem5/bzip2-1.0.8/bzip2_static.elf
+  
+  build/SPARC/gem5.opt hello.py
+  
+  For Debugging the output:
+  ./build/SPARC/gem5.opt \
+  --debug-flags=Exec,Decode,Fetch,O3CPU,MemoryAccess \
+  hello.py
+
+
+

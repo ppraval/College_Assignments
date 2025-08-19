@@ -1,0 +1,99 @@
+{
+    "_author": "Modified for SPARC",
+    "_license": "Copyright (c) 2020 The Regents of the University of California. SPDX-License-Identifier: BSD 3-Clause",
+    "builders":
+    [
+        {
+            "type": "qemu",
+            "format": "raw",
+            "boot_command":
+            [
+                "boot <enter>",
+                "debian-installer={{ user `locale` }} auto locale={{ user `locale` }} ",
+                "file=/floppy/{{ user `preseed` }} ",
+                "fb=false debconf/frontend=noninteractive ",
+                "hostname={{ user `hostname` }} ",
+                "/install/vmlinuz noapic ",
+                "initrd=/install/initrd.gz ",
+                "console=ttyS0,9600 ",
+                "-- <enter>"
+            ],
+            "cpus": "{{ user `vm_cpus`}}",
+            "disk_size": "{{ user `image_size` }}",
+            "floppy_files":
+            [
+                "shared/{{ user `preseed` }}"
+            ],
+            "headless": "{{ user `headless` }}",
+            "http_directory": "shared",
+            "iso_checksum": "{{ user `iso_checksum_type` }}:{{ user `iso_checksum` }}",
+            "iso_urls": [ "{{ user `iso_url` }}" ],
+            "memory": "{{ user `vm_memory`}}",
+            "output_directory": "spec-2017/{{ user `image_name` }}-image",
+            "qemuargs":
+            [
+                [ "-cpu", "TI SuperSparc II" ],
+                [ "-display", "none" ],
+                [ "-serial", "stdio" ]
+            ],
+            "qemu_binary":"/usr/bin/qemu-system-sparc",
+            "shutdown_command": "echo '{{ user `ssh_password` }}'|sudo -S shutdown -P now",
+            "ssh_password": "{{ user `ssh_password` }}",
+            "ssh_username": "{{ user `ssh_username` }}",
+            "ssh_wait_timeout": "60m",
+            "vm_name": "{{ user `image_name` }}"
+        }
+    ],
+    "provisioners":
+    [
+        {
+            "type": "file",
+            "source": "../gem5/util/m5/build/sparc/out/m5",
+            "destination": "/home/gem5/"
+        },
+        {
+            "type": "file",
+            "source": "shared/serial-getty@.service",
+            "destination": "/home/gem5/"
+        },
+        {
+            "type": "file",
+            "source": "spec-2017/runscript.sh",
+            "destination": "/home/gem5/"
+        },
+        {
+            "type": "file",
+            "source": "spec-2017/cpu2017-1.1.0.iso",
+            "destination": "/home/gem5/"
+        },
+        {
+            "type": "shell",
+            "execute_command": "echo '{{ user `ssh_password` }}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
+            "scripts":
+            [
+                "spec-2017/post-installation.sh",
+                "spec-2017/install-spec2017.sh"
+            ]
+        }
+    ],
+    "variables":
+    {
+        "boot_command_prefix": "",
+        "desktop": "false",
+        "image_size": "12000",
+        "headless": "true",
+        "iso_checksum": "YOUR_SPARC_ISO_CHECKSUM",
+        "iso_checksum_type": "md5",
+        "iso_name": "debian-sparc-netinst.iso",
+        "iso_url": "https://cdimage.debian.org/cdimage/ports/latest/sparc/iso-cd/debian-XX.X.X-sparc-netinst.iso",
+        "locale": "en_US",
+        "preseed" : "preseed.cfg",
+        "hostname": "gem5",
+        "ssh_fullname": "gem5",
+        "ssh_password": "12345",
+        "ssh_username": "gem5",
+        "vm_cpus": "1",
+        "vm_memory": "2048",
+        "image_name": "spec-2017-sparc"
+    }
+}
