@@ -1,0 +1,9 @@
+commands to run
+
+sudo apt-get install libpcap-dev libnet1-dev
+
+gcc -o ssh_rst_blocker your_code.c -lpcap -lnet
+
+sudo ./ssh_rst_blocker
+
+give input: server/client

@@ -7,7 +7,7 @@ we can trunk in and trunk out vlans in a managable switch
 we need to create some vlans
 
 from the firewall
-we can create virutal or physical networks
+we can create virtual or physical networks
 
 send an incomming line to the switch from the firewall in the laptop
 then in the l2 switch we will untag that incoming line into more networks and then take that to the 
@@ -23,7 +23,6 @@ go to file > network manager > tools
 
 create another host only network with the DHCP turned off
 since we have an L3 switch that will assign the ip addr to the vSwitch
-
 
 after what we can create a bridge in the firewall to the outside world
 
@@ -50,13 +49,13 @@ Proceed to installation and then remove the optical drive before the machine reb
 we don't need to setup vlans
 write (n)
 
-Assign the interfaces
+Assign the interfaces - Type 1
 
 Assign the WAN interface
 Assign the LAN interface
 Assign the OPT1 interface
 
-Set interface ip
+Set interface ip - Type 2
 
 (n) to DHCP
 
@@ -128,7 +127,7 @@ Now we can connect the switch to the VLAN110 interface
 in the switch we have to check the IP address in from the Manual and also username and the password which is admin and admin
 
 in our local internet connection
-we need to set local internet to the same series of the switch 192.168.110.0/24 so that we can connect to the switch via the web interface
+we need to set local internet to the same series of the switch 192.168.1.10/24 so that we can connect to the switch via the web interface
 
 in the web interface of the switch
 VLAN > VLAN > Create VLAN
