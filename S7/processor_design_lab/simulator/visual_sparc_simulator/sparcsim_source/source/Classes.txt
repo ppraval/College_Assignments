@@ -1,0 +1,94 @@
+Class Assembler
+-----------------------------
+Converts assembly to machine
+
+Data:
+Output :
+	UINT array of 32 bit instructions 16K instructions enough
+
+	Char array of data memory 32K is enough
+
+	Symbol Table - Name and location
+
+
+	
+Get Each line and break into tokens
+
+Make functions for the 3 formats passing the line to the function after determining the function
+( Store format for each instruction in an array )
+
+
+
+Class Processor
+--------------------------
+Contains many component classes for each component
+
+Interface for each component :
+Inputs and outputs
+All inputs and outputs will be integers for simplicity
+
+At each clock cycle each component will generate ouput depending on the control signals
+
+Control unit is responsible for generating proper controls for each instruction 
+( Microprogramming not needed )
+
+Eg. Classes
+Instruction Register
+Register File
+Memory
+ALU
+
+
+Multiplexers 
+Inheritance needed
+One basic Mux , each mux derived from this basic one
+
+
+
+IF/ID register
+---------------------
+Instruction
+PC+4 saved ( for beq later )
+
+ID/EX reg
+----------------
+2 registers
+16 bit field ( SE to 32 bits )
+
+PC + 4 
+
+write reg no for lw
+rs no also to check for data hazard forwarding unit
+
+
+
+EX/MEM reg
+-------------------
+Calculated address ( ALU Output )
+RT reg also ( for sw )
+write reg no for lw
+
+
+MEM/WB reg
+-------------------
+Date to be written ( ALU output and Memory output )
+write reg no for lw (  used now ) 
+
+
+
+* * * 
+In addition each register needs to save control information for the subsequent stages
+We can create control signals in the instruction decode stage
+4 for EX , 3 for Mem access  , 2 for Write Back
+
+
+* * *
+An ins passes through a stage even if there is nothing to do in that stage
+
+
+Algorithm for Processor
+---------------------------------------
+
+In the beginning Set PC to instruction Start then keep on generating Clock Pulses
+
+Control will automatically set desired inputs depending on the instruction

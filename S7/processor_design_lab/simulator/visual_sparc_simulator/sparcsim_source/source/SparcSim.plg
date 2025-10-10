@@ -1,0 +1,86 @@
+--------------------Configuration: SparcSim - Win32 Release--------------------
+Begining build with project "D:\sparc\SparcSim.dsp", at root.
+Active configuration is Win32 (x86) Application (based on Win32 (x86) Application)
+
+Project's tools are:
+			"32-bit C/C++ Compiler for 80x86" with flags "/nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /Fp"Release/SparcSim.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c "
+			"OLE Type Library Maker" with flags "/nologo /D "NDEBUG" /mktyplib203 /o NUL /win32 "
+			"Win32 Resource Compiler" with flags "/l 0x409 /fo"Release/SparcSim.res" /d "NDEBUG" "
+			"Browser Database Maker" with flags "/nologo /o"Release/SparcSim.bsc" "
+			"COFF Linker for 80x86" with flags "/nologo /subsystem:windows /incremental:no /pdb:"Release/SparcSim.pdb" /machine:I386 /out:"Release/SparcSim.exe" "
+			"Custom Build" with flags ""
+			"<Component 0xa>" with flags ""
+
+Creating command line "rc.exe /l 0x409 /fo"Release/SparcSim.res" /d "NDEBUG" "D:\sparc\SparcSim.rc"" 
+Creating temp file "C:\WINDOWS\TEMP\RSPC0E6.TMP" with contents </nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /Fp"Release/SparcSim.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"D:\sparc\Assembler.cpp"
+"D:\sparc\ChildFrm.cpp"
+"D:\sparc\DmemDlg.cpp"
+"D:\sparc\EmDlg.cpp"
+"D:\sparc\ImemDlg.cpp"
+"D:\sparc\MainFrm.cpp"
+"D:\sparc\ParamsDlg.cpp"
+"D:\sparc\PregsDlg.cpp"
+"D:\sparc\Processor.cpp"
+"D:\sparc\RegfileDlg.cpp"
+"D:\sparc\SparcSim.cpp"
+"D:\sparc\SparcSimDoc.cpp"
+"D:\sparc\SparcSimView.cpp"
+"D:\sparc\StatsDlg.cpp"
+>
+Creating command line "cl.exe @C:\WINDOWS\TEMP\RSPC0E6.TMP" 
+Creating temp file "C:\WINDOWS\TEMP\RSPC0E7.TMP" with contents </nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /Fp"Release/SparcSim.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"D:\sparc\StdAfx.cpp"
+>
+Creating command line "cl.exe @C:\WINDOWS\TEMP\RSPC0E7.TMP" 
+Creating temp file "C:\WINDOWS\TEMP\RSPC0E8.TMP" with contents </nologo /subsystem:windows /incremental:no /pdb:"Release/SparcSim.pdb" /machine:I386 /out:"Release/SparcSim.exe" 
+.\Release\Assembler.obj
+.\Release\ChildFrm.obj
+.\Release\DmemDlg.obj
+.\Release\EmDlg.obj
+.\Release\ImemDlg.obj
+.\Release\MainFrm.obj
+.\Release\ParamsDlg.obj
+.\Release\PregsDlg.obj
+.\Release\Processor.obj
+.\Release\RegfileDlg.obj
+.\Release\SparcSim.obj
+.\Release\SparcSimDoc.obj
+.\Release\SparcSimView.obj
+.\Release\StatsDlg.obj
+.\Release\StdAfx.obj
+.\Release\SparcSim.res>
+Creating command line "link.exe @C:\WINDOWS\TEMP\RSPC0E8.TMP" 
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+Assembler.cpp
+D:\sparc\Assembler.cpp(342) : warning C4101: 'cn' : unreferenced local variable
+ChildFrm.cpp
+DmemDlg.cpp
+EmDlg.cpp
+ImemDlg.cpp
+MainFrm.cpp
+ParamsDlg.cpp
+PregsDlg.cpp
+Processor.cpp
+D:\sparc\Processor.h(155) : warning C4018: '==' : signed/unsigned mismatch
+D:\sparc\Processor.cpp(535) : warning C4018: '<' : signed/unsigned mismatch
+D:\sparc\Processor.cpp(545) : warning C4018: '<' : signed/unsigned mismatch
+D:\sparc\Processor.cpp(559) : warning C4101: 'buffer' : unreferenced local variable
+RegfileDlg.cpp
+SparcSim.cpp
+D:\sparc\Processor.h(155) : warning C4018: '==' : signed/unsigned mismatch
+SparcSimDoc.cpp
+SparcSimView.cpp
+D:\sparc\Processor.h(155) : warning C4018: '==' : signed/unsigned mismatch
+D:\sparc\SparcSimView.cpp(148) : warning C4018: '<' : signed/unsigned mismatch
+D:\sparc\SparcSimView.cpp(203) : warning C4018: '<' : signed/unsigned mismatch
+StatsDlg.cpp
+Generating Code...
+Linking...
+
+
+
+SparcSim.exe - 0 error(s), 9 warning(s)

@@ -1,0 +1,5 @@
+.org
+add %r0,1,%r1
+sll %r1,3,%r1
+.end
+

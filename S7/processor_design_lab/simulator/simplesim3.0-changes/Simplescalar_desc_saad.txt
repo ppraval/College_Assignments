@@ -1,0 +1,35 @@
+Objective: converting out of order pipeline to in-order without losing functional accuracy (dump the register state to check) i.e . Identify and remove out of order exclusive stages like commit, and components like reservation station, reorder buffer, reg update unit and load-store queue and modify those components for basic inorder issue pipe with fetch, decode, execute width to 1 inst.
+
+Simplescalar-sim
+
+To build sim for alpha ISA, 
+In simplesim-3.0 dir, 
+
+
+make clean
+make config-alpha
+make
+
+To build sim for pisa ISA (Similar to MIPS)
+
+make clean
+make config-pisa
+make
+
+
+Run some inbuilt benchmark
+In simplesim-3.0
+
+./sim-(safe/fast/outorder or any executable) (give any flag and its arg) ./tests-alpha(or pisa)/bin/(any benchmark)
+
+Generate pipeline trace to check each stage processes only 1 instruction 
+
+sim-outorder -ptrace filename.trc start_inst:end_inst benchmark
+
+pipeline.pl filename.trc
+
+Get disassembly file with each instruction and its respective PC 
+
+../bin/sslittle-na-sstrix-objdump -ld benchmark > redirected_output.dis 
+
+

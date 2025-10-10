@@ -1,0 +1,16 @@
+Timing Information for N = 80
+=====================================
+Time taken to read A and B matrices: 1.201000 ms
+Time taken to compute L matrix: 14.001152 ms
+Time taken to compute U matrix: 0.081408 ms
+Total time for solving linear equations: 19.390465 ms
+
+Performance Metrics
+=====================================
+Total FLOPs: 354133
+Total Memory Accesses: 32160
+CGMA Ratio: 11.011598
+Total Thread Invocations: 177199
+Peak Blocks per Grid: 25
+Threads per Block: 256
+

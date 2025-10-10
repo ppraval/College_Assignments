@@ -1,0 +1,10 @@
+.org
+add %r0, 0, %r1
+add %r0, %r0, %r0   # nop
+add %r0, %r0, %r0   # nop
+ang : add %r1, 1, %r1
+add %r0, %r0, %r0   # nop
+add %r0, %r0, %r0   # nop
+ba ang
+add %r0, %r0, %r0   # nop
+.end

@@ -1,0 +1,8 @@
+sim-outorder: SimpleScalar/Alpha Tool Set version 3.0 of March, 2023.
+Copyright (c) 1994-2003 by Todd M. Austin, Ph.D. and SimpleScalar, LLC.
+All Rights Reserved. This version of SimpleScalar is licensed for academic
+non-commercial use.  No portion of this work may be used by any commercial
+entity, or for any commercial purpose, without the prior written permission
+of SimpleScalar, LLC (info@simplescalar.com).
+
+fatal: Alpha simulator cannot run PISA binary `../tests-pisa/bin.little/test-lswlr'

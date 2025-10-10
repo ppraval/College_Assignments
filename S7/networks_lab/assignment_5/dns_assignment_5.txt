@@ -1,0 +1,7 @@
+You are supposed to set up an Authoritative Name Server in Master Slave Mode for your organisation “NW Lab” hosted at subdomain nwlab.cse.nitc.ac.in. 
+Your organisation needs two DNS Servers in Master-Slave mode, 
+where one is the master in which you enter the domain entries and the other is the slave which gets updated automatically via the network from the master. 
+You are not supposed to make any domain name entries in the slave name server, 
+which should get updates of authoritative entries only from the master name server. 
+This will be tested at the time of the demonstration. 
+You should be able to register new domains in the DNS Server. Both Master and slave should be capable of resolving Domain names independently.

@@ -1,0 +1,252 @@
+# =============================================
+# MASTER DNS SERVER (192.168.1.10) - COMMANDS
+# =============================================
+
+# Initial Setup
+sudo apt-get update
+sudo apt-get install bind9 bind9utils bind9-doc -y
+sudo hostnamectl set-hostname ns1.nwlab.cse.nitc.ac.in
+
+# Configure Hosts File
+sudo nano /etc/hosts
+# Add: 192.168.1.10    ns1.nwlab.cse.nitc.ac.in ns1
+
+# Configure BIND Options
+sudo nano /etc/bind/named.conf.options
+# Content:
+options {
+    directory "/var/cache/bind";
+    recursion no;
+    allow-transfer { 192.168.1.11; };
+    dnssec-validation auto;
+    auth-nxdomain no;
+    listen-on-v6 { any; };
+    listen-on { any; };
+    allow-query { any; };
+};
+
+# Configure Local Zones
+sudo nano /etc/bind/named.conf.local
+# Content:
+zone "nwlab.cse.nitc.ac.in" {
+    type master;
+    file "/etc/bind/zones/db.nwlab.cse.nitc.ac.in";
+    allow-transfer { 192.168.1.11; };
+};
+
+zone "1.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/zones/db.192.168.1";
+    allow-transfer { 192.168.1.11; };
+};
+
+# Create Zones Directory and Forward Zone File
+sudo mkdir /etc/bind/zones
+sudo nano /etc/bind/zones/db.nwlab.cse.nitc.ac.in
+# Content:
+$TTL    604800
+@       IN      SOA     ns1.nwlab.cse.nitc.ac.in. admin.nwlab.cse.nitc.ac.in. (
+                              2024052001
+                         604800
+                          86400
+                        2419200
+                         604800 )
+
+@       IN      NS      ns1.nwlab.cse.nitc.ac.in.
+@       IN      NS      ns2.nwlab.cse.nitc.ac.in.
+
+ns1     IN      A       192.168.1.10
+ns2     IN      A       192.168.1.11
+@       IN      A       192.168.1.12
+www     IN      A       192.168.1.12
+webserver IN    A       192.168.1.12
+
+# Create Reverse Zone File
+sudo nano /etc/bind/zones/db.192.168.1
+# Content:
+$TTL    604800
+@       IN      SOA     ns1.nwlab.cse.nitc.ac.in. admin.nwlab.cse.nitc.ac.in. (
+                              2024052001
+                         604800
+                          86400
+                        2419200
+                         604800 )
+
+@       IN      NS      ns1.nwlab.cse.nitc.ac.in.
+@       IN      NS      ns2.nwlab.cse.nitc.ac.in.
+
+10      IN      PTR     ns1.nwlab.cse.nitc.ac.in.
+11      IN      PTR     ns2.nwlab.cse.nitc.ac.in.
+12      IN      PTR     www.nwlab.cse.nitc.ac.in.
+12      IN      PTR     webserver.nwlab.cse.nitc.ac.in.
+
+# Set Permissions and Test
+sudo chown bind:bind /etc/bind/zones/*
+sudo named-checkconf
+sudo named-checkzone nwlab.cse.nitc.ac.in /etc/bind/zones/db.nwlab.cse.nitc.ac.in
+sudo named-checkzone 1.168.192.in-addr.arpa /etc/bind/zones/db.192.168.1
+sudo systemctl restart bind9
+sudo systemctl enable bind9
+
+# =============================================
+# SLAVE DNS SERVER (192.168.1.11) - COMMANDS
+# =============================================
+
+# Initial Setup
+sudo apt-get update
+sudo apt-get install bind9 bind9utils bind9-doc -y
+sudo hostnamectl set-hostname ns2.nwlab.cse.nitc.ac.in
+
+# Configure Hosts File
+sudo nano /etc/hosts
+# Add: 192.168.1.11    ns2.nwlab.cse.nitc.ac.in ns2
+
+# Configure BIND Options
+sudo nano /etc/bind/named.conf.options
+# Content:
+options {
+    directory "/var/cache/bind";
+    recursion no;
+    allow-transfer { none; };
+    dnssec-validation auto;
+    auth-nxdomain no;
+    listen-on-v6 { any; };
+    listen-on { any; };
+    allow-query { any; };
+};
+
+# Configure Slave Zones
+sudo nano /etc/bind/named.conf.local
+# Content:
+zone "nwlab.cse.nitc.ac.in" {
+    type slave;
+    file "db.nwlab.cse.nitc.ac.in";
+    masters { 192.168.1.10; };
+};
+
+zone "1.168.192.in-addr.arpa" {
+    type slave;
+    file "db.192.168.1";
+    masters { 192.168.1.10; };
+};
+
+# Set Permissions and Test
+sudo mkdir /etc/bind/zones
+sudo chown bind:bind /etc/bind/zones
+sudo named-checkconf
+sudo systemctl restart bind9
+sudo systemctl enable bind9
+
+# =============================================
+# WEB SERVER (192.168.1.12) - COMMANDS
+# =============================================
+
+# Setup Web Server
+sudo apt-get update
+sudo apt-get install apache2 -y
+sudo hostnamectl set-hostname webserver.nwlab.cse.nitc.ac.in
+
+# Configure Hosts File
+sudo nano /etc/hosts
+# Add: 192.168.1.12    webserver.nwlab.cse.nitc.ac.in www.nwlab.cse.nitc.ac.in webserver
+
+# Create Test Page
+sudo nano /var/www/html/index.html
+# Content:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NW Lab - CSE NITC</title>
+</head>
+<body>
+    <h1>Welcome to NW Lab - CSE NITC</h1>
+    <p>This is the web server for nwlab.cse.nitc.ac.in</p>
+    <p>Server IP: 192.168.1.12</p>
+</body>
+</html>
+
+# Start Web Server
+sudo systemctl start apache2
+sudo systemctl enable apache2
+
+# =============================================
+# CLIENT SERVER (192.168.1.13) - COMMANDS
+# =============================================
+
+# Configure DNS
+sudo nano /etc/resolv.conf
+# Add:
+# nameserver 192.168.1.10
+# nameserver 192.168.1.11
+# search nwlab.cse.nitc.ac.in
+
+# Make DNS Persistent (Ubuntu)
+sudo nano /etc/systemd/resolved.conf
+# Add:
+# [Resolve]
+# DNS=192.168.1.10 192.168.1.11
+# Domains=nwlab.cse.nitc.ac.in
+sudo systemctl restart systemd-resolved
+
+# =============================================
+# TESTING COMMANDS - Run on Client
+# =============================================
+
+# Basic DNS Tests
+nslookup ns1.nwlab.cse.nitc.ac.in
+nslookup ns2.nwlab.cse.nitc.ac.in
+nslookup webserver.nwlab.cse.nitc.ac.in
+nslookup www.nwlab.cse.nitc.ac.in
+
+# Reverse Lookups
+nslookup 192.168.1.10
+nslookup 192.168.1.11
+nslookup 192.168.1.12
+
+# Test Web Server
+curl http://www.nwlab.cse.nitc.ac.in
+curl http://webserver.nwlab.cse.nitc.ac.in
+
+# Test Specific DNS Servers
+nslookup www.nwlab.cse.nitc.ac.in 192.168.1.10
+nslookup www.nwlab.cse.nitc.ac.in 192.168.1.11
+
+# =============================================
+# DEMONSTRATION COMMANDS
+# =============================================
+
+# Add New Domain (Run on Master DNS only)
+sudo nano /etc/bind/zones/db.nwlab.cse.nitc.ac.in
+# Add: newhost IN A 192.168.1.100
+# Increment serial number to 2024052002
+sudo rndc reload nwlab.cse.nitc.ac.in
+
+# Test New Domain (Run on Client)
+nslookup newhost.nwlab.cse.nitc.ac.in
+
+# =============================================
+# TROUBLESHOOTING COMMANDS
+# =============================================
+
+# Check Configuration
+sudo named-checkconf
+sudo named-checkzone nwlab.cse.nitc.ac.in /etc/bind/zones/db.nwlab.cse.nitc.ac.in
+sudo named-checkzone 1.168.192.in-addr.arpa /etc/bind/zones/db.192.168.1
+
+# Check Service Status
+sudo systemctl status bind9
+sudo systemctl status apache2
+
+# Check Logs
+sudo journalctl -u bind9
+sudo tail -f /var/log/syslog
+
+# Reload Zones
+sudo rndc reload
+sudo systemctl restart bind9
+
+# Test Zone Transfer
+dig @192.168.1.10 nwlab.cse.nitc.ac.in AXFR
+
+# Check Zone Files on Slave
+ls -la /var/cache/bind/

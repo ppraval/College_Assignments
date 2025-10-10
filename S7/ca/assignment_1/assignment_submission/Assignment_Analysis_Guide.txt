@@ -1,0 +1,262 @@
+Cache Replacement Policy Analysis Assignment Guide
+=====================================================
+Assignment: LRU vs MRU Cache Replacement Policy Comparison
+
+ASSIGNMENT OVERVIEW
+-------------------
+This assignment analyzes and compares LRU (Least Recently Used) and MRU (Most Recently Used) 
+cache replacement policies using SimpleScalar simulator with the specified baseline system configuration.
+
+BASELINE SYSTEM CONFIGURATION
+------------------------------
+Parameter                Value
+Core                     OoO, Single Core
+Frequency               2 GHz
+Fetch/Decode/Issue/Commit Width  2
+IQ/LSQ size             64/32
+ROB size                192
+Branch Predictor        Bimodal
+BTB/RAS size            4K/32
+Cache Block Size        64 Bytes
+L1 I-cache              32 KB, 4-way, 3-cycle latency, 32 MSHRs, LRU
+L1 D-cache              32 KB, 4-way, 3-cycle latency, 32 MSHRs, LRU
+L2 Cache (LLC)          256 KB, 16-way, 9-cycle latency, 32 MSHRs, LRU
+Main Memory             4 GB, DDR3 1600 MHz
+
+ASSIGNMENT TASKS
+----------------
+1. Analyse and compare the results of two cache replacement policies - LRU and MRU
+2. Identify the best-performing cache replacement policy among them
+3. Provide all necessary plots and a detailed explanation to justify your conclusion
+4. Plots may include miss rate vs cycle time, L1 miss rate
+
+EVALUATION GUIDELINES
+---------------------
+• Use LRU as the baseline replacement policy
+• Normalize MRU parameters with respect to the baseline (LRU) configuration
+• Use absolute values for L1 miss rate comparison
+
+TEST BENCHMARKS
+---------------
+• Alpha: test_fmath
+• PISA: test_lswlr
+
+STEP-BY-STEP EXECUTION GUIDE
+=============================
+
+STEP 1: Create Baseline Configuration Files
+--------------------------------------------
+
+First, let's create configuration files that match the baseline system specification:
+
+1.1 Create LRU baseline configuration:
+   File: baseline_lru.cfg
+
+1.2 Create MRU test configuration:
+   File: baseline_mru.cfg
+
+STEP 2: Calculate Cache Configuration Parameters
+------------------------------------------------
+
+For the baseline configuration:
+- L1 I-cache: 32 KB, 4-way, 64-byte blocks
+  Sets = 32KB / (4 ways × 64 bytes) = 128 sets
+  Config: il1:128:64:4:l
+
+- L1 D-cache: 32 KB, 4-way, 64-byte blocks  
+  Sets = 32KB / (4 ways × 64 bytes) = 128 sets
+  Config: dl1:128:64:4:l
+
+- L2 Cache: 256 KB, 16-way, 64-byte blocks
+  Sets = 256KB / (16 ways × 64 bytes) = 256 sets
+  Config: ul2:256:64:16:l
+
+STEP 3: Run Benchmarks and Collect Data
+----------------------------------------
+
+3.1 Test Alpha benchmark (test_fmath) with LRU:
+Command:
+./sim-outorder -config baseline_lru.cfg tests-alpha/bin/test-fmath > results_alpha_lru.txt 2>&1
+
+3.2 Test Alpha benchmark (test_fmath) with MRU:
+Command:
+./sim-outorder -config baseline_mru.cfg tests-alpha/bin/test-fmath > results_alpha_mru.txt 2>&1
+
+3.3 Test PISA benchmark (test_lswlr) with LRU:
+Command:
+./sim-outorder -config baseline_lru.cfg tests-pisa/bin.little/test-lswlr > results_pisa_lru.txt 2>&1
+
+3.4 Test PISA benchmark (test_lswlr) with MRU:
+Command:
+./sim-outorder -config baseline_mru.cfg tests-pisa/bin.little/test-lswlr > results_pisa_mru.txt 2>&1
+
+STEP 4: Extract Key Metrics
+----------------------------
+
+From each result file, extract these key metrics:
+
+Performance Metrics:
+- sim_cycle (total simulation cycles)
+- sim_inst_rate (instructions per second)
+- IPC (instructions per cycle)
+
+Cache Metrics:
+- dl1.miss_rate (L1 data cache miss rate)
+- il1.miss_rate (L1 instruction cache miss rate) 
+- ul2.miss_rate (L2 unified cache miss rate)
+- dl1.hits, dl1.misses, dl1.accesses
+- il1.hits, il1.misses, il1.accesses
+- ul2.hits, ul2.misses, ul2.accesses
+
+Memory Metrics:
+- Average memory access time
+- Cache access cycles
+
+STEP 5: Data Analysis Commands
+------------------------------
+
+5.1 Extract simulation cycles:
+grep "sim_cycle" results_*_*.txt
+
+5.2 Extract L1 data cache miss rates:
+grep "dl1.miss_rate" results_*_*.txt
+
+5.3 Extract L1 instruction cache miss rates:  
+grep "il1.miss_rate" results_*_*.txt
+
+5.4 Extract L2 cache miss rates:
+grep "ul2.miss_rate" results_*_*.txt
+
+5.5 Extract IPC values:
+grep "sim_IPC" results_*_*.txt
+
+STEP 6: Create Data Comparison Table
+------------------------------------
+
+Create a summary table with the following format:
+
+Benchmark | Policy | Sim_Cycles | IPC | L1D_Miss_Rate | L1I_Miss_Rate | L2_Miss_Rate
+----------|---------|------------|-----|---------------|---------------|-------------
+Alpha     | LRU     | [value]    |[val]| [value]       | [value]       | [value]
+Alpha     | MRU     | [value]    |[val]| [value]       | [value]       | [value]
+PISA      | LRU     | [value]    |[val]| [value]       | [value]       | [value] 
+PISA      | MRU     | [value]    |[val]| [value]       | [value]       | [value]
+
+STEP 7: Calculate Normalized Values
+-----------------------------------
+
+For each MRU metric, calculate normalized value:
+Normalized_MRU = MRU_value / LRU_value
+
+Values > 1.0 indicate MRU performs worse than LRU
+Values < 1.0 indicate MRU performs better than LRU
+
+EXPECTED COMMAND OUTPUTS AND ANALYSIS
+======================================
+
+Based on cache replacement theory, we expect:
+
+LRU Performance (Baseline):
+- Lower miss rates (better performance)
+- Better IPC (instructions per cycle)
+- Fewer total simulation cycles
+
+MRU Performance:
+- Higher miss rates (worse performance) 
+- Lower IPC
+- More total simulation cycles
+
+Typical Expected Results:
+------------------------
+
+Alpha test_fmath LRU:
+- dl1.miss_rate: ~0.05-0.15 (5-15%)
+- il1.miss_rate: ~0.01-0.05 (1-5%)
+- sim_IPC: ~1.2-1.8
+
+Alpha test_fmath MRU:
+- dl1.miss_rate: ~0.10-0.25 (10-25%) [Higher than LRU]
+- il1.miss_rate: ~0.02-0.08 (2-8%) [Higher than LRU]
+- sim_IPC: ~0.8-1.5 [Lower than LRU]
+
+PISA test_lswlr LRU:
+- dl1.miss_rate: ~0.03-0.12 (3-12%)
+- il1.miss_rate: ~0.01-0.04 (1-4%)
+- sim_IPC: ~1.0-1.6
+
+PISA test_lswlr MRU:
+- dl1.miss_rate: ~0.06-0.20 (6-20%) [Higher than LRU]
+- il1.miss_rate: ~0.02-0.07 (2-7%) [Higher than LRU] 
+- sim_IPC: ~0.7-1.3 [Lower than LRU]
+
+PLOTS TO GENERATE
+=================
+
+1. Normalized Performance Comparison (Bar Chart):
+   - X-axis: Benchmarks (Alpha, PISA)
+   - Y-axis: Normalized values (MRU/LRU)
+   - Bars: Sim_Cycles, IPC, L1D_Miss_Rate, L1I_Miss_Rate
+
+2. Absolute L1 Miss Rate Comparison (Bar Chart):
+   - X-axis: Benchmarks  
+   - Y-axis: Miss Rate (%)
+   - Grouped bars: LRU vs MRU for L1D and L1I
+
+3. Performance Impact (Line/Bar Chart):
+   - X-axis: Benchmarks
+   - Y-axis: Execution Time (cycles) or IPC
+   - Lines/Bars: LRU vs MRU
+
+ANALYSIS FRAMEWORK
+==================
+
+For your report, analyze:
+
+1. Performance Impact:
+   - Which policy completes execution faster?
+   - Which policy achieves higher IPC?
+
+2. Cache Efficiency:
+   - Which policy has lower miss rates?
+   - How do miss rates translate to performance?
+
+3. Workload Sensitivity:
+   - Do results vary between benchmarks?
+   - Why might certain workloads favor one policy?
+
+4. Trade-offs:
+   - What are the advantages/disadvantages of each policy?
+   - When might MRU be preferred despite worse performance?
+
+CONCLUSION TEMPLATE
+===================
+
+Based on the experimental results:
+
+1. Best Performing Policy: [LRU/MRU] because:
+   - Lower miss rates across benchmarks
+   - Higher IPC values  
+   - Faster execution times
+
+2. Performance Difference:
+   - LRU outperforms MRU by X% on average
+   - Miss rate differences of Y% observed
+
+3. Justification:
+   - LRU exploits temporal locality better
+   - MRU violates temporal locality principle
+   - Real-world applications benefit from LRU's approach
+
+IMPLEMENTATION VERIFICATION
+============================
+
+Before running the assignment, verify MRU implementation:
+
+Test command:
+./sim-outorder -cache:dl1 dl1:4:32:2:m -cache:dl2 none tests-alpha/bin/test-math | grep "dl1.miss_rate"
+
+Should show higher miss rate than equivalent LRU configuration:
+./sim-outorder -cache:dl1 dl1:4:32:2:l -cache:dl2 none tests-alpha/bin/test-math | grep "dl1.miss_rate"
+
+END OF GUIDE
+============

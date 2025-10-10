@@ -1,0 +1,7 @@
+.org
+add %r0, 5, %r1
+add %r0, 10, %r2
+st %r0, 0, %r1
+add %r0, %r2, %r1
+ld %r0, 0, %r2
+.end

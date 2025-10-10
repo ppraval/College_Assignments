@@ -1,0 +1,291 @@
+MRU (Most Recently Used) Block Replacement Policy Implementation Guide
+=========================================================================
+Date: September 27, 2025
+Project: SimpleScalar 3.0 Cache Enhancement
+
+OVERVIEW
+--------
+This guide documents the implementation of MRU (Most Recently Used) block 
+replacement policy in the SimpleScalar simulator. MRU replaces the most 
+recently used cache block on a cache miss, which is generally less efficient 
+than LRU but useful for certain workload analysis scenarios.
+
+IMPLEMENTATION CHANGES
+----------------------
+
+1. UPDATE cache.h - Add MRU to enum
+   File: /home/iamthope/ca_assignment/simplesim-3.0/cache.h
+   
+   Find the cache_policy enum (around line 100-106) and change:
+   
+   FROM:
+   /* cache replacement policy */
+   enum cache_policy {
+     LRU,		/* replace least recently used block (perfect LRU) */
+     Random,	/* replace a random block */
+     FIFO		/* replace the oldest block in the set */
+   };
+   
+   TO:
+   /* cache replacement policy */
+   enum cache_policy {
+     LRU,		/* replace least recently used block (perfect LRU) */
+     Random,	/* replace a random block */
+     FIFO,		/* replace the oldest block in the set */
+     MRU		/* replace most recently used block */
+   };
+
+2. UPDATE cache.c - Add MRU character mapping
+   File: /home/iamthope/ca_assignment/simplesim-3.0/cache.c
+   
+   Find the cache_char2policy function (around line 405-413) and change:
+   
+   FROM:
+   /* parse policy */
+   enum cache_policy			/* replacement policy enum */
+   cache_char2policy(char c)		/* replacement policy as a char */
+   {
+     switch (c) {
+     case 'l': return LRU;
+     case 'r': return Random;
+     case 'f': return FIFO;
+     default: fatal("bogus replacement policy, `%c'", c);
+     }
+   }
+   
+   TO:
+   /* parse policy */
+   enum cache_policy			/* replacement policy enum */
+   cache_char2policy(char c)		/* replacement policy as a char */
+   {
+     switch (c) {
+     case 'l': return LRU;
+     case 'r': return Random;
+     case 'f': return FIFO;
+     case 'm': return MRU;
+     default: fatal("bogus replacement policy, `%c'", c);
+     }
+   }
+
+3. UPDATE cache.c - Add MRU to config display
+   File: /home/iamthope/ca_assignment/simplesim-3.0/cache.c
+   
+   Find the cache_config function (around line 423-430) and change:
+   
+   FROM:
+   fprintf(stream,
+   	  "cache: %s: %d-way, `%s' replacement policy, write-back\n",
+   	  cp->name, cp->assoc,
+   	  cp->policy == LRU ? "LRU"
+   	  : cp->policy == Random ? "Random"
+   	  : cp->policy == FIFO ? "FIFO"
+   	  : (abort(), ""));
+   
+   TO:
+   fprintf(stream,
+   	  "cache: %s: %d-way, `%s' replacement policy, write-back\n",
+   	  cp->name, cp->assoc,
+   	  cp->policy == LRU ? "LRU"
+   	  : cp->policy == Random ? "Random"
+   	  : cp->policy == FIFO ? "FIFO"
+   	  : cp->policy == MRU ? "MRU"
+   	  : (abort(), ""));
+
+4. UPDATE cache.c - Add MRU replacement logic
+   File: /home/iamthope/ca_assignment/simplesim-3.0/cache.c
+   
+   Find the replacement logic in cache access (around line 572-586) and change:
+   
+   FROM:
+   /* select the appropriate block to replace, and re-link this entry to
+      the appropriate place in the way list */
+   switch (cp->policy) {
+   case LRU:
+   case FIFO:
+     repl = cp->sets[set].way_tail;
+     update_way_list(&cp->sets[set], repl, Head);
+     break;
+   case Random:
+     {
+       int bindex = myrand() & (cp->assoc - 1);
+       repl = CACHE_BINDEX(cp, cp->sets[set].blks, bindex);
+     }
+     break;
+   default:
+     panic("bogus replacement policy");
+   }
+   
+   TO:
+   /* select the appropriate block to replace, and re-link this entry to
+      the appropriate place in the way list */
+   switch (cp->policy) {
+   case LRU:
+   case FIFO:
+     repl = cp->sets[set].way_tail;
+     update_way_list(&cp->sets[set], repl, Head);
+     break;
+   case MRU:
+     repl = cp->sets[set].way_head;
+     update_way_list(&cp->sets[set], repl, Head);
+     break;
+   case Random:
+     {
+       int bindex = myrand() & (cp->assoc - 1);
+       repl = CACHE_BINDEX(cp, cp->sets[set].blks, bindex);
+     }
+     break;
+   default:
+     panic("bogus replacement policy");
+   }
+
+5. UPDATE cache.c - Add MRU hit handling
+   File: /home/iamthope/ca_assignment/simplesim-3.0/cache.c
+   
+   Find the hit handler (around line 676-681) and change:
+   
+   FROM:
+   /* if LRU replacement and this is not the first element of list, reorder */
+   if (blk->way_prev && cp->policy == LRU)
+     {
+       /* move this block to head of the way (MRU) list */
+       update_way_list(&cp->sets[set], blk, Head);
+     }
+   
+   TO:
+   /* if LRU or MRU replacement and this is not the first element of list, reorder */
+   if (blk->way_prev && (cp->policy == LRU || cp->policy == MRU))
+     {
+       /* move this block to head of the way (MRU) list */
+       update_way_list(&cp->sets[set], blk, Head);
+     }
+
+6. UPDATE sim-outorder.c - Update documentation
+   File: /home/iamthope/ca_assignment/simplesim-3.0/sim-outorder.c
+   
+   Find the cache config documentation (around line 744-756) and change:
+   
+   FROM:
+   "    <repl>   - block replacement strategy, 'l'-LRU, 'f'-FIFO, 'r'-random\n"
+   
+   TO:
+   "    <repl>   - block replacement strategy, 'l'-LRU, 'f'-FIFO, 'r'-random, 'm'-MRU\n"
+
+7. UPDATE sim-cache.c - Update documentation
+   File: /home/iamthope/ca_assignment/simplesim-3.0/sim-cache.c
+   
+   Find the cache config documentation (around line 283) and change:
+   
+   FROM:
+   "    <repl>   - block replacement strategy, 'l'-LRU, 'f'-FIFO, 'r'-random\n"
+   
+   TO:
+   "    <repl>   - block replacement strategy, 'l'-LRU, 'f'-FIFO, 'r'-random, 'm'-MRU\n"
+
+BUILD AND TEST COMMANDS
+-----------------------
+
+1. Navigate to SimpleScalar directory:
+   cd /home/iamthope/ca_assignment/simplesim-3.0
+
+2. Clean previous build:
+   make clean
+
+3. Build the simulator:
+   make sim-outorder
+   make sim-cache
+
+4. Verify help documentation shows MRU option:
+   ./sim-outorder -h | head -50
+   # Look for: 'l'-LRU, 'f'-FIFO, 'r'-random, 'm'-MRU
+
+TEST COMMANDS
+-------------
+
+1. Test MRU with sim-cache (basic functionality test):
+   ./sim-cache -cache:dl1 dl1:4:32:2:m -cache:dl2 none -cache:il1 il1:4:32:2:m -cache:il2 none tests-alpha/bin/test-math
+
+2. Test MRU with sim-outorder:
+   ./sim-outorder -cache:dl1 dl1:4:32:2:m -cache:dl2 none -cache:il1 il1:4:32:1:m -cache:il2 none -max:inst 10000 tests-alpha/bin/test-math
+
+3. Performance comparison test (LRU vs MRU):
+   # Test LRU performance:
+   ./sim-cache -cache:dl1 dl1:4:32:2:l -cache:dl2 none -cache:il1 none -cache:il2 none tests-alpha/bin/test-math 2>&1 | grep "dl1.miss_rate"
+   
+   # Test MRU performance:
+   ./sim-cache -cache:dl1 dl1:4:32:2:m -cache:dl2 none -cache:il1 none -cache:il2 none tests-alpha/bin/test-math 2>&1 | grep "dl1.miss_rate"
+
+EXPECTED RESULTS
+----------------
+
+1. Build should complete successfully without errors
+2. Help text should show 'm'-MRU option in cache replacement strategies
+3. MRU configurations should be accepted (e.g., dl1:4:32:2:m)
+4. MRU should show different (generally higher) miss rates compared to LRU:
+   - LRU miss rate: ~0.24 (24%)
+   - MRU miss rate: ~0.38 (38%)
+
+CACHE CONFIGURATION FORMAT
+---------------------------
+
+<name>:<nsets>:<bsize>:<assoc>:<repl>
+
+Where:
+- <name>   = cache name (e.g., dl1, il1, ul2)
+- <nsets>  = number of sets 
+- <bsize>  = block size in bytes
+- <assoc>  = associativity
+- <repl>   = replacement policy:
+  - 'l' = LRU (Least Recently Used)
+  - 'f' = FIFO (First In First Out) 
+  - 'r' = Random
+  - 'm' = MRU (Most Recently Used) [NEW]
+
+Examples:
+- dl1:128:32:4:m    # L1 data cache with MRU
+- il1:512:32:1:m    # L1 instruction cache with MRU
+- ul2:1024:64:8:m   # Unified L2 cache with MRU
+
+MRU BEHAVIOR EXPLANATION
+------------------------
+
+MRU (Most Recently Used) replacement policy works as follows:
+
+1. On Cache Hit:
+   - Move the accessed block to the head of the way list (same as LRU)
+   - This marks it as the most recently used
+
+2. On Cache Miss:
+   - Select the HEAD block (most recently used) for replacement
+   - This is opposite to LRU which selects the tail (least recently used)
+   - Install the new block at the head of the way list
+
+Performance Impact:
+- MRU typically performs worse than LRU for most workloads
+- Higher miss rates are expected since recently used blocks are more likely to be accessed again
+- Useful for cache analysis and understanding different replacement behaviors
+
+TROUBLESHOOTING
+---------------
+
+If build fails:
+1. Ensure all file modifications are complete
+2. Check for syntax errors in the modified code
+3. Run 'make clean' before rebuilding
+
+If tests fail:
+1. Verify cache configuration syntax is correct
+2. Check that test programs exist in tests-alpha/bin/
+3. Ensure 'm' character is properly handled in cache_char2policy function
+
+FILE SUMMARY
+------------
+Modified files:
+- cache.h (added MRU enum)
+- cache.c (added MRU logic and parsing)
+- sim-outorder.c (updated documentation)
+- sim-cache.c (updated documentation)
+
+No new files created - only existing files modified.
+
+END OF GUIDE
+============

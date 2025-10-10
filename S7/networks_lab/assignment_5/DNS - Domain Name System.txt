@@ -1,0 +1,56 @@
+DNS - Domain Name System
+it is a distributed database that maps hostnames to IP addresses.
+
+we have nslookup and dig
+
+we should have a NIC and that should have an IP
+
+we have to convert a hostname to an IP address
+
+.com - it is called ns domain (name server domain)
+
+we have top level root Servers
+
+we have another set of NS servers
+
+we have authoritative servers
+which have the authoritative mapping
+
+for example if we want the yahoo.com's ip address it has to be in the authoritative dns server
+
+
+Recursive resolution is the process of a DNS server querying other DNS servers on behalf of a client until it finds the authoritative DNS server for a domain name.
+we have 
+
+host machine -> local dns -> root dns -> ns server -> authoritative dns
+
+it gets the ip address from the authoritative dns server and then it sends it back to the local dns server, which caches the result for future queries.
+via the path 
+authoritative dns -> ns server -> root -> local -> host
+
+there are alot of entries
+
+A record     - it is in the authoritative server - mapping between the ip and the hostname
+NS record    - 
+CNAME record - canonical name
+MX record    - 
+
+we will use a software called BIND
+
+authoritative server with
+primary, secondary
+
+we have to set a TTL using bind 
+
+master slave configuration
+ - used when we have multiple internet connections and authoritative servers
+ - the slaves will have a read only copy of the database
+ - if the master goes down the slaves can still respond to queries  
+ - the slaves will periodically check with the master for updates and sync their data accordingly
+
+we have to run one webserver on one of the VMs and add that record to the authoritative server
+make it accessible from the other VMs
+it should be master slave
+
+
+we maybe asked to delete some entry and show them the failure etc

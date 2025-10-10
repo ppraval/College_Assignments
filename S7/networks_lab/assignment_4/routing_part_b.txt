@@ -1,0 +1,595 @@
+=== COMPLETE NETWORK SETUP GUIDE - IPv4 & IPv6 ===
+=== INCLUDING ALL TROUBLESHOOTING STEPS ===
+
+=== NETWORK SETUP SUMMARY ===
+
+Virtual Switches:
+- vSwitch00: 192.168.10.0/24 (LAN segment for all routers)
+- vSwitch01: 170.16.50.0/22 (WAN segment between routers)
+- vSwitch02: 158.16.101.0/22 (Router 02 OPT1 to Router 01 WAN)
+- vSwitch03: 162.160.100.0/24 (Router 03 OPT1 - FTP Server)
+- vSwitch04: 192.168.150.0/24 (Router 01 OPT1 - Web Server 2)
+
+Router Interfaces:
+
+Router 01 (INDIA – AS22521)
+- WAN: 158.16.101.3/22 (vSwitch02)
+- LAN: 192.168.10.4/24 (vSwitch00)
+- OPT1: 192.168.150.1/24 (vSwitch04)
+- Floating IP: 101.50.23.0/23
+
+Router 02 (INDIA – AS9941)
+- WAN: 170.16.50.4/22 (vSwitch01)
+- LAN: 192.168.10.3/24 (vSwitch00)
+- OPT1: 158.16.101.1/22 (vSwitch02)
+
+Router 03 (UAE – AS9953)
+- WAN: 170.16.50.2/22 (vSwitch01)
+- LAN: 192.168.10.2/24 (vSwitch00)
+- OPT1: 162.160.100.1/24 (vSwitch03)
+
+=== IPv6 ADDRESS ALLOCATION PLAN ===
+
+Router 02 (AS9941) - Parent ISP
+Assigned: 2001:5591:DEE6:A00::/56
+
+Subnet allocation:
+- WAN (vSwitch01): 2001:5591:DEE6:A00::/64
+  - Router 02 WAN: 2001:5591:DEE6:A00::2/64
+  - Router 03 WAN: 2001:5591:DEE6:A00::3/64
+- LAN (vSwitch00): 2001:5591:DEE6:A01::/64
+  - Router 02 LAN: 2001:5591:DEE6:A01::2/64
+  - Router 03 LAN: 2001:5591:DEE6:A01::3/64
+  - Router 01 LAN: 2001:5591:DEE6:A01::4/64
+- OPT1 (vSwitch02): 2001:5591:DEE6:A02::/64
+  - Router 02 OPT1: 2001:5591:DEE6:A02::2/64
+  - Router 01 WAN: 2001:5591:DEE6:A02::3/64
+- For Router 01: 2001:5591:DEE6:A03::/64 (from the /56 block)
+
+Router 03 (AS9953)
+Assigned: 2001:585C:FEEC:595A::/64
+- OPT1 (vSwitch03): 2001:585C:FEEC:595A::/64
+  - Router 03 OPT1: 2001:585C:FEEC:595A::2/64
+  - FTP Server: 2001:585C:FEEC:595A::10/64
+
+Router 01 (AS22521)
+From Router 02: 2001:5591:DEE6:A03::/64
+Floating IP Block: 2001:0EF9:BDA8::/48
+- OPT1 (vSwitch04): 2001:0EF9:BDA8:0001::/64
+  - Router 01 OPT1: 2001:0EF9:BDA8:0001::2/64
+  - Web Server 2: 2001:0EF9:BDA8:0001::10/64
+
+=== COMMON CONFIGURATION FOR ALL ROUTERS ===
+
+1. Firewall Settings:
+   - Navigate to: Firewall > Settings > Advanced
+   - Uncheck: "Block private networks" on WAN interface
+   - Apply changes
+
+2. FRR Global Configuration:
+   - Navigate to: Services > FRR > Global Settings > Route Maps
+   - Click "Add"
+   - Name: ALLOW-ALL
+   - Description: Permit all routes
+   - Action: Permit
+   - Sequence: 100
+   - Save
+
+3. IPv6 Route Maps:
+   - Navigate to: Services > FRR > Global Settings > Route Maps
+   - Click "Add"
+   - Name: ALLOW-ALL-IPv6
+   - Description: Permit all IPv6 routes
+   - Address Family: IPv6
+   - Action: Permit
+   - Sequence: 200
+   - Save
+
+=== ROUTER 02 (AS9941) CONFIGURATION ===
+
+IPv4 Configuration:
+1. FRR BGP Settings:
+   - Navigate to: Services > FRR > BGP
+   - ✓ Enable BGP
+   - Local AS: 9941
+   - Router ID: 170.16.50.4
+
+2. Network Distribution:
+   - Scroll to "Networks to Distribute"
+   - Click "Add"
+   - Subnet to Route: 158.16.100.0/22
+   - Route Map: ALLOW-ALL
+   - Save
+
+3. First Neighbor (Router 03):
+   - Navigate to: FRR BGP > Neighbors tab
+   - Click "Add"
+   - Name/Address: 170.16.50.2
+   - Remote AS: 9953
+   - Update Source: IPv4
+   - Local Source for BGP Updates: WAN
+   - ✓ Allow Neighbor to advertise and receive routes for IPv4 and IPv6
+   - Inbound Route Map Filter: ALLOW-ALL
+   - Outbound Route Map Filter: ALLOW-ALL
+   - Advanced Options > Local AS: 9941
+   - Save
+
+4. Second Neighbor (Router 01):
+   - Click "Add"
+   - Name/Address: 158.16.101.3
+   - Remote AS: 22521
+   - Update Source: IPv4
+   - Local Source for BGP Updates: OPT1
+   - ✓ Allow Neighbor to advertise and receive routes for IPv4 and IPv6
+   - Inbound Route Map Filter: ALLOW-ALL
+   - Outbound Route Map Filter: ALLOW-ALL
+   - Advanced Options > Local AS: 9941
+   - Save
+
+IPv6 Configuration:
+1. Configure IPv6 Interfaces:
+   - WAN: 2001:5591:DEE6:A00::2/64
+   - LAN: 2001:5591:DEE6:A01::2/64
+   - OPT1: 2001:5591:DEE6:A02::2/64
+
+2. FRR BGP IPv6 Settings:
+   - Networks to Distribute: 
+     * 2001:5591:DEE6:A00::/56
+     * ::/0 (IPv6 default route - CRITICAL FOR INTERNET)
+   - Neighbors:
+     * Router 03: 2001:5591:DEE6:A00::3 (AS9953)
+     * Router 01: 2001:5591:DEE6:A02::3 (AS22521)
+       - ✓ Next Hop Self (CRITICAL FIX)
+       - ✓ Route Reflector Client
+
+3. IPv6 Internet Gateway:
+   - Navigate to: System > Routing > Gateways
+   - Add IPv6 Gateway:
+     * Interface: WAN
+     * Gateway: 2001:5591:DEE6:A00::1 (VirtualBox NAT)
+     * ✓ Default Gateway
+
+4. Force Restart FRR:
+   - Navigate to: Services > FRR > Global Settings
+   - Click: "Force Service Restart"
+
+=== ROUTER 03 (AS9953) CONFIGURATION ===
+
+IPv4 Configuration:
+1. FRR BGP Settings:
+   - Navigate to: Services > FRR > BGP
+   - ✓ Enable BGP
+   - Local AS: 9953
+   - Router ID: 170.16.50.2
+
+2. Network Distribution:
+   - Scroll to "Networks to Distribute"
+   - Click "Add"
+   - Subnet to Route: 162.160.100.0/24
+   - Route Map: ALLOW-ALL
+   - Click "Add" again
+   - Subnet to Route: 192.168.10.0/24
+   - Route Map: ALLOW-ALL
+   - Save
+
+3. Neighbor Configuration (Router 02):
+   - Navigate to: FRR BGP > Neighbors tab
+   - Click "Add"
+   - Name/Address: 170.16.50.4
+   - Remote AS: 9941
+   - Update Source: IPv4
+   - Local Source for BGP Updates: WAN
+   - ✓ Allow Neighbor to advertise and receive routes for IPv4 and IPv6
+   - Inbound Route Map Filter: ALLOW-ALL
+   - Outbound Route Map Filter: ALLOW-ALL
+   - Advanced Options > Local AS: 9953
+   - Save
+
+IPv6 Configuration:
+1. Configure IPv6 Interfaces:
+   - WAN: 2001:5591:DEE6:A00::3/64
+   - LAN: 2001:5591:DEE6:A01::3/64
+   - OPT1: 2001:585C:FEEC:595A::2/64
+
+2. FRR BGP IPv6 Settings:
+   - Networks to Distribute: 
+     * 2001:585C:FEEC:595A::/64
+     * 2001:5591:DEE6:A01::/64 (LAN)
+   - Neighbors:
+     * Router 02: 2001:5591:DEE6:A00::2 (AS9941)
+
+3. IPv6 Internet Gateway:
+   - Navigate to: System > Routing > Gateways
+   - Add IPv6 Gateway:
+     * Interface: WAN
+     * Gateway: 2001:5591:DEE6:A00::1 (VirtualBox NAT)
+     * ✓ Default Gateway
+
+4. Force Restart FRR:
+   - Navigate to: Services > FRR > Global Settings
+   - Click: "Force Service Restart"
+
+=== ROUTER 01 (AS22521) CONFIGURATION ===
+
+IPv4 Configuration:
+1. FRR BGP Settings:
+   - Navigate to: Services > FRR > BGP
+   - ✓ Enable BGP
+   - Local AS: 22521
+   - Router ID: 158.16.101.3
+
+2. Network Distribution:
+   - Scroll to "Networks to Distribute"
+   - Click "Add"
+   - Subnet to Route: 192.168.10.0/24
+   - Route Map: ALLOW-ALL
+   - Click "Add" again
+   - Subnet to Route: 192.168.150.0/24
+   - Route Map: ALLOW-ALL
+   - Click "Add" again
+   - Subnet to Route: 101.50.23.0/23
+   - Route Map: ALLOW-ALL
+   - Save
+
+3. Neighbor Configuration (Router 02):
+   - Navigate to: FRR BGP > Neighbors tab
+   - Click "Add"
+   - Name/Address: 158.16.101.1
+   - Remote AS: 9941
+   - Update Source: IPv4
+   - Local Source for BGP Updates: WAN
+   - ✓ Allow Neighbor to advertise and receive routes for IPv4 and IPv6
+   - Inbound Route Map Filter: ALLOW-ALL
+   - Outbound Route Map Filter: ALLOW-ALL
+   - Advanced Options > Local AS: 22521
+   - Save
+
+4. Floating IP Configuration:
+   - Navigate to: Firewall > Virtual IPs > + Add
+   - Type: IP Alias
+   - Interface: OPT1
+   - Address: 101.50.23.1/23
+   - Next Firewall > NAT > 1:1
+      - Interface: OPT1
+      - External IP: 101.50.23.1
+      - Internal IP: 192.168.150.2
+      - Save
+
+IPv6 Configuration:
+1. Configure IPv6 Interfaces:
+   - WAN: 2001:5591:DEE6:A02::3/64
+   - LAN: 2001:5591:DEE6:A01::4/64
+   - OPT1: 2001:0EF9:BDA8:0001::2/64
+
+2. FRR BGP IPv6 Settings:
+   - Networks to Distribute:
+     * 2001:0EF9:BDA8::/48 (Floating IP Block)
+     * 2001:5591:DEE6:A01::/64 (LAN)
+     * 2001:5591:DEE6:A03::/64 (Assigned from Router 02)
+   - Neighbors:
+     * Router 02: 2001:5591:DEE6:A02::2 (AS9941)
+
+3. IPv6 Gateway:
+   - Navigate to: System > Routing > Gateways
+   - Add IPv6 Gateway:
+     * Interface: WAN
+     * Gateway: 2001:5591:DEE6:A02::2 (Router 02 OPT1)
+     * ✓ Default Gateway
+
+4. Force Restart FRR:
+   - Navigate to: Services > FRR > Global Settings
+   - Click: "Force Service Restart"
+
+=== DNS CONFIGURATION FIXES ===
+
+CRITICAL DNS ISSUES AND SOLUTIONS:
+
+1. Router DNS Configuration:
+   - Navigate to: System > General Setup
+   - DNS Servers:
+     * 8.8.8.8
+     * 1.1.1.1
+     * 2001:4860:4860::8888 (Google IPv6 DNS)
+     * 2606:4700:4700::1111 (Cloudflare IPv6 DNS)
+   - ✓ Allow DNS server list to be overridden by DHCP/PPP on WAN
+   - DNS Resolution Behavior: Use remote DNS Servers
+
+2. DNS Resolver Configuration:
+   - Navigate to: Services > DNS Resolver
+   - ✓ Enable DNS Resolver
+   - ✓ Enable Forwarding Mode
+   - Outgoing Network Interfaces: WAN
+
+3. Server DNS Configuration (in Netplan):
+   - Add nameservers to each server configuration
+   - Include both IPv4 and IPv6 DNS servers
+
+=== SERVER CONFIGURATION ===
+
+Web Server 1 (Behind Router 02):
+- IPv4: 158.16.101.2/24
+- Gateway: 158.16.101.1
+- IPv6: 2001:5591:DEE6:A02::10/64
+- IPv6 Gateway: 2001:5591:DEE6:A02::2
+
+FTP Server (Behind Router 03):
+- IPv4: 162.160.100.2/24
+- Gateway: 162.160.100.1
+- IPv6: 2001:585C:FEEC:595A::10/64
+- IPv6 Gateway: 2001:585C:FEEC:595A::2
+
+Web Server 2 (Behind Router 01):
+- IPv4: 192.168.150.2/24
+- Gateway: 192.168.150.1
+- IPv6: 2001:0EF9:BDA8:0001::10/64
+- IPv6 Gateway: 2001:0EF9:BDA8:0001::2
+
+=== SERVER NETPLAN CONFIGURATIONS ===
+
+Web Server 1 Netplan:
+network:
+  version: 2
+  ethernets:
+    enp0s3:
+      dhcp4: false
+      dhcp6: false
+      addresses: 
+        - 158.16.101.2/24
+        - 2001:5591:DEE6:A02::10/64
+      routes:
+        - to: default
+          via: 158.16.101.1
+        - to: default
+          via: 2001:5591:DEE6:A02::2
+          metric: 100
+      nameservers:
+        addresses: 
+          - 8.8.8.8
+          - 1.1.1.1
+          - 2001:4860:4860::8888
+          - 2606:4700:4700::1111
+
+FTP Server Netplan:
+network:
+  version: 2
+  ethernets:
+    enp0s3:
+      dhcp4: false
+      dhcp6: false
+      addresses: 
+        - 162.160.100.2/24
+        - 2001:585C:FEEC:595A::10/64
+      routes:
+        - to: default
+          via: 162.160.100.1
+        - to: default
+          via: 2001:585C:FEEC:595A::2
+          metric: 100
+      nameservers:
+        addresses: 
+          - 8.8.8.8
+          - 1.1.1.1
+          - 2001:4860:4860::8888
+          - 2606:4700:4700::1111
+
+Web Server 2 Netplan:
+network:
+  version: 2
+  ethernets:
+    enp0s3:
+      dhcp4: false
+      dhcp6: false
+      addresses: 
+        - 192.168.150.2/24
+        - 2001:0EF9:BDA8:0001::10/64
+      routes:
+        - to: default
+          via: 192.168.150.1
+        - to: default
+          via: 2001:0EF9:BDA8:0001::2
+          metric: 100
+      nameservers:
+        addresses: 
+          - 8.8.8.8
+          - 1.1.1.1
+          - 2001:4860:4860::8888
+          - 2606:4700:4700::1111
+
+Apply Netplan: sudo netplan apply
+
+=== INTERNET ACCESS CONFIGURATION ===
+
+1. Configure Default Gateway on Each Router:
+
+Router 01 (AS22521):
+- Navigate to: System > Routing > Gateways
+- Click "Add"
+  - Interface: WAN
+  - Address Family: IPv4
+  - Gateway: 158.16.100.1
+  - Description: Default Gateway
+  - Save
+
+Router 02 (AS9941):
+- Navigate to: System > Routing > Gateways
+- Click "Add"
+  - Interface: WAN
+  - Address Family: IPv4
+  - Gateway: 170.16.48.1
+  - Description: Default Gateway
+  - Save
+
+Router 03 (AS9953):
+- Navigate to: System > Routing > Gateways
+- Click "Add"
+  - Interface: WAN
+  - Address Family: IPv4
+  - Gateway: 170.16.48.1
+  - Description: Default Gateway
+  - Save
+
+2. Configure Static Routes for Internet Access:
+
+On Router 02 (AS9941):
+- Navigate to: System > Routing > Static Routes
+- Click "Add"
+  - Destination network: 0.0.0.0/1
+  - Gateway: Default - 170.16.48.1
+  - Description: Internet Default Route Part 1
+  - Save
+- Click "Add" again
+  - Destination network: 128.0.0.0/1
+  - Gateway: Default - 170.16.48.1
+  - Description: Internet Default Route Part 2
+  - Save
+
+3. Configure Outbound NAT on Each Router:
+
+All Routers:
+- Navigate to: Firewall > NAT > Outbound
+- Set mode to: Hybrid Outbound NAT
+- Add rules for each internal network to NAT through WAN interface
+
+4. Configure DNS on Each Router:
+
+All Routers:
+- Navigate to: System > General Setup
+- DNS servers: 8.8.8.8, 1.1.1.1, 2001:4860:4860::8888, 2606:4700:4700::1111
+- ✓ Allow DNS server list to be overridden by DHCP/PPP on WAN
+- DNS Resolution Behavior: Use remote DNS Servers (ignore local DNS)
+
+5. Update BGP to Advertise Default Route:
+
+On Router 02 (AS9941):
+- Navigate to: Services > FRR > BGP
+- Scroll to "Networks to Distribute"
+- Click "Add"
+  - Subnet to Route: 0.0.0.0/0
+  - Route Map: ALLOW-ALL
+  - Click "Add" again
+  - Subnet to Route: ::/0
+  - Route Map: ALLOW-ALL-IPv6
+  - Save
+- Force Restart FRR
+
+=== NAT NETWORK CONFIGURATION ===
+
+In Oracle Virtual Box:
+Tools > NAT Networks
+
+NatNetwork01:
+- IPv4 Prefix: 170.16.48.0/22
+- IPv6 Prefix: 2001:5591:DEE6:A00::/64 (CORRECTED)
+- ✓ Enable IPv6
+- ✓ Advertise Default IPv6 Route
+- Disable DHCP
+
+NatNetwork02:
+- IPv4 Prefix: 158.16.100.0/22
+- IPv6 Prefix: 2001:5591:DEE6:A02::/64
+- ✓ Enable IPv6
+- ✓ Advertise Default IPv6 Route
+- Disable DHCP
+
+Network Assignments:
+- Router 01 WAN → NatNetwork02
+- Router 02 OPT1 → NatNetwork02
+- Router 02 Web Server → NatNetwork02
+- Router 02 WAN → NatNetwork01
+- Router 03 WAN → NatNetwork01
+
+Check DHCP servers:
+cd 'C:\Program Files\Oracle\VirtualBox\'
+.\VboxManage list dhcpservers
+
+=== CRITICAL TROUBLESHOOTING STEPS IMPLEMENTED ===
+
+1. IPv6 ADDRESS FORMAT FIXES:
+   - Fixed truncated IPv6 addresses (missing segments)
+   - Fixed missing colons in IPv6 addresses
+   - Corrected NAT Network IPv6 prefixes
+
+2. BGP NEXT HOP ISSUES:
+   - Enabled "Next Hop Self" on Router 02 for Router 01 neighbor
+   - Fixed BGP routes using link-local addresses instead of global IPv6
+
+3. DNS RESOLUTION FIXES:
+   - Configured both IPv4 and IPv6 DNS servers on all routers
+   - Enabled DNS Resolver with forwarding mode
+   - Added DNS servers to all server configurations
+
+4. ROUTING ISSUES:
+   - Verified BGP is advertising default routes (::/0 and 0.0.0.0/0)
+   - Configured proper IPv6 gateways on all routers
+   - Ensured static routes don't conflict with BGP routes
+
+5. FIREWALL CONFIGURATION:
+   - Added IPv6 firewall rules for DNS and internet traffic
+   - Allowed ICMPv6 for neighbor discovery
+
+=== VERIFICATION STEPS ===
+
+1. Check BGP Status on each router:
+   - SSH into router: vtysh
+   - Command: show ip bgp summary
+   - Command: show bgp ipv6 unicast summary
+   - Expected: Neighbors should show "Established" state
+
+2. Test Connectivity:
+   IPv4 Tests:
+   - From Router 01: ping 162.160.100.2 (FTP Server)
+   - From Router 02: ping 192.168.150.2 (Web Server 2)
+   - From Router 03: ping 158.16.101.2 (Web Server 1)
+
+   IPv6 Tests:
+   - ping6 2001:585C:FEEC:595A::10 (FTP Server)
+   - ping6 2001:0EF9:BDA8:0001::10 (Web Server 2)
+   - ping6 2001:5591:DEE6:A02::10 (Web Server 1)
+
+3. Check Routing Tables:
+   - Command: show ip route bgp
+   - Command: show ipv6 route bgp
+   - Should see routes from other autonomous systems
+
+4. Test Internet Connectivity:
+   - ping 8.8.8.8
+   - ping6 2001:4860:4860::8888
+   - curl http://google.com
+   - curl -6 http://google.com
+
+5. Test DNS Resolution:
+   - nslookup google.com
+   - nslookup -query=AAAA google.com
+
+=== TROUBLESHOOTING COMMANDS ===
+
+If issues persist, run these diagnostic commands:
+
+On Router 01:
+1. Check IPv6 routes: netstat -rn -f inet6
+2. Check BGP routes: vtysh -c "show bgp ipv6 unicast"
+3. Test DNS manually: nslookup google.com 8.8.8.8
+4. Check gateway: ping6 2001:5591:DEE6:A02::2
+
+On Router 02:
+1. Test internet: ping6 2001:4860:4860::8888
+2. Check BGP neighbors: vtysh -c "show bgp ipv6 unicast summary"
+3. Verify default route: netstat -rn -f inet6 | grep default
+
+=== IMPORTANT SECURITY NOTES ===
+
+1. In production, use more restrictive route maps instead of ALLOW-ALL
+2. Implement proper firewall rules for each interface
+3. Consider using prefix lists for BGP route filtering
+4. Enable BGP security features like MD5 authentication
+5. Regularly update router firmware and security patches
+
+=== LESSONS LEARNED ===
+
+1. IPv6 address format is critical - must have proper colons and segments
+2. BGP "Next Hop Self" is essential for proper route advertisement
+3. DNS configuration requires both IPv4 and IPv6 DNS servers
+4. VirtualBox NAT Networks must have correct IPv6 prefix format
+5. Always verify connectivity step by step: gateway → internet → DNS
+
+=== END OF COMPREHENSIVE CONFIGURATION GUIDE ===

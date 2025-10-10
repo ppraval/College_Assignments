@@ -1,0 +1,30 @@
+Question: Implement an eƯicient CUDA program to solve a system of linear equations using LU 
+factorization method. Assume that the system is represented as “AX = B” matrices. 
+
+Input file format: 
+a.  First line contains a non-zero unsigned integer which specifies size of the system N (i.e. 
+N unknown variables). 
+b.  Next (N x N) lines contain a double precision floating point number in each line 
+representing row-major values of matrix A. 
+c.  Next N lines contain a double precision floating point number in each line representing 
+value of column matrix B. 
+ 
+Output file format: 
+a.  First line should contain the value N. 
+b.  Next (N x N) lines should contain values of lower triangular matrix L in row major order. 
+c.  Next (N x N) lines should contain values of upper triangular matrix U in row major order. 
+d.  Next N lines should contain the values of solution matrix X in a row major order. 
+ 
+In a separate file, report the following timing information: 
+a.  Time taken to read A and B matrices from file. 
+b.  Time taken in computing lower triangular matrix L. 
+c.  Time taken in computing upper triangular matrix U. 
+d.  Total time taken in solving system of linear equations for the given size N. 
+
+In your report, explain the following: 
+a.  Parallel algorithm used to implement the solution 
+b.  Kernel configuration (grid and block sizes) for each of the kernels called. 
+c.  CGMA value of each kernel called. 
+d.  Discuss different types of synchronizations used in the solution and their impact 
+on the performance. 
+ 

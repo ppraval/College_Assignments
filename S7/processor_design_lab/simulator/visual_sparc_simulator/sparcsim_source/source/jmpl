@@ -1,0 +1,14 @@
+.org
+add %r0, 1, %r1
+add %r0, 24, %r5
+jmpl %r5, %r15
+add %r0, 0, %r0
+call end
+add %r0, 0, %r0
+
+proc :
+add %r1, 10, %r1
+jmpl %r15, %r0
+add %r0, 0, %r0
+
+end : .end
