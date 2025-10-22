@@ -1,0 +1,98 @@
+Cache Replacement Policy Analysis Results
+Generated on: Sat Sep 27 10:59:47 UTC 2025
+==========================================
+
+Benchmark: Alpha_test_fmath | Policy: LRU
+----------------------------------------
+sim_cycle                     96116 # total simulation time in cycles
+sim_IPC                      0.1883 # instructions per cycle
+sim_num_insn                  18099 # total number of instructions committed
+dl1.accesses                   5549 # total number of accesses
+dl1.hits                       5369 # total number of hits
+dl1.misses                      180 # total number of misses
+dl1.miss_rate                0.0324 # miss rate (i.e., misses/ref)
+il1.accesses                  22536 # total number of accesses
+il1.hits                      22186 # total number of hits
+il1.misses                      350 # total number of misses
+il1.miss_rate                0.0155 # miss rate (i.e., misses/ref)
+ul2.accesses                    350 # total number of accesses
+ul2.hits                          3 # total number of hits
+ul2.misses                      347 # total number of misses
+ul2.miss_rate                0.9914 # miss rate (i.e., misses/ref)
+ul2.accesses                    350 # total number of accesses
+ul2.hits                          1 # total number of hits
+ul2.misses                      180 # total number of misses
+ul2.miss_rate                0.9914 # miss rate (i.e., misses/ref)
+
+Benchmark: Alpha_test_fmath | Policy: MRU
+----------------------------------------
+sim_cycle                    138368 # total simulation time in cycles
+sim_IPC                      0.1308 # instructions per cycle
+sim_num_insn                  18099 # total number of instructions committed
+dl1.accesses                   5547 # total number of accesses
+dl1.hits                       5274 # total number of hits
+dl1.misses                      273 # total number of misses
+dl1.miss_rate                0.0492 # miss rate (i.e., misses/ref)
+il1.accesses                  21779 # total number of accesses
+il1.hits                      20980 # total number of hits
+il1.misses                      799 # total number of misses
+il1.miss_rate                0.0367 # miss rate (i.e., misses/ref)
+ul2.accesses                    799 # total number of accesses
+ul2.hits                        267 # total number of hits
+ul2.misses                      532 # total number of misses
+ul2.miss_rate                0.6658 # miss rate (i.e., misses/ref)
+ul2.accesses                    799 # total number of accesses
+ul2.hits                        163 # total number of hits
+ul2.misses                      207 # total number of misses
+ul2.miss_rate                0.6658 # miss rate (i.e., misses/ref)
+
+Benchmark: PISA_test_lswlr | Policy: LRU
+----------------------------------------
+
+Benchmark: PISA_test_lswlr | Policy: MRU
+----------------------------------------
+
+
+PERFORMANCE COMPARISON TABLE
+============================
+Format: Benchmark | Policy | Cycles | IPC | L1D_Miss_Rate | L1I_Miss_Rate | L2_Miss_Rate
+
+Alpha | LRU | 96116 | 0.1883 | 0.0324 | 0.0155 | 0.9914
+0.9914
+Alpha | MRU | 138368 | 0.1308 | 0.0492 | 0.0367 | 0.6658
+0.6658
+PISA | LRU |  |  |  |  | 
+PISA | MRU |  |  |  |  | 
+
+QUICK METRICS EXTRACTION
+========================
+
+L1 Data Cache Miss Rates:
+Alpha LRU:
+dl1.miss_rate                0.0324 # miss rate (i.e., misses/ref)
+Alpha MRU:
+dl1.miss_rate                0.0492 # miss rate (i.e., misses/ref)
+PISA LRU:
+N/A
+PISA MRU:
+N/A
+
+Simulation Cycles:
+Alpha LRU:
+sim_cycle                     96116 # total simulation time in cycles
+Alpha MRU:
+sim_cycle                    138368 # total simulation time in cycles
+PISA LRU:
+N/A
+PISA MRU:
+N/A
+
+IPC Values:
+Alpha LRU:
+sim_IPC                      0.1883 # instructions per cycle
+Alpha MRU:
+sim_IPC                      0.1308 # instructions per cycle
+PISA LRU:
+N/A
+PISA MRU:
+N/A

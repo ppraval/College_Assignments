@@ -1,0 +1,120 @@
+ASSIGNMENT REPRODUCTION COMMANDS
+=================================
+Quick Reference for Cache Replacement Policy Analysis
+
+SETUP COMMANDS
+==============
+cd /home/iamthope/ca_assignment/simplesim-3.0
+make clean
+make sim-outorder
+
+VERIFY MRU IMPLEMENTATION
+==========================
+# Test that MRU works and differs from LRU
+./sim-outorder -cache:dl1 dl1:4:32:2:l -cache:dl2 none tests-alpha/bin/test-math | grep "dl1.miss_rate"
+./sim-outorder -cache:dl1 dl1:4:32:2:m -cache:dl2 none tests-alpha/bin/test-math | grep "dl1.miss_rate"
+# MRU should show higher miss rate
+
+RUN COMPLETE ASSIGNMENT
+========================
+# Execute automated analysis script
+./run_assignment.sh
+
+# OR run individual tests manually:
+
+# Test 1: Alpha test_fmath with LRU
+./sim-outorder -config baseline_lru.cfg tests-alpha/bin/test-fmath > test_fmath_lru.txt 2>&1
+
+# Test 2: Alpha test_fmath with MRU  
+./sim-outorder -config baseline_mru.cfg tests-alpha/bin/test-fmath > test_fmath_mru.txt 2>&1
+
+# Test 3: Alpha test_lswlr with LRU
+./sim-outorder -config baseline_lru.cfg tests-alpha/bin/test-lswlr > test_lswlr_lru.txt 2>&1
+
+# Test 4: Alpha test_lswlr with MRU
+./sim-outorder -config baseline_mru.cfg tests-alpha/bin/test-lswlr > test_lswlr_mru.txt 2>&1
+
+EXTRACT KEY METRICS
+===================
+# Simulation cycles
+grep "sim_cycle" test_*_*.txt
+
+# Instructions per cycle
+grep "sim_IPC" test_*_*.txt
+
+# L1 data cache miss rates
+grep "dl1.miss_rate" test_*_*.txt
+
+# L1 instruction cache miss rates  
+grep "il1.miss_rate" test_*_*.txt
+
+# L2 cache miss rates
+grep "ul2.miss_rate" test_*_*.txt
+
+EXPECTED RESULTS SUMMARY
+========================
+test_fmath benchmark:
+- LRU: 96,116 cycles, IPC=0.1883, L1D miss=3.24%, L1I miss=1.55%
+- MRU: 138,368 cycles, IPC=0.1308, L1D miss=4.92%, L1I miss=3.67%
+- MRU Impact: +44% execution time, -31% IPC, +52% L1D misses, +137% L1I misses
+
+test_lswlr benchmark:
+- LRU: 66,196 cycles, IPC=0.0736, L1D miss=7.93%, L1I miss=4.16%  
+- MRU: 72,283 cycles, IPC=0.0674, L1D miss=9.19%, L1I miss=5.01%
+- MRU Impact: +9% execution time, -8% IPC, +16% L1D misses, +20% L1I misses
+
+PLOTTING DATA
+=============
+# Absolute L1 miss rates (%)
+Benchmark  | LRU_L1D | MRU_L1D | LRU_L1I | MRU_L1I
+-----------|---------|---------|---------|--------
+test_fmath |   3.24  |   4.92  |   1.55  |   3.67
+test_lswlr |   7.93  |   9.19  |   4.16  |   5.01
+
+# Normalized performance (MRU/LRU, where LRU=1.0)
+Metric          | test_fmath | test_lswlr  
+----------------|------------|------------
+Cycles          |    1.44    |    1.09
+IPC             |    0.69    |    0.92
+L1D Miss Rate   |    1.52    |    1.16
+L1I Miss Rate   |    2.37    |    1.20
+
+FILES CREATED
+=============
+Configuration Files:
+- baseline_lru.cfg (LRU policy configuration)
+- baseline_mru.cfg (MRU policy configuration)
+
+Analysis Files:
+- Assignment_Analysis_Guide.txt (detailed assignment guide)
+- Complete_Analysis_Report.txt (final results and analysis)  
+- run_assignment.sh (automated execution script)
+
+Result Files (in assignment_results/):
+- alpha_lru_results.txt (test_fmath LRU results)
+- alpha_mru_results.txt (test_fmath MRU results)
+- alpha_lswlr_lru_results.txt (test_lswlr LRU results)
+- alpha_lswlr_mru_results.txt (test_lswlr MRU results)
+- analysis_summary.txt (automated analysis summary)
+
+CONCLUSION COMMANDS
+===================
+# View complete analysis
+cat Complete_Analysis_Report.txt
+
+# Quick performance comparison
+echo "=== PERFORMANCE SUMMARY ==="
+echo "LRU consistently outperforms MRU:"
+echo "- Average execution time improvement: 26.6%" 
+echo "- Average IPC improvement: 19.5%"
+echo "- Average L1D miss rate improvement: 33.9%"
+echo "- Average L1I miss rate improvement: 78.6%"
+echo ""
+echo "RECOMMENDATION: Use LRU as cache replacement policy"
+echo "JUSTIFICATION: Exploits temporal locality, consistent performance advantage"
+
+# Verify all files exist
+ls -la *.cfg *.txt assignment_results/
+
+END OF REFERENCE
+================
