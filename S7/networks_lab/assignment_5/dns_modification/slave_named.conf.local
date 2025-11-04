@@ -1,0 +1,50 @@
+//
+// Do any local configuration here
+//
+
+// Forward zone - slave
+zone "nwlab.cse.nitc.ac.in" {
+    type slave;
+    file "db.nwlab.cse.nitc.ac.in";
+    masters { 192.168.1.10; };
+};
+
+// Reverse zone - slave
+zone "1.168.192.in-addr.arpa" {
+    type slave;
+    file "db.192.168.1";
+    masters { 192.168.1.10; };
+};
+
+// Forward zone - slave
+zone "nw.nitc.ac.in" {
+    type slave;
+    file "db.nw.nitc.ac.in";
+    masters { 192.168.1.10; };
+};
+
+// Reverse zone - slave
+zone "2.168.192.in-addr.arpa" {
+    type slave;
+    file "db.192.168.2";
+    masters { 192.168.1.10; };
+};
+
+// Forward zone - slave
+zone "sub.nw.nitc.ac.in" {
+    type slave;
+    file "db.sub.nw.nitc.ac.in";
+    masters { 192.168.1.18; };
+};
+
+// Reverse zone - slave
+zone "3.168.192.in-addr.arpa" {
+    type slave;
+    file "db.192.168.3";
+    masters { 192.168.1.18; };
+};
+
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";

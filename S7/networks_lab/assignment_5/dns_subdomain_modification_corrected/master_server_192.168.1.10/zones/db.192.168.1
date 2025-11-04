@@ -1,0 +1,18 @@
+$TTL    604800
+@       IN      SOA     ns1.nwlab.cse.nitc.ac.in. admin.nwlab.cse.nitc.ac.in. (
+                              2024052001 ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+
+; Name servers
+@       IN      NS      ns1.nwlab.cse.nitc.ac.in.
+@       IN      NS      ns2.nwlab.cse.nitc.ac.in.
+
+; PTR records
+10      IN      PTR     ns1.nwlab.cse.nitc.ac.in.
+11      IN      PTR     ns2.nwlab.cse.nitc.ac.in.
+12      IN      PTR     www.nwlab.cse.nitc.ac.in.
+12      IN      PTR     webserver.nwlab.cse.nitc.ac.in.
+

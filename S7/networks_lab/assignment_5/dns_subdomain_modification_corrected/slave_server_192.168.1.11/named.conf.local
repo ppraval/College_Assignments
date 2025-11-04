@@ -1,0 +1,51 @@
+//
+// Do any local configuration here
+//
+// This slave server replicates zones from both the main master and subdomain master
+
+// Forward zone - slave (from main master)
+zone "nwlab.cse.nitc.ac.in" {
+    type slave;
+    file "db.nwlab.cse.nitc.ac.in";
+    masters { 192.168.1.10; };
+};
+
+// Reverse zone - slave (from main master)
+zone "1.168.192.in-addr.arpa" {
+    type slave;
+    file "db.192.168.1";
+    masters { 192.168.1.10; };
+};
+
+// Forward zone - slave (from main master)
+// This zone includes delegation records pointing to sub.nw.nitc.ac.in
+zone "nw.nitc.ac.in" {
+    type slave;
+    file "db.nw.nitc.ac.in";
+    masters { 192.168.1.10; };
+};
+
+// Reverse zone - slave (from main master)
+zone "2.168.192.in-addr.arpa" {
+    type slave;
+    file "db.192.168.2";
+    masters { 192.168.1.10; };
+};
+
+// Forward zone - slave (from subdomain master)
+zone "sub.nw.nitc.ac.in" {
+    type slave;
+    file "db.sub.nw.nitc.ac.in";
+    masters { 192.168.3.10; };  // Transfer from the subdomain master
+};
+
+// Reverse zone - slave (from subdomain master)
+zone "3.168.192.in-addr.arpa" {
+    type slave;
+    file "db.192.168.3";
+    masters { 192.168.3.10; };  // Transfer from the subdomain master
+};
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";

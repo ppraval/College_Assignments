@@ -1,0 +1,19 @@
+$TTL    604800
+@       IN      SOA     ns3.sub.nw.nitc.ac.in. admin.sub.nw.nitc.ac.in. (
+                              2024052001 ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+
+; Name servers
+@       IN      NS      ns3.sub.nw.nitc.ac.in.
+@       IN      NS      ns2.nw.nitc.ac.in.
+
+; PTR records for 192.168.3.0/24 network
+10      IN      PTR     ns3.sub.nw.nitc.ac.in.
+100     IN      PTR     www.sub.nw.nitc.ac.in.
+100     IN      PTR     webserver.sub.nw.nitc.ac.in.
+101     IN      PTR     ftp.sub.nw.nitc.ac.in.
+102     IN      PTR     mail.sub.nw.nitc.ac.in.
+200     IN      PTR     test.sub.nw.nitc.ac.in.

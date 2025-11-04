@@ -1,0 +1,36 @@
+//
+// Do any local configuration here
+//
+
+// Forward zone for nwlab.cse.nitc.ac.in - master
+zone "nwlab.cse.nitc.ac.in" {
+    type master;
+    file "/etc/bind/zones/db.nwlab.cse.nitc.ac.in";
+    allow-transfer { 192.168.1.11; };  // Allow slave to transfer
+};
+
+// Reverse zone for 192.168.1.0/24 - master
+zone "1.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/zones/db.192.168.1";
+    allow-transfer { 192.168.1.11; };
+};
+
+// Forward zone for nw.nitc.ac.in - master
+// This zone will DELEGATE sub.nw.nitc.ac.in to another server
+zone "nw.nitc.ac.in" {
+    type master;
+    file "/etc/bind/zones/db.nw.nitc.ac.in";
+    allow-transfer { 192.168.1.11; };  // Allow slave to transfer
+};
+
+// Reverse zone for 192.168.2.0/24 - master
+zone "2.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/zones/db.192.168.2";
+    allow-transfer { 192.168.1.11; };
+};
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";

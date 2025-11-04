@@ -1,0 +1,33 @@
+$TTL    604800
+@       IN      SOA     ns1.nw.nitc.ac.in. admin.nw.nitc.ac.in. (
+                              2024052005 ; Serial (UPDATED for delegation)
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+
+; Name servers for nw.nitc.ac.in
+@       IN      NS      ns1.nw.nitc.ac.in.
+@       IN      NS      ns2.nw.nitc.ac.in.
+
+; A records for name servers
+ns1     IN      A       192.168.1.10
+ns2     IN      A       192.168.1.11
+
+; Other A records for nw.nitc.ac.in
+@       IN      A       192.168.2.12
+www     IN      A       192.168.2.12
+webserver IN    A       192.168.2.12
+ftp     IN      A       192.168.2.12
+mail    IN      A       192.168.2.1
+abc     IN      A       192.168.2.250
+
+; ===== SUBDOMAIN DELEGATION =====
+; Delegate sub.nw.nitc.ac.in to another DNS server
+; This tells DNS clients that ns3.sub.nw.nitc.ac.in is authoritative for sub.nw.nitc.ac.in
+sub     IN      NS      ns3.sub.nw.nitc.ac.in.
+sub     IN      NS      ns2.nw.nitc.ac.in.
+
+; Glue record - provide IP address for the subdomain's nameserver
+; This is REQUIRED because ns3 is within the subdomain being delegated
+ns3.sub IN      A       192.168.3.10

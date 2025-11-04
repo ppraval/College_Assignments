@@ -1,0 +1,22 @@
+//
+// Do any local configuration here
+//
+// This is the DNS server that handles the subdomain sub.nw.nitc.ac.in
+
+// Forward zone for sub.nw.nitc.ac.in - master
+zone "sub.nw.nitc.ac.in" {
+    type master;
+    file "/etc/bind/zones/db.sub.nw.nitc.ac.in";
+    allow-transfer { 192.168.1.11; };  // Allow slave to transfer
+};
+
+// Reverse zone for 192.168.3.0/24 - master
+zone "3.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/zones/db.192.168.3";
+    allow-transfer { 192.168.1.11; };
+};
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
