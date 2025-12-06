@@ -1,0 +1,25 @@
+python -m pip install --upgrade pip
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+pip install datasets transformers
+pip install 'accelerate>=0.26.0'
+pip install transformers[torch]
+pip install scikit-learn
+pip install tensorboardX
+pip install evaluate
+
+change the compute metrics fuction from load_metrics to evaluate
+
+metric = evaluate.load("accuracy")
+
+def compute_metrics(p):
+    return metric.compute(
+        predictions=np.argmax(p.predictions, axis=1), 
+        references=p.label_ids
+    )
+
+
+in training args
+change 
+evaluation_strategy="steps",
+to
+eval_strategy="steps",

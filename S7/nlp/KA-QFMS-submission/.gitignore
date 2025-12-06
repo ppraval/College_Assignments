@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+QMSum.log
+
+# Output files
+outputs/*.txt
+outputs/*.jsonl
+!outputs/.gitkeep
+
+# Checkpoints (too large for git)
+logs/*/checkpoints/*.ckpt
+logs/*/events.out.tfevents.*
+
+# Data files (too large for git)
+qmsum_data/512/*.pkl
+qmsum_data/processed_data_no_sent_split/*.jsonl
+
+# Temporary files
+*.tmp
+*.bak
+.DS_Store
+terminal_output/

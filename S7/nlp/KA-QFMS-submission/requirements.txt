@@ -1,0 +1,48 @@
+# Core Deep Learning Framework
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+
+# PyTorch Lightning - Latest stable version
+pytorch-lightning>=2.1.0
+lightning>=2.1.0
+
+# Transformers and NLP
+transformers>=4.35.0
+tokenizers>=0.15.0
+datasets>=2.14.0
+sentencepiece>=0.1.99
+sacremoses>=0.1.0
+
+# DeepSpeed for distributed training
+deepspeed>=0.12.0
+
+# Evaluation Metrics
+rouge-score>=0.1.2
+nltk>=3.8.1
+
+# Scientific Computing
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Data Processing
+jsonlines>=4.0.0
+PyYAML>=6.0.1
+
+# Logging and Monitoring
+tensorboard>=2.15.0
+wandb>=0.16.0
+
+# Utilities
+tqdm>=4.66.0
+requests>=2.31.0
+filelock>=3.13.0
+click>=8.1.7
+
+# Jupyter support (optional)
+ipykernel>=6.27.0
+jupyter>=1.0.0
+notebook>=7.0.0
+
+# Type hints and code quality
+typing-extensions>=4.8.0
