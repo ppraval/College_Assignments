@@ -1,0 +1,6 @@
+1. Third-order
+2. Kneser-Ney
+3. Extrinsic evaluation
+4. 0
+5. 1/7150
+6. 7150^(1/4)

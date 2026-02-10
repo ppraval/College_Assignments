@@ -1,0 +1,9 @@
+1. XOR
+2. Absorption
+3. f and g are equivalent and g is not a canonical form of f
+4. In Sum of Product canonical form
+5. 16
+6. (uw + xz)(uv + xy)
+7. (11001.1011)₂
+8. All of the above
+9. 793

@@ -1,0 +1,9 @@
+1. x’ + z’ + wy’
+2. Only S2 is correct
+3. All of the above
+4. Both S1 and S2 are incorrect
+5. For (1), the minimal expression is (x ๏ z), and for (2), it is 1.
+6. Only S1 is correct.
+7. Only S2 and S3 are correct.
+8. All S1, S2 and S3 are correct.
+9. y’z’ + wx

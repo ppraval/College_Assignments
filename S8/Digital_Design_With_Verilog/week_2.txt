@@ -1,0 +1,9 @@
+1. Subtracting each digit from (n−1)
+2. n’s complement = (n−1)’s complement + 1
+3. 121₃
+4. False
+5. (8, 4, 2, 1)
+6. BCD
+7. All of the above
+8. The number of bit positions in which the two codewords differ
+9. 2

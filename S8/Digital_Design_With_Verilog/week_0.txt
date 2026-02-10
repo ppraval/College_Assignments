@@ -1,0 +1,8 @@
+1. 11
+2. Yes
+3. All of the above
+4. Yes
+5. OR gate
+6. 1
+7. Flip-Flop
+8. 10100

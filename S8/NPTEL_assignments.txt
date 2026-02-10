@@ -1,0 +1,53 @@
+======================================
+Intro to LLMs Week 1
+- Polysemy
+- Only (i) is correct
+- Syntactic ambiguity
+- Cannot be determined
+- un + happy + ness
+- Beneficiary
+- 4
+- Non-standard English, Neologisms
+- Entailed
+- Meronymy
+=======================================
+Intro to LLMs Week 2
+- Third-order
+- Kneser-Ney
+- Extrinsic evaluation
+- 0
+- 1/7150
+- 7150^(1/4)
+=======================================
+Verilog week 0
+- 11
+- Yes
+- All of the above
+- Yes
+- OR gate
+- 1
+- Flip-Flop
+- 10100
+======================================
+Verilog week 1
+- XOR
+- Absorption
+- f and g are equivalent and g is not a canonical form of f
+- In Sum of Product canonical form
+- 16
+- (uw + xz)(uv + xy)
+- (11001.1011)₂
+- All of the above
+- 793
+======================================
+Verilog week 2
+- Subtracting each digit from (n−1)
+- n’s complement = (n−1)’s complement + 1
+- 121₃
+- False
+- (8, 4, 2, 1)
+- BCD
+- All of the above
+- The number of bit positions in which the two codewords differ
+- 2
+======================================

@@ -1,0 +1,11 @@
+1. False
+2. They cannot capture semantic similarity between words.
+3. 9
+4. Score = Frequency(A, B) / (Frequency(A) x Frequency(B))
+5. It identifies the longest subword starting from the beginning of the word that exists in the vocabulary.
+6. Rare words should be decomposed into meaningful subwords. 
+   It serves as a middle ground between word-based and character-based tokenization. 
+   It consists of two components: a token learner to generate a vocabulary and a token segmenter to process raw text.
+7. 0
+8. Automatically generating labels based on the relationship between words and their context
+9. Distributional semantics

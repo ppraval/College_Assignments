@@ -1,0 +1,9 @@
+1. Only S1 is correct.
+2. Both S1 and S2 are correct statements. 
+3. All the statements: S1,S2 and S3 are correct.
+4. Only (i) and (ii)
+5. Pass 2: 2 implicants, Pass 3: 0 implicants
+6. Reduce
+7. Only S2 is correct.
+8. Only S1 is correct
+9. All the statements: S1, S2 and S3 are correct.

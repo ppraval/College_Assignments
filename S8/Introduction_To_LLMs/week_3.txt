@@ -1,0 +1,10 @@
+1. Activation function
+2. It becomes equivalent to a single linear transformation
+3. ReLU
+4. Dropout is disabled
+5. XOR is non-linear and not linearly separable
+6. It applies the chain rule from output to input layers
+7. L1 regularization
+8. Loss oscillates or diverges
+9. Produces probabilities that sum to 1
+10. To reduce overfitting and improve generalization
