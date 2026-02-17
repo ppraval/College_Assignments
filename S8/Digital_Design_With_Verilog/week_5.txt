@@ -1,0 +1,9 @@
+1. One 2-to-1 multiplexer will be generated, where each input will be of 4-bit width.
+2. It represents structural description of the Boolean function f = a xor c.
+3. f1 = 0, f2 = 0
+4. 4’b0101
+5. a = 4, b = 4, c = 4 and d = 4.
+6. 22
+7. 5’b00011
+8. The output can depend on the present inputs as well as the present state.
+9. The sum function of a full adder with inputs a, b, c.

@@ -1,0 +1,8 @@
+1. False
+2. 0.016, 0.117, 0.867
+3. Allows access to all encoder states during decoding
+4. Forget gate
+5. It allows attending to multiple parts of the sequence from different representation subspaces
+6. To ensure the model does not attend to future tokens
+7. They can process sequences of arbitrary length
+8. (i) and (ii)
