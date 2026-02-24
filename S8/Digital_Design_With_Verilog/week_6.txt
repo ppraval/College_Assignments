@@ -1,0 +1,10 @@
+1. n
+2. Only pi
+3. n inputs and at most 2n outputs
+4. 2^n
+5. 1 and 3
+6. 2 and 3
+7. Equality of bits
+8. s=A,  D0=B,  D1=B′
+9. It specifies a procedural block that is executed only once.
+10. A combinational circuit implementing a XNOR function will be generated.

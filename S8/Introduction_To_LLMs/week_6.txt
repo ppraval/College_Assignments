@@ -1,0 +1,11 @@
+1. False
+2. The output of each token is a weighted sum over all values
+3. Prevents attention lookups into the future
+4. Combines relative and absolute positional information
+   Applies a multiplicative rotation matrix to encode positions
+5. Multi-head attention increases the overall dimensionality of the transformer model
+6. To improve computational efficiency by avoiding sequential processing
+7. Batch normalization is not effective for sequence models
+8. cosine
+9. 32
+10. Normalization
