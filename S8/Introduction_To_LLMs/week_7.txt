@@ -1,0 +1,15 @@
+1. ELMo uses a bi-directional LSTM to pre-train word representations, while BERT uses a transformer encoder with masked language modeling.
+   Both ELMo and BERT produce contextual embeddings usable for downstream tasks.
+2. Encoder-decoder models
+3. Token masking, i.e., random tokens replaced by mask markers
+   Token deletion
+   Sentence permutation
+   Text infilling, i.e., replacing spans with a single sentinel and tasking decoder to generate the spans.
+4. Addition of layer normalization between sub-blocks
+   Increased vocabulary size
+   Increased context size
+5. Sentiment Classification: Encoder-only, Machine-Translation: Encoder-Decoder
+6. $\log P(s) = \log P(t_1) + \sum_{j=1}^{m-1} \log P(t_{j+1} | t_1, ..., t_j)$
+7. To avoid UNK tokens and generate representations for any string
+8. It allows the downstream task to scale the overall magnitude of the combined representation.
+9. 9
