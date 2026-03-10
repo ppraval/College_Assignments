@@ -1,0 +1,10 @@
+1. 2 and 4
+2. X'Q' + Y'Q
+3. Q = 1, Q' = 1
+4. All of the above
+5. J = D, K = D’ for D flip-flop, J = K = T for T flip flop
+6. if clk = 1 and D = 0 then S = 1 and R = 0
+7. B enters a high impedance state effectively disconnecting from the bus
+8. Four 4:1 multiplexers
+9. Option 2 and 4 is correct
+10. 0,1

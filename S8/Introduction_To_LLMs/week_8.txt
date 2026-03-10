@@ -1,0 +1,18 @@
+1. The number of instruction templates used in training.
+   The tokenization algorithm used by the model.
+   The order in which tasks are presented during fine-tuning.
+2. They require additional training, unlike discrete prompts.
+   They cannot be interpreted or used effectively by non-expert users.
+3. Fine-tuning modifies the model weights permanently, while prompting does not.
+4. Diversity in the responses to intent-preserving prompt variations
+   Entropy of the distribution of response frequencies
+   Variance in the log-likelihood of the same response for different input prompt variations 
+5. ToT allows backtracking to explore multiple reasoning paths
+6. Accuracy does not account for prompt sensitivity.
+7. It cannot prevent models from generating undesired responses
+8. To ensure models do not diverge too far from the reference model.
+9. Simplifying gradient computation
+10. Proximal Policy Optimization
+
+ 
+ 

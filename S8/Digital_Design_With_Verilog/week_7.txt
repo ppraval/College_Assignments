@@ -1,6 +1,6 @@
-1. 1 & 2 only
-2. 8 units
-3. 84 units
+1. 1, 2, 3, 4
+2. 6 units
+3. 42 units
 4. 1, 4, 3, 2
 5. 1, 2, 3
 6. One number is negative and other is positive
