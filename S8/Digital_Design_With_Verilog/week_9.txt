@@ -1,0 +1,9 @@
+1. 0000 to 1111
+2. All flip-flops share the same clock signal
+3. Large propagation delay due to unsynchronized flip-flops
+4. When T = 1
+5. Output is function of current state and input
+6. 1
+7. Only present state
+8. For every state, transitions are defined for all possible input combinations
+9. 0 to 9 and repeat

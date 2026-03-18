@@ -1,6 +1,5 @@
 1. The number of instruction templates used in training.
    The tokenization algorithm used by the model.
-   The order in which tasks are presented during fine-tuning.
 2. They require additional training, unlike discrete prompts.
    They cannot be interpreted or used effectively by non-expert users.
 3. Fine-tuning modifies the model weights permanently, while prompting does not.

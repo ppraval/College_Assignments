@@ -1,0 +1,13 @@
+1. KGs allow flexible, graph-based connections and typed edges, enabling richer relationships and inferences compared to KBs.
+2. Transliteration or language-based string matching for entity labels, 
+   Matching neighbours, or connected entities, across different KGs
+3. It produces a raw confidence score indicating how plausible a triple (s,r,o) is.
+4. Semantic interpretation is more transparent or interpretable, whereas differentiable KG is end-to-end trainable but less interpretable.
+5. The textual question representation (e.g., BERT embeddings), 
+   The graph structure encoding (e.g., GCN or transformer-based graph embeddings), 
+   The final answer selection mechanism that identifies which node(s) in the graph satisfy the question
+6. Because randomly picking negative entities does not guarantee close or challenging negatives, causing unstable training estimates.
+7. The percentage of queries for which the correct answer appears in the top-K of the ranked list.
+8. That (s,r,o) has a high likelihood of being a true fact in the knowledge graph.
+9. The relation embedding er is its own inverse (i.e., a 180° rotation when squared).
+10. Rotation-based models handle a broader set of relation properties (symmetry, anti-symmetry, inverses, composition) more naturally.
