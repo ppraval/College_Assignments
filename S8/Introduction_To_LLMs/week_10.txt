@@ -1,0 +1,12 @@
+1. Prefix Tuning learns trainable "prefix" hidden states at each layer's input, whereas Adapters insert small bottleneck modules inside the Transformer blocks.
+2. Learning one scalar per layer for layer-wise scaling
+3. QLoRA supports low-rank adaptation on 4-bit quantized models
+   DyLoRA automatically selects the optimal rank during training
+4. Magnitude Pruning
+5. To estimate scale factors for quantizing weights and activations under representative data conditions.
+6. It converts the final residual vector into vocabulary logits for next-token prediction.
+7. A head that looks for previous occurrences of a token A, retrieves the token B that followed it last time, and then predicts B again
+8. A subgraph of the neural network hypothesized to implement a specific function or behaviour
+9. It quantizes the quantization constants themselves for additional memory savings.
+10. It trains a student model by matching the teacher's sequence outputs (e.g., predicted token sequences) rather than just individual token distributions.
+    It can be combined with word-level distillation to transfer both local and global knowledge.

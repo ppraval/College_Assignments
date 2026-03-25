@@ -1,0 +1,10 @@
+1. S1 Only
+2. D
+3. 1
+4. Yes, any sequential system
+5. Reduce the number of states and logic complexity
+6. They produce the same output and go to the same next state for all inputs
+7. k-map
+8. Their output values
+9. States cannot be combined by observing their next state
+10. One hot encoding
