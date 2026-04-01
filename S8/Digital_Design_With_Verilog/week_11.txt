@@ -1,0 +1,8 @@
+1. S1, S2 and S3 are true. 
+2. Statement 1 is true; Statement 2 is true; Statement 3 is false.
+3. False
+4. A <- A + B
+5. ?: 1  $: 0
+6. Statement 1 is true; Statement 2 is false; Statement 3 is true.
+7. S1, S2 and S3 are true.
+8. Figure (a) is a state box;  Figure (b) is a conditional output box;  $ : can model Moore;  ? : can model Mealy.
