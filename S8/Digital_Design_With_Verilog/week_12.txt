@@ -1,0 +1,8 @@
+1. Both S1 and S2 are false.
+2. Statement 1 is true; Statement 2 is false.
+3. True
+4. Normal sequential multiplier will require 9 addition operations whereas booth encoding would require only two addition and two subtraction operations.
+5. MUX; LUTs
+6. Model Checking
+7. Both S1 and S2 are true.
+8. Statement 1 is true; Statement 2 is false; Statement 3 is false.

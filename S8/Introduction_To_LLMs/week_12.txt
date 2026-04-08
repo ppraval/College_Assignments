@@ -1,0 +1,13 @@
+1. 1 and 3
+2. The proportion of examples in which a model chooses a stereotypical association over an anti-stereotypical one.
+3. 1, 2, and 4
+4. To exploit the model’s distributional patterns, thereby neutralizing or flipping biased associations in generated text
+5. It is a classification label reflecting the attitude towards a demographic group in the generated text.
+6. Retrieving safety demonstrations similar to the user query., 
+   Providing retrieved demonstrations as examples in the prompt to guide the model’s response generation.
+7. HRLs get more data, so the model might overfit to HRL cultural perspectives., 
+   LRLs are often under-represented, leading to potential underestimation of their cultural nuances., 
+   Dominance of HRLs can cause a reinforcing cycle that perpetuates imbalance.
+8. A set of concerns including explainability, fairness, robustness, and security
+9. A balanced metric capturing both a model’s language modelling ability and the tendency to avoid stereotypical bias
+10. The training corpus over-represents some topics or groups, creating a skewed distribution

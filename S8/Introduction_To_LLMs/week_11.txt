@@ -7,8 +7,9 @@
 5. Each subject–relation pair is collapsed into a single dimension, while objects remain as separate entries.
 6. Transitivity in the form (camel, is-a, mammal) and (mammal, is-a, animal) ⟹ (camel, is-a, animal)
 7. They map nodes onto a disk (or ball) such that large branching factors can be represented with lower distortion than in Euclidean space.
-   They can achieve arbitrarily low distortion embeddings for trees with the same dimension as Euclidean space.
+   Distance grows slowly near the center and becomes infinite near the boundary, making it naturally suited for tree-like structures.
 8. They explicitly encode the ancestor–descendant relation as a coordinate-wise inequality or containment.
+   They inherently guarantee transitive closure of the hierarchy in the learned embedding space.
    They do not rely on pairwise distances but use a notion of coordinate-wise ordering or interval containment.
 9. Containment Iₓ ⊆ Iᵧ all dimensions encodes x<y.
 10. The volume (measure) of cones is the same regardless of how "broad" or "narrow" the cone is, making sub-categories indistinguishable by volume.
