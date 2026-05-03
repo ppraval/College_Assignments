@@ -1,0 +1,10 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Data distribution of the first and second stage. We list the different datasets used in the first and second stages, including source, type, number, and description.}}{30}{}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Hyperparameter settings.}}{33}{}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Comparison of different models. We compare our experimental results with existing influential multimodal large models, with key metrics including CIDEr, ROUGE-L, METEOR, BLEU-4, and BERTScore.}}{37}{}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Comparison of the accuracy of generated reports.}}{39}{}%
+\addvspace {10\p@ }

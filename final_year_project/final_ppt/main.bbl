@@ -1,0 +1,179 @@
+\begin{thebibliography}{24}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Ali et~al.(2024)Ali, Muzammil, Dahiya, Ali, Yasin, Hanif, Gangwani,
+  Aziz, Khalaf, Basuli, and Al-Haddad]{pmc2024endo}
+Heya Ali, Muhammad~A. Muzammil, Dushyant~S. Dahiya, Fawad Ali, Shanza Yasin,
+  Warda Hanif, Madhav~K. Gangwani, Muhammad Aziz, Moataz Khalaf, Debashis
+  Basuli, and Mohammad Al-Haddad.
+\newblock Artificial intelligence in gastrointestinal endoscopy: A
+  comprehensive review.
+\newblock \emph{Annals of Gastroenterology}, 2024.
+\newblock URL \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC11842897/}.
+
+\bibitem[Ben~Abacha et~al.(2019)Ben~Abacha, Hasan, Datla, Liu, Demner-Fushman,
+  and M{\"u}ller]{vqamed2019abacha}
+Asma Ben~Abacha, Sadid~A. Hasan, Vivek~V. Datla, Joey Liu, Dina Demner-Fushman,
+  and Henning M{\"u}ller.
+\newblock Vqa-med: Overview of the medical visual question answering task at
+  imageclef 2019.
+\newblock In \emph{CLEF 2019 Working Notes}, 2019.
+\newblock URL \url{https://ceur-ws.org/Vol-2380/paper_272.pdf}.
+
+\bibitem[Corp.(2024)]{phison2024format}
+Phison~Electronics Corp.
+\newblock Choosing the right ai model format.
+\newblock \emph{Phison Blog}, 2024.
+\newblock URL
+  \url{https://phisonblog.com/choose-the-right-ai-model-format-to-save-time-boost-performance-and-build-smarter-projects/}.
+
+\bibitem[Eaton(2024)]{inc2024burnout}
+Kit Eaton.
+\newblock How this ai tool is reducing burnout in the medical field.
+\newblock \emph{Inc.com}, 2024.
+\newblock URL
+  \url{https://www.inc.com/kit-eaton/how-this-ai-tool-is-reducing-burnout-in-the-medical-field/}.
+
+\bibitem[Fregly(2024)]{redhat2024ollama}
+Chris Fregly.
+\newblock Ollama vs vllm: Performance benchmarking.
+\newblock \emph{Red Hat Developer}, 2024.
+\newblock URL
+  \url{https://developers.redhat.com/articles/2025/08/08/ollama-vs-vllm-deep-dive-performance-benchmarking}.
+
+\bibitem[Gopal(2024)]{kanerika2024analysis}
+Ravi Gopal.
+\newblock vllm vs ollama analysis.
+\newblock 2024.
+\newblock URL \url{https://kanerika.com/blogs/vllm-vs-ollama/}.
+
+\bibitem[Gupta(2024)]{e2e2024quantization}
+Rishi Gupta.
+\newblock Which quantization method is best for you: Gguf, gptq, or awq?
+\newblock \emph{E2E Networks}, 2024.
+\newblock URL
+  \url{https://www.e2enetworks.com/blog/which-quantization-method-is-best-for-you-gguf-gptq-or-awq}.
+
+\bibitem[Haghighi et~al.(2024)Haghighi, Hosseinzadeh~Taher, Zhou, Gotway, and
+  Liang]{frontiers2024survey}
+Fatemeh Haghighi, Mohammad~Reza Hosseinzadeh~Taher, Zongwei Zhou, Michael~B.
+  Gotway, and Jianming Liang.
+\newblock Medical vision-language models: A survey.
+\newblock \emph{Frontiers in Artificial Intelligence}, 2024.
+\newblock URL
+  \url{https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2024.1430984/full}.
+
+\bibitem[Hicks(2024)]{github2024kvasir}
+Steven~A. Hicks.
+\newblock Kvasir-vqa-x1 github repository, 2024.
+\newblock URL \url{https://github.com/simula/Kvasir-VQA-x1}.
+
+\bibitem[Hu et~al.(2022)Hu, Shen, Wallis, Allen-Zhu, Li, Wang, Wang, and
+  Chen]{lora2022hu}
+Edward~J. Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean
+  Wang, Lu~Wang, and Weizhu Chen.
+\newblock Lora: Low-rank adaptation of large language models.
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2022.
+\newblock URL \url{https://openreview.net/forum?id=nZeVKeeFYf9}.
+
+\bibitem[Hurst(2024)]{europe2024burnout}
+Lena Hurst.
+\newblock Documentation burnout in medicine: Ai scribes to the rescue?
+\newblock \emph{Healthcare in Europe}, 2024.
+\newblock URL
+  \url{https://healthcare-in-europe.com/en/news/documentation-burnout-medicine-ai-scribes.html}.
+
+\bibitem[Leaman and Lu(2024)]{acl2024clinical}
+Robert Leaman and Zhiyong Lu.
+\newblock Clinical applications of large language models.
+\newblock \emph{ACL Anthology}, 2024.
+\newblock URL \url{https://aclanthology.org/2024.clinicalnlp-1.21.pdf}.
+
+\bibitem[Li et~al.(2023)Li, Wong, Zhang, Usuyama, Liu, Yang, Naumann, Poon, and
+  Gao]{neurips2023llava}
+Chunyuan Li, Cliff Wong, Steven Zhang, Naoto Usuyama, Haotian Liu, Jianwei
+  Yang, Tristan Naumann, Hoifung Poon, and Jianfeng Gao.
+\newblock Llava-med: Training a large language and vision assistant for
+  biomedicine.
+\newblock In \emph{NeurIPS}, 2023.
+\newblock URL
+  \url{https://papers.neurips.cc/paper_files/paper/2023/file/5abcdf8ecdcacba028c6662789194572-Paper-Datasets_and_Benchmarks.pdf}.
+
+\bibitem[Linh(2024)]{designveloper2024comparison}
+Nguyen Linh.
+\newblock Ollama vs vllm comparison: Choosing the best llm deployment tool.
+\newblock 2024.
+\newblock URL \url{https://www.designveloper.com/blog/ollama-vs-vllm/}.
+
+\bibitem[Liu et~al.(2024)Liu, Li, Wu, and Lee]{llava2024official}
+Haotian Liu, Chunyuan Li, Qingyang Wu, and Yong~Jae Lee.
+\newblock Llava: Large language and vision assistant, 2024.
+\newblock URL \url{https://llava-vl.github.io}.
+
+\bibitem[Liu et~al.(2022)Liu, Ji, Fu, Tam, Du, Yang, and Tang]{plora2022liu}
+Xiao Liu, Kaixuan Ji, Yicheng Fu, Weng~Lam Tam, Zhengxiao Du, Zhilin Yang, and
+  Jie Tang.
+\newblock P-tuning v2: Prompt tuning can be comparable to fine-tuning
+  universally across scales and tasks.
+\newblock In \emph{Proceedings of the ACL}, 2022.
+\newblock URL \url{https://aclanthology.org/2022.acl-short.8}.
+
+\bibitem[{National Academies of Sciences, Engineering, and
+  Medicine}(2024)]{nat2024burden}
+{National Academies of Sciences, Engineering, and Medicine}.
+\newblock \emph{Reducing Administrative Burden in Health Care: Strategies to
+  Improve Clinician Well-Being}.
+\newblock National Academies Press, 2024.
+\newblock URL \url{https://www.ncbi.nlm.nih.gov/books/NBK608542/}.
+
+\bibitem[Pogorelov and et~al.(2024)]{arxiv2024kvasir}
+Konstantin Pogorelov and et~al.
+\newblock Kvasir-vqa-x1: Medical visual question answering dataset.
+\newblock \emph{arXiv preprint}, 2024.
+\newblock URL \url{https://arxiv.org/html/2506.09958v1}.
+
+\bibitem[{SandLogic Technologies}(2024)]{huggingface2024medgemma}
+{SandLogic Technologies}.
+\newblock Medgemma-4b-it-gguf model, 2024.
+\newblock URL
+  \url{https://huggingface.co/SandLogicTechnologies/MedGemma-4B-IT-GGUF}.
+
+\bibitem[{TheBloke}(2024)]{dataloop2024medicine}
+{TheBloke}.
+\newblock Medicine-llm-gguf model, 2024.
+\newblock URL
+  \url{https://dataloop.ai/library/model/thebloke_medicine-llm-gguf/}.
+
+\bibitem[Wang et~al.(2024)Wang, Peng, Lu, Lu, and
+  Summers]{arxiv2024qageneration}
+Xiaosong Wang, Yifan Peng, Le~Lu, Zhiyong Lu, and Ronald~M. Summers.
+\newblock Automated medical qa generation: A review.
+\newblock \emph{arXiv preprint}, 2024.
+\newblock URL \url{https://arxiv.org/abs/1811.00681}.
+
+\bibitem[Wong(2024)]{ibm2024gguf}
+Andrew Wong.
+\newblock Gguf vs ggml: Understanding ai model formats.
+\newblock \emph{IBM Think}, 2024.
+\newblock URL \url{https://www.ibm.com/think/topics/gguf-versus-ggml}.
+
+\bibitem[Xie et~al.(2025)Xie, Wu, He, et~al.]{medtrinity2025xie}
+Yunfei Xie, Ce~Wu, Pengfei He, et~al.
+\newblock Medtrinity-25m: A large-scale multimodal dataset with multigranular
+  annotations for medicine.
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2408.02900}.
+
+\bibitem[Zhang and et~al.(2024)]{jmir2024instruction}
+Yuhao Zhang and et~al.
+\newblock Medical instruction datasets for large language models.
+\newblock \emph{JMIR}, 2024.
+\newblock URL \url{https://www.jmir.org/2025/1/e70481}.
+
+\end{thebibliography}

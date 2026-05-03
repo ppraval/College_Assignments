@@ -1,0 +1,660 @@
+Biomedical Signal Processing and Control 118 (2026) 109737
+
+
+
+
+
+
+
+
+
+
+A Fine-tuning Multimodal Large Language Model for Endoscopic Report Generation
+Xingyu Zhang a,b , Xiangwei Zheng a,b ,∗, Zhen Li c, Mingjun Ma c, Xiao Liang c, Xiuxiu Ren d,
+Mingzhe Zhang a,b
+a School of Computer Science and Artificial Intelligence, Shandong Normal University, Jinan, China
+b Shandong Provincial Key Laboratory of Intelligent Collaborative Perception and Computing, Jinan, China
+c Department of Gastroenterology, Qilu Hospital of Shandong University, Jinan, China
+d School of Information Science and Electrical Engineering, Shandong Jiaotong University, Jinan, China
+
+
+A R T I C L E  I N F O	A B S T R A C T
+
+ 	 
+ 
+Keywords:
+Multimodality
+Large language models Fine-tuning
+Endoscopic report generation
+ 
+Background and Objective: Writing endoscopic image reports requires extensive domain expertise, and even experienced clinicians spend substantial time on them. Although multimodal large language models (MLLMs) excel at cross-modal understanding and generation, general models struggle with specialized terminologies, pathological features, and complex medical logic, limiting their accuracy and applicability in endoscopy. Existing fine-tuning methods can improve model performance to some extent, but they often suffer from limited adaptability and insufficient domain-specific knowledge when applied to tasks in specialized fields.
+Methods: We propose a fine-tuning multimodal large Language Model for Endoscopic Report Generation (ERGLM). We apply a two-stage parameter-efficient fine-tuning method to address the specific requirements of endoscopic report generation. In the first-stage fine-tuning, we collect a large number of publicly available datasets to acquire knowledge of digestive endoscopy for addressing the lack of domain-specific knowledge. In the second stage, we use professionally clinical data for fine-tuning to enhance the professionalism of the model in generating reports. Then a prompt-based LoRA fine-tuning method (P-LoRA) is integrated into both stages to better adapt to the task of generating professional endoscopic reports.
+Results: Experimental results show that ERGLM attains state-of-the-art performance on our dataset, achieving CIDEr of 0.2667, ROUGE-L of 0.4598, METEOR of 0.4070, BLEU-4 of 0.3863, and BERTScore of 0.8216.
+ 
+
+ 
+
+ 
+1.	Introduction
+
+In recent years, the rapid advancement of artificial intelligence has greatly enhanced the performance of multimodal large language models in integrating visual and textual information. Recent studies have made notable contributions to endoscopic tasks [1,2]. In the medical field, especially in endoscopic examinations, generating high-quality reports is critical for early disease detection, diagnosis, and treatment [3,4]. Endoscopy produces a large amount of image data, which doctors must carefully analyze to write accurate reports. This takes time and expertise, and less experienced doctors may make mistakes. By learning general knowledge from large-scale data, MLLMs can quickly adapt to specific domains and handle the complex mapping between endoscopic images and diagnostic reports [5].
+Previous studies [6–8] have focused on building comprehensive multimodal models for medical applications, aiming to achieve in-tegrated reasoning capabilities across modalities. Large-scale medical
+ 
+datasets like PubMed [9] provide abundant general medical knowl-edge but lack detailed annotations for specific diseases or organs. High-quality annotated endoscopic images are especially scarce, lim-iting the development of effective diagnostic models. Additionally, while MLLMs like VisualGLM-6B [10,11] and DeepSeek-VL-7B [12] demonstrate strong general-purpose understanding, their performance in medical applications remains limited, especially in comprehending specialized medical knowledge. Moreover, training multimodal large models from scratch requires vast computational resources. Thus, effi-cient fine-tuning of existing large models has become a more practical approach [13].
+LoRA [14] is an example of a reparameterization-based approach. Prefix Tuning [6] is a classic example of prompt-based fine-tuning, while adapter-based methods involve freezing the parameters of the pre-trained model and fine-tuning only newly added adapter structures.
+ 
+
+ 
+∗ Corresponding author at: School of Computer Science and Artificial Intelligence, Shandong Normal University, Jinan, China.
+E-mail addresses: zxy13465021338@163.com (X. Zhang), xwzhengcn@163.com (X. Zheng), qilulizhen@sdu.edu.cn (Z. Li), mamingjun@hotmail.com (M. Ma), 17854576095@163.com (X. Liang), xiuxiu0045@163.com (X. Ren), zmz420@126.com (M. Zhang).
+https://doi.org/10.1016/j.bspc.2026.109737
+Received 25 June 2025; Received in revised form 13 January 2026; Accepted 31 January 2026
+Available online 3 February 2026
+1746-8094/© 2026 Elsevier Ltd. All rights are reserved, including those for text and data mining, AI training, and similar technologies.
+ 
+
+ 
+In practice, directly applying general-purpose models and adapting them to specialized medical domains through fine-tuning often fails to fully capture domain-specific knowledge, making the prior injec-tion of specialized knowledge necessary. Although LoRA has demon-strated strong generalizability across various tasks, its fine-tuning per-formance on specialized downstream tasks still leaves room for im-provement [15]. Therefore, effectively leveraging prompt-based meth-ods to enhance LoRA’s capability in generating reports for specialized tasks remains a critical challenge.
+Inspired by the aforementioned analyses, we propose a fine-tuning multimodal large Language Model for Endoscopic Report Generation (ERGLM), which achieves state-of-the-art performance in comparisons with mainstream foundational models. To enhance the fine-tuning results, we construct a high-quality multimodal endoscopic dataset. The data is initially annotated by professional physicians and subse-quently templated using GPT-4. We adopt a two-stage P-LoRA fine-tuning method to tackle the knowledge deficiencies commonly encoun-tered during fine-tuning of general-purpose models [16]. In the first stage, we infuse the model with domain-specific medical knowledge, enabling it to comprehend and adapt to the unique requirements of medical tasks, thus bridging the knowledge gap of general models in the medical domain. In the second stage, we guide the model to produce endoscopic reports that align with established medical standards. This staged optimization strategy effectively enhances the model’s capability for generating endoscopic reports.
+The contributions of this paper could be summarized as follows:
+1.	We propose a fine-tuning multimodal large Language Model for Endoscopic Report Generation(ERGLM), which focuses on opti-mizing foundational large models to meet the specific require-ments of medical endoscopic report generation. Our method improves the accuracy of endoscopic report generation and can effectively assist physicians for diagnosis and report writing.
+2.	We propose a two-stage fine-tuning framework using the prompt-based LoRA (P-LoRA) method to adapt DeepSeek-VL-7B for endoscopic report generation. P-LoRA achieves about a 5% improvement over LoRA. A comprehensive evaluation demonstrates that it significantly improves the model’s clinical applicability and diagnostic accuracy.
+3.	We develop a GPT-4-based templating pipeline to process endo-scopic report data in order to build a high-quality multimodal endoscopic dataset. Additionally, a cosine distance-based sen-tence selection strategy is employed for rigorous semantic filter-ing, substantially improving the performance of the fine-tuned large model.
+4.	We design an endoscopic report measurement score (ERMS) to provide a comprehensive evaluation of generated reports. This metric is intended to quantify the clinical quality of the reports across multiple dimensions, including, but not limited to, completeness of information, factual correctness, and clarity and consistency of medical terminology.
+The remainder is organized as follows: Section 2 discusses related work. Section 3 explains the methodology behind the proposed ER-GLM, covering its overview, the P-LoRA approach, and the cosine distance-based sentence selection method. Section 4 showcases detailed experimental results and thorough comparisons with baseline methods, highlighting the effectiveness and robustness of our proposed approach. Furthermore, Section 5 discusses the limitations of the current model and outlines potential directions for future research. Lastly, Section 6 concludes the paper.
+2.	Related work
+
+2.1.	MLLMs
+
+In recent years, the emergence of multimodal large models has profoundly transformed the landscape of multimodal data processing
+ 
+and learning. To address the limitations of pretrained language models in visual-language tasks, Wang et al. [17] proposed CogVLM, which bridges the gap between fixed pretrained language models and image encoders by incorporating trainable visual expert modules into the attention and FFN layers. This allows for deep integration of visual and linguistic features without compromising the performance of nat-ural language processing tasks. Bai et al. [18] proposed the Qwen-VL series of vision-language models to overcome the limitations of large language models in processing visual signals. The models achieved new benchmarks in tasks such as image captioning, question answering, and visual localization through a three-stage training process with multilingual data, demonstrating superior performance in real-world dialogue-based benchmarks. Liu et al. [19] utilized GPT-4 with only language to generate multimodal language-image instruction-following data, introducing LLaVA. LLaVA connects vision encoders with LLMs to enable universal visual and linguistic understanding. It demonstrates multimodal chat capabilities and similar performance to multimodal GPT-4 on unseen images. However, as medical data account for only a limited proportion of their training corpora, general-purpose models exhibit insufficient perception and reasoning capabilities regarding domain-specific medical knowledge. As a result, they often struggle to accurately identify lesion characteristics or generate report content aligned with clinical standards. This limitation is precisely one of the main motivations for proposing ERGLM, which aims to enhance model performance in specialized tasks by incorporating medical knowledge and endoscopic reports.
+
+2.2.	Medical MLLMs
+
+With the advancement of technology, the medical field has accumu-lated massive amounts of multimodal data, including medical imaging, electronic health records, surgical videos, pathological slides, and mul-tidimensional clinical test indicators. This wealth of data provides a solid foundation for constructing multimodal large models [20]. Chen et al. [21] introduced the HuatuoGPT-Vision model, in which they re-fined medical image–text pairs from PubMed and applied MLLM-based denoising to create the PubMedVision dataset, significantly enhancing model performance in medical multimodal tasks. In the domain of gastrointestinal endoscopy, Seenivasan et al. [22] tackled the limitation that GPT-style unidirectional language models cannot directly process surgical images by introducing SurgicalGPT, an end-to-end trainable model that improved accuracy by 3%–5% across three datasets. Ji et al. [23] introduced the ColonINST dataset and the ColonGPT model to address the lack of multimodal benchmarks for colonoscopy and the suboptimal performance of general-purpose large models. The pro-posed model achieved state-of-the-art results in classification, referring expression, and localization tasks, markedly enhancing generalization ability. Schmidgall et al. [24] sought to overcome the limitations of existing surgical VLMs, including task specificity and poor generaliz-ability, and developed GP-VLS, an open-source general-purpose surgical vision–language model that achieved substantial accuracy gains in multiple surgical vision–language tasks.
+Although building MLLMs from scratch can deliver strong task-specific performance, it demands vast amounts of annotated data, substantial computational resources, and prolonged training cycles, greatly increasing development costs. Moreover, given the highly spe-cialized and domain-specific nature of medical applications, clinicians often favor models tailored to their discipline. Therefore our study focuses on how to efficiently fine-tune existing general large models for the specialized task of endoscopic medical report generation.
+
+2.3.	Fine-tuning methods
+
+With the success of large-scale pretrained models, these MLLMs have demonstrated exceptional performance across various tasks. How-ever, due to their enormous parameter size, direct training is costly,
+ 
+
+ 
+and using the raw models without adaptation for specific tasks cannot optimize their performance. Therefore, fine-tuning has become an es-sential method for adapting general models to specific tasks [25,26]. Li et al. [8] proposed the LLaVA-Med model to address the issue of biomedical image understanding. In the first stage, the PMC-15M dataset was used to align biomedical vocabulary. In the second stage, data generated by GPT-4 was used for end-to-end instruction fine-tuning. He et al. [27] introduced the PeFoMed framework to address parameter efficiency in MLLMs for medical imaging tasks. Through a two-stage fine-tuning strategy, they significantly improved model performance on medical imaging tasks while maintaining parameter efficiency. Chen et al. [28] used generative pretraining and fine-tuning methods to solve the challenges of data privacy and high annotation costs in medical visual question answering tasks. Lu et al. [29] proposed an effective two-stage fine-tuning strategy to enhance the accuracy and efficiency of generating radiology reports from medical images. They improved model performance in multimodal tasks by aligning visual features as soft visual prompts with the text embedding space of large language models. Wu et al. [30] constructed the PathEnhanceDS dataset, which contains 45,000 cases, and used it for instruction tuning to improve the model’s performance in tasks such as pathological image classification, caption generation, and question answering. In summary, although existing medical MLLMs and fine-tuning methods have achieved promising results, they still face several key limitations:
+(1) insufficient incorporation of domain-specific medical knowledge
+during fine-tuning, leading to limited understanding of clinical seman-tics; (2) a lack of adaptive prompt mechanisms to guide model attention toward task-relevant representations; and (3) inefficiencies arising from uniform LoRA adaptation across all layers. To address these challenges, our proposed ERGLM introduces a two-stage knowledge infusion frame-work that integrates domain knowledge at both pre-adaptation and task-specific fine-tuning stages. Furthermore, by combining adaptive prompts with a selectively applied LoRA structure, ERGLM achieves more efficient parameter utilization and stronger domain adaptability, thereby overcoming the deficiencies of previous approaches.
+
+3.	Method
+
+In this paper, we propose a two-stage P-LoRA method and fine-tune the DeepSeek-VL-7B as the base model, effectively improving its ability to describe endoscopic images. The structure of this chapter is arranged as follows: Section 3.1 provides an overview of the overall framework of our fine-tuned model; Section 3.2 explains the specific process of the two-stage fine-tuning method, where the first stage focuses on learning domain knowledge and the second stage emphasizes generating high-quality reports; Section 3.3 elaborates on the fine-tuning method we adopted, which is more suitable for generating reports from endoscopic images; finally, Section 3.4 introduces our sentence selection method based on cosine similarity to enhance the dataset.
+
+3.1.	Overview
+
+As shown in Fig. 1, we present the overall architectural design for fine-tuning a multimodal large language model using the P-LoRA method. In the first stage, we extensively collect publicly available datasets related to endoscopy, which include endoscopic reports, pre-scriptions, dialogues, and other content. During this phase, we inject domain knowledge into the model using these public datasets and fine-tune the model with the P-LoRA method, while keeping the param-eters of the visual encoder and connector frozen. In the second stage, with the assistance of Qilu Hospital of Shandong University and its expert physicians, we construct a private multimodal dataset contain-ing gastric endoscopic images and corresponding textual descriptions. The visual encoder extracts deep features from gastric images, while the large language model extracts semantic features from the related textual descriptions. Throughout this process, the parameters of the
+ 
+visual encoder and connector remain frozen, allowing the focus to be on fine-tuning the specific parameters of the large language model. This two-stage fine-tuning enhances the model’s understanding of complex multimodal medical data while reducing computational costs, enabling accurate integration of visual and textual features for endoscopic report generation.
+We adopt the open-source multimodal large language model DeepSeek-VL-7B [12] as the foundational model. In our approach, DeepSeek-VL-7B is utilized to extract visual features from gastric endo-scopic images and combine them with corresponding textual descrip-tions. The image features are extracted by the pretrained visual encoder
+SigLIP [31]. For each input RGB image 𝐼 ∈ 𝑅𝐻×𝑊 ×3, where 𝐻 and 𝑊
+represent the height and width of the image, respectively. The visual encoder processes the input image to obtain a sequence of visual tokens
+𝑉 = [𝑣1, 𝑣2, … , 𝑣𝑁𝑣 ], where 𝑁𝑣 represents the length of the visual token sequence, which is processed by the pretrained DeepSeek LLM [32] for
+text feature extraction. Subsequently, we concatenate the visual tokens and text tokens 𝑇 = [𝑡1, 𝑡2, … , 𝑡𝑁𝑡 ], where 𝑁𝑡 represents the length of
+the text tokens. These are then input into a multimodal large language
+model to generate the language response k = [𝑟1, 𝑟2, … , 𝑡𝑁𝑟 ], where 𝑁𝑟
+represents the length of the text response.
+
+3.2.	Two-stage fine-tuning strategy
+
+General multimodal large language models (MLLMs) exhibit knowl-edge gaps in endoscopy, particularly in understanding specific lesion characteristics and medical terminology. To address this limitation and improve the quality of generated endoscopic reports, we propose a two-stage fine-tuning strategy that explicitly separates domain knowledge acquisition from report generation. This separation allows the model to first internalize core medical knowledge and then adapt to the stylistic and structural conventions of professional endoscopic reports, leading to more accurate and clinically consistent outputs.
+In the first stage, PubMed [9] provides rich medical semantics across diverse diseases and organs, serving as a strong foundation for multimodal medical pretraining. To better align with endoscopic tasks, we further extract a subset focused on gastrointestinal descrip-tions. This selected dataset is meticulously filtered to better suit the fine-tuning of models for learning medical knowledge in the gastric domain. MedTrinity-25M [33] is a large-scale multimodal medical dataset comprising approximately 25 million image–text pairs, en-compassing various types of medical imaging and their corresponding clinical descriptions. The dataset integrates medical knowledge from multiple fields, including radiology, pathology, and endoscopy, offering robust support for the training and research of multimodal medical models. VQA-Med [34] is a dataset specifically designed for medical im-age question-answering tasks, combining medical images with relevant clinical questions to facilitate multimodal understanding of medical imaging. By leveraging the extensive domain knowledge available in public datasets for the first-phase fine-tuning, the model can effectively acquire core medical knowledge related to the stomach, including le-sion localization, language expressions of structural changes in tissues, and common terms used in diagnostic reports. During this phase, we freeze the vision encoder and other components, performing limited parameter fine-tuning only on the large language model.
+In the second stage, to generate templated language that better aligns with the professional style preferences of physicians, we fine-tune the model using data annotated by physicians from Qilu Hospi-tal of Shandong University. After undergoing specific data processing workflows, this phase focuses on fully leveraging the high level of pro-fessionalism and standardizing language expressions in the physician-annotated data. By further optimizing the model, it can more accurately learn and master commonly used terminology, sentence structures, and expression patterns in endoscopic reports, thereby enhancing its ability to produce outputs consistent with professional medical documentation practices.
+ 
+
+ 
+
+/ig. 1. Architecture of fine-tuning large language model. Stage 1 and Stage 2 represent the first-stage and second-stage fine-tuning, respectively. The right side shows an expanded diagram of the P-LoRA method. The text highlighted in green is our main work.
+
+ 
+By separating domain knowledge learning from professional report generation, the model can follow a clear and structured knowledge transfer process. In the first stage, it focuses on acquiring core medical knowledge such as lesion localization, tissue morphology, and diag-nostic terminology without interference from report language style. In the second stage, the model is fine-tuned on physician-annotated reports to learn sentence structures, templated expressions, and stylis-tic conventions specific to endoscopic documentation. This approach reduces conflicts between factual knowledge and language style during training, supports efficient transfer of medical knowledge to report generation, and enables the model to produce outputs that are both clinically accurate and linguistically coherent. As a result, the two-stage strategy improves the quality, consistency, and reliability of generated endoscopic reports.
+
+3.3.	P-LoRA method
+
+Although LoRA has demonstrated good generality across multiple tasks, its fine-tuning performance on domain-specific downstream tasks still requires improvement [15]. To effectively adapt large multimodal models to the endoscopic domain, we combine soft prompt tuning with selective LoRA fine-tuning. Soft prompt tuning efficiently guides the model to align with domain-specific language patterns without modifying the majority of model parameters, while LoRA provides targeted weight updates that enhance feature extraction from visual and textual inputs. This combination leverages the strengths of both approaches, achieving better domain adaptation than either method alone: prompt tuning alone may not sufficiently adjust deep represen-tations, whereas LoRA alone may require fine-tuning more parameters and increase computational cost. We apply LoRA selectively to the first, middle, and last layers of the model. This strategy is based on the observation that lower layers capture general visual features, middle layers integrate multimodal interactions, and higher layers encode task-specific representations. By updating only these key layers, we achieve a balance between adaptation performance and computational efficiency, allowing effective domain alignment while keeping training cost manageable as illustrated in Fig. 2.
+First, trainable prompt parameters [35] are inserted into each atten-tion layer, as shown in Fig. 2(a). The soft prompt tokens are initialized using the same normal distribution as the pretrained embedding layer.
+Specifically, a set of special prompt tokens 𝑝 = (𝑝1, 𝑝2, … , 𝑝𝑚) with learnable embeddings is added to the front of the input sequence.
+ 
+Let the original input embeddings be 𝑥 = (𝑥1, 𝑥2, … , 𝑥𝑛), where each
+𝑥𝑖 ∈ R𝑑model and 𝑑model denotes the hidden dimensionality of the model. These prompt tokens are concatenated with the input embed-
+dings to form an extended sequence 𝑥′ = (𝑝1, 𝑝2, … , 𝑝𝑚, 𝑥1, 𝑥2, … , 𝑥𝑛), which is then input into the attention layer. During self-attention
+computation, the query, key, and value are calculated based on this extended sequence, allowing the model to leverage the prompt tokens to capture task-specific information while keeping the output dimen-sionality consistent with 𝑑model. No manually crafted prompt content is used; instead, the prompt tokens adapt entirely through task-specific learning. Through this process, the attention layers can better learn representations relevant to the target domain without modifying the pre-trained backbone weights.
+Subsequently, LoRA is applied to the feed-forward layers to optimize the model’s structural adaptation to the domain. As shown in Fig. 2(b), we combine the use of the LoRA method in the feed-forward layers of the Transformer by inserting low-rank matrices to achieve overall structural optimization, capturing the macro features of the task. To minimize the amount of parameter tuning as much as possible while effectively adapting to the new task, LoRA is applied only to the first layer, middle layers, and the final layer. The goal is to enable the model to quickly adapt to new input features in the first layer, adjust the model’s focus on domain-specific information and knowledge expres-sion in the middle layers, and finally optimize the generated output for task-specific needs. Specifically, the input dimension is expanded
+from 𝑑model to a larger dimension 𝑑𝑓𝑓 in the first fully connected layer, which means inserting a low-rank matrix at the weight matrix of the
+fully connected layer. The original weight matrix 𝑊 ∈ R𝑚×𝑛 needs to be optimized. In traditional fine-tuning methods, all the parameters in 𝑊 are updated. However, LoRA proposes a more efficient approach, which is to keep 𝑊 unchanged and only add a low-rank adjustment term 𝛥𝑊 , such that the fine-tuned weight matrix is as shown in Formula (1).
+𝑊 ′ = 𝑊 + 𝛥𝑊	(1)
+𝛥𝑊 is decomposed into a low-rank form 𝛥𝑊 = 𝐴𝐵, where 𝐴 ∈ R𝑚×𝑟,
+𝐵 ∈ R𝑟×𝑛, and 𝑟 is the rank of the decomposition, with the condition that 𝑟 ≪ min(𝑚, 𝑛). These low-rank matrices capture the primary
+information in the weight matrix, reducing reliance on full-parameter fine-tuning while maintaining efficient representational capacity. Next, the intermediate results undergo a nonlinear transformation using the
+ReLU activation function, further enhancing the model’s expressive-ness. In the second fully connected layer, the 𝑑𝑓𝑓 dimension is mapped
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/ig. 2. P-LoRA method. (b) illustrates the fine-tuning approach used in the first, middle, and final layers, while (a) shows the approach applied to all other layers.
+
+ 
+back to the original input dimension 𝑑𝑚𝑜𝑑𝑒𝑙. This transformation ensures that the more complex representations obtained after the nonlinear
+transformation are projected back to the same dimension as the input, maintaining consistency with other parts of the model. The feedforward layer integrates the nonlinear transformations with the contextual in-formation learned by the attention layer, preserving critical context and making the model’s overall representation more expressive.
+As a result, the feedforward layer and the attention layer form a complementary optimization relationship. The attention layer, through prompt tokens, enhances sensitivity to task-specific information, while the feedforward layer, utilizing LoRA’s low-rank decomposition com-bined with nonlinear transformations, increases the complexity and compactness of the representations. This ensures the model achieves
+a good balance between task adaptability and efficiency. For the mul-timodal fine-tuned model, inputting an image 𝐼 along with a prompt
+𝑃 produces a generated report 𝑌 =  𝑦1, 𝑦2, … , 𝑦𝑇  according to the
+following autoregressive conditional probability Formula (2).
+
+𝑌 = arg max  𝑃 𝑦𝑡 ∣ 𝑦<𝑡, 𝐼, 𝑃 ; 𝜃 ,	(2)
+𝑌  𝑡=1
+where 𝜃 are the model parameters, and 𝑦<𝑡 denotes all previously generated tokens.
+
+3.4.	Data optimization and filtering
+
+In this experiment, we use a large number of clinical gastroscopy reports collected from Qilu Hospital of Shandong University as the research data. These reports provide detailed records of patients’ gas-tric health, including a large number of gastric endoscopic images that cover key areas such as the esophagus, cardia, fundus, body, antrum, pylorus, duodenal bulb, and descending segment. These images not only provide intuitive visual information for our research but are also crucial for accurately assessing the condition of the stom-ach. Additionally, the reports include detailed descriptions written by skilled physicians, based on their clinical experience and profes-sional knowledge, providing a thorough record and analysis of gastric
+ 
+
+ 
+Templatizing textual sentences helps unify the structure of input data and standardize its formatting, thereby effectively reducing data noise caused by inconsistent expression. For complex medical texts, the application of standardized templates is particularly critical: it ensures that the model focuses on extracting key clinical features during the fine-tuning phase, while avoiding interference from non-uniform descriptive styles across different reports. To implement this templa-tization, we first provide GPT-4 with a structured positive prompt: You are a professional medical text processing assistant. Your task is to convert the following endoscopic image description sentence into a standardized template format: ‘‘This image shows (gastric region). It describes the following features (details of color, texture, presence)’’. To ensure methodological transparency and reproducibility, we explic-itly define the interaction protocol. First, raw sentences are provided to GPT-4 with prompts for template conversion. Next, the generated outputs are reviewed by experienced gastroenterologists, who verify medical accuracy, correct terminology usage, and check logical con-sistency. Finally, low-quality or inconsistent outputs are revised or discarded. Through this multi-step process, GPT-4 serves as an auxiliary tool for annotation, while expert physicians guarantee clinical validity and professional reliability.
+During the optimization process, a core principle must always be followed: the optimized sentence must remain semantically consistent with the original sentence, ensuring that the conveyed information is not altered or lost. To this end, introducing a reliable semantic consistency judgment method is crucial. This not only helps assess the semantic alignment between the optimized sentence and the original sentence, providing quality assurance for the optimization process, but also strikes a balance between richness and accuracy in text expression. To ensure that the sentences remain semantically consistent with the original during the optimization process, we introduced a semantic consistency evaluation method based on cosine similarity. Sentence-BERT [38] is used for feature extraction to obtain the vector represen-
+tations of both the original and optimized sentences. Assume that 𝑢 is the vector representation of the original sentence, and 𝑣 is the vector representation of  the optimized sentence. Then compute the modes
+∑𝑛	2	∑𝑛	2
+ 
+quial or contain awkward or erroneous sentences. Recently, GPT-4 has demonstrated outstanding capabilities in assisting with text processing, providing valuable references for our research [36,37]. Therefore, we leverage GPT-4 to enrich and optimize text sentences, with the specific
+ 
+expressed as 𝐮 and 𝐯 . Then the resulting similarity value between the original sentence and the optimized sentence is shown in Formula (3).
+ 𝐮 ⋅ 𝐯 
+ 
+process illustrated in Fig. 3.
+ 
+𝑆 =
+ 
+‖𝐮‖‖𝐯‖
+ 
+(3)
+ 
+
+ 	 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/ig. 3. Example of sentence selection. ‘‘Original Sentences’’ represents the original physician-annotated sentence, while ‘‘Enhanced Sentences’’ represent sentences optimized by GPT-4. The final step determines whether the sentence satisfies similarity score > 0.85.
+
+ 
+where 𝑆 denotes the similarity value. In practical applications, we set the similarity threshold to 0.85 and filter all generated sentences one by one based on this criterion. If certain texts fail to meet the set threshold, new sentences are regenerated until the requirement is satisfied, thereby achieving the goal of data enhancement.
+
+4.	Experiments and discussion
+
+To validate the effectiveness of our proposed method, we conducted fine-tuning on both public and private datasets and analyzed and compared the experimental results. The structure of this chapter is organized as follows: Section 4.1 describes the datasets employed; Section 4.2 provides a detailed description of the parameters and equipment used in the experiments; Section 4.3 introduces the key evaluation metrics adopted in the experiments; and Section 4.4 presents an in-depth analysis of the experimental results, including comparative experiments with different models to verify the effectiveness of our fine-tuned model in generating endoscopic reports, the advantages of the fine-tuning method, and the efficacy of the two-stage fine-tuning approach. Additionally, this section evaluates the generated endoscopic reports and includes case studies.
+
+4.1.	Datasets
+
+We adopt a two-phase fine-tuning approach, where the first phase screens gastrointestinal descriptive data from open-source medical datasets, as shown in Table 1. At this stage, we use a gastroen-terology medical vocabulary as the basis to conduct comprehensive screening and precise filtering of the data, ensuring that the final dataset centers on core knowledge in the field of gastroenterology. Irrelevant information is effectively removed, achieving a high degree of alignment between the dataset content and the target domain. After the initial screening process, each report is independently reviewed by five experienced gastroenterologists. They examine the accuracy of medical terminology, the standardization of lesion descriptions, and the rigor of medical logic in the data. The final label of each report is determined by a majority voting strategy: if at least three experts judge the report as meeting clinical standards, it is labeled as compliant; otherwise, it is labeled as non-compliant. For reports labeled as non-compliant, a discussion is conducted to determine the final label. In addition, the physicians filter out low-quality or unusable samples, further enhancing the dataset’s professional reliability and clinical ap-plicability. These datasets, including PubMed, encompass rich content
+ 
+across general medicine, providing detailed descriptions of various body parts and diseases. With their large scale and comprehensive semantic knowledge, these datasets are valuable resources for medical research and model training. By filtering and cleaning high-relevance gastrointestinal data from PubMed and other datasets, we obtained a subset of approximately 60K records for the first phase of fine-tuning. This dataset not only includes detailed problem descriptions but also contains extensive domain knowledge, enabling the model to learn foundational semantic knowledge, lesion descriptions, and anatomical expressions related to gastrointestinal medicine, thereby laying a solid groundwork for subsequent training.
+In the second stage, we use a large number of gastroscopy reports collected from Qilu Hospital of Shandong University as research data. These reports are strictly screened and processed using the method described in Section 3.4, resulting in a more targeted training dataset. The data are derived from real clinical patients and have undergone de-identification processing to ensure compliance and ethical use by pre-processing information involving patient privacy. To enhance the diversity and representativeness of the dataset, we include subjects from various age groups, genders, and regional backgrounds. Specifi-cally, the subjects range in age from 20 to 80 years, with individuals aged 40 to 80 accounting for 85% of the total. The gender distribution is relatively balanced, with a near 1:1 male-to-female ratio. Addition-ally, the dataset covers patients from both urban and rural areas. In the constructed dataset, normal samples account for approximately 40%, while abnormal samples make up about 60%. This distribution is designed to ensure sufficient representation of abnormal cases, which is crucial for the model to learn discriminative features, while still maintaining a reasonable number of normal samples to avoid bias toward the normal class. To validate the effectiveness of this ratio, we conducted additional experiments using alternative ratios. The 4:6 ratio provides a balanced trade-off across different performance met-rics, supporting the rationality of our data distribution. The abnormal samples encompass a variety of gastric conditions, including gastric polyps, gastric bleeding, gastric ulcers, early-stage gastric cancer, and advanced gastric cancer, demonstrating a high diversity of disease types. The images are collected from multiple key anatomical regions of the gastrointestinal tract, such as the esophagus, cardia, fundus, body, antrum, pylorus, as well as the duodenal bulb and descending seg-ment, ensuring the dataset’s comprehensiveness and representativeness. These images are all selected by endoscopists from the key anatomical regions during actual clinical examinations. All images are captured using different endoscopic devices within the hospital, but uniformly
+ 
+
+Table 1
+Data distribution of the first and second stage. We list the different datasets used in the first and second stages, including source, type, number, and description.
+Stage	Data source	Data type	Number	Description
+First stage	PubMed,	Gastrointestinal	60k	Descriptive data related to the gastrointestinal
+	MedTrinity-25M,	tract related		tract, selected from open medical datasets.
+	VQA-Med	knowledge		Includes fundamental semantic knowledge, lesion
+		description data		descriptions, and anatomical expressions.
+Second stage	Physician-annotated	Specialized	10k	High-quality, professional endoscopic report data,
+	data from Qilu	endoscopic		cleaned and optimized for generating
+	Hospital of	report data		template-based language matching physicians’
+	Shandong University			professional style.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/ig. 4. Distribution of similarity score in sentence filtering during the second stage. The abscissa represents the percentage, and the ordinate represents the similarity score interval, arranged in descending order of percentage.
+
+ 
+configured to the same resolution of 1920 × 1080, ensuring consistency in image clarity and standardization. The ratio of the training set, validation set, and test set is 8:1:1. Due to the standardized collection process, all images meet clinical diagnostic requirements in terms of clarity, key region coverage, validity, and lesion feature presentation. Considering that the optimization process may introduce non-standard expressions or inconsistent terminology even when semantic changes are minimal, multiple experienced physicians rigorously review the optimized reports to ensure medical professionalism and the accurate use of terminology. They also make necessary revisions to any parts that exhibit deviations.
+All data meet the predefined similarity threshold, and Fig. 4 shows the distribution of data across different similarity levels. As seen in the figure, the vast majority of the data have a similarity score above 0.9, reaching 78.6%, which aligns with our expected standards and indicates that the data quality is highly satisfactory in most cases. The filtered dataset contains approximately 10K high-quality physician-annotated reports. These reports exhibit a high degree of profession-alism in language expression, showcasing the terminology, sentence structures, and diagnostic habits commonly used by physicians when writing endoscopic reports, which effectively enhance the model’s gen-erative capabilities in the professional domain. Compared to publicly available data, the amount of data in the second stage is relatively small, but it focuses on high professionalism and standardized language expression, concentrating on the precise description of endoscopic im-ages and the documentation of lesion information.
+ 
+4.2.	Implementation details
+
+We conduct fine-tuning experiments based on the DeepSeek-VL-7B-Base model, using the P-LoRA method for fine-tuning in both the first and second stages. The fine-tuning settings for both stages are configured as rank = 64, 𝛼 = 16, and dropout = 0.05. The batch size for both stages is set to 4, with gradient accumulation steps set to 16. The initial learning rate is configured to 5e−5, the warm-up ratio is set to 0.2, and the maximum text length limit is 1024. The seed is set to 42, and the number of processes for dataset preprocessing is 1. During testing, the temperature is set to 0, while both top_p and top_k are set to None. As shown in Table 2.
+Our tests are conducted on a Linux system using the PyTorch plat-form and running Ubuntu 20.04. The system is powered by an Intel(R) Xeon(R) Silver 4208 CPU (16 cores at 2.10 GHz × 2, 128 GB RAM) and four NVIDIA GTX 3090i GPUs with 24 GB of memory each. The Python version in use is 3.8. The trainable parameters introduced by our P-LoRA method account for approximately 0.343% of the full model size. The actual GPU memory usage during training is approximately 43 GB, and the average inference time per report is around 7 s. For deploy-ment, our model can be run on a single NVIDIA RTX 3090 (24 GB) GPU with an expected average inference latency of approximately 7 s per report. A minimum system configuration requires at least 16 GB of RAM, Python 3.8 or later, CUDA 11.2 or above, and PyTorch 2.0 or newer. In the first stage, the training lasts for approximately 70 h, while in the second stage, it takes about 15 h.
+ 
+
+ 
+
+Table 2
+Hyperparameter settings.	
+Hyperparameter	Stage1	Stage2
+Learning rate	5e−5	5e−5
+Batch size	4	4
+Gradient accumulation	16	16
+Optimizer	AdamW	AdamW
+Warm-up ratio	0.2	0.2
+Max text length	1024	1024
+LoRA rank	64	64
+𝛼	16	16
+Dropout	0.05	0.05
+Prompt tokens	64	64
+Temperature	0(Ablation experiments)	0
+Random seed	42	42
+
+
+4.3.	Evaluation metrics
+
+A large number of previous studies [39–41] adopt metrics such as CIDEr, ROUGE, and METEOR to evaluate the similarity between generated medical descriptions and the original descriptions. CIDEr (Consensus-based Image Description Evaluation) [42] is specifically designed for image description tasks. CIDEr aligns more closely with human judgment when determining the similarity between two sen-tences because it employs TF-IDF to assign different weights to vari-ous n-grams. Intuitively, frequently occurring phrases are given lower weights, while less common phrases are considered more distinctive, drawing more attention from people to these unique words.
+ROUGE (Recall-Oriented Understudy for Gisting Evaluation) [43] is a metric used for automatically evaluating the quality of generated text. It is commonly applied in tasks such as summarization, machine trans-lation, and text generation. ROUGE assesses the quality of generated text by measuring the overlap between the generated and reference texts, with a primary focus on recall.
+METEOR (Metric for Evaluation of Translation with Explicit OR-dering) [44] is a metric used to evaluate the quality of text outputs in tasks such as machine translation, image caption generation, and other natural language generation tasks. It is based on precise matching and semantic similarity between sentences, addressing shortcomings of traditional metrics like BLEU [45], which are less sensitive to word order and semantic similarities.
+Therefore, the metrics CIDEr, ROUGE, and METEOR each reflect the similarity between generated endoscopy reports and reference re-ports from different perspectives. CIDEr effectively evaluates whether the generated report accurately preserves key clinical terms, thereby reflecting its fidelity in terms of information importance. ROUGE-L considers the continuity of the longest common subsequence, making it suitable for assessing the quality of structured text in medical reports. METEOR incorporates semantic similarity, word order, and morpho-logical variations, enabling it to more accurately identify semantically equivalent sentences, aligning with clinicians’ standards for ‘‘consis-tency of meaning’’ in reports. However, these metrics mainly focus on linguistic form and are limited in capturing the clinical correctness and practical utility of the reports. Therefore, to further assess the clinical validity and quality of the generated reports, we introduce expert human evaluation.
+
+4.4.	Experimental results
+
+4.4.1.	Comparison of different models
+In this section, to demonstrate the effectiveness of our method, we select several mainstream large models for comparison, including Qwen-VL-7B [18], LLAVA-v1.5-7B [19,46], VisualGLM-6B [10], GPT-
+4V [47], HuatuoGPT-Vision-7B [21], LLaVA-Med [8], Uni-Med [48], EndoChat [49], and BiomedGPT [50], and conduct a comprehensive comparative analysis with our method, as shown in Table 3. The
+ 
+models Qwen-VL-7B, LLAVA-v1.5-7B, and VisualGLM-6B are selected because they achieve balanced and stable performance on general vision-language understanding tasks, and their parameter scales are similar to that of our model. GPT-4V, as a state-of-the-art model in the multimodal domain, demonstrates outstanding reasoning and gen-eration capabilities thanks to its extensive pretraining. Meanwhile, HuatuoGPT-Vision-7B, LLaVA-Med, and BiomedGPT represent typical approaches focused on medical multimodal applications. By comparing with these models, we can more intuitively assess the practical value and performance improvement of the proposed method in endoscopic image scenarios. To better evaluate experimental performance, we test the models using the same prompt as our model: ‘‘Observe this endo-scopic image and describe the gastric features presented in the image’’. We conducted statistical significance tests across all evaluation met-rics. Paired t-tests between ERGLM and the comparison models show significant improvements (p < 0.01) in CIDEr, ROUGE-L, METEOR, BLEU-4, and BERTScore. Moreover, the large effect sizes (Cohen’s d > 0.8) indicate that the performance gains of ERGLM are both statistically robust and practically meaningful.
+Firstly, Qwen-VL-7B, while performing well in multimodal tasks and demonstrating strong generalization capabilities, shows limitations in interpreting medical images, particularly endoscopic images. Specifi-cally, due to the lack of deeply annotated medical data—especially endoscopic data—in its training set, it struggles with understanding medical terminology and capturing details in specialized scenarios. Secondly, LLAVA-v1.5-7B achieves balanced performance in general vision-language tasks, excelling at describing general images. However, its limitations become apparent when dealing with highly specialized tasks, such as endoscopic image interpretation. VisualGLM-6B is a com-pact multimodal model notable for its efficiency with small-scale com-putational resources. Nonetheless, constrained by its model size and the scope of its training data, it encounters bottlenecks in complex med-ical image interpretation tasks. Specifically, in analyzing endoscopic images, it falls short in capturing fine-grained details and generating logically coherent and clinically appropriate language, failing to meet the high standards required in clinical language expression. Meanwhile, although GPT-4V demonstrates exceptional cross-modal understanding and reasoning capabilities, delivering high-quality outputs across vari-ous tasks, it still exhibits certain limitations when applied to the highly specialized medical context of endoscopic imaging.
+As for HuatuoGPT-Vision-7B and EndoChat, the models incorporate extensive medical knowledge during training and possess certain rea-soning capabilities in the medical domain. However, their training pri-oritizes general medical knowledge rather than in-depth specialization, leading to insufficient expertise in endoscopic image interpretation. While they can recognize some medical terms, they lacks adequate contextual understanding in endoscopic scenarios, resulting in gener-ated content that lacks specificity and detail. Similarly, general-purpose medical large models such as LLaVA-Med, BiomedGPT and Uni-Med also face comparable challenges. Although these models demonstrate strong generalization capabilities across a wide range of domains – in-cluding medical literature, case summaries, and image–text alignment – they still show noticeable gaps in clinical feature recognition, lesion interpretation, and diagnostic reasoning for endoscopic images. This is primarily due to the lack of specialized training and annotated data tailored to the vertical scenario of endoscopy, making it difficult for them to meet the requirements of professional clinical decision support.
+Unlike the aforementioned models, ERGLM is fine-tuned on a strong foundation model to adapt it specifically to the professional task of endoscopic report generation. On the one hand, the proposed two-stage fine-tuning strategy enables the model to progressively evolve from learning endoscopic medical knowledge to generating specialized and standardized clinical reports. On the other hand, the task-oriented de-sign and the fine-tuning strategy tailored for endoscopic image–report generation significantly enhance the model’s domain adaptability. In addition, the construction of high-quality and professionally annotated endoscopic report data is an indispensable component of this work.
+ 
+
+Table 3
+Comparison of different models. We compare our experimental results with existing influential multimodal large models, with key metrics including CIDEr, ROUGE-L, METEOR, BLEU-4, and BERTScore.
+Method	CIDEr ↑	ROUGE-L ↑	METEOR ↑	BLEU-4 ↑	BERTScore ↑
+Qwen-VL-7B [18]
+0.0212	0.2815	0.2369	0.2293	0.6947
+LLAVA-v1.5-7B [19,46]
+0.0292	0.2572	0.1947	0.1912	0.6011
+VisualGLM-6B [10,11]
+0.0147	0.2210	0.1913	0.1829	0.5893
+GPT-4V [47]
+0.0955	0.3040	0.3311	0.3292	0.7846
+HuatuoGPT-Vision-7B [21]
+0.0802	0.2642	0.2791	0.2709	0.7538
+LLaVA-Med [8]
+0.0171	0.1979	0.2677	0.2417	0.7452
+BiomedGPT [50]
+0.0233	0.1739	0.2381	0.2178	0.7117
+Uni-Med [48]
+0.0881	0.2013	0.1928	0.1903	0.6639
+EndoChat [49]
+0.0578	0.1965	0.2102	0.1961	0.6740
+ERGLM (Ours)	0.2667	0.4598	0.4070	0.3863	0.8216
+
+ 
+Table 4
+Comparison of fine-tuning methods. We employ different models to validate the effectiveness of the fine-tuning method we use, with DeepSeek-VL-7B, VisualGLM-6B, and ShareGPT-4V primarily used to compare experimental metrics.
+ 
+Table 5
+Comparison of fine-tuning results at different stages. The symbol ✓ indicates that the stage is used, while × indicates that the stage is not used.	
+ 
+Foundation models	Methods	CIDEr ↑	ROUGE-L ↑	METEOR ↑		✓	×	0.1032	0.3682	0.2474
+	LoRA [14]
+0.2539	0.4406	0.3880		×	✓	0.2439	0.4297	0.3926
+DeepSeek-VL-7B [12]
+P-tuning-v2[35]
+0.2481	0.4317	0.3952		✓	✓	0.2667	0.4598	0.4070
+	Adapter [51]
+0.2407	0.4261	0.3857						
+	P-LoRA (ours)	0.2667	0.4598	0.4070						
+	LoRA [14]
+0.1397	0.3991	0.4018						
+VisualGLM-6B [10,11]
+P-tuning-v2[35]
+0.1392	0.3869	0.3964	29.8%, and 9.2%. For ROUGE-L, P-LoRA reaches 0.3720, higher than
+	Adapter [51]
+0.1337	0.3794	0.3872	0.3607, 0.3543, and 0.3544, with improvements of 3.1%, 5.0%, and
+	P-LoRA (ours)	0.1540	0.4212	0.4008	5.0%. On METEOR, P-LoRA achieves 0.3240, surpassing 0.2990,
+	LoRA [14]
+0.0976	0.3607	0.2990	0.3103, and 0.2894, with improvements of 8.4%, 4.4%, and 12.0%.
+ShareGPT [52]
+P-tuning-v2[35]
+0.0802	0.3543	0.3103	While LoRA focuses on low-rank weight adaptation and P-tuning-
+ 
+	Adapter [51]
+0.0953	0.3544	0.2894
+	P-LoRA (ours)	0.1041	0.3720	0.3240
+
+
+4.4.2.	Comparative experiments on fine-tuning methods
+To validate the effectiveness of our proposed fine-tuning method, P-LoRA, we select three mainstream foundational models, DeepSeek-VL-7B, VisualGLM-6B, and ShareGPT-4V, and conduct comparative experiments by applying LoRA, P-tuning-v2, Adapter, and P-LoRA on them. Here, LoRA can be regarded as using only the LoRA component of the P-LoRA method, while P-tuning-v2 can be viewed as using only the prompt component of P-LoRA. Table 4 presents the results on three evaluation metrics: CIDEr, ROUGE-L, and METEOR. Furthermore, to assess whether the performance improvements introduced by P-LoRA are statistically significant, we conduct paired t-tests between P-LoRA and each baseline method across all models and metrics. The results show that the improvements achieved by P-LoRA are statistically significant (p < 0.05).
+On DeepSeek-VL-7B, P-LoRA achieves a CIDEr score of 0.2667, significantly higher than LoRA’s 0.2539, Ptuning-v2’s 0.2481, and Adapter’s 0.2407, with improvements of 5.0%, 7.5%, and 10.8%. For
+ROUGE-L, P-LoRA reaches 0.4598, compared to 0.4406, 0.4317, and
+0.4261, representing improvements of 4.4%, 6.5%, and 7.9%. On
+METEOR, P-LoRA achieves 0.4070, surpassing 0.3880, 0.3952, and
+0.3857, with improvements of 4.9%, 3.0%, and 5.5%. These results indicate that P-LoRA significantly enhances the overall quality and consistency of generated reports.
+On VisualGLM-6B, P-LoRA achieves a CIDEr score of 0.1540, higher than 0.1397, 0.1392, and 0.1337, with improvements of 10.2%, 10.6%,
+and 15.2%. For ROUGE-L, P-LoRA reaches 0.4212, exceeding 0.3991,
+0.3869, and 0.3794, with improvements of 5.5%, 8.8%, and 11.0%. On METEOR, P-LoRA obtains 0.4008, slightly lower than LoRA’s 0.4018 but higher than 0.3964 and 0.3872, with improvements of 1.1% and 3.5%. These results confirm that P-LoRA can boost the performance of both stronger and weaker models.
+On ShareGPT-4V, P-LoRA achieves a CIDEr score of 0.1041, out-performing 0.0976, 0.0802, and 0.0953, with improvements of 6.7%,
+ 
+v2 emphasizes prompt optimization, neither method alone explicitly models the task-specific alignment between endoscopic visual features and clinical report language. P-LoRA combines the advantages of LoRA and prompt tuning, efficiently capturing task-related features while keeping the parameter adjustment minimal. This low-rank matrix fine-tuning combined with optimized input prompts enables the model to adapt to new tasks efficiently under limited resource conditions. From VisualGLM-6B to ShareGPT, P-LoRA shows significant performance improvements across different scales and architectures of foundational models, indicating that this method has good cross-model adaptability and can be applied to various large models. We compute the perfor-mance gain per million trainable parameters for DeepSeek-VL-7B. The results show that P-tuning v2 achieves the highest efficiency due to its minimal number of trainable parameters. P-LoRA attains slightly higher performance per million trainable parameters compared to the LoRA method. In contrast, Adapter exhibits the lowest performance gain per million trainable parameters.
+
+4.4.3.	Ablation and sensitivity experiments
+Table 5 presents the performance of the model on the CIDEr, ROUGE-L, and METEOR metrics at different fine-tuning stages. Specif-ically, Stage 1 represents domain knowledge fine-tuning, while Stage 2 focuses on fine-tuning for the endoscopic report generation task. By comparing the experimental results under different combinations, the performance improvements brought by each fine-tuning stage, as well as the overall effect of the two-stage fine-tuning strategy, can be clearly observed.
+First, without any fine-tuning, the model achieves scores of 0.0325, 0.2862, and 0.1136 on the CIDEr, ROUGE-L, and METEOR metrics, respectively, indicating relatively weak overall performance. This sug-gests that, without adaptation to domain knowledge and report gen-eration tasks, the model struggles with specialized endoscopic report generation, resulting in low similarity between the generated text and the reference reports. When only domain knowledge fine-tuning is applied, CIDEr significantly increases to 0.1032, ROUGE-L improves to 0.3682, and METEOR rises to 0.2474. Compared to the non-fine-tuned model, these metrics show substantial improvements, demonstrating
+ 
+
+ 
+
+/ig. 5. Performance across different values of rank and prompt length. The horizontal axis represents the prompt length, comparing the CIDEr, ROUGE-L, and METEOR under rank values of 16, 32, and 64.
+
+ 
+that domain knowledge fine-tuning effectively enhances the model’s understanding of specialized medical content. This enables the model to generate text that is more aligned with professional reference reports in both content and structure.
+If only the second-stage fine-tuning is performed, the model achieves CIDEr, ROUGE-L, and METEOR scores of 0.2439, 0.4297, and 0.3926, respectively. Compared to the model fine-tuned only on domain knowledge, CIDEr improves further, while ROUGE-L and METEOR also show significant increases. This indicates that fine-tuning specifically for the endoscopic report generation task plays a crucial role in enhancing language fluency and the accuracy of report content, making the model better suited for the target task. Finally, when both domain knowledge fine-tuning and endoscopic report generation fine-tuning are applied together, the model achieves the best results across all three metrics, with CIDEr increasing to 0.2667, ROUGE-L reaching 0.4598, and METEOR attaining 0.4070. Compared to the model fine-tuned only on Stage 2, CIDEr improves by approximately 9.4%, while ROUGE-L and METEOR also show slight increases. This result fully demonstrates the synergy of the two-stage fine-tuning strategy: domain knowledge fine-tuning first establishes a solid foundation for profes-sional understanding, followed by task-specific fine-tuning to enhance generation quality, thereby enabling the model to achieve higher levels of professionalism and expressiveness. In summary, the comparative results in Table 5 indicate that the effective combination of domain knowledge fine-tuning and endoscopic report generation fine-tuning significantly improves the model’s adaptability and generation quality for endoscopic report tasks.
+To fully validate the effectiveness of the parameters, we conduct a parameter sensitivity experiment. During the experiment, we keep the fine-tuning parameters in both the first and second stages consistent. As shown in Fig. 5, the results indicate that the model achieves the best overall performance when the rank is set to 64 and the prompt length is set to 64. In cases where both the rank and prompt length are relatively low, the model exhibits suboptimal performance. When the rank is too small, the model struggles to learn sufficient task-specific knowledge, which in turn limits its performance.
+To further investigate the impact of different ratios of normal to abnormal samples on model performance, we conducted experiments under several reasonable data distributions ranging from 3:7 to 7:3. As shown in Fig. 6, the model’s performance remains generally stable across different ratios, indicating strong robustness to data imbalance. From the metrics perspective, the ROUGE-L and METEOR scores fluc-tuate only slightly, remaining around 0.45 and 0.40, respectively, suggesting that the model can consistently generate coherent and se-mantically accurate reports under varying sample ratios. Importantly, this stability indicates that the model does not disproportionately favor abnormal descriptions when the proportion of normal cases increases, thereby reducing the risk of over-diagnosis. Notably, when the ratio of normal to abnormal samples is 4:6, the model achieves the best overall performance, indicating that a moderate increase in abnormal samples
+ 
+
+ 
+
+/ig. 6. Model performance under different data ratios, where the ratios represent the proportions of normal to abnormal samples. The metrics CIDEr, ROUGE-L, and METEOR are used for comparison.
+
+
+helps the model better learn lesion features while avoiding overfitting to a limited number of abnormal cases.
+In this work we also specify one critical hyperparameter, namely the text similarity threshold used during the second-stage data optimiza-tion. If the optimized data are not properly controlled, the generated sentences may become excessively divergent, leading to data distortion. After multiple rounds of experimentation and analysis we set this threshold to 0.85. Although setting the threshold to 0.90 or higher theoretically increases the resemblance between generated and original text, we observe that it prevents the model from satisfying the prede-fined templating requirements. Template language inherently reduces overall text similarity, and high thresholds often cause the model to fail to produce the expected format after multiple iterations, resulting in approximately 15% or more of samples falling below the standard. We conduct comparative experiments across different threshold values and find that a threshold of 0.85 enables the model to generate text that better conforms to the template within a reasonable number of iterations while maintaining high content quality. Consequently, we adopt 0.85 as the similarity threshold for the optimization stage and subsequently involve clinical physicians to perform manual validation, ensuring that the generated text is both factually accurate and clinically applicable.
+
+4.4.4.	Evaluation of the accuracy and quality of generated reports
+To assess the clinical accuracy and practical usability of the gen-erated endoscopic reports, we conduct a structured physician-based evaluation. Seven senior endoscopists (each with more than 10 years of clinical experience in gastrointestinal endoscopy) are invited as expert reviewers. All reviewers participate voluntarily and independently, and
+ 
+
+ 
+they are blinded to the model identity and experimental settings to avoid potential bias. Each endoscopist independently evaluates the generated reports based solely on the corresponding endoscopic images, without access to reference reports or other reviewers’ judgments. Two aspects are assessed: (1) report accuracy, and (2) overall report quality, measured by the proposed Endoscopy Report Measure Score (ERMS). Here, report accuracy refers to whether all the content described in the report aligns with actual medical facts. If all content in a report is accurate, it is marked as ‘‘Correct’’. If there is any factual error or description inconsistent with clinical reality, the report is marked as ‘‘Incorrect’’. In cases where the evaluations of the seven experts are not consistent, we adopt a majority voting strategy to determine the final label of report accuracy. Specifically, if at least four experts judge a report as ‘‘Correct’’, it is labeled as correct; otherwise, it is labeled as incorrect. This evaluation criterion emphasizes the rigor of the report content and serves as an important indicator for determining whether the report is suitable for real clinical scenarios.
+To more comprehensively quantify the quality of the generated reports, the endoscopy report measure score is designed to evaluate the clinical value of a report from multiple dimensions, including but not limited to: completeness of information (whether key lesion char-acteristics and examination elements are covered), factual correctness (whether the content is truthful, objective, and free of hallucinations), and clarity and consistency of medical terminology. Each dimension reflects an essential aspect of clinical utility: completeness ensures that important findings are not omitted; factual correctness guarantees the report aligns with actual patient conditions; and clarity ensures that the report is interpretable and actionable by clinicians. By aggregating scores across multiple expert evaluators, ERMS provides a rigorous, standardized metric for evaluating the clinical reliability and usability of generated reports. The ERMS is calculated as the average of all scores given by all physicians across all reports.
+The ERMS score is based on a 5-point Likert scale [27], with the evaluation criteria defined as follows:
+•	4 points: The report is highly complete, factually clear, accu-rately expressed, and holds high clinical value.
+•	3 points: The report is basically complete, reliably described, with only minor expression flaws that do not affect understand-ing.
+•	2 points: The report contains some omissions or vague language that slightly impacts clinical judgment.
+•	1 point: The report is incomplete, contains factual deviations or hallucinated content, and has low clinical reference value.
+•	0 point: The report is severely flawed or lacks basic medical logic and is not clinically applicable.
+After the seven senior endoscopists complete independent evalua-tions, we further examine the consistency among their assessments to ensure the reliability of the human evaluation results. Specifically, for the indicator of report accuracy, we aggregate the judgments of the seven experts for each report into a count matrix and apply Fleiss’ Kappa coefficient for consistency testing. This metric measures the level of agreement among multiple raters in classification tasks, with values ranging from [−1, 1], where 0 indicates agreement equivalent to chance and 1 indicates perfect agreement. Our calculation yields a Fleiss’ Kappa coefficient of 0.783, which corresponds to a substantial level of agreement. We conduct assessments of face validity and content validity. In the face validity evaluation, we invite senior endoscopists to review the ERMS scoring items and provide feedback on whether each item is intuitively appropriate and capable of measuring report qual-ity (clarity, completeness, factual correctness). The experts generally agree that the ERMS evaluation dimensions are reasonable, intuitive, and consistent with clinical judgment habits. In the content validity evaluation, the same panel rates each ERMS item (completeness, factual correctness, terminology clarity) on relevance and representativeness.
+ 
+Table 6
+Comparison of the accuracy and quality of generated reports. Accuracy is used to determine whether a report contains errors, while ERMS represents the average score of the overall quality of reports generated by the model. A higher score indicates that the generated content is more in line with the expectations of medical experts.
+Method	Accuracy↑	ERMS↑
+Junior doctors	0.8092	2.6479
+HuatuoGPT-Vision-7B [21]
+0.7240	2.1552
+LLava-Med [8]
+0.7013	1.9271
+BiomedGPT [50]
+0.6426	1.7870
+Qwen-VL-7B [18]
+0.5659	1.5803
+EndoChat [49]
+0.6734	1.8816
+GPT-4V [47]
+0.7833	2.3924
+ERGLM (Ours)	0.8403	2.8580
+
+
+
+We compute the Item-level Content Validity Index (I-CVI) and the Scale-level Content Validity Index (S-CVI), and also calculate modified Kappa statistics for agreement among experts on these ratings. The results show that all I-CVI values range from 0.80 to 1.00, the average S-CVI is 0.92, and the modified Kappa values for each item all exceed 0.65, indicating good content validity.
+Table 6 presents the comparison results of various MLLMs on the endoscopy report evaluation task, including two key metrics: accuracy and ERMS. Accuracy measures whether the reports contain any er-rors, while ERMS reflects the average quality score of the generated reports—the higher the score, the more the content aligns with the expectations of medical experts. As shown in the table, our model achieves an accuracy of 0.8403, outperforming mainstream medical multimodal models and GPT-4V. During evaluation, we observe that although GPT-4V demonstrates strong performance in detail extraction, it still shows inconsistencies in final diagnostic conclusions, often re-sulting in incorrect diagnoses. Meanwhile, other medical multimodal models show relatively weaker understanding of medical images and textual information when generating endoscopy reports, leading to no-ticeable differences from real reports. In contrast, our proposed model performs better in extracting and describing image details, demon-strating superior capability in identifying lesion features and visual cues. However, when the model attempts to infer higher-level semantic information such as specific gastric regions, the overall accuracy and quality of the reports decline.
+To provide a clinical performance reference, we further include a
+human baseline composed of five junior doctors. Their average report accuracy and ERMS are 0.8092 and 2.6479, respectively. The proposed ERGLM outperforms this human baseline in both accuracy and report quality, suggesting that the model-generated reports are not only com-parable to but in some aspects superior to those written by junior doctors. We conduct a short-term clinical evaluation in which real endoscopic images captured during routine examinations are imported into the ERGLM system for report generation. During the test, junior doctors also write reports manually, while experienced endoscopists review and edit the automatically generated reports. Meanwhile, we perform a cost–benefit analysis focusing on time efficiency and work-load reduction. Junior doctors typically take about 3–5 min to write an endoscopic report, whereas ERGLM generates a report automatically within approximately 5–7 s. The evaluation shows that the system can process every image, achieving a 100% edit rate. However, omissions occasionally occur in key regions, such as the gastric antrum or body, suggesting that these areas should be specifically highlighted. We de-sign a three-level satisfaction scale (satisfied, neutral, dissatisfied) for the participating physicians to evaluate the reports. The results show that nearly 75% of the reports are rated as satisfied, approximately 15% as neutral, and 10% as dissatisfied, demonstrating the system’s potential. Clinicians also provide qualitative feedback. They report that the generated reports are generally clear and clinically meaning-ful, especially for common lesions. However, the model sometimes
+ 
+
+ 
+offers vague descriptions of subtle mucosal abnormalities and may miss secondary findings. Clinicians also note the need for more precise anatomical localization and more standardized terminology. Overall, they consider the system promising as an assistive tool but indicate that further refinement is required before clinical use.
+ERGLM also assists junior doctors in clinical diagnosis. For example, when a junior doctor examines a patient and suspects early gastric cancer but is uncertain, ERGLM correctly identifies the lesion as early gastric cancer, providing additional diagnostic support and reducing decision-making time. This greatly reduces the time and manual effort required for report writing, not only improving clinical efficiency but also allowing physicians to devote more time to diagnosis and patient communication.
+To further evaluate how well the model’s confidence aligns with its actual predictive accuracy, we conducted a calibration analysis using the Expected Calibration Error (ECE). Token-level confidence was estimated by averaging the predicted probabilities of the generated report tokens, and these confidence values were grouped into 10 bins to compute the gap between predicted confidence and empirical accuracy. Our model achieved an ECE of 0.042, indicating good calibration performance. The model’s predicted confidence aligns closely with its actual correctness, indicating that the generated diagnostic descriptions are reliable.
+
+4.4.5.	Multidimensional evaluation of generated reports
+Previous studies [27,53] have utilized GPT-4 for auxiliary evalu-ation in text generation tasks involving large models. These works leverage GPT-4’s capabilities in natural language understanding and generation to perform in-depth analysis and comprehensive assess-ments of generated text quality. By evaluating the semantic consistency, linguistic fluency, logical coherence, and relevance to reference texts, these studies have effectively enhanced the objectivity and accuracy of evaluations. To comprehensively assess our model’s sensitivity in endoscopic image descriptions, we conduct a multi-dimensional anal-ysis encompassing shape, color, location, size, degree, and texture. To achieve this, we design three complementary evaluation methods: key-word extraction evaluation, human evaluation, and GPT-4 evaluation. The keyword extraction evaluation focuses on the literal similarity between the predicted keywords and the ground truth. However, we also find that this method has limitations when dealing with seman-tically similar expressions that differ in wording. Table 7 presents examples of keywords extracted across different dimensions, which serve as the basis for our comprehensive evaluation across these six dimensions. During the evaluation process, we observe cases where descriptions in the ‘‘shape’’ dimension, such as ‘‘tongue-shaped’’, appear in the ground truth, while the prediction sometimes generates terms like ‘‘leaf-shaped’’. Although these descriptions differ in specific details, they exhibit a degree of similarity and can be considered correct in terms of description. These situations may lead to underestimated scores. Therefore, we extend the evaluation by going beyond literal matching and incorporating semantic similarity into the assessment. To mitigate the impact of semantic ambiguity and prevent descrip-tions generated by the model with potential hallucinations from being mistakenly judged as accurate, we introduce human evaluation and GPT-4-based evaluation as correction methods.
+Human evaluation is conducted by seven domain experts who assess the correctness of knowledge, while GPT-4 assists in evaluating the plausibility and semantic consistency of the predicted keywords based on its natural language understanding capabilities. We pay particular attention to identifying potential hallucinations in the generated text to enhance the safety and scientific rigor of the evaluation. As shown in Fig. 7, the accuracy of human-assisted evaluation is very close to that of GPT-4 evaluation, indicating a high degree of consistency between the two methods in verifying the correctness of the keywords. This suggests that, whether relying on the judgment of professionals or the intelligent analysis of GPT-4, the evaluation results can accurately reflect the
+ 
+Table 7
+Keyword examples across different dimensions. Here, a simple case is provided for the six dimensions of shape, color, location, size, severity, and texture.
+Dimensions	Ground truth	Prediction
+Shape	Tongue-shaped	Leaf-shaped
+Color	Red and white interlaced	White tinged with red
+Location	Gastric antrum	Antral region
+Size	Quite large in volume	Enormous size
+Severity	No clear abnormalities observed	Normal
+Texture	Rough	Harsh
+
+
+
+model’s performance. However, keyword extraction evaluation requires two words to be highly similar, so in some cases, the evaluation results may be lower. This is because the two words are semantically similar, they might still be viewed as different at a literal level, which leads to a lower evaluation score. The results show that our model performs excellently in terms of shape, color, and size, being able to capture and describe these features accurately. As the most direct features, color and size are expected to show the model’s superior performance, which also reflects its judgment capabilities. However, in terms of understand-ing position and assessing severity, the model still faces significant challenges, particularly in the description of location. The model may exhibit certain biases or inaccuracies when interpreting and locating lesions or features in images, especially when judging the stomach’s regions. We categorize the errors in model-generated reports into five types: hallucinations, lesion mislocalizations, omissions, term misuse, and severity misjudgment. Lesion mislocalizations, hallucinations, and severity misjudgment are categorized as high-risk clinical errors. Omis-sions are considered medium-risk errors, as they can be corrected through subsequent review. Term misuse affects the linguistic rigor of the report and is classified as a low-risk error. To provide a clearer understanding of the distribution of these error types, we present their proportions in a visual format in Fig. 8. As shown in the figure, le-sion mislocalizations constitute the largest proportion at approximately 35%, followed by hallucinations at 25%. Omissions account for 20%, while term misuse and severity misjudgment each represent around 10%. The visualization highlights that the most common issues arise from incorrect anatomical localization and hallucinated descriptions, indicating key areas where the model requires further improvement.
+To further gain deeper clinical insights, we conduct a stratified analysis across major gastric conditions, including gastritis, ulcers, polyps, bleeding, and gastric cancer. As shown in Table 8, the model achieves the highest accuracy in gastric bleeding and gastric polyps, demonstrating its strong capability in recognizing distinct visual cues such as bleeding coloration or polyp morphology. However, the per-formance on gastric ulcers and gastric cancer remains relatively lower, suggesting that the model still requires improvement in handling com-plex or heterogeneous lesions. This stratified analysis highlights that different gastric diseases pose varying levels of challenge for auto-matic endoscopic description generation, offering valuable insights for clinical application and future model enhancement. Rare diseases and uncommon lesion patterns are inherently underrepresented in most clinical datasets, which may limit the model’s exposure during training. In such cases, the proposed model primarily relies on visual evidence grounding and structured report constraints to avoid over-interpretation. When the distinctive features of rare lesions are not sufficiently captured, the model tends to generate conservative descrip-tions focused on observable morphological characteristics rather than making definitive diagnoses.
+
+4.4.6.	Case study
+This section focuses on the differences in the model’s performance before and after fine-tuning. We present real labels, predicted text descriptions before fine-tuning, and predicted text descriptions after fine-tuning to visually demonstrate the improvement in model perfor-mance due to fine-tuning. DeepSeek-VL-7B is a multimodal generation
+ 
+
+ 
+
+/ig. 7. Evaluation across different dimensions. The evaluation is conducted across six dimensions: shape, color, location, size, severity, and texture. In the bar chart, the red color represents keyword evaluation, green represents human evaluation, and yellow represents GPT-4 evaluation.
+
+ 
+
+ 
+
+/ig. 8. Distribution of error types in model-generated reports. This figure presents the proportions of the five major error categories identified in the generated reports, including lesion mislocalizations, hallucinations, omissions, term misuse, and severity misjudgment.
+
+Table 8
+Model performance across different gastric disease types. The analysis primar-ily focuses on the model’s accuracy in identifying polyps, bleeding, ulcers, and gastric cancer.
+Disease types	Accuracy↑
+Gastric polyp	0.8921
+Gastric bleeding	0.9064
+Gastric ulcer	0.8475
+Gastric cancer	0.8186
+
+
+
+model that can handle both visual and textual inputs, designed to achieve more accurate image–text descriptions. During the fine-tuning process, by introducing labeled data for specific tasks, the model’s generation ability and understanding of domain-specific content are further optimized, thus improving the accuracy and relevance of the predicted text descriptions for endoscopic images. As shown in Fig. 9, in the original labels, professional physicians provided visual descriptions
+ 
+of the endoscopic images, such as ‘‘obvious congestion and edema’’, ‘‘red and white mixture’’, and ‘‘nodular elevation’’. Before fine-tuning, the model lacked sensitivity to the specific location of the lesions. For example, in Fig. 9(a), although the actual lesion is located in the gastric antrum, the model incorrectly focused on the pyloric region and based its description or suggestion on this. Similar issues appeared in Fig. 9(b) and (c), where the model showed a preference for the pyloric region. This phenomenon mainly arises from the high similarity between dif-ferent areas in endoscopic images, making it difficult for the un-tuned model to accurately distinguish specific anatomical regions. However, after fine-tuning, the model can leverage the newly introduced domain knowledge to distinguish between different regions to some extent and generate more accurate text descriptions based on visual features. For instance, in Fig. 9(a), the fine-tuned model correctly identified key features such as ‘‘predominantly red and pink’’, ‘‘mucosal elevation’’, and ‘‘slight inflammation’’. Similarly, the descriptions in Fig. 9(b) such as ‘‘white mucus’’ and ‘‘rough mucosa’’, and the keywords in Fig. 9(c) like ‘‘signs of bleeding’’, ‘‘white circular area’’, and ‘‘gastric ulcer’’, all accurately captured the core features of the endoscopic images. These improvements indicate that fine-tuning not only enhanced the model’s specificity and recognition ability but also made the generated text descriptions more closely aligned with actual pathological features. At the same time, this study presents an example of an erroneous report generation. As shown in Fig. 9(d), the endoscopic image demonstrates features of old bleeding and edema. While the model successfully identifies abnormalities such as discoloration and mucosal edema, it mistakenly interprets the central antral characteristics as lesion fea-tures. Such a misclassification is critical and highlights an important direction for future model refinement. The corresponding visualization results further reveal that the model incorrectly identifies the central region as a lesion and highlights it with a scattered activation pattern, indicating uncertainty in its decision-making process. In Fig. 9(e), the model does not fully capture the severity of the lesion and fails to identify the yellow-white exudative coating. Fig. 9(f) also illustrates a failure case, in which specular reflection is mistakenly identified as a white lesion area. Furthermore, we observed that expert endoscopists tend to produce reports that are concise yet highly accurate, while our model-generated reports contain more detailed descriptive information. The heat map visualization demonstrates the regions that our fine-tuned model focuses on, which show a high degree of alignment with the content of the generated reports. This consistency provides strong evidence for the model’s effectiveness and interpretability.
+ 
+
+ 
+
+/ig. 9. Case study. Ground-truth represents the real labels, no fine-tuning represents the test results of the model before fine-tuning, and fine-tuning represents the results after the two-stage fine-tuning with P-LoRA. Expert endoscopist is used for parallel comparison, while the heat map visualizes the importance of regions attended to by our fine-tuning model.
+
+ 
+5.	Limitations and future work
+
+This paper focuses on addressing the problem of automated de-scriptions of endoscopic images while also opening new directions for the application of multimodal foundational models in the medical field. However, many key issues in the field of digestive endoscopy still require further exploration and solutions. For example, achieving more precise automatic detection of lesion locations, improving the accuracy of gastric cancer grading and classification, and optimizing the recognition and diagnosis of complex lesions remain significant challenges.
+Although our model demonstrates high accuracy in generating en-doscopic reports, errors of varying clinical severity can occur. High-severity errors include omissions of critical findings, such as early-stage gastric cancer or active bleeding, which may directly impact diag-nosis and treatment decisions. Low-severity errors primarily involve minor wording or stylistic inconsistencies that do not significantly affect clinical interpretation. Expert review shows that most errors fall into the low-severity category, while high-severity errors are rel-atively rare but require particular attention to ensure patient safety. These findings emphasize the need for qualified clinicians to review all model-generated reports and highlight the importance of careful integration of AI tools into clinical workflows. Although our dataset is carefully constructed and annotated, it is limited to a single hos-pital and evaluated by a relatively small group of clinical experts, which may constrain the generalizability of error severity assessment. Although the endoscopic equipment in this hospital covers multiple brands, the same brand may differ across hospitals, and variations in physicians’ expertise may also lead to differences in reports. This single-center data source may restrict the model’s generalizability across
+ 
+different hospitals and clinical environments. In practice, variations in endoscopic imaging equipment, illumination conditions, and color calibration between hospitals can alter image characteristics, while differences in reporting styles, terminology, and diagnostic criteria among physicians may lead to textual inconsistencies. Such physician dependent annotation styles may introduce implicit bias during train-ing, potentially affecting the phrasing, emphasis, or level of diagnostic certainty in the generated reports. Furthermore, regional differences in disease prevalence and case complexity may introduce additional bias. These factors can cause domain shifts that reduce the model’s performance when applied to unseen data. If endoscopic images present ambiguous or contradictory visual cues, the model is designed to gen-erate conservative, evidence-based descriptions rather than definitive diagnoses. This approach helps prevent over-interpretation and main-tains clinical reliability. In addition, automatically flagging instances with high uncertainty for closer physician review represents a highly valuable direction for future work.
+Future work will involve a concrete multi-center validation plan. Specifically, we plan to collaborate with several hospitals in different regions of China to collect diverse endoscopic image–report pairs from various imaging systems and patient populations. The evaluation will include cross-hospital transfer tests, consistency assessments across different endoscopic brands, and clinical validation by independent physicians. This study primarily focuses on the analysis of individual endoscopic images, where diagnostic conclusions are limited to describ-ing specific lesions observed within each image. However, in real-world clinical practice, endoscopists typically acquire multiple images per patient to form a comprehensive diagnostic assessment. Accordingly, an important direction for future work is to extend the current single-image interpretation framework toward multi-image and patient-level
+ 
+
+ 
+
+/ig. 10. Workflow of ERGLM in clinical practice, including endoscopic image input, ERGLM-generated draft report, physician review and editing, and final integration into the EMR system.
+
+ 
+report generation, enabling integrated diagnostic summaries that more closely reflect actual clinical workflows. Building upon this direction, future research will further explore video-based endoscopy analysis by modeling temporal information across consecutive frames. Such temporal modeling has the potential to support more robust lesion localization, progression analysis, and comprehensive patient-level di-agnosis. Additionally, regional differences in medical practices and terminology may lead to interpretative biases in the generated med-ical descriptions. In addition, to provide a clearer illustration of the potential integration of ERGLM into clinical workflows, we include a simplified conceptual workflow diagram Fig. 10 in the manuscript. This diagram outlines the full process from endoscopic image acquisition, model generated draft reporting, and physician review and refinement to final documentation in the electronic medical record EMR. The diagram serves as a schematic representation of our planned direction for developing a complete clinical system in the future. When deploying the proposed model in new hospitals or clinical settings, domain shifts may arise due to differences in endoscopic devices, imaging proto-cols, patient populations, and report-writing styles. To address this issue, several lightweight adaptation strategies can be adopted. First, parameter-efficient fine-tuning methods can be applied using a small number of locally collected image–report pairs, enabling rapid domain adaptation with limited computational cost. Second, prompt adjust-ment provides a flexible alternative, where hospital-specific reporting templates, terminology preferences, or anatomical naming conventions can be incorporated into structured prompts without updating model parameters. In addition, continuous feedback from clinicians can be used to iteratively refine prompts or select representative samples for incremental fine-tuning. These strategies allow the model to be efficiently adapted to new hospitals while preserving data privacy and minimizing deployment overhead.
+These challenges not only place higher demands on intelligent
+analysis of medical images but also pose significant tests to the model’s multimodal fusion ability and cross-domain generalization. Regarding the application of large language models in healthcare, the foremost challenge lies in data availability. Collecting endoscopic data is time-consuming and costly, so it is important to explore how LLM-based approaches can generate synthetic data that closely reflect real clinical scenarios while adhering to ethical standards [54,55]. Furthermore, in terms of LLM architecture, an important future direction is to design models that effectively leverage the strengths of both language and visual encoders, achieving efficient multimodal feature fusion [56]. Research on clinical endoscopy videos also holds greater practical significance and applicability [57]. Finally, direct inference with LLMs may not fully exploit their potential; existing strategies such as rethink-ing [58] or chain-of-thought reasoning may enhance their reasoning capabilities, representing another highly valuable direction for future work. We are actively communicating with the collaborating hospital to seek approval for releasing a de-identified subset of the dataset. While public release depends on institutional review and privacy regulations, we aim to make as much of the data as ethically permissible publicly accessible. In addition, the pretrained model, P-LoRA configurations, and training scripts will be made available upon publication to support reproducibility and further research.
+
+6.	Conclusion
+
+In this study, we develop an endoscopic image interpretation model using a prompt-based LoRA fine-tuning method, aiming to fully explore
+ 
+and utilize the potential of existing multimodal foundational models to achieve precise medical image interpretation through a two-stage fine-tuning strategy. In the first stage, we systematically align the foun-dational model with domain knowledge by collecting and integrating existing public endoscopic domain knowledge, making it more tailored to the contextual features of endoscopic images. In the second stage, we conduct specialized high-quality annotations using a large amount of clinical data collected by local senior physicians, thereby fine-tuning the model to enhance its medical interpretation ability for endoscopic images. In addition, to ensure factual consistency and reduce hal-lucinations in the generated reports, the model incorporates several reliability-oriented mechanisms. A constrained decoding strategy with a temperature of 0 enforces deterministic and evidence-grounded out-puts. Image–text alignment verification is introduced to ensure that generated descriptions correspond to visually supported regions. Fur-thermore, a structured report format guides the generation process, re-stricting unsupported free-form content and maintaining clinical logic. These strategies collectively enhance the factual grounding and relia-bility of the model’s outputs. Although this study focuses on upper gas-trointestinal endoscopy, the proposed framework is modality-agnostic and can be readily extended to other endoscopic modalities, such as colonoscopy and bronchoscopy, by adapting domain-specific prompts and fine-tuning with corresponding image and report data.
+After fine-tuning, the model shows remarkable performance in
+generating descriptions of endoscopic images, with particularly high sensitivity to recognizing image morphological features. Specifically, its evaluation metrics include a CIDEr score of 0.2667, ROUGE-L of 0.4598, METEOR of 0.4070, BLEU-4 of 0.3863, and BERTScore of
+0.8216. The accuracy of the generated reports reaches 84.03%, which represents a significant improvement compared to its performance be-fore fine-tuning and is comparable to the standard of intermediate-level physicians. In the task of interpreting endoscopic reports, our model significantly outperforms models such as GPT-4V and HuatuoGPT-Vision-7B. To further validate the reliability of automatic evaluation metrics, we compared them with human evaluation results, including report accuracy and the Endoscopy Report Measure Score (ERMS). Overall, the trends of automatic metrics are largely consistent with hu-man assessments: reports scoring higher on CIDEr, ROUGE-L, METEOR, and BLEU also tend to receive higher ERMS and accuracy ratings from expert reviewers. Minor discrepancies are observed in cases where the generated text captures clinically relevant details not fully reflected in n-gram-based metrics, highlighting the complementary value of human evaluation in assessing clinical quality and factual correctness. It should be noted that the above conclusions are drawn under standard endo-scopic acquisition conditions, in which images are of sufficient quality, properly focused, and captured in accordance with routine clinical protocols. When images are missing, severely degraded, or affected by artifacts such as motion blur, occlusion, or inadequate illumination, the accuracy and completeness of the generated reports may be com-promised, potentially resulting in less precise descriptions or omitted findings. In this work, basic robustness considerations are incorpo-rated through structured generation constraints, while future studies will further explore image quality assessment and uncertainty-aware mechanisms to enhance reliability in challenging clinical scenarios. This level of accuracy is comparable to the standard of intermediate-level physicians. It accurately captures subtle visual characteristics and generates high-quality descriptions that meet medical professional standards, providing a solution with practical application potential in the field of endoscopic image interpretation.
+ 
+
+ 
+CRediT authorship contribution statement
+
+Xingyu Zhang: Writing – original draft, Methodology, Concep-tualization. Xiangwei Zheng: Writing – review & editing, Supervi-sion, Funding acquisition. Zhen Li: Validation, Formal analysis, Data curation. Mingjun Ma: Validation, Resources, Data curation. Xiao Liang: Validation, Data curation. Xiuxiu Ren: Visualization, Software. Mingzhe Zhang: Project administration, Investigation.
+
+Ethics and safety
+
+All procedures in this study comply with ethical standards for medical data usage. The dataset used for model training and eval-uation is fully de-identified by the data-providing institution, with all Protected Health Information (PHI) removed in accordance with HIPAA-like privacy guidelines. No patient-identifiable information is accessed or processed during the development of this study.
+To ensure safe deployment, all model-generated outputs are in-tended solely for research purposes. The system is not designed for direct clinical application, and any generated report is required to un-dergo review and verification by licensed physicians before being used in clinical decision-making. In addition, all experiments are approved by the corresponding institutional ethics committee, and data usage strictly follows the institution’s data governance requirements.
+
+Ethics statements
+
+Approval of the research protocol by an Institutional Review Board: This study was approved by the Ethics Committee of the Qilu Hos-pital of Shandong University (2022026). Informed Consent: Informed written consent was obtained from each patient before enrollment.
+
+Declaration of competing interest
+
+The authors declare that they have no known competing finan-cial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+Acknowledgments
+
+This work is supported by the Natural Science Foundation of Shan-dong Province China (NO. ZR2022LZH003, ZR2020LZH008, ZR2021MF118), the Key R&D Program of Shandong Province, China (NO.2021SFGC0104), the Key R&D Program of Shandong Province, China (Major Scientific and Technological Innovation Project) (NO. 2021CXGC010506).
+
+Data availability
+
+The authors do not have permission to share data.
+
+
+References
+
+[1]	X. Zhang, X. Zheng, M. Dong, M. Zhang, An endoscopic images and diagnostic records based multimodal method for severity grading of gastric cancer, Biomed. Signal Process. Control. 109 (2025) 107891, http://dx.doi.org/10.1016/j.bspc.
+2025.107891.
+[2]	X. Chen, X. Zheng, Z. Li, M. Ma, M. Zhang, Self-supervised visual–textual prompt learning for few-shot grading of gastric intestinal metaplasia, Knowl.-Based Syst. 301 (2024) 112303, http://dx.doi.org/10.1016/j.knosys.2024.112303.
+[3]	Y. Okagawa, S. Abe, M. Yamada, I. Oda, Y. Saito, Artificial intelligence in endoscopy, Dig. Dis. Sci. 67 (5) (2022) 1553–1572, http://dx.doi.org/10.1007/ s10620-021-07086-z.
+[4]	F. Chadebecq, L.B. Lovat, D. Stoyanov, Artificial intelligence and automation in endoscopy and surgery, Nat. Rev. Gastroenterol. Hepatol. 20 (3) (2023) 171–182, http://dx.doi.org/10.1038/s41575-022-00701-y.
+ 
+[5]	C. Kraišniković, R. Harb, M. Plass, W.A. Zoughbi, A. Holzinger, H. Müller, Fine-tuning language model embeddings to reveal domain knowledge: An explainable artificial intelligence perspective on medical decision making, Eng. Appl. Artif. Intell. 139 (2025) 109561, http://dx.doi.org/10.1016/j.engappai.2024.109561.
+[6]	B. Lester, R. Al-Rfou, N. Constant, The power of scale for parameter-efficient prompt tuning, in: Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing, 2021, pp. 3045–3059, http://dx.doi.org/10.18653/ v1/2021.emnlp-main.243.
+[7]	X. Zhang, C. Wu, Z. Zhao, W. Lin, Y. Zhang, Y. Wang, W. Xie, Pmc-vqa: Visual instruction tuning for medical visual question answering, 2023, arXiv preprint arXiv:2305.10415. URL https://arxiv.org/abs/2305.10415.
+[8]	C. Li, C. Wong, S. Zhang, N. Usuyama, H. Liu, J. Yang, T. Naumann, H. Poon, J. Gao, LLaVA-med: training a large language-and-vision assistant for biomedicine in one day, in: Proceedings of the 37th International Conference on Neural Information Processing Systems, 2023, p. 24, doi: https://dl.acm.org/doi/10. 5555/3666122.3667362.
+[9]	J. White, PubMed 2.0, Med. Ref. Serv. Q. 39 (4) (2020) 382–387, http://dx.doi. org/10.1080/02763869.2020.1826228.
+[10]	M. Ding, Z. Yang, W. Hong, W. Zheng, C. Zhou, D. Yin, J. Lin, X. Zou, Z. Shao,
+H. Yang, et al., Cogview: Mastering text-to-image generation via transformers, Adv. Neural Inf. Process. Syst. 34 (2021) 19822–19835, URL https://proceedings. neurips.cc/paper/2021/file/a4d92e2cd541fca87e4620aba658316d-Paper.pdf.
+[11]	Z. Du, Y. Qian, X. Liu, M. Ding, J. Qiu, Z. Yang, J. Tang, Glm: General language model pretraining with autoregressive blank infilling, in: Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics, Association for Computational Linguistics, 2021, pp. 320–335, http://dx.doi.org/10.18653/v1/ 2022.acl-long.26.
+[12]	H. Lu, W. Liu, B. Zhang, B. Wang, K. Dong, B. Liu, J. Sun, T. Ren, Z. Li, H. Yang, Y. Sun, C. Deng, H. Xu, Z. Xie, C. Ruan, DeepSeek-VL: Towards real-world vision-language understanding, 2024, arXiv:2403.05525.
+[13]	Z. Fu, H. Yang, A.M.-C. So, W. Lam, L. Bing, N. Collier, On the effectiveness of parameter-efficient fine-tuning. 37, 11, 2023, pp. 12799–12807, http://dx.doi. org/10.1609/aaai.v37i11.26505.
+[14]	E.J. Hu, Y. Shen, P. Wallis, Z. Allen-Zhu, Y. Li, S. Wang, L. Wang, W. Chen, Lora: Low-rank adaptation of large language models, ICLR 1 (2) (2022) 3, URL https://openreview.net/forum?id=nZeVKeeFYf9.
+[15]	Y. Mao, Y. Ge, Y. Fan, W. Xu, Y. Mi, Z. Hu, Y. Gao, A survey on lora of large language models, Front. Comput. Sci. 19 (7) (2025) 197605, http://dx.doi.org/ 10.1007/s11704-024-40663-9.
+[16]	S.-W. Pi, M.-S. Park, B.-D. Lee, Enhancing radiology report interpretation with large-scale language models: A two-stage fine-tuning approach, in: 2025 27th International Conference on Advanced Communications Technology, ICACT, 2025, pp. 383–388, http://dx.doi.org/10.23919/ICACT63878.2025.10936299.
+[17]	W. Wang, Q. Lv, W. Yu, W. Hong, J. Qi, Y. Wang, J. Ji, Z. Yang, L. Zhao, X. Song, et al., Cogvlm: Visual expert for pretrained language models, 2024, pp. 121475–121499, 37, arXiv preprint arXiv:2311.03079.
+[18]	J. Bai, S. Bai, S. Yang, S. Wang, S. Tan, P. Wang, J. Lin, C. Zhou, J. Zhou, Qwen-vl: A frontier large vision-language model with versatile abilities, 2023, arXiv:2308.12966.
+[19]	H. Liu, C. Li, Q. Wu, Y.J. Lee, Visual instruction tuning, in: Proceedings of the 37th International Conference on Neural Information Processing Systems, NIPS ’23, Curran Associates Inc, Red Hook, NY, USA, 2023, URL https://dl.acm.org/ doi/10.5555/3666122.3667638.
+[20]	H. Lv, C. Zhou, Z. Cui, C. Xu, Y. Li, J. Yang, Localizing anomalies from weakly-labeled videos, IEEE Trans. Image Process. 30 (2021) 4505–4515, http:
+//dx.doi.org/10.1109/TIP.2021.3072863.
+[21]	J. Chen, C. Gui, R. Ouyang, A. Gao, S. Chen, G.H. Chen, X. Wang, R. Zhang, Z. Cai, K. Ji, et al., Huatuogpt-vision, towards injecting medical visual knowledge into multimodal llms at scale, 2024, arXiv:2406.19280.
+[22]	L. Seenivasan, M. Islam, G. Kannan, H. Ren, SurgicalGPT: end-to-end language-vision GPT for visual question answering in surgery, in: International Conference on Medical Image Computing and Computer-Assisted Intervention, 2023, pp. 281–290, http://dx.doi.org/10.1007/978-3-031-43996-4_27.
+[23]	G.-P. Ji, J. Liu, P. Xu, N. Barnes, F.S. Khan, S. Khan, D.-P. Fan, Frontiers in intelligent colonoscopy, 2024, arXiv:2410.17241.
+[24]	S. Schmidgall, J. Cho, C. Zakka, W. Hiesinger, Gp-vls: A general-purpose vision language model for surgery, 2024, arXiv:2407.19305.
+[25]	H. Xiong, S. Wang, Y. Zhu, Z. Zhao, Y. Liu, L. Huang, Q. Wang, D. Shen, Doctorglm: Fine-tuning your chinese doctor is not a herculean task, 2023, arXiv:2304.01097.
+[26]	A.P. Gema, P. Minervini, L. Daines, T. Hope, B. Alex, Parameter-efficient fine-tuning of llama for the clinical domain, 2023, arXiv:2307.03042.
+[27]	G. Liu, J. He, P. Li, G. He, Z. Chen, S. Zhong, Pefomed: Parameter efficient fine-tuning of multimodal large language models for medical imaging, 2024, arXiv:2401.02797.
+[28]	J. Chen, D. Yang, Y. Jiang, Y. Lei, L. Zhang, MISS: A generative pre-training and fine-tuning approach for med-VQA, in: International Conference on Artificial Neural Networks, Springer, 2024, pp. 299–313, http://dx.doi.org/10.1007/978-3-031-72353-7_22.
+ 
+
+ 
+[29]	Y. Lu, S. Hong, Y. Shah, P. Xu, Effectively fine-tune to improve large multi-modal models for radiology report generation, in: Deep Generative Models for Health Workshop NeurIPS 2023, 2023, URL https://openreview.net/forum?id= QAruOR4nUa.
+[30]	X. Wu, R. Xu, P. Wei, W. Qin, P. Huang, Z. Li, L. Luo, Pathinsight: Instruction tuning of multimodal datasets and models for intelligence assisted diagnosis in histopathology, 2024, arXiv:2408.07037.
+[31]	X. Zhai, B. Mustafa, A. Kolesnikov, L. Beyer, Sigmoid loss for language image pre-training, in: 2023 IEEE/CVF International Conference on Computer Vision, ICCV, 2023, pp. 11941–11952, http://dx.doi.org/10.1109/ICCV51070.2023.01100.
+[32]	X. Bi, D. Chen, G. Chen, S. Chen, D. Dai, C. Deng, H. Ding, K. Dong, Q. Du, Z. Fu, et al., Deepseek llm: Scaling open-source language models with longtermism, 2024, arXiv:2401.02954.
+[33]	Y. Xie, C. Zhou, L. Gao, J. Wu, X. Li, H.-Y. Zhou, S. Liu, L. Xing, J. Zou, C. Xie, Y. Zhou, MedTrinity-25m: A large-scale multimodal dataset with multigranular an-notations for medicine, in: The Thirteenth International Conference on Learning Representations, 2025, URL https://openreview.net/forum?id=IwgmgidYPS.
+[34]	A. Ben Abacha, S.A. Hasan, V.V. Datla, D. Demner-Fushman, H. Müller, Vqa-med: Overview of the medical visual question answering task at imageclef 2019, in: Proceedings of CLEF (Conference and Labs of the Evaluation Forum) 2019 Working Notes, 2019, URL https://arodes.hes-so.ch/record/4214?v=pdf.
+[35]	X. Liu, K. Ji, Y. Fu, W. Tam, Z. Du, Z. Yang, J. Tang, P-tuning: Prompt tuning can be comparable to fine-tuning across scales and tasks, in: S. Muresan, P. Nakov, A. Villavicencio (Eds.), Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers), Association for Computational Linguistics, Dublin, Ireland, 2022, pp. 61–68, http://dx.doi. org/10.18653/v1/2022.acl-short.8.
+[36]	X. Xiao, Y. Li, X. He, J. Fang, Z. Yan, C. Xie, An assessment framework of higher-order thinking skills based on fine-tuned large language models, Expert Syst. Appl. 272 (2025) 126531, http://dx.doi.org/10.1016/j.eswa.2025.126531.
+[37]	S. Li, W. Tan, C. Zhang, J. Li, H. Ren, Y. Guo, J. Jia, Y. Liu, X. Pan, J. Guo,
+W. Meng, Z. He, Taming large language models to implement diagnosis and evaluating the generation of LLMs at the semantic similarity level in acupuncture and moxibustion, Expert Syst. Appl. 264 (2025) 125920, http://dx.doi.org/10. 1016/j.eswa.2024.125920.
+[38]	N. Reimers, I. Gurevych, Sentence-BERT: Sentence embeddings using siamese BERT-networks, in: Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing, EMNLP-IJCNLP, 2019, pp. 3982–3992, http:
+//dx.doi.org/10.18653/v1/D19-1410.
+[39]	D.-R. Beddiar, M. Oussalah, T. Seppänen, Automatic captioning for medical imaging (MIC): a rapid review of literature, Artif. Intell. Rev. 56 (5) (2023) 4019–4076, http://dx.doi.org/10.1007/s10462-022-10270-w.
+[40]	A. Zhang, E. Zhao, R. Wang, X. Zhang, J. Wang, E. Chen, Multimodal large language models for medical image diagnosis: Challenges and opportunities,
+J. Biomed. Inform. 169 (2025) 104895, http://dx.doi.org/10.1016/j.jbi.2025.
+104895.
+[41]	H. Park, K. Kim, S. Park, J. Choi, Medical image captioning model to con-vey more details: methodological comparison of feature difference generation, IEEE Access 9 (2021) 150560–150568, http://dx.doi.org/10.1109/ACCESS.2021.
+3124564.
+[42]	R. Vedantam, C.L. Zitnick, D. Parikh, CIDEr: Consensus-based image descrip-tion evaluation, in: 2015 IEEE Conference on Computer Vision and Pattern Recognition, CVPR, 2015, pp. 4566–4575, http://dx.doi.org/10.1109/CVPR.
+2015.7299087.
+[43]	C.-Y. Lin, Rouge: A package for automatic evaluation of summaries, in: Text Summarization Branches Out, 2004, pp. 74–81, URL https://aclanthology.org/ W04-1013/.
+ 
+[44]	S. Banerjee, A. Lavie, METEOR: An automatic metric for MT evaluation with im-proved correlation with human judgments, in: Proceedings of the Acl Workshop on Intrinsic and Extrinsic Evaluation Measures for Machine Translation and/Or Summarization, 2005, pp. 65–72, URL https://aclanthology.org/W05-0909/.
+[45]	K. Papineni, S. Roukos, T. Ward, W.-J. Zhu, Bleu: a method for automatic evaluation of machine translation, in: Proceedings of the 40th Annual Meeting of the Association for Computational Linguistics, 2002, pp. 311–318, http://dx. doi.org/10.3115/1073083.1073135.
+[46]	H. Liu, C. Li, Y. Li, Y.J. Lee, Improved baselines with visual instruction tuning, in: 2024 IEEE/CVF Conference on Computer Vision and Pattern Recognition, CVPR, 2024, pp. 26286–26296, http://dx.doi.org/10.1109/CVPR52733.2024.02484.
+[47]	A. Hurst, A. Lerer, A.P. Goucher, A. Perelman, A. Ramesh, A. Clark, A. Ostrow,
+A. Welihinda, A. Hayes, A. Radford, et al., Gpt-4o system card, 2024, arXiv: 2410.21276.
+[48]	X. Zhu, Y. Hu, F. Mo, M. Li, J. Wu, Uni-med: A unified medical generalist foundation model for multi-task learning via connector-moe, in: Advances in Neural Information Processing Systems, Vol. 37, Curran Associates, Inc, 2024,
+pp. 81225–81256.
+[49]	G. Wang, L. Bai, J. Wang, K. Yuan, Z. Li, T. Jiang, X. He, J. Wu, Z. Chen, Z. Lei, et al., Endochat: Grounded multimodal large language model for endoscopic surgery, 2025, arXiv:2501.11347.
+[50]	K. Zhang, R. Zhou, E. Adhikarla, Z. Yan, Y. Liu, J. Yu, Z. Liu, X. Chen, B.D. Davison, H. Ren, et al., A generalist vision–language foundation model for diverse biomedical tasks, Nature Med. (2024) 1–13, http://dx.doi.org/10.1038/s41591-024-03185-2.
+[51]	N. Houlsby, A. Giurgiu, S. Jastrzebski, B. Morrone, Q. De Laroussilhe, A. Gesmundo, M. Attariyan, S. Gelly, Parameter-efficient transfer learning for NLP, in: Proceedings of the 36th International Conference on Machine Learning, Vol. 97, PMLR, 2019, pp. 2790–2799.
+[52]	L. Chen, J. Li, X. Dong, P. Zhang, C. He, J. Wang, F. Zhao, D. Lin, ShareGPT4V: Improving large multi-modal models with better captions, 2023, http://dx.doi. org/10.1007/978-3-031-72643-9_22, arXiv preprint arXiv:2311.12793.
+[53]	Y. Xie, S. Zhang, H. Cheng, P. Liu, Z. Gero, C. Wong, T. Naumann, H. Poon, C. Rose, DocLens: Multi-aspect fine-grained evaluation for medical text generation, in: L.-W. Ku, A. Martins, V. Srikumar (Eds.), Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), Association for Computational Linguistics, Bangkok, Thailand, 2024, pp. 649–679, http://dx.doi.org/10.18653/v1/2024.acl-long.39.
+[54]	J. Zhao, X. Wang, J. Zhu, C. Chukwudi, A. Finebaum, J. Zhang, S. Yang, S. He,
+N. Saeidi, PhaseFIT: live-organoid phase-fluorescent image transformation via generative AI, Light.: Sci. Appl. 12 (1) (2023) 297, http://dx.doi.org/10.1038/ s41377-023-01296-y.
+[55]	Z. Xu, C. Xu, Z. Cui, X. Zheng, J. Yang, CVNet: contour vibration network for building extraction, in: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2022, pp. 1383–1391.
+[56]	Z. Ji, Y. Ge, C. Chukwudi, K. U, S.M. Zhang, Y. Peng, J. Zhu, H. Zaki, X. Zhang,
+S. Yang, X. Wang, Y. Chen, J. Zhao, Counterfactual bidirectional co-attention transformer for integrative histology-genomic cancer risk stratification, IEEE J. Biomed. Health Inform. 29 (8) (2025) 5862–5874, http://dx.doi.org/10.1109/ JBHI.2025.3548048.
+[57]	J. Liu, J. Zhang, S. Yang, J. Xiang, X. Wang, J. Zhao, Z. Yang, J. Zhao, Towards general-purpose video reconstruction through synergy of grid-splicing diffusion and large language models, IEEE Trans. Circuits Syst. Video Technol. (2025) 1, http://dx.doi.org/10.1109/TCSVT.2025.3545795.
+[58]	S. Huang, Y. Ge, D. Liu, M. Hong, J. Zhao, A.C. Loui, Rethinking copy-paste for consistency learning in medical image segmentation, IEEE Trans. Image Process. 34 (2025) 1060–1074, http://dx.doi.org/10.1109/TIP.2025.3536208.
+

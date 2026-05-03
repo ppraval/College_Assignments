@@ -1,0 +1,139 @@
+\relax 
+\providecommand\@newglossary[4]{}
+\@newglossary{main}{glg}{gls}{glo}
+\@newglossary{acronym}{alg}{acr}{acn}
+\providecommand\@glsorder[1]{}
+\providecommand\@istfilename[1]{}
+\@istfilename{main.ist}
+\@glsorder{word}
+\providecommand\@glsmakeindexappname[1]{}
+\@glsmakeindexappname{makeindex}
+\@writefile{toc}{\vskip -30pt}
+\@writefile{toc}{\contentsline {chapter}{\numberline {1}Introduction}{2}{}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {1.1}Introduction}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Literature Survey}{6}{}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}MLLMs}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Medical MLLMs}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Fine-tuning methods}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Problem Definition}{10}{}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Methodology}{11}{}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Method}{11}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Overview}{12}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Architecture of fine-tuning large language model. Stage 1 and Stage 2 represent the first-stage and second-stage fine-tuning, respectively. The right side shows an expanded diagram of the P-LoRA method. The text highlighted in green is our main work.}}{13}{}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:arch}{{4.1}{13}{}{figure.4.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Two-stage fine-tuning strategy}{13}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}P-LoRA method}{15}{}\protected@file@percent }
+\newlabel{eq:lora}{{4.1}{17}{}{equation.4.1}{}}
+\newlabel{eq:autoregressive}{{4.2}{18}{}{equation.4.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces P-LoRA method. (b) illustrates the fine-tuning approach used in the first, middle, and final layers, while (a) shows the approach applied to all other layers.}}{18}{}\protected@file@percent }
+\newlabel{fig:plora}{{4.2}{18}{}{figure.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.4}Data optimization and filtering}{18}{}\protected@file@percent }
+\newlabel{eq:cosine}{{4.3}{20}{}{equation.4.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Example of sentence selection. ``Original Sentences'' represents the original physician-annotated sentence, while ``Enhanced Sentences'' represent sentences optimized by GPT-4. The final step determines whether the sentence satisfies similarity score $> 0.85$.}}{21}{}\protected@file@percent }
+\newlabel{fig:sentence-selection}{{4.3}{21}{}{figure.4.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.5}Data Augmentation}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Rotation Augmentation}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Stochastic Translation Augmentation}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Combined Dataset Size}{23}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.6}Chain-of-Thought Integration}{23}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{The Interpretability Problem and Motivation}{23}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Examples of data augmentation applied to an endoscopic image. (a) Original image from GMC Calicut dataset. (b) Image after 90° rotation — clinically safe as lesion morphology is rotation-invariant in endoscopy. (c) Image after stochastic translation (Bernoulli $p=0.2$, $\sigma =5\%W$) simulating natural camera jitter, with at least 72.25\% overlap guaranteed.}}{24}{}\protected@file@percent }
+\newlabel{fig:augmentation}{{4.4}{24}{}{figure.4.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{CoT Implementation}{24}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Impact on Clinical Utility}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Results}{26}{}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Experiments and discussion}{26}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Datasets}{26}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Automated de-identification pipeline applied to GMC Calicut endoscopic reports. All Protected Health Information (PHI) fields — including Patient ID, Name, Age/Gender, Visit Date, and UGI-OGD report numbers — are irreversibly redacted prior to entering the training pipeline, in compliance with the DPDP Act.}}{28}{}\protected@file@percent }
+\newlabel{fig:deidentification}{{5.1}{28}{}{figure.5.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Data distribution of the first and second stage. We list the different datasets used in the first and second stages, including source, type, number, and description.}}{30}{}\protected@file@percent }
+\newlabel{tab:data-distribution}{{5.1}{30}{}{table.5.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Implementation details}{31}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces Hyperparameter settings.}}{33}{}\protected@file@percent }
+\newlabel{tab:hyperparams}{{5.2}{33}{}{table.5.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Evaluation metrics}{33}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.4}Experimental results}{34}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Comparison of different models}{34}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces Comparison of different models. We compare our experimental results with existing influential multimodal large models, with key metrics including CIDEr, ROUGE-L, METEOR, BLEU-4, and BERTScore.}}{37}{}\protected@file@percent }
+\newlabel{tab:model-comparison}{{5.3}{37}{}{table.5.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Evaluation of the accuracy and quality of generated reports}{37}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.4}{\ignorespaces Comparison of the accuracy of generated reports.}}{39}{}\protected@file@percent }
+\newlabel{tab:accuracy-quality}{{5.4}{39}{}{table.5.4}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Conclusion and Future work}{40}{}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Limitations and future work}{40}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces Workflow of MVLMERG in clinical practice, including endoscopic image input, MVLMERG-generated draft report, physician review and editing, and final integration into the EMR system.}}{44}{}\protected@file@percent }
+\newlabel{fig:workflow}{{6.1}{44}{}{figure.6.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Conclusion}{44}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{References}{47}{}\protected@file@percent }
+\bibcite{ref1}{1}
+\bibcite{ref2}{2}
+\bibcite{ref3}{3}
+\bibcite{ref4}{4}
+\bibcite{ref5}{5}
+\bibcite{ref6}{6}
+\bibcite{ref7}{7}
+\bibcite{ref8}{8}
+\bibcite{ref9}{9}
+\bibcite{ref10}{10}
+\bibcite{ref11}{11}
+\bibcite{ref12}{12}
+\bibcite{ref13}{13}
+\bibcite{ref14}{14}
+\bibcite{ref15}{15}
+\bibcite{ref16}{16}
+\bibcite{ref17}{17}
+\bibcite{ref18}{18}
+\bibcite{ref19}{19}
+\bibcite{ref20}{20}
+\bibcite{ref21}{21}
+\bibcite{ref22}{22}
+\bibcite{ref23}{23}
+\bibcite{ref24}{24}
+\bibcite{ref25}{25}
+\bibcite{ref26}{26}
+\bibcite{ref27}{27}
+\bibcite{ref28}{28}
+\bibcite{ref29}{29}
+\bibcite{ref30}{30}
+\bibcite{ref31}{31}
+\bibcite{ref32}{32}
+\bibcite{ref33}{33}
+\bibcite{ref34}{34}
+\bibcite{ref35}{35}
+\bibcite{ref36}{36}
+\bibcite{ref37}{37}
+\bibcite{ref38}{38}
+\bibcite{ref39}{39}
+\bibcite{ref40}{40}
+\bibcite{ref41}{41}
+\bibcite{ref42}{42}
+\bibcite{ref43}{43}
+\bibcite{ref44}{44}
+\bibcite{ref45}{45}
+\bibcite{ref46}{46}
+\bibcite{ref47}{47}
+\bibcite{ref48}{48}
+\bibcite{ref49}{49}
+\bibcite{ref50}{50}
+\bibcite{ref51}{51}
+\bibcite{ref52}{52}
+\bibcite{ref53}{53}
+\bibcite{ref54}{54}
+\bibcite{ref55}{55}
+\bibcite{ref56}{56}
+\bibcite{ref57}{57}
+\bibcite{ref58}{58}
+\gdef \@abspage@last{65}

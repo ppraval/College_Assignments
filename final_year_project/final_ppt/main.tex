@@ -1,0 +1,760 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{natbib}               % author-year citations
+\usepackage{attachfile2}
+\usepackage{amsmath, amssymb}     % for align*, \mathcal, \text in math
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Small gray citation command
+\definecolor{darkgray}{RGB}{100,100,100}
+\newcommand{\scite}[1]{{\footnotesize\color{darkgray}\citet{#1}}}
+
+% Title – Final Evaluation
+\title{Medical Diagnosis and Report Generation for Endoscopic Procedures Using Vision-Language Models}
+\author{Praval Pattam, Theenesh Potluri, Pranav Sai Sarvepalli \\ \small Under the Guidance of: Jayaraj PB, Srinivasa TM \\ National Institute of Technology Calicut}
+\date{B.Tech CSE Semester 8 Final Evaluation}
+
+\setbeamertemplate{footline}[frame number]
+
+\begin{document}
+
+% ========== Title Slide ==========
+\begin{frame}
+\titlepage
+\end{frame}
+
+% ========== Agenda ==========
+\begin{frame}{Agenda}
+\tableofcontents
+\end{frame}
+
+% ========== Introduction Section ==========
+\section{Introduction}
+
+\begin{frame}
+\centering \Large \textbf{Introduction}
+\end{frame}
+
+% --- Motivation ---
+\begin{frame}{Motivation \& Problem Statement}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{The Clinical Burden:}
+\begin{itemize}
+    \item Each endoscopic procedure requires a detailed written report
+    \item Manual report writing: \textbf{3--5 minutes per image} — a major bottleneck in busy GI units
+    \item Documentation fatigue contributes to physician burnout \scite{inc2024burnout,europe2024burnout,nat2024burden}
+\end{itemize}
+\vspace{0.5em}
+\textbf{The AI Gap:}
+\begin{itemize}
+    \item General-purpose MLLMs (GPT-4V, LLaVA) lack specialised endoscopy terminology and pathological reasoning
+    \item No model trained on physician-annotated GMC Calicut endoscopic data existed
+\end{itemize}
+\end{column}
+\begin{column}{0.42\textwidth}
+\textbf{Our Objective:}
+\begin{itemize}
+    \item Develop \textbf{MVLMERG} — a Multimodal Vision-Language Model for Endoscopic Report Generation
+    \item Two-stage P-LoRA fine-tuning on publicly available GI datasets + GMC Calicut physician annotations
+    \item Target: \textbf{automated, structured, interpretable} endoscopic reports in $\sim$7 seconds
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% --- Problem Definition ---
+\begin{frame}{Problem Definition}
+\textbf{Core Problem:}
+\begin{itemize}
+    \item Writing endoscopic image reports requires deep domain expertise in gastroenterological terminology, lesion morphology, and clinical logic
+    \item General Multimodal Large Language Models (MLLMs) exhibit critical knowledge gaps: they struggle with specialised endoscopy terminology, pathological feature descriptions, and complex medical reasoning
+    \item Existing fine-tuning methods suffer from \textbf{limited domain adaptability} and \textbf{insufficient endoscopic-specific knowledge}
+    \item High-quality physician-annotated endoscopic data is scarce — publicly available medical datasets (PubMed) cover general medicine but lack the specificity needed for endoscopic report generation
+\end{itemize}
+\vspace{0.8em}
+\textbf{Goal:} Develop \textbf{MVLMERG} — a fine-tuned vision-language model that bridges the domain gap, producing professional-grade endoscopic reports matching the standard of intermediate-level physicians. \scite{pmc2024endo,frontiers2024survey}
+\end{frame}
+
+% --- Related Work ---
+\begin{frame}{Related Work}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\textbf{General Medical MLLMs:}
+\begin{itemize}
+    \item \textbf{LLaVA-Med} \scite{neurips2023llava} — trained on PMC-15M biomedical image-text pairs; strong generalization but lacks endoscopy specificity
+    \item \textbf{HuatuoGPT-Vision} — incorporates medical knowledge but insufficient for endoscopic detail
+    \item \textbf{BiomedGPT, Uni-Med} — broad medical coverage; weak on GI endoscopic scenarios
+\end{itemize}
+\vspace{0.5em}
+\textbf{Surgical / GI-specific models:}
+\begin{itemize}
+    \item \textbf{SurgicalGPT} — 3--5\% accuracy gain in surgical VQA
+    \item \textbf{ColonGPT / ColonINST} — colonoscopy instruction tuning
+    \item \textbf{EndoChat} — endoscopy dialogue; limited report generation
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{Fine-Tuning Methods:}
+\begin{itemize}
+    \item \textbf{LoRA} \scite{lora2022hu} — low-rank weight adaptation; efficient but no domain-specific prompt alignment
+    \item \textbf{Prefix / P-Tuning} \scite{plora2022liu} — soft prompt tokens; needs combination with weight adaptation
+    \item \textbf{PeFoMed, MISS} — parameter-efficient medical MLLM fine-tuning; not endoscopy-specific
+\end{itemize}
+\vspace{0.5em}
+\textbf{Gap MVLMERG fills:}
+\begin{itemize}
+    \item Combines \textbf{P-LoRA} (prompt tokens + selective LoRA) with GMC Calicut physician-annotated data
+    \item First model targeting professional Indian endoscopic report generation
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ========== Methodology Section ==========
+\section{Methodology}
+
+\begin{frame}
+\centering \Large \textbf{Methodology}
+\end{frame}
+
+% --- Dataset Creation and Augmentation ---
+\begin{frame}{Dataset Creation and Augmentation}
+\begin{itemize}
+    \item \textbf{Data Source:} Government Medical College (GMC), Kozhikode
+    \item \textbf{Raw Data:} 6,500 \textbf{patient reports} (semi‑structured PDFs + endoscopic images)
+    \begin{itemize}
+        \item Each report includes \textbf{4 endoscopic images}
+    \end{itemize}
+    \item \textbf{Data Augmentation:}
+    \begin{itemize}
+        \item Applied \textbf{rotation and random translation} to every image
+        \item Purpose: increase dataset size and improve model robustness
+        \item \textbf{Approximate scale:}
+        \begin{itemize}
+            \item 6,500 reports × 4 images = 26,000 base images
+            \item Rotation alone multiplies by 4 → over 100,000 images
+            \item Translation variations further expand the pool
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Text Data:}
+    \begin{itemize}
+        \item Final Q\&A pairs derived from report content: \textbf{32,545 unique samples}
+        \item Data split: 30,917 training / 1,627 validation
+    \end{itemize}
+    \item \textbf{Multimodal Association:} Each Q\&A pair linked to original + augmented endoscopic images \scite{arxiv2024qageneration,jmir2024instruction}
+\end{itemize}
+\end{frame}
+
+% --- Figure 1: Custom Dataset Workflow ---
+\begin{frame}{Figure 1: Custom Dataset Workflow}
+\begin{figure}
+\centering
+\includegraphics[width=0.9\textwidth]{figures/figure1_data_workflow.png}
+\caption{Data Workflow: From 6,500 patient reports to 32,545 Q\&A pairs \scite{arxiv2024qageneration,jmir2024instruction}}
+\end{figure}
+\end{frame}
+
+% --- Data Augmentation: Rotation ---
+\begin{frame}{Data Augmentation: Rotation}
+\begin{itemize}
+    \item Each original endoscopic image is rotated by \textbf{0°, 90°, 180°, and 270°}
+    \item Produces exactly \textbf{4 variants} per image
+    \item Clinically safe: tissue textures and lesion appearances remain unchanged
+    \item \textbf{Effect:} 4× structured expansion of the base image set
+\end{itemize}
+\end{frame}
+
+% --- Data Augmentation: Stochastic Translation ---
+\begin{frame}{Data Augmentation: Stochastic Translation}
+\begin{itemize}
+    \item \textbf{Sampling:} Bernoulli process with \( p=0.2 \) selects approx.\ 20\% of rotated images for translation
+    \item \textbf{Shift model:} Translation vector \( (\tau_x,\tau_y) \) drawn from a truncated Gaussian:
+    \begin{align*}
+        \tau_x &\sim \mathcal{N}(0, (0.05\,W)^2),\; \text{clamped to } [-0.15\,W, +0.15\,W] \\
+        \tau_y &\sim \mathcal{N}(0, (0.05\,H)^2),\; \text{clamped to } [-0.15\,H, +0.15\,H]
+    \end{align*}
+    \item \textbf{Overlap guarantee:}
+    \[
+        \text{Overlap Fraction} = \left(1 - \frac{|\tau_x|}{W}\right) \times \left(1 - \frac{|\tau_y|}{H}\right) \ge (1-0.15)^2 = 72.25\%
+    \]
+    \item \textbf{Result:} Controlled positional variation mimicking endoscopic camera jitter, without harming diagnostic content.
+\end{itemize}
+\end{frame}
+
+% --- Data Augmentation Examples ---
+\begin{frame}{Data Augmentation Examples}
+\begin{figure}
+\centering
+\includegraphics[height=4cm]{figures/aug_original.jpg}\hfill
+\includegraphics[height=4cm]{figures/aug_rotated_90.jpg}\hfill
+\includegraphics[height=4cm]{figures/aug_translated.png}
+\caption{Left: Original \quad Middle: Rotated (90°) \quad Right: Randomly translated}
+\end{figure}
+\end{frame}
+
+% --- Patient Data De-identification & Ethical Compliance ---
+\begin{frame}{Patient Data De‑identification \& Ethical Compliance}
+\begin{itemize}
+    \item \textbf{Regulatory Framework \& Automated Script:}
+    \begin{itemize}
+        \item Strict adherence to the \textbf{Digital Personal Data Protection (DPDP) Act}, supported by a formal MoU between GMC Kozhikode and NIT Calicut
+        \item \textbf{Redaction approach mirrors rigorous de‑identification used in recent high‑profile document releases (e.g., Epstein files)} – all personally identifiable fields irreversibly blacked out to ensure zero traceability
+        \item \textbf{Header Field Redaction:} Automatic blackout of Patient ID, Name, Age/Gender, Visit Date, UGI/OGD Numbers
+    \end{itemize}
+    \item \textbf{Result:} Irreversible anonymization of all sensitive patient information before data enters the pipeline
+\end{itemize}
+\vspace{0.5em}
+\begin{figure}
+\centering
+\includegraphics[width=0.85\textwidth, keepaspectratio]{figures/deidentification_diagram.jpeg}
+\caption*{\textit{Irreversible de‑identification of sensitive info prior to the data pipeline.}}
+\end{figure}
+\end{frame}
+
+% --- Report Analysis and Preprocessing (revised) ---
+\begin{frame}{Report Analysis and Preprocessing}
+\textbf{Medical Entities Extracted:} \scite{arxiv2024qageneration,jmir2024instruction}
+\begin{itemize}
+    \item Pathological findings and characteristics
+    \item Diagnostic conclusions
+    \item Procedural techniques and instruments
+\end{itemize}
+\vspace{1em}
+\textbf{Processing Method:}
+\begin{itemize}
+    \item Natural language processing techniques
+    \item Extraction of critical medical elements
+    \item Foundation for Q\&A pair generation
+\end{itemize}
+\end{frame}
+
+% --- Automated Question-Answer Pair Generation ---
+\begin{frame}{Automated Question‑Answer Pair Generation}
+\textbf{Multi‑Stage Process:} \scite{github2024kvasir,arxiv2024kvasir}
+\begin{enumerate}
+    \item \textbf{Medical Entity Extraction} – Key concepts and diagnoses
+    \item \textbf{Question Template Design} – Diagnostic, anatomical, pathological, procedural, comparative
+    \item \textbf{Automated QA Generation} -- Multiple question variations per concept \scite{llava2024official,neurips2023llava}
+    \item \textbf{Answer Synthesis} – Accurate answers from reports + medical knowledge
+\end{enumerate}
+\vspace{1em}
+\textbf{Result:} Diverse, clinically relevant question‑answer combinations.
+\end{frame}
+
+% ========== Dataflow Pipeline and Methodology (2 image slides) ==========
+\begin{frame}{Dataflow Pipeline and Methodology}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figures/pipeline_part1_data.png}
+\caption{Stage 1: Pre-training.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Dataflow Pipeline and Methodology}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figures/pipeline_part2_training.png}
+\caption{Stage 2: Fine-tuning}
+\end{figure}
+\end{frame}
+
+% ========== Architecture Section ==========
+\section{Architecture}
+
+\begin{frame}
+\centering \Large \textbf{Architecture}
+\end{frame}
+
+% --- Two‑Stage Training Framework (all original citations restored, now \scite) ---
+\begin{frame}{Two‑Stage Training Framework — MVLMERG}
+\textbf{Stage 1: Medical Domain Knowledge Injection} \scite{acl2024clinical,lora2022hu}
+\begin{itemize}
+    \item \textbf{Objective:} Acquire gastrointestinal domain knowledge
+    \item \textbf{Base Model:} LLaVA‑4 with frozen CLIP ViT‑L/14
+    \item \textbf{Trainable:} LLM backbone (vision encoder + connector frozen)
+    \item \textbf{Datasets:} PubMed, MedTrinity-25M, VQA-Med ($\sim$60K GI records) \scite{medtrinity2025xie,vqamed2019abacha}
+\end{itemize}
+\vspace{0.8em}
+\textbf{Stage 2: Professional Report Generation} \scite{acl2024clinical,lora2022hu}
+\begin{itemize}
+    \item \textbf{Objective:} Learn physician‑style endoscopic report language
+    \item \textbf{Dataset:} GMC Calicut physician‑annotated data (6,500 base; $\sim$31K after augmentation)
+    \item \textbf{Strategy:} P-LoRA — prompt tokens + selective LoRA on key layers \scite{lora2022hu,plora2022liu}
+    \item \textbf{Unfrozen:} LLM backbone (vision encoder + connector frozen)
+\end{itemize}
+\end{frame}
+
+% --- P-LoRA Method ---
+\begin{frame}{P-LoRA: Prompt-based LoRA Fine-Tuning}
+\textbf{Core Innovation of MVLMERG} \scite{lora2022hu,plora2022liu}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\textbf{Soft Prompt Tuning:}
+\begin{itemize}
+    \item Learnable tokens $p_1,\ldots,p_m$ prepended to input
+    \item Guides model toward domain-specific language patterns
+    \item No manual prompt crafting — adapts through training
+\end{itemize}
+\vspace{0.5em}
+\textbf{Selective LoRA:}
+\begin{itemize}
+    \item Applied only to first, middle, and last layers
+    \item $\Delta W = AB$, rank $r=64$, $\alpha=32$
+    \item Only \textbf{0.343\%} of parameters are trainable
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{Why P-LoRA beats LoRA alone?}
+\begin{itemize}
+    \item Prompt tuning aligns input representations
+    \item LoRA adapts weight matrices efficiently
+    \item Combined: +5\% CIDEr, +4.4\% ROUGE-L over plain LoRA
+    \item GPU memory: $\sim$43 GB during training
+\end{itemize}
+\vspace{0.5em}
+\textbf{Inference:}
+\begin{itemize}
+    \item $\sim$7s per report on A100 80GB
+    \item Deployable on RTX 3090 (24 GB)
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% --- System Architecture Diagram ---
+\begin{frame}{System Architecture}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figures/system_architecture.png}
+\caption{High‑level architecture of the proposed vision‑language model for endoscopic report generation.}
+\end{figure}
+\end{frame}
+
+% --- Model Architecture – LLaVA ---
+\begin{frame}{Model Architecture – LLaVA}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figures/llava_architecture.png}
+\caption{LLaVA architecture: vision encoder + projection layer + language model for multimodal understanding.}
+\end{figure}
+\end{frame}
+
+% --- CLIP‑ViT Architecture ---
+\begin{frame}{CLIP‑ViT Architecture}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figures/clip_vit_architecture.png}
+\caption{CLIP‑ViT‑L/14 vision encoder: patch embedding, transformer layers, and projected visual features.}
+\end{figure}
+\end{frame}
+
+% --- LLaMA Architecture ---
+\begin{frame}{LLaMA Architecture}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figures/llama_architecture.png}
+\caption{LLaMA language model backbone: transformer decoder layers used for text generation and multimodal fusion.}
+\end{figure}
+\end{frame}
+
+% ========== Implementation Section ==========
+\section{Implementation}
+
+\begin{frame}
+\centering \Large \textbf{Implementation}
+\end{frame}
+
+% --- Refining Generation: Implementing System Prompts ---
+\begin{frame}{Refining Generation: Implementing System Prompts}
+\textbf{Initial Challenge:} 
+\begin{itemize}
+    \item Early model iterations produced verbose, unstructured, and redundant reports that did not match standard clinical formatting.
+\end{itemize}
+
+\vspace{0.8em}
+\textbf{Implemented Solution (Dataset Reformatting):}
+\begin{itemize}
+    \item Integrated rigorous \textbf{System Prompts} directly into the training dataset.
+    \item \textbf{Role Assignment:} Instructed the model to assume a specific clinical persona (e.g., ``You are an expert gastroenterologist...'').
+    \item \textbf{Output Constraints:} Provided explicit instructions to prioritise direct, concise, and structured answers mirroring real GMC Kozhikode reports.
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Result:} A massive reduction in unnecessary text, yielding highly concise and structured outputs; further refinement improved diagnostic accuracy.
+\end{frame}
+
+% --- Qualitative Impact: Verbose vs. Concise Reports (unchanged) ---
+\begin{frame}{Qualitative Impact: Verbose vs. Concise Reports}
+\begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+        \centering
+        \textbf{\textcolor{red}{Previous Generation}} \\
+        \textit{(Verbose \& Redundant)}
+        \vspace{0.5em}
+        \only<1>{\fbox{\includegraphics[page=1, trim=1cm 3cm 1cm 1cm, clip, width=\textwidth]{figures/old_report.pdf}}}
+        \only<2>{\fbox{\includegraphics[page=2, trim=1cm 3cm 1cm 1cm, clip, width=\textwidth]{figures/old_report.pdf}}}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+        \centering
+        \textbf{\textcolor{blue}{Current Generation}} \\
+        \textit{(Concise via System Prompt)}
+        \vspace{0.5em}
+        \only<1>{\fbox{\includegraphics[page=1, trim=1cm 10cm 1cm 1cm, clip, width=\textwidth]{figures/new_report.pdf}}}
+        \only<2>{\fbox{\includegraphics[page=2, trim=1cm 10cm 1cm 1cm, clip, width=\textwidth]{figures/new_report.pdf}}}
+    \end{column}
+\end{columns}
+\vspace{0.5em}
+\centering
+\textbf{\only<1>{Page 1 Comparison}\only<2>{Page 2 Comparison}}
+\end{frame}
+
+% --- The “Blackbox” Problem & Our Solution ---
+\begin{frame}{The “Blackbox” Problem \& Our Solution}
+\textbf{The Initial Blackbox:}
+\begin{itemize}
+    \item The model would output a final diagnosis directly from an image without revealing its reasoning, making it hard to trust or debug.
+\end{itemize}
+
+\vspace{0.8em}
+\textbf{Our Solution – Chain‑of‑Thought Integration:}
+\begin{itemize}
+    \item Augmented the training Q\&A pairs with \textbf{step‑by‑step reasoning chains}.
+    \item Each chain forces the model to structure its answer as: \textbf{anatomical identification → visual observation → diagnosis}.
+    \item During training, the model learns to mimic this transparent reasoning process.
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Outcome:} The model now explicitly explains \textit{what it sees} and \textit{why it concludes something}, turning a black‑box predictor into an \textbf{interpretable diagnostic assistant}.
+\end{frame}
+
+% --- Chain‑of‑Thought (CoT) in Endoscopy (now implemented) ---
+\begin{frame}{Chain‑of‑Thought (CoT) in Endoscopy}
+\textbf{Before CoT Implementation (Baseline Model):}
+\begin{itemize}
+    \item \textbf{Input:} [Image] ``What is the diagnosis?''
+    \item \textbf{Output:} ``Grade II Esophageal Varices.'' \textit{(correct but no justification)}
+\end{itemize}
+
+\vspace{1em}
+\textbf{After CoT Implementation (Our Model):}
+\begin{itemize}
+    \item \textbf{Input:} [Image] ``Analyze the image step‑by‑step and provide a diagnosis.''
+    \item \textbf{Output:} 
+    \begin{enumerate}
+        \item \textbf{Observation 1:} I observe the lower third of the oesophagus.
+        \item \textbf{Observation 2:} There are swollen, tortuous submucosal veins present.
+        \item \textbf{Observation 3:} The veins occupy less than 1/3 of the lumen, with no red colour signs.
+        \item \textbf{Conclusion:} Therefore, the diagnosis is Grade II Esophageal Varices.
+    \end{enumerate}
+\end{itemize}
+\vspace{0.5em}
+\textbf{Impact:} Explicit reasoning enhances clinical trust, allows verification, and helps identify subtle mistakes – a crucial feature for real‑world deployment.
+\end{frame}
+
+% --- Fine‑Tuning Configuration Details ---
+\begin{frame}{Fine‑Tuning Configuration Details}
+\textbf{Vision Encoder:} CLIP‑ViT‑L/14
+\begin{itemize}
+    \item Image resolution: 336×336 pixels
+    \item Patch size: 14×14 (24×24 grid)
+    \item Total vision tokens: 577 per image (576 patches + CLS)
+\end{itemize}
+
+\vspace{0.8em}
+\textbf{Training Hyperparameters:}
+\begin{itemize}
+    \item \textbf{Precision:} bfloat16 (BF16)
+    \item \textbf{Optimizer:} AdamW with 8‑bit quantization
+    \item \textbf{Learning Rate:} 2e$^{-4}$ with cosine scheduler, warmup 0.1
+    \item \textbf{Batch Size:} 2 micro‑batch, 4 accumulation steps = 8 global
+    \item \textbf{Attention:} Flash Attention 2
+    \item \textbf{Epochs:} 4 epochs (both stages)
+\end{itemize}
+\end{frame}
+
+% --- Training Configuration Rationale ---
+\begin{frame}{Training Configuration Rationale}
+\begin{itemize}
+    \item \textbf{CLIP‑ViT‑L/14} – pre‑trained on 400M pairs; robust medical visual features; L size balances capacity vs. speed; 14×14 patch grid captures both anatomy and small lesions.
+    \item \textbf{336×336 resolution} – standard for LLaVA; sufficient detail without excessive memory.
+    \item \textbf{577 vision tokens} – each patch token carries localised information, enabling the language model to ``see'' global and local structures.
+    \item \textbf{bfloat16} – halves memory vs. FP32, no performance loss.
+    \item \textbf{AdamW + 8‑bit} – stable weight‑decoupled convergence; 8‑bit reduces optimizer memory ~75\%.
+    \item \textbf{LR 2e$^{-4}$, cosine + warmup} – low peak prevents catastrophic forgetting; warmup stabilises early steps.
+    \item \textbf{Batch size 8 (accumulated)} – simulates larger batch under GPU memory limits.
+    \item \textbf{Flash Attention 2} – memory‑efficient exact attention; ~5‑10× VRAM reduction for long sequences.
+    \item \textbf{4 epochs} – sufficient for P-LoRA adapters on the augmented second-stage dataset without overfitting.
+\end{itemize}
+\end{frame}
+
+% --- Why AdamW & Flash Attention 2? (concise) ---
+\begin{frame}{Why AdamW \& Flash Attention 2?}
+\textbf{AdamW over Adam}
+\begin{itemize}
+    \item Adam couples weight decay with gradient scaling – can over‑regularize.
+    \item AdamW \textbf{decouples} weight decay from adaptive gradients → better generalization.
+    \item Standard for LLaMA fine‑tuning; prevents over‑shrinking of LoRA adapters.
+\end{itemize}
+\vspace{0.5em}
+\textbf{Flash Attention 2 over regular / Flash Attention 1}
+\begin{itemize}
+    \item Standard attention: O(N$^2$) memory – prohibitive for 577 vision tokens + text.
+    \item Flash Attention 1 tiled computation, but under‑utilised GPU parallelism.
+    \item Flash Attention 2:
+    \begin{itemize}
+        \item \textbf{Fewer non‑matmul operations} → higher throughput.
+        \item \textbf{Better batch/head parallelism} → faster training.
+        \item \textbf{Lower VRAM usage (5‑10× reduction)} → feasible on single GPU.
+    \end{itemize}
+\end{itemize}
+\vspace{0.5em}
+\textbf{Together:} Stable convergence + memory‑efficient training at scale.
+\end{frame}
+
+% ========== Results Section ==========
+\section{Results}
+
+\begin{frame}
+\centering \Large \textbf{Results}
+\end{frame}
+
+
+% --- Generated Report – Two Pages Side by Side ---
+\begin{frame}{Generated Report}
+\begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+        \centering
+        \includegraphics[height=0.82\textheight, keepaspectratio, page=1]{generated_report.pdf}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+        \centering
+        \includegraphics[height=0.82\textheight, keepaspectratio, page=2]{generated_report.pdf}
+    \end{column}
+\end{columns}
+\vspace{0.3em}
+\centering
+\small Final diagnostic report – Pages 1 and 2
+\end{frame}
+
+
+% --- Quantitative Comparison ---
+\begin{frame}{Quantitative Comparison — MVLMERG vs. Baselines}
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Method} & \textbf{CIDEr}$\uparrow$ & \textbf{ROUGE-L}$\uparrow$ & \textbf{METEOR}$\uparrow$ & \textbf{BLEU-4}$\uparrow$ & \textbf{BERTScore}$\uparrow$ \\
+\midrule
+Qwen-VL-7B & 0.0212 & 0.2815 & 0.2369 & 0.2293 & 0.6947 \\
+VisualGLM-6B & 0.0147 & 0.2210 & 0.1913 & 0.1829 & 0.5893 \\
+GPT-4V & 0.0955 & 0.3040 & 0.3311 & 0.3292 & 0.7846 \\
+HuatuoGPT-Vision-7B & 0.0802 & 0.2642 & 0.2791 & 0.2709 & 0.7538 \\
+LLaVA-Med & 0.0171 & 0.1979 & 0.2677 & 0.2417 & 0.7452 \\
+BiomedGPT & 0.0233 & 0.1739 & 0.2381 & 0.2178 & 0.7117 \\
+Uni-Med & 0.0881 & 0.2013 & 0.1928 & 0.1903 & 0.6639 \\
+EndoChat & 0.0578 & 0.1965 & 0.2102 & 0.1961 & 0.6740 \\
+\textbf{MVLMERG (Ours)} & \textbf{0.2667} & \textbf{0.4598} & \textbf{0.4070} & \textbf{0.3863} & \textbf{0.8216} \\
+\bottomrule
+\end{tabular}%
+}
+\vspace{0.4em}
+\small MVLMERG achieves state-of-the-art on all 5 metrics ($p < 0.01$, Cohen's $d > 0.8$). Report accuracy: \textbf{84.03\%}.
+\end{frame}
+
+% --- Accuracy Comparison Table ---
+\begin{frame}{Report Accuracy \& Calibration}
+\begin{columns}[T]
+\begin{column}{0.52\textwidth}
+\textbf{Expert Physician Evaluation \scite{pmc2024endo}}
+\begin{itemize}
+    \item 2 senior endoscopists (10+ years experience), GMC Calicut
+    \item Reports labelled Correct/Incorrect; disagreements resolved by joint discussion
+\end{itemize}
+\vspace{0.5em}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lc}
+\toprule
+\textbf{Method} & \textbf{Accuracy} $\uparrow$ \\
+\midrule
+HuatuoGPT-Vision-7B & 0.7240 \\
+LLaVA-Med & 0.7013 \\
+BiomedGPT & 0.6426 \\
+Qwen-VL-7B & 0.5659 \\
+EndoChat & 0.6734 \\
+GPT-4V & 0.7833 \\
+\textbf{MVLMERG (Ours)} & \textbf{0.8403} \\
+\bottomrule
+\end{tabular}%
+}
+\end{column}
+\begin{column}{0.45\textwidth}
+\textbf{Calibration Analysis:}
+\begin{itemize}
+    \item ECE (Expected Calibration Error) = \textbf{0.042}
+    \item Token-level confidence binned into 10 intervals
+    \item Confidence aligns closely with actual correctness
+    \item Model is \textbf{well-calibrated} — predictions are reliable, not overconfident
+\end{itemize}
+\vspace{0.5em}
+\textbf{Inference Speed:}
+\begin{itemize}
+    \item $\sim$\textbf{7 s/report} on A100 80GB
+    \item vs.\ 3--5 min manual writing
+    \item \textbf{26$\times$ faster} than manual reporting
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% --- Hardware \& Training Setup ---
+\begin{frame}{Hardware \& Training Setup}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\textbf{Training Hardware:}
+\begin{itemize}
+    \item \textbf{GPU:} NVIDIA A100 80GB PCIe (CUDA 12.9)
+    \item \textbf{CPU:} Intel Xeon Silver 4310 @ 2.10 GHz\\(24 physical cores, 48 threads, 2 sockets)
+    \item \textbf{RAM:} 125 GiB
+    \item \textbf{Python:} 3.10.12; PyTorch (BF16 + Flash Attention 2)
+\end{itemize}
+\vspace{0.5em}
+\textbf{Training Resource Usage:}
+\begin{itemize}
+    \item GPU memory during training: $\sim$43 GB
+    \item Stage 1 training time: $\sim$70 h
+    \item Stage 2 training time: $\sim$15 h
+    \item Trainable parameters: \textbf{0.343\%} of full model
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{P-LoRA Hyperparameters:}
+\begin{itemize}
+    \item LoRA rank $r = 64$, $\alpha = 32$, dropout $= 0.05$
+    \item Prompt tokens $= 64$
+    \item Epochs: 4 (both stages)
+    \item Seed: 42
+    \item Max sequence length: 4096
+\end{itemize}
+\vspace{0.5em}
+\textbf{Minimum Deployment Spec:}
+\begin{itemize}
+    \item 16 GB RAM, Python 3.8+
+    \item CUDA 11.2+, PyTorch 2.0+
+    \item Can run on RTX 3090 (24 GB)
+    \item $\sim$7 s inference latency
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ========== Future Work Section ==========
+\section{Future Work}
+
+\begin{frame}
+\centering \Large \textbf{Future Work}
+\end{frame}
+
+% --- Model Optimization & Quantization (original citations fully restored) ---
+\begin{frame}{Model Optimization \& Quantization}
+\textbf{GGUF Format Conversion} \scite{ibm2024gguf,huggingface2024medgemma}
+\begin{itemize}
+    \item Optimizes CPU and mixed CPU‑GPU inference
+    \item Significantly improved model loading times \scite{phison2024format,ibm2024gguf}
+\end{itemize}
+
+\vspace{0.8em}
+\textbf{Multi‑Level Quantization Strategy} \scite{huggingface2024medgemma,e2e2024quantization}
+\begin{table}
+\centering
+\begin{tabular}{llr}
+\toprule
+\textbf{Format} & \textbf{Use Case} & \textbf{Size Reduction} \\
+\midrule
+Q8\_0 & High‑end workstations & $\sim$50\% \\
+Q5\_K\_M & Standard clinical computers & $\sim$69\% \\
+Q4\_K\_M & Basic clinical terminals & $\sim$75\% (3.25GB) \scite{dataloop2024medicine} \\
+Q3\_K\_L & Mobile deployments & Ultra‑compact \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{frame}
+
+% --- Deployment Planning (original citations restored) ---
+\begin{frame}{Deployment Planning}
+\textbf{Two Deployment Strategies:}
+
+\begin{enumerate}
+    \item \textbf{vLLM Framework} \scite{redhat2024ollama,designveloper2024comparison}
+    \begin{itemize}
+        \item High‑throughput clinical environments
+        \item Concurrent access scenarios
+    \end{itemize}
+    
+    \item \textbf{Ollama Framework} \scite{redhat2024ollama,kanerika2024analysis,designveloper2024comparison}
+    \begin{itemize}
+        \item Individual workstations
+        \item Low‑resource environments
+        \item Resource‑constrained deployment
+    \end{itemize}
+\end{enumerate}
+
+\vspace{1em}
+\textbf{EHR Integration:}
+\begin{itemize}
+    \item RESTful API architecture (secure, authenticated endpoints)
+    \item Real‑time synchronization with patient records
+\end{itemize}
+\end{frame}
+
+% ========== Conclusion (original citations restored) ==========
+\section{Conclusion}
+\begin{frame}{Conclusion}
+\textbf{Key Achievements:}
+\begin{itemize}
+    \item Built a vision‑language model for automated endoscopic report generation, fine‑tuned on a custom 32,545‑sample Q\&A dataset.
+    \item Implemented a DPDP‑compliant de‑identification pipeline, making sensitive clinical data safe for AI training.
+    \item Integrated system prompts and Chain‑of‑Thought reasoning to produce \textbf{concise, transparent, and clinically interpretable} reports.
+    \item Achieved state-of-the-art: CIDEr 0.2667, ROUGE-L 0.4598, METEOR 0.4070, BLEU-4 0.3863, BERTScore 0.8216, report accuracy \textbf{84.03\%}.
+\end{itemize}
+\vspace{1em}
+\textbf{Impact:} Drastically reduces documentation time; provides explainable AI assistance to gastroenterologists \scite{inc2024burnout,europe2024burnout}.
+\vspace{1em}
+\textbf{Path Forward:} Model quantization \scite{ibm2024gguf,huggingface2024medgemma} and clinical deployment trials (pending IEC approval) will bring the tool into real‑world endoscopic workflows.
+\end{frame}
+
+% ========== Acknowledgments ==========
+\begin{frame}{Acknowledgments}
+\begin{itemize}
+    \item \textbf{Government Medical College (GMC), Kozhikode}
+    \begin{itemize}
+        \item Provided the dataset of 6,500 procedures and invaluable clinical expertise.
+    \end{itemize}
+    \item \textbf{Medical Staff}
+    \begin{itemize}
+        \item Continuous feedback and validation throughout development.
+    \end{itemize}
+    \item \textbf{Mentors \& Colleagues}
+    \begin{itemize}
+        \item Project guidance and support from NIT Calicut faculty.
+    \end{itemize}
+\end{itemize}
+\vspace{2em}
+\centering
+\textcolor{blue}{\Large \textbf{Thank You!}}
+\end{frame}
+
+% ========== References ==========
+\begin{frame}[allowframebreaks]{References}
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{frame}
+
+\end{document}

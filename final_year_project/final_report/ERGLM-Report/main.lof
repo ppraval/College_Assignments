@@ -1,0 +1,12 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Architecture of fine-tuning large language model. Stage 1 and Stage 2 represent the first-stage and second-stage fine-tuning, respectively. The right side shows an expanded diagram of the P-LoRA method. The text highlighted in green is our main work.}}{13}{}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces P-LoRA method. (b) illustrates the fine-tuning approach used in the first, middle, and final layers, while (a) shows the approach applied to all other layers.}}{18}{}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Example of sentence selection. ``Original Sentences'' represents the original physician-annotated sentence, while ``Enhanced Sentences'' represent sentences optimized by GPT-4. The final step determines whether the sentence satisfies similarity score $> 0.85$.}}{21}{}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Examples of data augmentation applied to an endoscopic image. (a) Original image from GMC Calicut dataset. (b) Image after 90° rotation — clinically safe as lesion morphology is rotation-invariant in endoscopy. (c) Image after stochastic translation (Bernoulli $p=0.2$, $\sigma =5\%W$) simulating natural camera jitter, with at least 72.25\% overlap guaranteed.}}{24}{}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Automated de-identification pipeline applied to GMC Calicut endoscopic reports. All Protected Health Information (PHI) fields — including Patient ID, Name, Age/Gender, Visit Date, and UGI-OGD report numbers — are irreversibly redacted prior to entering the training pipeline, in compliance with the DPDP Act.}}{28}{}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Workflow of MVLMERG in clinical practice, including endoscopic image input, MVLMERG-generated draft report, physician review and editing, and final integration into the EMR system.}}{44}{}%

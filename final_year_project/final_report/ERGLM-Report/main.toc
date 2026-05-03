@@ -1,0 +1,34 @@
+\vskip -30pt
+\contentsline {chapter}{\numberline {1}Introduction}{2}{}%
+\contentsline {section}{\numberline {1.1}Introduction}{2}{}%
+\contentsline {chapter}{\numberline {2}Literature Survey}{6}{}%
+\contentsline {section}{\numberline {2.1}MLLMs}{6}{}%
+\contentsline {section}{\numberline {2.2}Medical MLLMs}{7}{}%
+\contentsline {section}{\numberline {2.3}Fine-tuning methods}{8}{}%
+\contentsline {chapter}{\numberline {3}Problem Definition}{10}{}%
+\contentsline {chapter}{\numberline {4}Methodology}{11}{}%
+\contentsline {section}{\numberline {4.1}Method}{11}{}%
+\contentsline {subsection}{\numberline {4.1.1}Overview}{12}{}%
+\contentsline {subsection}{\numberline {4.1.2}Two-stage fine-tuning strategy}{13}{}%
+\contentsline {subsection}{\numberline {4.1.3}P-LoRA method}{15}{}%
+\contentsline {subsection}{\numberline {4.1.4}Data optimization and filtering}{18}{}%
+\contentsline {subsection}{\numberline {4.1.5}Data Augmentation}{22}{}%
+\contentsline {subsubsection}{Rotation Augmentation}{22}{}%
+\contentsline {subsubsection}{Stochastic Translation Augmentation}{22}{}%
+\contentsline {subsubsection}{Combined Dataset Size}{23}{}%
+\contentsline {subsection}{\numberline {4.1.6}Chain-of-Thought Integration}{23}{}%
+\contentsline {subsubsection}{The Interpretability Problem and Motivation}{23}{}%
+\contentsline {subsubsection}{CoT Implementation}{24}{}%
+\contentsline {subsubsection}{Impact on Clinical Utility}{25}{}%
+\contentsline {chapter}{\numberline {5}Results}{26}{}%
+\contentsline {section}{\numberline {5.1}Experiments and discussion}{26}{}%
+\contentsline {subsection}{\numberline {5.1.1}Datasets}{26}{}%
+\contentsline {subsection}{\numberline {5.1.2}Implementation details}{31}{}%
+\contentsline {subsection}{\numberline {5.1.3}Evaluation metrics}{33}{}%
+\contentsline {subsection}{\numberline {5.1.4}Experimental results}{34}{}%
+\contentsline {subsubsection}{Comparison of different models}{34}{}%
+\contentsline {subsubsection}{Evaluation of the accuracy and quality of generated reports}{37}{}%
+\contentsline {chapter}{\numberline {6}Conclusion and Future work}{40}{}%
+\contentsline {section}{\numberline {6.1}Limitations and future work}{40}{}%
+\contentsline {section}{\numberline {6.2}Conclusion}{44}{}%
+\contentsline {chapter}{References}{47}{}%
