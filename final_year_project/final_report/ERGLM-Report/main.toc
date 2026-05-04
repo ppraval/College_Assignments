@@ -23,12 +23,12 @@
 \contentsline {chapter}{\numberline {5}Results}{26}{}%
 \contentsline {section}{\numberline {5.1}Experiments and discussion}{26}{}%
 \contentsline {subsection}{\numberline {5.1.1}Datasets}{26}{}%
-\contentsline {subsection}{\numberline {5.1.2}Implementation details}{31}{}%
-\contentsline {subsection}{\numberline {5.1.3}Evaluation metrics}{33}{}%
+\contentsline {subsection}{\numberline {5.1.2}Implementation details}{29}{}%
+\contentsline {subsection}{\numberline {5.1.3}Evaluation metrics}{32}{}%
 \contentsline {subsection}{\numberline {5.1.4}Experimental results}{34}{}%
 \contentsline {subsubsection}{Comparison of different models}{34}{}%
-\contentsline {subsubsection}{Evaluation of the accuracy and quality of generated reports}{37}{}%
-\contentsline {chapter}{\numberline {6}Conclusion and Future work}{40}{}%
-\contentsline {section}{\numberline {6.1}Limitations and future work}{40}{}%
-\contentsline {section}{\numberline {6.2}Conclusion}{44}{}%
-\contentsline {chapter}{References}{47}{}%
+\contentsline {subsubsection}{Evaluation of the accuracy and quality of generated reports}{36}{}%
+\contentsline {chapter}{\numberline {6}Conclusion and Future work}{39}{}%
+\contentsline {section}{\numberline {6.1}Limitations and future work}{39}{}%
+\contentsline {section}{\numberline {6.2}Conclusion}{43}{}%
+\contentsline {chapter}{References}{46}{}%

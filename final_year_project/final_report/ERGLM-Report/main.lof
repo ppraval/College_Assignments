@@ -9,4 +9,4 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Automated de-identification pipeline applied to GMC Calicut endoscopic reports. All Protected Health Information (PHI) fields — including Patient ID, Name, Age/Gender, Visit Date, and UGI-OGD report numbers — are irreversibly redacted prior to entering the training pipeline, in compliance with the DPDP Act.}}{28}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Workflow of MVLMERG in clinical practice, including endoscopic image input, MVLMERG-generated draft report, physician review and editing, and final integration into the EMR system.}}{44}{}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Workflow of MVLMERG in clinical practice, including endoscopic image input, MVLMERG-generated draft report, physician review and editing, and final integration into the EMR system.}}{43}{}%
