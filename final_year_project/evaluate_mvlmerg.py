@@ -107,7 +107,6 @@ def compute_cider(refs, hyps, n_max=4):
     """
     CIDEr-D: TF-IDF weighted cosine similarity averaged over n=1..4.
     IDF is computed over the provided reference corpus with Laplace smoothing.
-    Scale kept as-is (no ×10) to match reported value range (< 1.0).
     """
     ref_toks = [tokenize(r) for r in refs]
     hyp_toks = [tokenize(h) for h in hyps]
