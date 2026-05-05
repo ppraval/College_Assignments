@@ -2,33 +2,34 @@
 \contentsline {chapter}{\numberline {1}Introduction}{2}{}%
 \contentsline {section}{\numberline {1.1}Introduction}{2}{}%
 \contentsline {chapter}{\numberline {2}Literature Survey}{6}{}%
-\contentsline {section}{\numberline {2.1}MLLMs}{6}{}%
-\contentsline {section}{\numberline {2.2}Medical MLLMs}{7}{}%
-\contentsline {section}{\numberline {2.3}Fine-tuning methods}{8}{}%
-\contentsline {chapter}{\numberline {3}Problem Definition}{10}{}%
-\contentsline {chapter}{\numberline {4}Methodology}{11}{}%
-\contentsline {section}{\numberline {4.1}Method}{11}{}%
-\contentsline {subsection}{\numberline {4.1.1}Overview}{12}{}%
-\contentsline {subsection}{\numberline {4.1.2}Two-stage fine-tuning strategy}{13}{}%
-\contentsline {subsection}{\numberline {4.1.3}P-LoRA method}{15}{}%
-\contentsline {subsection}{\numberline {4.1.4}Data optimization and filtering}{18}{}%
-\contentsline {subsection}{\numberline {4.1.5}Data Augmentation}{22}{}%
-\contentsline {subsubsection}{Rotation Augmentation}{22}{}%
-\contentsline {subsubsection}{Stochastic Translation Augmentation}{22}{}%
-\contentsline {subsubsection}{Combined Dataset Size}{23}{}%
-\contentsline {subsection}{\numberline {4.1.6}Chain-of-Thought Integration}{23}{}%
-\contentsline {subsubsection}{The Interpretability Problem and Motivation}{23}{}%
-\contentsline {subsubsection}{CoT Implementation}{24}{}%
-\contentsline {subsubsection}{Impact on Clinical Utility}{25}{}%
-\contentsline {chapter}{\numberline {5}Results}{26}{}%
-\contentsline {section}{\numberline {5.1}Experiments and discussion}{26}{}%
-\contentsline {subsection}{\numberline {5.1.1}Datasets}{26}{}%
-\contentsline {subsection}{\numberline {5.1.2}Implementation details}{29}{}%
-\contentsline {subsection}{\numberline {5.1.3}Evaluation metrics}{32}{}%
-\contentsline {subsection}{\numberline {5.1.4}Experimental results}{34}{}%
-\contentsline {subsubsection}{Comparison of different models}{34}{}%
-\contentsline {subsubsection}{Evaluation of the accuracy and quality of generated reports}{36}{}%
-\contentsline {chapter}{\numberline {6}Conclusion and Future work}{39}{}%
-\contentsline {section}{\numberline {6.1}Limitations and future work}{39}{}%
-\contentsline {section}{\numberline {6.2}Conclusion}{43}{}%
-\contentsline {chapter}{References}{46}{}%
+\contentsline {section}{\numberline {2.1}Evolution of Medical Documentation Burden}{6}{}%
+\contentsline {section}{\numberline {2.2}MLLMs}{7}{}%
+\contentsline {section}{\numberline {2.3}Medical MLLMs}{8}{}%
+\contentsline {section}{\numberline {2.4}Fine-tuning methods}{9}{}%
+\contentsline {chapter}{\numberline {3}Problem Definition}{11}{}%
+\contentsline {chapter}{\numberline {4}Methodology}{12}{}%
+\contentsline {section}{\numberline {4.1}Method}{12}{}%
+\contentsline {subsection}{\numberline {4.1.1}Overview}{13}{}%
+\contentsline {subsection}{\numberline {4.1.2}Two-stage fine-tuning strategy}{14}{}%
+\contentsline {subsection}{\numberline {4.1.3}P-LoRA method}{16}{}%
+\contentsline {subsection}{\numberline {4.1.4}Data optimization and filtering}{20}{}%
+\contentsline {subsection}{\numberline {4.1.5}Data Augmentation}{23}{}%
+\contentsline {subsubsection}{Rotation Augmentation}{23}{}%
+\contentsline {subsubsection}{Stochastic Translation Augmentation}{23}{}%
+\contentsline {subsubsection}{Combined Dataset Size}{24}{}%
+\contentsline {subsection}{\numberline {4.1.6}Chain-of-Thought Integration}{24}{}%
+\contentsline {subsubsection}{The Interpretability Problem and Motivation}{24}{}%
+\contentsline {subsubsection}{CoT Implementation}{25}{}%
+\contentsline {subsubsection}{Impact on Clinical Utility}{26}{}%
+\contentsline {chapter}{\numberline {5}Results}{27}{}%
+\contentsline {section}{\numberline {5.1}Experiments and discussion}{27}{}%
+\contentsline {subsection}{\numberline {5.1.1}Datasets}{27}{}%
+\contentsline {subsection}{\numberline {5.1.2}Implementation details}{30}{}%
+\contentsline {subsection}{\numberline {5.1.3}Evaluation metrics}{33}{}%
+\contentsline {subsection}{\numberline {5.1.4}Experimental results}{35}{}%
+\contentsline {subsubsection}{Comparison of different models}{35}{}%
+\contentsline {subsubsection}{Evaluation of the accuracy and quality of generated reports}{37}{}%
+\contentsline {chapter}{\numberline {6}Conclusion and Future work}{40}{}%
+\contentsline {section}{\numberline {6.1}Limitations and future work}{40}{}%
+\contentsline {section}{\numberline {6.2}Conclusion}{44}{}%
+\contentsline {chapter}{References}{47}{}%
