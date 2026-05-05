@@ -103,13 +103,13 @@ Fine-tune a vision-language model to automatically generate professional-grade G
 % --- Related Work: General Medical MLLMs ---
 \begin{frame}{Related Work: General Medical MLLMs}
 \begin{itemize}
-    \item \textbf{LLaVA-Med} \scite{neurips2023llava} — trained on PMC-15M biomedical image-text pairs; strong generalization across medical domains but \textbf{lacks endoscopy-specific terminology} and fine-grained lesion description
-    \item \textbf{HuatuoGPT-Vision} — clinical knowledge via instruction tuning; good medical NLP but \textbf{insufficient for GI endoscopic findings}
-    \item \textbf{BiomedGPT} — unified generative model across diverse biomedical tasks; \textbf{broad coverage but weak on GI endoscopic scenarios}
-    \item \textbf{Uni-Med} — multi-task VLM covering radiology, pathology, dermatology; limited endoscopic performance
+    \item \textbf{LLaVA-Med} \scite{neurips2023llava} — aligns PMC-15M biomedical image-text pairs in Stage 1; uses GPT-4-generated instruction data \scite{openai2023gpt4} for end-to-end fine-tuning in Stage 2; strong generalization but \textbf{lacks endoscopy-specific terminology}
+    \item \textbf{HuatuoGPT-Vision} \scite{chen2024huatuo} — refines medical image-text pairs from PubMed; MLLM-based denoising to build PubMedVision dataset; strong on broad medical VQA but \textbf{insufficient for detailed GI endoscopic findings}
+    \item \textbf{BiomedGPT} \scite{zhang2024biomedgpt} — unified generative pre-trained transformer across vision, language, and multimodal biomedical tasks; \textbf{broad coverage but weak on GI endoscopic report generation}
+    \item \textbf{PeFoMed} \scite{frontiers2024survey} — parameter-efficient fine-tuning framework for medical MLLMs; improves performance on medical imaging tasks but \textbf{not endoscopy-specific}
 \end{itemize}
-\vspace{0.5em}
-\textbf{Common gap:} Pre-training on broad medical corpora does not provide the specialised knowledge needed for \textit{detailed} GI endoscopic report generation.
+\vspace{0.3em}
+\textbf{Common gap:} Broad biomedical pre-training cannot substitute for \textbf{physician-annotated, domain-specific} endoscopic training data.
 \end{frame}
 
 % --- Related Work: Surgical / GI-specific Models ---
@@ -285,6 +285,35 @@ No existing model combines (1) prompt-based input alignment, (2) selective weigh
 \textbf{Result:} Diverse, clinically relevant question‑answer combinations.
 \end{frame}
 
+% --- GPT-4 Data Optimization & Filtering (slide 1: text) ---
+\begin{frame}{Data Optimization \& Filtering with GPT-4}
+\vspace{0.3em}
+\textbf{Why GPT-4?} \scite{openai2023gpt4}
+\begin{itemize}
+    \item Physician reports from GMC Calicut contain incomplete, colloquial, or inconsistent sentences
+    \item GPT-4 acts as an \textbf{auxiliary annotation tool} to enrich and templatize raw descriptions
+    \item Structured prompt: \textit{``Convert to: This image shows (region). It describes (color, texture, features.)''}
+    \item All GPT-4 outputs reviewed by senior gastroenterologists for clinical accuracy
+\end{itemize}
+\vspace{0.6em}
+\textbf{Semantic Consistency Filter:} \scite{reimers2019sbert}
+\begin{itemize}
+    \item Optimized sentences must preserve the original clinical meaning
+    \item Sentence-BERT extracts vector embeddings $\mathbf{u}$ (original) and $\mathbf{v}$ (enhanced)
+    \item Cosine similarity: $S = \dfrac{\mathbf{u}\cdot\mathbf{v}}{\|\mathbf{u}\|\|\mathbf{v}\|}$ must satisfy $S > 0.85$
+    \item If $S \leq 0.85$, GPT-4 regenerates until threshold is met
+\end{itemize}
+\end{frame}
+
+% --- GPT-4 Data Optimization & Filtering (slide 2: figure) ---
+\begin{frame}{Data Optimization \& Filtering — Sentence Selection}
+\begin{figure}
+\centering
+\includegraphics[width=0.88\textwidth, keepaspectratio]{figures/gpt4_sentence_selection.png}
+\caption{Example of sentence selection: original physician-annotated sentence $\to$ GPT-4 enhanced sentence $\to$ cosine similarity filter ($S > 0.85$). Sentences below threshold are regenerated. \scite{openai2023gpt4,reimers2019sbert}}
+\end{figure}
+\end{frame}
+
 % ========== Dataflow Pipeline and Methodology (2 image slides) ==========
 \begin{frame}{Dataflow Pipeline and Methodology}
 \begin{figure}
@@ -358,9 +387,8 @@ Injects low-rank adapter matrices $\Delta W = AB$ into the \textit{first, middle
 
 % --- Soft Prompt Tuning ---
 \begin{frame}{Soft Prompt Tuning}
-\scite{plora2022liu}
 \vspace{0.2em}
-\textbf{What it is:}
+\textbf{What it is:} \scite{plora2022liu}
 \begin{itemize}
     \item $m = 64$ learnable embedding vectors $\{p_1, p_2, \ldots, p_{64}\}$ prepended to the input token sequence
     \item Updated via gradient descent during training — \textbf{no manual prompt crafting required}
@@ -378,9 +406,8 @@ Injects low-rank adapter matrices $\Delta W = AB$ into the \textit{first, middle
 
 % --- Selective LoRA ---
 \begin{frame}{Selective LoRA}
-\scite{lora2022hu}
 \vspace{0.2em}
-\textbf{What it is:}
+\textbf{What it is:} \scite{lora2022hu}
 \begin{itemize}
     \item Low-rank adapter matrices injected into weight matrices: $W' = W + \Delta W = W + AB$
     \item $A \in \mathbb{R}^{d \times r}$, $B \in \mathbb{R}^{r \times k}$, rank $r = 64$, scaling $\alpha = 32$, dropout $= 0.05$
@@ -402,9 +429,8 @@ Injects low-rank adapter matrices $\Delta W = AB$ into the \textit{first, middle
 
 % --- Why P-LoRA beats LoRA alone ---
 \begin{frame}{Why P-LoRA Outperforms LoRA Alone}
-\scite{lora2022hu,plora2022liu}
 \vspace{0.2em}
-\textbf{Plain LoRA — the limitation:}
+\textbf{Plain LoRA — the limitation:} \scite{lora2022hu,plora2022liu}
 \begin{itemize}
     \item Adapts weight matrices but does not change how the model \textit{interprets the input context}
     \item For highly specialised domains like GI endoscopy, the model still ``reads'' input through a generic lens — producing suboptimal attention over clinical features
@@ -641,7 +667,7 @@ Injects low-rank adapter matrices $\Delta W = AB$ into the \textit{first, middle
 \end{frame}
 
 
-% --- Evaluation Metrics Overview ---
+% --- Evaluation Metrics Slide 1: Formulas ---
 \begin{frame}{Evaluation Metrics}
 \begin{columns}[T]
 \column{0.48\textwidth}
@@ -679,7 +705,43 @@ Semantic similarity via contextual BERT token embeddings.
 \[F_{\text{BERT}}=\frac{2\,P_{\text{BERT}}\cdot R_{\text{BERT}}}{P_{\text{BERT}}+R_{\text{BERT}}}\]}
 
 \vspace{0.4cm}
-\small All five metrics reward similarity between generated and reference reports; higher is better ($\uparrow$).
+\small All five metrics reward similarity to reference reports; higher is better ($\uparrow$).
+\end{columns}
+\end{frame}
+
+% --- Evaluation Metrics Slide 2: Why these metrics? ---
+\begin{frame}{Why These Evaluation Metrics?}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\small\textbf{CIDEr} — \textit{primary metric}
+\begin{itemize}\setlength\itemsep{0pt}
+    \item Designed for report generation; TF-IDF up-weights \textit{discriminative} n-grams, penalising generic filler
+    \item Best reflects domain-specific clinical term quality
+\end{itemize}
+\textbf{ROUGE-L} — \textit{clinical structure}
+\begin{itemize}\setlength\itemsep{0pt}
+    \item LCS-based: captures correct finding sequence (anatomy $\to$ observation $\to$ diagnosis)
+    \item Robust to paraphrasing
+\end{itemize}
+\textbf{METEOR} — \textit{linguistic fluency}
+\begin{itemize}\setlength\itemsep{0pt}
+    \item Handles synonyms and stemming — physicians use varied clinical vocabulary
+    \item Fragmentation penalty discourages incoherent output
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\small\textbf{BLEU-4} — \textit{n-gram precision}
+\begin{itemize}\setlength\itemsep{0pt}
+    \item 4-gram precision captures multi-word phrases (e.g., ``Grade II esophageal varices'')
+    \item Included for comparability with prior medical NLG literature
+\end{itemize}
+\textbf{BERTScore} — \textit{semantic correctness}
+\begin{itemize}\setlength\itemsep{0pt}
+    \item Contextual BERT embeddings measure semantic similarity beyond surface overlap
+    \item Handles spelling variants (``oesophageal'' vs.\ ``esophageal'')
+    \item Strongest indicator of correct clinical meaning
+\end{itemize}
+\end{column}
 \end{columns}
 \end{frame}
 
@@ -709,9 +771,8 @@ EndoChat & 0.0578 & 0.1965 & 0.2102 & 0.1961 & 0.6740 \\
 
 % --- Expert Physician Evaluation ---
 \begin{frame}{Expert Physician Evaluation}
-\scite{pmc2024endo}
 \vspace{0.3em}
-\textbf{Evaluation Protocol:}
+\textbf{Evaluation Protocol:} \scite{pmc2024endo}
 \begin{itemize}
     \item 2 senior endoscopists (10+ years experience), GMC Calicut
     \item Each generated report labelled \textbf{Correct / Incorrect} based on clinical accuracy

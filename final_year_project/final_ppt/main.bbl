@@ -1,4 +1,4 @@
-\begin{thebibliography}{17}
+\begin{thebibliography}{21}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -59,6 +59,28 @@ Chunyuan Li, Cliff Wong, Steven Zhang, Naoto Usuyama, Haotian Liu, Jianwei
 \newblock URL
   \url{https://papers.neurips.cc/paper_files/paper/2023/file/5abcdf8ecdcacba028c6662789194572-Paper-Datasets_and_Benchmarks.pdf}.
 
+\bibitem[{OpenAI}(2023)]{openai2023gpt4}
+{OpenAI}.
+\newblock {GPT-4} technical report.
+\newblock \emph{arXiv preprint arXiv:2303.08774}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2303.08774}.
+
+\bibitem[Chen et~al.(2024)Chen, Li, Wang, Liu, Li, et~al.]{chen2024huatuo}
+Jiarong Chen, Junying Li, Weichen Wang, Zhenyang Liu, Guiming~Hardy Li, et~al.
+\newblock Huatuogpt-vision, towards injecting medical visual knowledge into
+  multimodal {LLMs} at scale.
+\newblock \emph{arXiv preprint arXiv:2406.19280}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2406.19280}.
+
+\bibitem[Zhang et~al.(2023)Zhang, Yu, Yan, Liu, Adhikarla, Fu, Chen, Zhou, Li,
+  Jiang, et~al.]{zhang2024biomedgpt}
+Kai Zhang, Jun Yu, Zhiling Yan, Yixin Liu, Eashan Adhikarla, Sunyang Fu, Ying
+  Chen, Yuyin Zhou, Xiang Li, Lifang Jiang, et~al.
+\newblock Biomedgpt: A unified and generalist biomedical generative pre-trained
+  transformer for vision, language, and multimodal tasks.
+\newblock \emph{arXiv preprint arXiv:2305.17100}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2305.17100}.
+
 \bibitem[Hu et~al.(2022)Hu, Shen, Wallis, Allen-Zhu, Li, Wang, Wang, and
   Chen]{lora2022hu}
 Edward~J. Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean
@@ -94,6 +116,14 @@ Konstantin Pogorelov and et~al.
 \newblock Kvasir-vqa-x1: Medical visual question answering dataset.
 \newblock \emph{arXiv preprint}, 2024.
 \newblock URL \url{https://arxiv.org/html/2506.09958v1}.
+
+\bibitem[Reimers and Gurevych(2019)]{reimers2019sbert}
+Nils Reimers and Iryna Gurevych.
+\newblock Sentence-{BERT}: Sentence embeddings using {Siamese BERT}-networks.
+\newblock In \emph{Proceedings of the 2019 Conference on Empirical Methods in
+  Natural Language Processing}, pages 3982--3992. Association for Computational
+  Linguistics, 2019.
+\newblock \doi{10.18653/v1/D19-1410}.
 
 \bibitem[Leaman and Lu(2024)]{acl2024clinical}
 Robert Leaman and Zhiyong Lu.

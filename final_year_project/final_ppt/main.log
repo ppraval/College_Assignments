@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.3)  4 MAY 2026 15:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.3)  5 MAY 2026 10:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1076,7 +1076,7 @@ thkerncmss.
 ] [13
 
 ]
-<figures/figure1_data_workflow.png, id=461, 897.3525pt x 225.09094pt>
+<figures/figure1_data_workflow.png, id=468, 897.3525pt x 225.09094pt>
 File: figures/figure1_data_workflow.png Graphic file (type png)
 <use figures/figure1_data_workflow.png>
 Package pdftex.def Info: figures/figure1_data_workflow.png  used on input line 
@@ -1089,17 +1089,17 @@ Package pdftex.def Info: figures/figure1_data_workflow.png  used on input line
 ] [16
 
 ]
-<figures/aug_original.jpg, id=548, 481.8pt x 423.5825pt>
+<figures/aug_original.jpg, id=555, 481.8pt x 423.5825pt>
 File: figures/aug_original.jpg Graphic file (type jpg)
 <use figures/aug_original.jpg>
 Package pdftex.def Info: figures/aug_original.jpg  used on input line 237.
 (pdftex.def)             Requested size: 129.44814pt x 113.81102pt.
-<figures/aug_rotated_90.jpg, id=549, 481.8pt x 423.5825pt>
+<figures/aug_rotated_90.jpg, id=556, 481.8pt x 423.5825pt>
 File: figures/aug_rotated_90.jpg Graphic file (type jpg)
 <use figures/aug_rotated_90.jpg>
 Package pdftex.def Info: figures/aug_rotated_90.jpg  used on input line 237.
 (pdftex.def)             Requested size: 129.44814pt x 113.81102pt.
-<figures/aug_translated.png, id=550, 488.42474pt x 370.986pt>
+<figures/aug_translated.png, id=557, 488.42474pt x 370.986pt>
 File: figures/aug_translated.png Graphic file (type png)
 <use figures/aug_translated.png>
 Package pdftex.def Info: figures/aug_translated.png  used on input line 237.
@@ -1108,7 +1108,7 @@ Package pdftex.def Info: figures/aug_translated.png  used on input line 237.
 
  <./figures/aug_original.jpg> <./figures/aug_rotated_90.jpg> <./figures/aug_tra
 nslated.png>]
-<figures/deidentification_diagram.jpeg, id=578, 986.68625pt x 307.1475pt>
+<figures/deidentification_diagram.jpeg, id=585, 986.68625pt x 307.1475pt>
 File: figures/deidentification_diagram.jpeg Graphic file (type jpg)
 <use figures/deidentification_diagram.jpeg>
 Package pdftex.def Info: figures/deidentification_diagram.jpeg  used on input l
@@ -1125,252 +1125,276 @@ Overfull \vbox (85.53246pt too high) detected at line 256
 ] [20
 
 ]
-<figures/pipeline_part1_data.png, id=660, 522.15076pt x 133.6995pt>
-File: figures/pipeline_part1_data.png Graphic file (type png)
-<use figures/pipeline_part1_data.png>
-Package pdftex.def Info: figures/pipeline_part1_data.png  used on input line 29
-5.
-(pdftex.def)             Requested size: 433.34402pt x 110.96442pt.
+LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <10.95> not available
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 306.
+
+LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <8> not available
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 306.
+
+LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <6> not available
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 306.
+
  [21
 
+]
+<figures/gpt4_sentence_selection.png, id=695, 644.4075pt x 314.67563pt>
+File: figures/gpt4_sentence_selection.png Graphic file (type png)
+<use figures/gpt4_sentence_selection.png>
+Package pdftex.def Info: figures/gpt4_sentence_selection.png  used on input lin
+e 315.
+(pdftex.def)             Requested size: 381.34485pt x 186.22359pt.
+LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <10> not available
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 315.
+
+LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <7> not available
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 315.
+
+LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <5> not available
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 315.
+
+
+Overfull \vbox (34.20819pt too high) detected at line 315
+ []
+
+[22
+
+ <./figures/gpt4_sentence_selection.png>]
+<figures/pipeline_part1_data.png, id=726, 522.15076pt x 133.6995pt>
+File: figures/pipeline_part1_data.png Graphic file (type png)
+<use figures/pipeline_part1_data.png>
+Package pdftex.def Info: figures/pipeline_part1_data.png  used on input line 32
+4.
+(pdftex.def)             Requested size: 433.34402pt x 110.96442pt.
+ [23
+
  <./figures/pipeline_part1_data.png>]
-<figures/pipeline_part2_training.png, id=686, 783.52725pt x 290.2845pt>
+<figures/pipeline_part2_training.png, id=752, 783.52725pt x 290.2845pt>
 File: figures/pipeline_part2_training.png Graphic file (type png)
 <use figures/pipeline_part2_training.png>
 Package pdftex.def Info: figures/pipeline_part2_training.png  used on input lin
-e 303.
+e 332.
 (pdftex.def)             Requested size: 433.34402pt x 160.5517pt.
- [22
+ [24
 
- <./figures/pipeline_part2_training.png>] [23
-
-] [24
-
-]
-[25
+ <./figures/pipeline_part2_training.png>] [25
 
 ] [26
 
 ] [27
 
-]
-Overfull \vbox (7.42204pt too high) detected at line 426
- []
-
-[28
+] [28
 
 ]
-<figures/system_architecture.png, id=907, 702.2235pt x 308.95425pt>
-File: figures/system_architecture.png Graphic file (type png)
-<use figures/system_architecture.png>
-Package pdftex.def Info: figures/system_architecture.png  used on input line 43
-5.
-(pdftex.def)             Requested size: 433.34402pt x 190.65395pt.
-
-Overfull \vbox (15.933pt too high) detected at line 435
- []
-
 [29
 
+]
+Overfull \vbox (7.42204pt too high) detected at line 452
+ []
+
+[30
+
+]
+<figures/system_architecture.png, id=973, 702.2235pt x 308.95425pt>
+File: figures/system_architecture.png Graphic file (type png)
+<use figures/system_architecture.png>
+Package pdftex.def Info: figures/system_architecture.png  used on input line 46
+1.
+(pdftex.def)             Requested size: 433.34402pt x 190.65395pt.
+
+Overfull \vbox (15.933pt too high) detected at line 461
+ []
+
+[31
+
  <./figures/system_architecture.png>]
-<figures/llava_architecture.png, id=934, 1722.435pt x 596.2275pt>
+<figures/llava_architecture.png, id=1001, 1722.435pt x 596.2275pt>
 File: figures/llava_architecture.png Graphic file (type png)
 <use figures/llava_architecture.png>
-Package pdftex.def Info: figures/llava_architecture.png  used on input line 444
+Package pdftex.def Info: figures/llava_architecture.png  used on input line 470
 .
 (pdftex.def)             Requested size: 433.34402pt x 150.00267pt.
- [30
+ [32
 
  <./figures/llava_architecture.png>]
-<figures/clip_vit_architecture.png, id=961, 666.0885pt x 233.07076pt>
+<figures/clip_vit_architecture.png, id=1028, 666.0885pt x 233.07076pt>
 File: figures/clip_vit_architecture.png Graphic file (type png)
 <use figures/clip_vit_architecture.png>
 Package pdftex.def Info: figures/clip_vit_architecture.png  used on input line 
-453.
+479.
 (pdftex.def)             Requested size: 433.34402pt x 151.63644pt.
- [31
+ [33
 
  <./figures/clip_vit_architecture.png>]
-<figures/llama_architecture.png, id=988, 1161.33875pt x 679.53876pt>
+<figures/llama_architecture.png, id=1054, 1161.33875pt x 679.53876pt>
 File: figures/llama_architecture.png Graphic file (type png)
 <use figures/llama_architecture.png>
-Package pdftex.def Info: figures/llama_architecture.png  used on input line 462
+Package pdftex.def Info: figures/llama_architecture.png  used on input line 488
 .
 (pdftex.def)             Requested size: 433.34402pt x 253.5614pt.
 
-Overfull \vbox (89.24045pt too high) detected at line 462
+Overfull \vbox (89.24045pt too high) detected at line 488
  []
 
-[32
+[34
 
- <./figures/llama_architecture.png>] [33
+ <./figures/llama_architecture.png>] [35
 
-] [34
+] [36
 
 ]
-<figures/old_report.pdf, id=1065, page=1, 597.50786pt x 845.04686pt>
+<figures/old_report.pdf, id=1131, page=1, 597.50786pt x 845.04686pt>
 File: figures/old_report.pdf Graphic file (type pdf)
 <use figures/old_report.pdf, page 1>
-Package pdftex.def Info: figures/old_report.pdf , page1 used on input line 513.
+Package pdftex.def Info: figures/old_report.pdf , page1 used on input line 539.
 
 (pdftex.def)             Requested size: 208.00327pt x 281.35373pt.
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 513--513
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 539--539
  [] 
  []
 
-<figures/new_report.pdf, id=1067, page=1, 597.50786pt x 845.04686pt>
+<figures/new_report.pdf, id=1133, page=1, 597.50786pt x 845.04686pt>
 File: figures/new_report.pdf Graphic file (type pdf)
 <use figures/new_report.pdf, page 1>
-Package pdftex.def Info: figures/new_report.pdf , page1 used on input line 513.
+Package pdftex.def Info: figures/new_report.pdf , page1 used on input line 539.
 
 (pdftex.def)             Requested size: 208.00327pt x 204.72041pt.
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 513--513
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 539--539
  [] 
  []
 
 
-Overfull \vbox (140.44667pt too high) detected at line 513
+Overfull \vbox (140.44667pt too high) detected at line 539
  []
 
-[35
+[37
 
  <./figures/old_report.pdf> <./figures/new_report.pdf>]
-<figures/old_report.pdf, id=1113, page=2, 597.50786pt x 845.04686pt>
+<figures/old_report.pdf, id=1180, page=2, 597.50786pt x 845.04686pt>
 File: figures/old_report.pdf Graphic file (type pdf)
 <use figures/old_report.pdf, page 2>
-Package pdftex.def Info: figures/old_report.pdf , page2 used on input line 513.
+Package pdftex.def Info: figures/old_report.pdf , page2 used on input line 539.
 
 (pdftex.def)             Requested size: 208.00327pt x 281.35373pt.
 
-Overfull \hbox (9.23332pt too wide) in paragraph at lines 513--513
+Overfull \hbox (9.23332pt too wide) in paragraph at lines 539--539
   [] 
  []
 
-<figures/new_report.pdf, id=1115, page=2, 597.50786pt x 845.04686pt>
+<figures/new_report.pdf, id=1182, page=2, 597.50786pt x 845.04686pt>
 File: figures/new_report.pdf Graphic file (type pdf)
 <use figures/new_report.pdf, page 2>
-Package pdftex.def Info: figures/new_report.pdf , page2 used on input line 513.
+Package pdftex.def Info: figures/new_report.pdf , page2 used on input line 539.
 
 (pdftex.def)             Requested size: 208.00327pt x 204.72041pt.
 
-Overfull \hbox (9.23332pt too wide) in paragraph at lines 513--513
+Overfull \hbox (9.23332pt too wide) in paragraph at lines 539--539
   [] 
  []
 
 
-Overfull \vbox (130.24666pt too high) detected at line 513
+Overfull \vbox (130.24666pt too high) detected at line 539
  []
 
-[36
+[38
 
- <./figures/old_report.pdf> <./figures/new_report.pdf>] [37
+ <./figures/old_report.pdf> <./figures/new_report.pdf>] [39
 
-] [38
-
-] [39
-
-]
-[40
+] [40
 
 ] [41
 
-] [42
+]
+[42
+
+] [43
+
+] [44
 
 ]
-<generated_report.pdf, id=1302, page=1, 597.50786pt x 845.04686pt>
+<generated_report.pdf, id=1369, page=1, 597.50786pt x 845.04686pt>
 File: generated_report.pdf Graphic file (type pdf)
 <use generated_report.pdf, page 1>
-Package pdftex.def Info: generated_report.pdf , page1 used on input line 641.
+Package pdftex.def Info: generated_report.pdf , page1 used on input line 667.
 (pdftex.def)             Requested size: 141.2805pt x 199.81512pt.
-<generated_report.pdf, id=1303, page=2, 597.50786pt x 845.04686pt>
+<generated_report.pdf, id=1370, page=2, 597.50786pt x 845.04686pt>
 File: generated_report.pdf Graphic file (type pdf)
 <use generated_report.pdf, page 2>
-Package pdftex.def Info: generated_report.pdf , page2 used on input line 641.
+Package pdftex.def Info: generated_report.pdf , page2 used on input line 667.
 (pdftex.def)             Requested size: 141.2805pt x 199.81512pt.
 
-Overfull \vbox (8.457pt too high) detected at line 641
+Overfull \vbox (8.457pt too high) detected at line 667
  []
 
-[43
+[45
 
  <./generated_report.pdf> <./generated_report.pdf>]
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <9> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 684.
-
-LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <6> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 684.
-
-LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <5> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 684.
-
-LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <10> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 684.
-
-LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <7> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 684.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 710.
 
 
-Overfull \vbox (9.49837pt too high) detected at line 684
- []
-
-[44
-
-]
-LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <10.95> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 708.
-
-LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <8> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 708.
-
- [45
-
-]
-Overfull \vbox (23.01427pt too high) detected at line 741
+Overfull \vbox (9.49837pt too high) detected at line 710
  []
 
 [46
 
 ]
-Overfull \vbox (7.4222pt too high) detected at line 764
+Overfull \vbox (23.35684pt too high) detected at line 746
  []
 
 [47
 
+] [48
+
 ]
-Overfull \vbox (12.3472pt too high) detected at line 805
+Overfull \vbox (23.01427pt too high) detected at line 802
  []
 
-[48
+[49
 
-] [49
+]
+Overfull \vbox (7.4222pt too high) detected at line 825
+ []
 
-] [50
+[50
 
-] [51
+]
+Overfull \vbox (12.3472pt too high) detected at line 866
+ []
+
+[51
 
 ] [52
 
 ] [53
+
+] [54
+
+] [55
+
+] [56
 
 ] (main.bbl
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\translate ' on input line 1.
 
-) [54
-
-] [55
-
-
-] [56
-
-
-] [57
-
+) [57
 
 ] [58
+
+
+] [59
+
+
+] [60
+
+
+] [61
+
+
+] [62
 
 
 ]
@@ -1392,11 +1416,11 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 3B357F955481EEE719651CBF8A65892E;782.
  ) 
 Here is how much of TeX's memory you used:
- 24495 strings out of 467871
- 472246 string characters out of 5418377
- 846460 words of memory out of 5000000
- 52734 multiletter control sequences out of 15000+600000
- 645113 words of font info for 101 fonts, out of 8000000 for 9000
+ 24535 strings out of 467871
+ 473067 string characters out of 5418377
+ 848685 words of memory out of 5000000
+ 52762 multiletter control sequences out of 15000+600000
+ 645469 words of font info for 102 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,14n,123p,408b,775s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\pprav\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcsx
@@ -1425,9 +1449,9 @@ fb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
 fonts/cm/cmsy9.pfb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/type1/pu
 blic/amsfonts/cm/cmtt10.pfb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts
 /type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (58 pages, 3592078 bytes).
+Output written on main.pdf (62 pages, 3840609 bytes).
 PDF statistics:
- 1883 PDF objects out of 2073 (max. 8388607)
- 142 named destinations out of 1000 (max. 500000)
- 420 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2006 PDF objects out of 2073 (max. 8388607)
+ 154 named destinations out of 1000 (max. 500000)
+ 425 words of extra memory for PDF output out of 10000 (max. 10000000)
 
