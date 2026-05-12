@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.3)  5 MAY 2026 19:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.3)  12 MAY 2026 20:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -611,13 +611,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 125--132
 \tf@toc=\write6
 \openout6 = `main.toc'.
 
- [3] (main.lof [4
-
-])
+ [3] (main.lof)
 \tf@lof=\write7
 \openout7 = `main.lof'.
 
- [5] (main.lot)
+ [4
+
+] [5] (main.lot)
 \tf@lot=\write8
 \openout8 = `main.lot'.
 
@@ -634,279 +634,266 @@ Underfull \hbox (badness 10000) in paragraph at lines 153--158
 
 [2
 
-] [3] [4] [5]
+] [3] [4]
 Chapter 2.
 
-Overfull \hbox (5.55975pt too wide) in paragraph at lines 174--174
+Overfull \hbox (5.55975pt too wide) in paragraph at lines 172--172
 []\OT1/cmr/bx/n/17.28 Evolution of Med-i-cal Doc-u-men-ta-tion Bur-
  []
 
-[6
+[5
 
-] [7] [8] [9] [10]
+] [6] [7] [8]
 Chapter 3.
-[11
+[9
 
 ]
 Chapter 4.
-[12
-
-] [13]
-<Fig-1.png, id=89, 907.13907pt x 411.03563pt>
-File: Fig-1.png Graphic file (type png)
-<use Fig-1.png>
-Package pdftex.def Info: Fig-1.png  used on input line 203.
-(pdftex.def)             Requested size: 331.50238pt x 150.2055pt.
- [14 <./Fig-1.png>] [15] [16] [17] [18]
-<Fig-2.png, id=107, 495.35063pt x 338.76563pt>
-File: Fig-2.png Graphic file (type png)
-<use Fig-2.png>
-Package pdftex.def Info: Fig-2.png  used on input line 241.
-(pdftex.def)             Requested size: 331.50238pt x 226.71332pt.
- [19] [20 <./Fig-2.png>]
-[21]
-<Fig-3.png, id=120, 644.4075pt x 314.67563pt>
-File: Fig-3.png Graphic file (type png)
-<use Fig-3.png>
-Package pdftex.def Info: Fig-3.png  used on input line 258.
-(pdftex.def)             Requested size: 331.50238pt x 161.88449pt.
- [22 <./Fig-3.png>] [23
+[10
 
 ]
-<aug_original.jpg, id=128, 481.8pt x 423.5825pt>
+<Fig-1.png, id=75, 907.13907pt x 411.03563pt>
+File: Fig-1.png Graphic file (type png)
+<use Fig-1.png>
+Package pdftex.def Info: Fig-1.png  used on input line 201.
+(pdftex.def)             Requested size: 331.50238pt x 150.2055pt.
+ [11] [12 <./Fig-1.png>] [13] [14] [15]
+<Fig-2.png, id=98, 495.35063pt x 338.76563pt>
+File: Fig-2.png Graphic file (type png)
+<use Fig-2.png>
+Package pdftex.def Info: Fig-2.png  used on input line 239.
+(pdftex.def)             Requested size: 331.50238pt x 226.71332pt.
+ [16] [17 <./Fig-2.png>] [18]
+[19] [20
+
+]
+<aug_original.jpg, id=116, 481.8pt x 423.5825pt>
 File: aug_original.jpg Graphic file (type jpg)
 <use aug_original.jpg>
-Package pdftex.def Info: aug_original.jpg  used on input line 298.
+Package pdftex.def Info: aug_original.jpg  used on input line 291.
 (pdftex.def)             Requested size: 120.89905pt x 106.28963pt.
-<aug_rotated_90.jpg, id=129, 481.8pt x 423.5825pt>
+<aug_rotated_90.jpg, id=117, 481.8pt x 423.5825pt>
 File: aug_rotated_90.jpg Graphic file (type jpg)
 <use aug_rotated_90.jpg>
-Package pdftex.def Info: aug_rotated_90.jpg  used on input line 303.
+Package pdftex.def Info: aug_rotated_90.jpg  used on input line 296.
 (pdftex.def)             Requested size: 120.89905pt x 106.28963pt.
-<aug_translated.png, id=130, 488.42474pt x 370.986pt>
+<aug_translated.png, id=118, 488.42474pt x 370.986pt>
 File: aug_translated.png Graphic file (type png)
 <use aug_translated.png>
-Package pdftex.def Info: aug_translated.png  used on input line 308.
+Package pdftex.def Info: aug_translated.png  used on input line 301.
 (pdftex.def)             Requested size: 120.89905pt x 91.82921pt.
 
-Underfull \hbox (badness 3690) in paragraph at lines 309--309
+Underfull \hbox (badness 3690) in paragraph at lines 302--302
 []\OT1/cmr/m/n/10.95 (c) |Stochas-tic Trans-la-
  []
 
-[24] [25 <./aug_original.jpg> <./aug_rotated_90.jpg> <./aug_translated.png>]
-[26]
+[21] [22 <./aug_original.jpg> <./aug_rotated_90.jpg> <./aug_translated.png>]
+[23]
 Chapter 5.
-[27
+[24
 
-] [28]
-<deidentification_diagram.jpeg, id=150, 986.68625pt x 307.1475pt>
+]
+<deidentification_diagram.jpeg, id=135, 986.68625pt x 307.1475pt>
 File: deidentification_diagram.jpeg Graphic file (type jpg)
 <use deidentification_diagram.jpeg>
-Package pdftex.def Info: deidentification_diagram.jpeg  used on input line 355.
+Package pdftex.def Info: deidentification_diagram.jpeg  used on input line 348.
 
 (pdftex.def)             Requested size: 331.50238pt x 103.19617pt.
- [29 <./deidentification_diagram.jpeg>]
-Overfull \hbox (7.30357pt too wide) in paragraph at lines 370--370
+ [25] [26 <./deidentification_diagram.jpeg>]
+Overfull \hbox (7.30357pt too wide) in paragraph at lines 363--363
 []|\OT1/cmr/m/n/12 Number| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 372--372
+Underfull \hbox (badness 10000) in paragraph at lines 365--365
 []|\OT1/cmr/m/n/12 First
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 372--372
+Underfull \hbox (badness 10000) in paragraph at lines 365--365
 []|\OT1/cmr/m/n/12 PubMed;
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 372--372
+Underfull \hbox (badness 10000) in paragraph at lines 365--365
 \OT1/cmr/m/n/12 MedTrinity-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 372--372
+Underfull \hbox (badness 10000) in paragraph at lines 365--365
 \OT1/cmr/m/n/12 25M; VQA-
  []
 
 
-Overfull \hbox (11.002pt too wide) in paragraph at lines 372--372
+Overfull \hbox (11.002pt too wide) in paragraph at lines 365--365
 []|\OT1/cmr/m/n/12 Gastrointestinal
  []
 
 
-Underfull \hbox (badness 4872) in paragraph at lines 372--372
+Underfull \hbox (badness 4872) in paragraph at lines 365--365
 \OT1/cmr/m/n/12 tract re-lated
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 373--373
+Underfull \hbox (badness 10000) in paragraph at lines 366--366
 []|\OT1/cmr/m/n/12 Second
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 373--373
+Underfull \hbox (badness 10000) in paragraph at lines 366--366
 []|\OT1/cmr/m/n/12 Physician-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 373--373
+Underfull \hbox (badness 10000) in paragraph at lines 366--366
 \OT1/cmr/m/n/12 annotated
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 373--373
+Underfull \hbox (badness 10000) in paragraph at lines 366--366
 \OT1/cmr/m/n/12 data from
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 373--373
+Underfull \hbox (badness 10000) in paragraph at lines 366--366
 \OT1/cmr/m/n/12 Gov-ern-ment
  []
 
 
-Underfull \hbox (badness 2253) in paragraph at lines 373--373
+Underfull \hbox (badness 2253) in paragraph at lines 366--366
 \OT1/cmr/m/n/12 Med-i-cal Col-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 373--373
+Underfull \hbox (badness 10000) in paragraph at lines 366--366
 []|\OT1/cmr/m/n/12 Specialized
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 373--373
+Underfull \hbox (badness 10000) in paragraph at lines 366--366
 \OT1/cmr/m/n/12 en-do-scopic
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 373--373
+Underfull \hbox (badness 10000) in paragraph at lines 366--366
 []|\OT1/cmr/m/n/12 6.5k
  []
 
 
-Overfull \hbox (0.51892pt too wide) in paragraph at lines 373--373
+Overfull \hbox (0.51892pt too wide) in paragraph at lines 366--366
 \OT1/cmr/m/n/12 (base);
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 373--373
+Underfull \hbox (badness 10000) in paragraph at lines 366--366
 \OMS/cmsy/m/n/12 ^^X$\OT1/cmr/m/n/12 31k
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 373--373
+Underfull \hbox (badness 10000) in paragraph at lines 366--366
 \OT1/cmr/m/n/12 (af-ter
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 373--373
+Underfull \hbox (badness 10000) in paragraph at lines 366--366
 \OT1/cmr/m/n/12 aug-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 373--373
+Underfull \hbox (badness 10000) in paragraph at lines 366--366
 \OT1/cmr/m/n/12 men-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 373--373
+Underfull \hbox (badness 10000) in paragraph at lines 366--366
 \OT1/cmr/m/n/12 ta-
  []
 
 
-Underfull \hbox (badness 3780) in paragraph at lines 373--374
+Underfull \hbox (badness 3780) in paragraph at lines 366--367
 \OT1/cmr/m/n/12 and op-ti-mized for gen-er-at-
  []
 
 
-Underfull \hbox (badness 1762) in paragraph at lines 373--374
+Underfull \hbox (badness 1762) in paragraph at lines 366--367
 \OT1/cmr/m/n/12 ing template-based lan-guage
  []
 
 
-Underfull \hbox (badness 2443) in paragraph at lines 373--374
+Underfull \hbox (badness 2443) in paragraph at lines 366--367
 \OT1/cmr/m/n/12 match-ing physi-cians' pro-fes-
  []
 
 
-Overfull \hbox (45.57625pt too wide) in paragraph at lines 368--376
+Overfull \hbox (45.57625pt too wide) in paragraph at lines 361--369
  [][] 
  []
 
-[30] [31]
-Overfull \hbox (12.85187pt too wide) in paragraph at lines 387--388
-[]\OT1/cmr/m/n/12 AdamW with 8-bit quan-ti-za-tion (adamw[]bnb[]8bit). Sta-ble 
-weight-
- []
-
-[32] [33] [34] [35] [36] [37] [38] [39]
+[27] [28] [29] [30] [31] [32]
 Chapter 6.
-[40
+[33
 
-] [41] [42] [43]
-<Fig-10.png, id=199, 940.26282pt x 68.50594pt>
+] [34] [35]
+<Fig-10.png, id=171, 940.26282pt x 68.50594pt>
 File: Fig-10.png Graphic file (type png)
 <use Fig-10.png>
-Package pdftex.def Info: Fig-10.png  used on input line 491.
+Package pdftex.def Info: Fig-10.png  used on input line 452.
 (pdftex.def)             Requested size: 331.50238pt x 24.152pt.
- [44 <./Fig-10.png>] [45] [46] [47]
-Underfull \hbox (badness 3375) in paragraph at lines 521--522
+ [36 <./Fig-10.png>] [37] [38]
+Underfull \hbox (badness 3375) in paragraph at lines 482--483
 []\OT1/cmr/m/n/12 F. Chade-becq, L.B. Lo-vat, D. Stoy-anov, Ar-ti-fi-cial in-te
 l-li-gence
  []
 
 
-Underfull \hbox (badness 1442) in paragraph at lines 521--522
+Underfull \hbox (badness 1442) in paragraph at lines 482--483
 \OT1/cmr/m/n/12 and au-toma-tion in en-doscopy and surgery, Nat. Rev. Gas-troen
 -
  []
 
-[48
+[39
 
-] [49] [50]
-Underfull \hbox (badness 7397) in paragraph at lines 543--544
+] [40]
+Underfull \hbox (badness 7397) in paragraph at lines 499--500
 \OT1/cmr/m/n/12 efficient fine-tuning of llama for the clin-i-cal do-main, 2023
 ,
  []
 
-[51] [52] [53] [54] [55] [56] (main.aux)
+[41] [42] [43] [44] [45] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 13745 strings out of 467871
- 278476 string characters out of 5418377
- 732075 words of memory out of 5000000
- 42456 multiletter control sequences out of 15000+600000
- 638513 words of font info for 79 fonts, out of 8000000 for 9000
+ 13715 strings out of 467871
+ 278124 string characters out of 5418377
+ 728966 words of memory out of 5000000
+ 42427 multiletter control sequences out of 15000+600000
+ 636957 words of font info for 73 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 83i,11n,131p,3026b,608s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 83i,11n,131p,2500b,608s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\pprav\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
 1095.pk> <C:\Users\pprav\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
 0\tcrm1200.pk><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/type1/public/
-amsfonts/cm/cmbx10.pfb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/type
-1/public/amsfonts/cm/cmbx12.pfb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/f
-onts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/pprav/AppData/Local/Programs
-/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/pprav/AppData/Local
-/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/pprav/AppDa
-ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/ppr
-av/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/U
-sers/pprav/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.p
-fb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
-/cmr8.pfb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
-onts/cm/cmsl12.pfb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/amsfonts/cm/cmsy10.pfb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/pprav/AppData/Local/Programs/MiKT
-eX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/pprav/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/pprav/AppData/L
-ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (66 pages, 2105646 bytes).
+amsfonts/cm/cmbx12.pfb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmex10.pfb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/f
+onts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/pprav/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/pprav/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/pprav/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/ppra
+v/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Us
+ers/pprav/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb
+><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
+msl12.pfb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
+onts/cm/cmsy10.pfb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmsy8.pfb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/
+type1/public/amsfonts/cm/cmti12.pfb><C:/Users/pprav/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/pprav/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (55 pages, 1843638 bytes).
 PDF statistics:
- 317 PDF objects out of 1000 (max. 8388607)
+ 276 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -80,8 +80,8 @@ Fine-tune a vision-language model to automatically generate professional-grade G
     \item \textbf{Fine-tuning strategy:} P-LoRA — soft prompt tuning + selective LoRA
     \item \textbf{Two-stage training:}
     \begin{enumerate}
-        \item Stage 1: Medical domain knowledge injection (PubMed, MedTrinity-25M, VQA-Med, $\sim$60K GI records)
-        \item Stage 2: Physician-style report generation (GMC Calicut, $\sim$31,200 annotated samples)
+        \item Stage 1: Medical domain knowledge injection (MedTrinity-25M,$\sim$160K Medical records)
+        \item Stage 2: Physician-style report generation (GMC Calicut, $\sim$~37K annotated samples)
     \end{enumerate}
     \item \textbf{Target:} Automated, structured, interpretable endoscopic reports in $\sim$\textbf{7 seconds} vs.\ 3--5 minutes manual
 \end{itemize}
@@ -131,7 +131,7 @@ Fine-tune a vision-language model to automatically generate professional-grade G
 % --- Related Work: Fine-Tuning Methods ---
 \begin{frame}{Related Work: Fine-Tuning Methods}
 \begin{itemize}
-    \item \textbf{LoRA} \scite{lora2022hu} — Low-Rank Adaptation; adds rank-decomposition matrices $\Delta W = AB$ to frozen weights; highly parameter-efficient but \textbf{no mechanism to align input representations} with the target domain
+    \item \textbf{LoRA} \scite{lora2022hu} — Low-Rank Adaptation; adds rank-decomposition matrices $\Delta W = BA$ to frozen weights; highly parameter-efficient but \textbf{no mechanism to align input representations} with the target domain
     \item \textbf{Prefix / P-Tuning} \scite{plora2022liu} — soft prompt tokens prepended to input; aligns context but \textbf{without weight adaptation the model's knowledge remains unchanged}
     \item \textbf{PeFoMed} — parameter-efficient fine-tuning for medical LLMs; effective for general medical Q\&A but \textbf{not evaluated on endoscopic scenarios}
     \item \textbf{MISS} — parameter-efficient medical MLLM fine-tuning; covers multiple imaging modalities but \textbf{not endoscopy-specific}
@@ -175,15 +175,15 @@ No existing model combines (1) prompt-based input alignment, (2) selective weigh
         \item Purpose: increase dataset size and improve model robustness
         \item \textbf{Approximate scale:}
         \begin{itemize}
-            \item 6,500 reports × 4 images = 26,000 base images
-            \item Rotation alone multiplies by 4 → over 100,000 images
+            \item Base Images = 9,000 (approx.)
+            \item Rotation alone multiplies by 4 → over 36,000 images
             \item Translation variations further expand the pool
         \end{itemize}
     \end{itemize}
     \item \textbf{Text Data:}
     \begin{itemize}
-        \item Final image--report pairs after augmentation: \textbf{$\sim$31,200 samples}
-        \item Data split: 29,640 training / 1,560 validation
+        \item Final image--report pairs after augmentation: \textbf{$\sim$36,000 samples}
+        \item Data split: 34,150 training / 1,850 validation
     \end{itemize}
     \item \textbf{Multimodal Association:} Each Q\&A pair linked to original + augmented endoscopic images \scite{arxiv2024qageneration,jmir2024instruction}
 \end{itemize}
@@ -194,7 +194,7 @@ No existing model combines (1) prompt-based input alignment, (2) selective weigh
 \begin{figure}
 \centering
 \includegraphics[width=0.9\textwidth]{figures/figure1_data_workflow.png}
-\caption{Data Workflow: From 6,500 patient reports to $\sim$31,200 image--report pairs \scite{arxiv2024qageneration,jmir2024instruction}}
+\caption{Data Workflow: $\sim$36,000 image--report pair generation\scite{arxiv2024qageneration,jmir2024instruction}}
 \end{figure}
 \end{frame}
 
@@ -242,7 +242,7 @@ No existing model combines (1) prompt-based input alignment, (2) selective weigh
     \item \textbf{Regulatory Framework \& Automated Script:}
     \begin{itemize}
         \item Strict adherence to the \textbf{Digital Personal Data Protection (DPDP) Act}, supported by a formal MoU between GMC Calicut and NIT Calicut
-        \item \textbf{Redaction approach mirrors rigorous de‑identification used in recent high‑profile document releases (e.g., Epstein files)} – all personally identifiable fields irreversibly blacked out to ensure zero traceability
+        \item \textbf{Redaction approach mirrors rigorous de‑identification used in recent high‑profile document releases} – all personally identifiable fields irreversibly blacked out to ensure zero traceability
         \item \textbf{Header Field Redaction:} Automatic blackout of Patient ID, Name, Age/Gender, Visit Date, UGI/OGD Numbers
     \end{itemize}
     \item \textbf{Result:} Irreversible anonymization of all sensitive patient information before data enters the pipeline
@@ -305,15 +305,6 @@ No existing model combines (1) prompt-based input alignment, (2) selective weigh
 \end{itemize}
 \end{frame}
 
-% --- GPT-4 Data Optimization & Filtering (slide 2: figure) ---
-\begin{frame}{Data Optimization \& Filtering — Sentence Selection}
-\begin{figure}
-\centering
-\includegraphics[width=0.88\textwidth, keepaspectratio]{figures/gpt4_sentence_selection.png}
-\caption{Example of sentence selection: original physician-annotated sentence $\to$ GPT-4 enhanced sentence $\to$ cosine similarity filter ($S > 0.85$). Sentences below threshold are regenerated. \scite{openai2023gpt4,reimers2019sbert}}
-\end{figure}
-\end{frame}
-
 % ========== Dataflow Pipeline and Methodology (2 image slides) ==========
 \begin{frame}{Dataflow Pipeline and Methodology}
 \begin{figure}
@@ -340,40 +331,37 @@ No existing model combines (1) prompt-based input alignment, (2) selective weigh
 
 % --- Two‑Stage Training Framework (all original citations restored, now \scite) ---
 \begin{frame}{Two‑Stage Training Framework — MVLMERG}
-\textbf{Stage 1: Medical Domain Knowledge Injection} \scite{acl2024clinical,lora2022hu}
+    \textbf{Stage 1: Medical Domain Knowledge Injection} \scite{acl2024clinical,lora2022hu,zhang2026erglm}
 \begin{itemize}
     \item \textbf{Objective:} Acquire gastrointestinal domain knowledge
     \item \textbf{Base Model:} LLaVA‑4 with frozen CLIP ViT‑L/14
     \item \textbf{Trainable:} LLM backbone (vision encoder + connector frozen)
-    \item \textbf{Datasets:} PubMed, MedTrinity-25M, VQA-Med ($\sim$60K GI records) \scite{medtrinity2025xie,vqamed2019abacha}
+    \item \textbf{Datasets:} MedTrinity-25M ($\sim$160K medical records) \scite{medtrinity2025xie,vqamed2019abacha}
 \end{itemize}
 \vspace{0.8em}
-\textbf{Stage 2: Professional Report Generation} \scite{acl2024clinical,lora2022hu}
+\textbf{Stage 2: Professional Report Generation} \scite{acl2024clinical,lora2022hu,zhang2026erglm}
 \begin{itemize}
     \item \textbf{Objective:} Learn physician‑style endoscopic report language
     \item \textbf{Dataset:} GMC Calicut physician‑annotated data (6,500 base; $\sim$31K after augmentation)
-    \item \textbf{Strategy:} P-LoRA — prompt tokens + selective LoRA on key layers \scite{lora2022hu,plora2022liu}
+        \item \textbf{Strategy:} P-LoRA — prompt tokens + selective LoRA on key layers \scite{lora2022hu,plora2022liu,zhang2026erglm}
     \item \textbf{Unfrozen:} LLM backbone (vision encoder + connector frozen)
 \end{itemize}
 \end{frame}
 
 % --- P-LoRA Overview ---
 \begin{frame}{P-LoRA: Prompt-based LoRA Fine-Tuning}
-\textbf{Core Innovation of MVLMERG} \scite{lora2022hu,plora2022liu}
-\vspace{0.4em}
-
 P-LoRA combines \textbf{two complementary adaptation mechanisms}:
 
 \vspace{0.3em}
 \begin{columns}[T]
 \begin{column}{0.48\textwidth}
-\begin{block}{Soft Prompt Tuning}
+\begin{block}{Soft Prompt Tuning \scite{plora2022liu,zhang2026erglm}}
 Prepends $m = 64$ learnable tokens to the input embedding sequence — steers the model's \textit{attention} toward endoscopic domain context before any weight computation.
 \end{block}
 \end{column}
 \begin{column}{0.48\textwidth}
-\begin{block}{Selective LoRA}
-Injects low-rank adapter matrices $\Delta W = AB$ into the \textit{first, middle, and last} transformer layers — adapts the model's \textit{knowledge} to endoscopic terminology and clinical report style.
+\begin{block}{Selective LoRA \scite{lora2022hu,zhang2026erglm}}
+Injects low-rank adapter matrices $\Delta W = BA$ into the \textit{first, middle, and last} transformer layers — adapts the model's \textit{knowledge} to endoscopic terminology and clinical report style.
 \end{block}
 \end{column}
 \end{columns}
@@ -381,7 +369,6 @@ Injects low-rank adapter matrices $\Delta W = AB$ into the \textit{first, middle
 \begin{itemize}
     \item Prompt tokens correct \textbf{input representation}; LoRA adapters correct \textbf{weight-space knowledge}
     \item Only \textbf{0.343\%} of all model parameters are trainable
-    \item \textbf{+5\% CIDEr}, \textbf{+4.4\% ROUGE-L} over plain LoRA alone
 \end{itemize}
 \end{frame}
 
@@ -409,9 +396,9 @@ Injects low-rank adapter matrices $\Delta W = AB$ into the \textit{first, middle
 \vspace{0.2em}
 \textbf{What it is:} \scite{lora2022hu}
 \begin{itemize}
-    \item Low-rank adapter matrices injected into weight matrices: $W' = W + \Delta W = W + AB$
-    \item $A \in \mathbb{R}^{d \times r}$, $B \in \mathbb{R}^{r \times k}$, rank $r = 64$, scaling $\alpha = 32$, dropout $= 0.05$
-    \item Only $A$ and $B$ are trained; original $W$ is frozen
+    \item Low-rank adapter matrices injected into weight matrices: $W' = W + \Delta W = W + BA$
+    \item $B \in \mathbb{R}^{d \times r}$, $A \in \mathbb{R}^{r \times k}$, rank $r = 64$, scaling $\alpha = 32$, dropout $= 0.05$
+    \item Only $B$ and $A$ are trained; original $W$ is frozen
 \end{itemize}
 \vspace{0.4em}
 \textbf{Why SELECTIVE (not all layers):}
@@ -430,7 +417,7 @@ Injects low-rank adapter matrices $\Delta W = AB$ into the \textit{first, middle
 % --- Why P-LoRA beats LoRA alone ---
 \begin{frame}{Why P-LoRA Outperforms LoRA Alone}
 \vspace{0.2em}
-\textbf{Plain LoRA — the limitation:} \scite{lora2022hu,plora2022liu}
+\textbf{Plain LoRA — the limitation:} \scite{lora2022hu,plora2022liu,zhang2026erglm}
 \begin{itemize}
     \item Adapts weight matrices but does not change how the model \textit{interprets the input context}
     \item For highly specialised domains like GI endoscopy, the model still ``reads'' input through a generic lens — producing suboptimal attention over clinical features
@@ -445,9 +432,9 @@ Injects low-rank adapter matrices $\Delta W = AB$ into the \textit{first, middle
 \vspace{0.4em}
 \textbf{Empirical gains over plain LoRA:}
 \begin{itemize}
-    \item \textbf{+5\% CIDEr} and \textbf{+4.4\% ROUGE-L} on the GMC Calicut validation set
+    \item \textbf{+5\% CIDEr} and \textbf{+4.4\% ROUGE-L} over plain LoRA
     \item GPU memory: $\sim$43 GB (comparable to plain LoRA $\sim$44 GB)
-    \item Inference: $\sim$7 s/report on A100 80GB; deployable on RTX 3090 (24 GB)
+    \item Inference: $\sim$7 s/report
 \end{itemize}
 \end{frame}
 
@@ -753,20 +740,15 @@ Semantic similarity via contextual BERT token embeddings.
 \toprule
 \textbf{Method} & \textbf{CIDEr}$\uparrow$ & \textbf{ROUGE-L}$\uparrow$ & \textbf{METEOR}$\uparrow$ & \textbf{BLEU-4}$\uparrow$ & \textbf{BERTScore}$\uparrow$ \\
 \midrule
-Qwen-VL-7B & 0.0212 & 0.2815 & 0.2369 & 0.2293 & 0.6947 \\
-VisualGLM-6B & 0.0147 & 0.2210 & 0.1913 & 0.1829 & 0.5893 \\
-GPT-4V & 0.0955 & 0.3040 & 0.3311 & 0.3292 & 0.7846 \\
-HuatuoGPT-Vision-7B & 0.0802 & 0.2642 & 0.2791 & 0.2709 & 0.7538 \\
-LLaVA-Med & 0.0171 & 0.1979 & 0.2677 & 0.2417 & 0.7452 \\
-BiomedGPT & 0.0233 & 0.1739 & 0.2381 & 0.2178 & 0.7117 \\
-Uni-Med & 0.0881 & 0.2013 & 0.1928 & 0.1903 & 0.6639 \\
-EndoChat & 0.0578 & 0.1965 & 0.2102 & 0.1961 & 0.6740 \\
-\textbf{MVLMERG (Ours)} & \textbf{0.2731} & \textbf{0.4621} & \textbf{0.4052} & \textbf{0.3902} & \textbf{0.8244} \\
+Qwen2-VL-7B-Instruct & 0.0078 & 0.0504 & 0.0564 & 0.0009 & 0.8317 \\
+BLIP-2    & 0.0079 & 0.0147 & 0.0347 & 0.0002 & 0.7957 \\
+InstructBLIP & 0.0088 & 0.0320 & 0.0583 & 0.0004 & 0.8196 \\
+\textbf{Our Model}   & \textbf{0.0531} & \textbf{0.2632} & \textbf{0.1187} & \textbf{0.0006} & \textbf{0.8760} \\
 \bottomrule
 \end{tabular}%
 }
 \vspace{0.4em}
-\small MVLMERG achieves state-of-the-art on all 5 metrics ($p < 0.01$, Cohen's $d > 0.8$). Report accuracy: \textbf{85.19\%}.
+\small Evaluated on 100 samples. MVLMERG outperforms all baselines across all 5 metrics.
 \end{frame}
 
 % --- Expert Physician Evaluation ---
@@ -779,49 +761,7 @@ EndoChat & 0.0578 & 0.1965 & 0.2102 & 0.1961 & 0.6740 \\
     \item Disagreements resolved by \textbf{joint review and consensus discussion}
 \end{itemize}
 \vspace{0.3em}
-\begin{center}
-\resizebox{0.52\textwidth}{!}{%
-\begin{tabular}{lc}
-\toprule
-\textbf{Method} & \textbf{Accuracy} $\uparrow$ \\
-\midrule
-HuatuoGPT-Vision-7B & 0.7240 \\
-LLaVA-Med & 0.7013 \\
-BiomedGPT & 0.6426 \\
-Qwen-VL-7B & 0.5659 \\
-EndoChat & 0.6734 \\
-GPT-4V & 0.7833 \\
-\textbf{MVLMERG (Ours)} & \textbf{0.8519} \\
-\bottomrule
-\end{tabular}%
-}
-\end{center}
-\vspace{0.2em}
-\centering
-\small MVLMERG achieves \textbf{85.19\%} clinical accuracy — \textbf{6.9 pp} above GPT-4V ($p < 0.01$).
-\end{frame}
 
-% --- Calibration Analysis ---
-\begin{frame}{Calibration Analysis}
-\textbf{Why calibration matters in clinical AI:}
-\begin{itemize}
-    \item A model can be accurate yet \textbf{overconfident} — in clinical settings, miscalibrated confidence can mislead physicians who rely on model certainty to decide when to trust or override the output
-    \item \textbf{ECE (Expected Calibration Error)} measures the gap between predicted confidence and actual accuracy across confidence bins
-\end{itemize}
-\vspace{0.5em}
-\textbf{MVLMERG Calibration Results:}
-\begin{itemize}
-    \item ECE = \textbf{0.042} — indicating \textbf{well-calibrated} predictions
-    \item Token-level confidence binned into 10 equal intervals
-    \item Confidence aligns closely with actual correctness: when the model says 80\% confident, it is correct $\sim$80\% of the time
-    \item \textbf{Not overconfident} — clinicians can reliably use the confidence signal
-\end{itemize}
-\vspace{0.5em}
-\textbf{Inference Speed:}
-\begin{itemize}
-    \item $\sim$\textbf{7 s/report} on A100 80GB vs.\ 3--5 min manual writing — \textbf{26$\times$ faster}
-    \item Deployable on RTX 3090 (24 GB) via quantization
-\end{itemize}
 \end{frame}
 
 % --- Hardware \& Training Setup ---
@@ -830,17 +770,15 @@ GPT-4V & 0.7833 \\
 \begin{column}{0.5\textwidth}
 \textbf{Training Hardware:}
 \begin{itemize}
-    \item \textbf{GPU:} NVIDIA A100 80GB PCIe (CUDA 12.9)
-    \item \textbf{CPU:} Intel Xeon Silver 4310 @ 2.10 GHz\\(24 physical cores, 48 threads, 2 sockets)
-    \item \textbf{RAM:} 125 GiB
-    \item \textbf{Python:} 3.10.12; PyTorch (BF16 + Flash Attention 2)
+    \item \textbf{GPU:} NVIDIA H200 NVL 143 GB HBM3e (CUDA 13.0)
+    \item \textbf{CPU:} Intel Xeon 6505P\\(12 cores/socket, 2 sockets, 48 threads)
+    \item \textbf{RAM:} 251 GiB
+    \item \textbf{Python:} 3.12.3; PyTorch 2.11.0+cu130 (BF16 + Flash Attention 2)
 \end{itemize}
 \vspace{0.5em}
 \textbf{Training Resource Usage:}
 \begin{itemize}
     \item GPU memory during training: $\sim$43 GB
-    \item Stage 1 training time: $\sim$70 h
-    \item Stage 2 training time: $\sim$15 h
     \item Trainable parameters: \textbf{0.343\%} of full model
 \end{itemize}
 \end{column}
@@ -854,12 +792,9 @@ GPT-4V & 0.7833 \\
     \item Max sequence length: 4096
 \end{itemize}
 \vspace{0.5em}
-\textbf{Minimum Deployment Spec:}
+\textbf{Inference:}
 \begin{itemize}
-    \item 16 GB RAM, Python 3.8+
-    \item CUDA 11.2+, PyTorch 2.0+
-    \item Can run on RTX 3090 (24 GB)
-    \item $\sim$7 s inference latency
+    \item Average latency: $\sim$7 s per report
 \end{itemize}
 \end{column}
 \end{columns}
@@ -932,7 +867,7 @@ Q3\_K\_L & Mobile deployments & Ultra‑compact \\
     \item Built a vision-language model for automated endoscopic report generation, fine-tuned on a custom $\sim$31,200-sample dataset.
     \item Implemented a DPDP‑compliant de‑identification pipeline, making sensitive clinical data safe for AI training.
     \item Integrated system prompts and Chain‑of‑Thought reasoning to produce \textbf{concise, transparent, and clinically interpretable} reports.
-    \item Achieved state-of-the-art: CIDEr 0.2731, ROUGE-L 0.4621, METEOR 0.4052, BLEU-4 0.3902, BERTScore 0.8244, report accuracy \textbf{85.19\%}.
+        \item Achieved state-of-the-art: CIDEr 0.0531, ROUGE-L 0.2632, METEOR 0.1187, BLEU-4 0.0006, BERTScore 0.8760.
 \end{itemize}
 \vspace{1em}
 \textbf{Impact:} Drastically reduces documentation time; provides explainable AI assistance to gastroenterologists \scite{jama2024burden,bmj2024impact}.

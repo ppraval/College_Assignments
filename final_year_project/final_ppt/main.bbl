@@ -1,4 +1,4 @@
-\begin{thebibliography}{21}
+\begin{thebibliography}{22}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -130,6 +130,16 @@ Robert Leaman and Zhiyong Lu.
 \newblock Clinical applications of large language models.
 \newblock \emph{ACL Anthology}, 2024.
 \newblock URL \url{https://aclanthology.org/2024.clinicalnlp-1.21.pdf}.
+
+\bibitem[Zhang et~al.(2026)Zhang, Zheng, Li, Ma, Liang, Ren, and
+  Zhang]{zhang2026erglm}
+Xingyu Zhang, Xiangwei Zheng, Zhen Li, Mingjun Ma, Xiao Liang, Xiuxiu Ren, and
+  Mingzhe Zhang.
+\newblock A fine-tuning multimodal large language model for endoscopic report
+  generation.
+\newblock \emph{Biomedical Signal Processing and Control}, 118:\penalty0
+  109737, 2026.
+\newblock \doi{10.1016/j.bspc.2026.109737}.
 
 \bibitem[Xie et~al.(2025)Xie, Wu, He, et~al.]{medtrinity2025xie}
 Yunfei Xie, Ce~Wu, Pengfei He, et~al.

@@ -1,17 +1,19 @@
-$env:PATH += ";C:\Users\pprav\AppData\Local\Programs\MiKTeX\miktex\bin\x64"
 Set-Location $PSScriptRoot
 
-Write-Host "Pass 1: pdflatex..." -ForegroundColor Cyan
-pdflatex -interaction=nonstopmode main.tex | Select-String "^!" | ForEach-Object { Write-Host $_ -ForegroundColor Red }
+Write-Host "Pass 1: pdflatex..."
+pdflatex -interaction=nonstopmode main.tex
 
-Write-Host "Running bibtex..." -ForegroundColor Cyan
+Write-Host "Running bibtex..."
 bibtex main
 
-Write-Host "Pass 2: pdflatex..." -ForegroundColor Cyan
-pdflatex -interaction=nonstopmode main.tex | Select-String "^!" | ForEach-Object { Write-Host $_ -ForegroundColor Red }
+Write-Host "Pass 2: pdflatex..."
+pdflatex -interaction=nonstopmode main.tex
 
-Write-Host "Pass 3: pdflatex..." -ForegroundColor Cyan
-pdflatex -interaction=nonstopmode main.tex | Select-String "^!" | ForEach-Object { Write-Host $_ -ForegroundColor Red }
+Write-Host "Pass 3: pdflatex..."
+pdflatex -interaction=nonstopmode main.tex
 
-if (Test-Path "main.pdf") { Write-Host "Done! main.pdf generated successfully." -ForegroundColor Green }
-else { Write-Host "Build failed - main.pdf not found." -ForegroundColor Red }
+if (Test-Path "main.pdf") {
+    Write-Host "Done! main.pdf generated successfully."
+} else {
+    Write-Host "Compilation failed. Check main.log for details."
+}

@@ -1,7 +1,7 @@
 \beamer@sectionintoc {1}{Introduction}{3}{0}{1}
 \beamer@sectionintoc {2}{Methodology}{12}{0}{2}
-\beamer@sectionintoc {3}{Architecture}{25}{0}{3}
-\beamer@sectionintoc {4}{Implementation}{35}{0}{4}
-\beamer@sectionintoc {5}{Results}{44}{0}{5}
-\beamer@sectionintoc {6}{Future Work}{52}{0}{6}
-\beamer@sectionintoc {7}{Conclusion}{55}{0}{7}
+\beamer@sectionintoc {3}{Architecture}{24}{0}{3}
+\beamer@sectionintoc {4}{Implementation}{34}{0}{4}
+\beamer@sectionintoc {5}{Results}{43}{0}{5}
+\beamer@sectionintoc {6}{Future Work}{50}{0}{6}
+\beamer@sectionintoc {7}{Conclusion}{53}{0}{7}
