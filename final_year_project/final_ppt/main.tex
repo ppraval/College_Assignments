@@ -8,6 +8,17 @@
 \usepackage[numbers]{natbib}       % numbered citations
 \usepackage{attachfile2}
 \usepackage{amsmath, amssymb}     % for align*, \mathcal, \text in math
+\usepackage{tikz}
+
+% Post-Mid badge helper
+\newcommand{\postmidbadge}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north east, xshift=-0.3cm, yshift=-0.05cm,
+          fill=orange!20, draw=orange, rounded corners=2pt,
+          font=\tiny\bfseries, text=orange!80!black, inner sep=2pt]
+      at (current page.north east) {[Post-Mid]};
+  \end{tikzpicture}%
+}
 
 \usetheme{Madrid}
 \usecolortheme{default}
@@ -200,6 +211,7 @@ No existing model combines (1) prompt-based input alignment, (2) selective weigh
 
 % --- Data Augmentation: Rotation ---
 \begin{frame}{Data Augmentation: Rotation}
+\postmidbadge
 \begin{itemize}
     \item Each original endoscopic image is rotated by \textbf{0°, 90°, 180°, and 270°}
     \item Produces exactly \textbf{4 variants} per image
@@ -210,6 +222,7 @@ No existing model combines (1) prompt-based input alignment, (2) selective weigh
 
 % --- Data Augmentation: Stochastic Translation ---
 \begin{frame}{Data Augmentation: Stochastic Translation}
+\postmidbadge
 \begin{itemize}
     \item \textbf{Sampling:} Bernoulli process with \( p=0.2 \) selects approx.\ 20\% of rotated images for translation
     \item \textbf{Shift model:} Translation vector \( (\tau_x,\tau_y) \) drawn from a truncated Gaussian:
@@ -227,6 +240,7 @@ No existing model combines (1) prompt-based input alignment, (2) selective weigh
 
 % --- Data Augmentation Examples ---
 \begin{frame}{Data Augmentation Examples}
+\postmidbadge
 \begin{figure}
 \centering
 \includegraphics[height=4cm]{figures/aug_original.jpg}\hfill
@@ -285,15 +299,16 @@ No existing model combines (1) prompt-based input alignment, (2) selective weigh
 \textbf{Result:} Diverse, clinically relevant question‑answer combinations.
 \end{frame}
 
-% --- GPT-4 Data Optimization & Filtering (slide 1: text) ---
-\begin{frame}{Data Optimization \& Filtering with GPT-4}
+% --- GPT-5 Data Optimization & Filtering (slide 1: text) ---
+\begin{frame}{Data Optimization \& Filtering with GPT-5}
+\postmidbadge
 \vspace{0.3em}
-\textbf{Why GPT-4?} \scite{openai2023gpt4}
+\textbf{Why GPT-5?} \scite{openai2023gpt4}
 \begin{itemize}
     \item Physician reports from GMC Calicut contain incomplete, colloquial, or inconsistent sentences
-    \item GPT-4 acts as an \textbf{auxiliary annotation tool} to enrich and templatize raw descriptions
+    \item GPT-5 acts as an \textbf{auxiliary annotation tool} to enrich and templatize raw descriptions
     \item Structured prompt: \textit{``Convert to: This image shows (region). It describes (color, texture, features.)''}
-    \item All GPT-4 outputs reviewed by senior gastroenterologists for clinical accuracy
+    \item All GPT-5 outputs reviewed by senior gastroenterologists for clinical accuracy
 \end{itemize}
 \vspace{0.6em}
 \textbf{Semantic Consistency Filter:} \scite{reimers2019sbert}
@@ -301,7 +316,7 @@ No existing model combines (1) prompt-based input alignment, (2) selective weigh
     \item Optimized sentences must preserve the original clinical meaning
     \item Sentence-BERT extracts vector embeddings $\mathbf{u}$ (original) and $\mathbf{v}$ (enhanced)
     \item Cosine similarity: $S = \dfrac{\mathbf{u}\cdot\mathbf{v}}{\|\mathbf{u}\|\|\mathbf{v}\|}$ must satisfy $S > 0.85$
-    \item If $S \leq 0.85$, GPT-4 regenerates until threshold is met
+    \item If $S \leq 0.85$, GPT-5 regenerates until threshold is met
 \end{itemize}
 \end{frame}
 
@@ -350,6 +365,7 @@ No existing model combines (1) prompt-based input alignment, (2) selective weigh
 
 % --- P-LoRA Overview ---
 \begin{frame}{P-LoRA: Prompt-based LoRA Fine-Tuning}
+\postmidbadge
 P-LoRA combines \textbf{two complementary adaptation mechanisms}:
 
 \vspace{0.3em}
@@ -546,6 +562,7 @@ Injects low-rank adapter matrices $\Delta W = BA$ into the \textit{first, middle
 
 % --- Chain‑of‑Thought (CoT) in Endoscopy (now implemented) ---
 \begin{frame}{Chain‑of‑Thought (CoT) in Endoscopy}
+\postmidbadge
 \textbf{Before CoT Implementation (Baseline Model):}
 \begin{itemize}
     \item \textbf{Input:} [Image] ``What is the diagnosis?''

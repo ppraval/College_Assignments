@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.3)  12 MAY 2026 22:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.3)  13 MAY 2026 12:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -840,6 +840,80 @@ File: atfi-pdftex.def 2024-01-18 v2.12 attachfile2 driver for pdfTeX (HO)
 \atfi@appearancebox=\box80
 \c@atfi@flags=\count371
 )
+(C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlayer\tikz.
+sty
+(C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty
+Package: pgf 2025-08-29 v3.1.11a (3.1.11a)
+
+(C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodule
+shapes.code.tex
+File: pgfmoduleshapes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfnodeparttextbox=\box81
+)
+(C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodule
+plot.code.tex
+File: pgfmoduleplot.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfco
+mp-version-0-65.sty
+Package: pgfcomp-version-0-65 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@nodesepstart=\dimen319
+\pgf@nodesepend=\dimen320
+)
+(C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfco
+mp-version-1-18.sty
+Package: pgfcomp-version-1-18 2025-08-29 v3.1.11a (3.1.11a)
+))
+(C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgffor.st
+y
+(C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgffor.
+code.tex
+Package: pgffor 2025-08-29 v3.1.11a (3.1.11a)
+\pgffor@iter=\dimen321
+\pgffor@skip=\dimen322
+\pgffor@stack=\toks49
+\pgffor@toks=\toks50
+))
+(C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
+z\tikz.code.tex
+Package: tikz 2025-08-29 v3.1.11a (3.1.11a)
+
+(C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibr
+aryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@plot@mark@count=\count372
+\pgfplotmarksize=\dimen323
+)
+\tikz@lastx=\dimen324
+\tikz@lasty=\dimen325
+\tikz@lastxsaved=\dimen326
+\tikz@lastysaved=\dimen327
+\tikz@lastmovetox=\dimen328
+\tikz@lastmovetoy=\dimen329
+\tikzleveldistance=\dimen330
+\tikzsiblingdistance=\dimen331
+\tikz@figbox=\box82
+\tikz@figbox@bg=\box83
+\tikz@tempbox=\box84
+\tikz@tempbox@bg=\box85
+\tikztreelevel=\count373
+\tikznumberofchildren=\count374
+\tikznumberofcurrentchild=\count375
+\tikz@fig@count=\count376
+
+(C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodule
+matrix.code.tex
+File: pgfmodulematrix.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfmatrixcurrentrow=\count377
+\pgfmatrixcurrentcolumn=\count378
+\pgf@matrix@numberofcolumns=\count379
+)
+\tikz@expandcount=\count380
+
+(C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
+z/libraries\tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)))
 (C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerthemeMadri
 d.sty
 (C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamercolortheme
@@ -852,38 +926,38 @@ rounded.sty)
 infolines.sty))
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 21.
+(hyperref)                removing `\\' on input line 32.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 21.
+(hyperref)                removing `\\' on input line 32.
 
 
 (C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
 tex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count372
+\l__color_backend_stack_int=\count381
 ) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -923,17 +997,17 @@ LaTeX Font Info:    ... okay on input line 26.
 (C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count373
-\scratchdimen=\dimen319
-\scratchbox=\box81
-\nofMPsegments=\count374
-\nofMParguments=\count375
-\everyMPshowfont=\toks49
-\MPscratchCnt=\count376
-\MPscratchDim=\dimen320
-\MPnumerator=\count377
-\makeMPintoPDFobject=\count378
-\everyMPtoPDFconversion=\toks50
+\scratchcounter=\count382
+\scratchdimen=\dimen332
+\scratchbox=\box86
+\nofMPsegments=\count383
+\nofMParguments=\count384
+\everyMPshowfont=\toks51
+\MPscratchCnt=\count385
+\MPscratchDim=\dimen333
+\MPnumerator=\count386
+\makeMPintoPDFobject=\count387
+\everyMPtoPDFconversion=\toks52
 )
 (C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
 ase.sty
@@ -945,63 +1019,63 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 26.
+Package hyperref Info: Link coloring OFF on input line 37.
  (main.out) (main.out)
 \@outlinefile=\write6
 \openout6 = `main.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 26.
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 37.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 26.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 37.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 26.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 26.
+(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 37.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 26.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 26.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 26.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 37.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 26.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 26.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 26.
+(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 37.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 26.
+(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 26.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 26.
+(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 37.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 26.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 26.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 37.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 26.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 37.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 26.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/cmr/b/n on input line 26.
+(Font)                  OT1/cmss/b/n --> OT1/cmr/b/n on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/cmss/b/n on input line 26.
+(Font)                  OT1/cmss/b/n --> OT1/cmss/b/n on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 26.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 26.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 26.
-LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 26.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 37.
+LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 37.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
-(Font)                  OT1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 2
-6.
+(Font)                  OT1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 3
+7.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/cmss/b/it --> OT1/mathkerncmss/m/sl on input line 2
-6.
+(Font)                  OT1/cmss/b/it --> OT1/mathkerncmss/m/sl on input line 3
+7.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
 (Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on inp
-ut line 26.
+ut line 37.
 
 (C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/latex/translator\translator-b
 asic-dictionary-English.dict
@@ -1027,7 +1101,7 @@ Dictionary: translator-numbers-dictionary, Language: English
 heorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-\c@lstlisting=\count379
+\c@lstlisting=\count388
  (main.nav) [1
 
 {C:/Users/pprav/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (main.toc) [
@@ -1036,20 +1110,20 @@ Dictionary: translator-theorem-dictionary, Language: English
 ] [3
 
 ]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 56.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 67.
 
 
 (C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 56.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 67.
 
 
 (C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on inp
-ut line 56.
+ut line 67.
 
 (C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/latex/sansmathaccent\ot1mathk
 erncmss.fd
@@ -1080,7 +1154,7 @@ thkerncmss.
 File: figures/figure1_data_workflow.png Graphic file (type png)
 <use figures/figure1_data_workflow.png>
 Package pdftex.def Info: figures/figure1_data_workflow.png  used on input line 
-199.
+210.
 (pdftex.def)             Requested size: 390.00697pt x 97.8279pt.
  [14
 
@@ -1092,17 +1166,17 @@ Package pdftex.def Info: figures/figure1_data_workflow.png  used on input line
 <figures/aug_original.jpg, id=553, 481.8pt x 423.5825pt>
 File: figures/aug_original.jpg Graphic file (type jpg)
 <use figures/aug_original.jpg>
-Package pdftex.def Info: figures/aug_original.jpg  used on input line 237.
+Package pdftex.def Info: figures/aug_original.jpg  used on input line 251.
 (pdftex.def)             Requested size: 129.44814pt x 113.81102pt.
 <figures/aug_rotated_90.jpg, id=554, 481.8pt x 423.5825pt>
 File: figures/aug_rotated_90.jpg Graphic file (type jpg)
 <use figures/aug_rotated_90.jpg>
-Package pdftex.def Info: figures/aug_rotated_90.jpg  used on input line 237.
+Package pdftex.def Info: figures/aug_rotated_90.jpg  used on input line 251.
 (pdftex.def)             Requested size: 129.44814pt x 113.81102pt.
 <figures/aug_translated.png, id=555, 488.42474pt x 370.986pt>
 File: figures/aug_translated.png Graphic file (type png)
 <use figures/aug_translated.png>
-Package pdftex.def Info: figures/aug_translated.png  used on input line 237.
+Package pdftex.def Info: figures/aug_translated.png  used on input line 251.
 (pdftex.def)             Requested size: 149.83757pt x 113.81102pt.
  [17
 
@@ -1112,10 +1186,10 @@ nslated.png>]
 File: figures/deidentification_diagram.jpeg Graphic file (type jpg)
 <use figures/deidentification_diagram.jpeg>
 Package pdftex.def Info: figures/deidentification_diagram.jpeg  used on input l
-ine 256.
+ine 270.
 (pdftex.def)             Requested size: 368.34506pt x 114.66449pt.
 
-Overfull \vbox (85.53246pt too high) detected at line 256
+Overfull \vbox (85.53246pt too high) detected at line 270
  []
 
 [18
@@ -1126,13 +1200,13 @@ Overfull \vbox (85.53246pt too high) detected at line 256
 
 ]
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <10.95> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 306.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 321.
 
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <8> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 306.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 321.
 
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <6> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 306.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 321.
 
  [21
 
@@ -1140,8 +1214,8 @@ LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <6> not available
 <figures/pipeline_part1_data.png, id=693, 522.15076pt x 133.6995pt>
 File: figures/pipeline_part1_data.png Graphic file (type png)
 <use figures/pipeline_part1_data.png>
-Package pdftex.def Info: figures/pipeline_part1_data.png  used on input line 31
-5.
+Package pdftex.def Info: figures/pipeline_part1_data.png  used on input line 33
+0.
 (pdftex.def)             Requested size: 433.34402pt x 110.96442pt.
  [22
 
@@ -1150,7 +1224,7 @@ Package pdftex.def Info: figures/pipeline_part1_data.png  used on input line 31
 File: figures/pipeline_part2_training.png Graphic file (type png)
 <use figures/pipeline_part2_training.png>
 Package pdftex.def Info: figures/pipeline_part2_training.png  used on input lin
-e 323.
+e 338.
 (pdftex.def)             Requested size: 433.34402pt x 160.5517pt.
  [23
 
@@ -1166,7 +1240,7 @@ e 323.
 ] [28
 
 ]
-Overfull \vbox (7.42204pt too high) detected at line 439
+Overfull \vbox (7.42204pt too high) detected at line 455
  []
 
 [29
@@ -1175,11 +1249,11 @@ Overfull \vbox (7.42204pt too high) detected at line 439
 <figures/system_architecture.png, id=947, 762.4485pt x 329.43076pt>
 File: figures/system_architecture.png Graphic file (type png)
 <use figures/system_architecture.png>
-Package pdftex.def Info: figures/system_architecture.png  used on input line 44
-8.
+Package pdftex.def Info: figures/system_architecture.png  used on input line 46
+4.
 (pdftex.def)             Requested size: 433.34402pt x 187.23459pt.
 
-Overfull \vbox (12.51364pt too high) detected at line 448
+Overfull \vbox (12.51364pt too high) detected at line 464
  []
 
 [30
@@ -1188,7 +1262,7 @@ Overfull \vbox (12.51364pt too high) detected at line 448
 <figures/llava_architecture.png, id=974, 1722.435pt x 596.2275pt>
 File: figures/llava_architecture.png Graphic file (type png)
 <use figures/llava_architecture.png>
-Package pdftex.def Info: figures/llava_architecture.png  used on input line 457
+Package pdftex.def Info: figures/llava_architecture.png  used on input line 473
 .
 (pdftex.def)             Requested size: 433.34402pt x 150.00267pt.
  [31
@@ -1198,7 +1272,7 @@ Package pdftex.def Info: figures/llava_architecture.png  used on input line 457
 File: figures/clip_vit_architecture.png Graphic file (type png)
 <use figures/clip_vit_architecture.png>
 Package pdftex.def Info: figures/clip_vit_architecture.png  used on input line 
-466.
+482.
 (pdftex.def)             Requested size: 433.34402pt x 151.63644pt.
  [32
 
@@ -1206,11 +1280,11 @@ Package pdftex.def Info: figures/clip_vit_architecture.png  used on input line
 <figures/llama_architecture.png, id=1028, 1161.33875pt x 679.53876pt>
 File: figures/llama_architecture.png Graphic file (type png)
 <use figures/llama_architecture.png>
-Package pdftex.def Info: figures/llama_architecture.png  used on input line 475
+Package pdftex.def Info: figures/llama_architecture.png  used on input line 491
 .
 (pdftex.def)             Requested size: 433.34402pt x 253.5614pt.
 
-Overfull \vbox (89.24045pt too high) detected at line 475
+Overfull \vbox (89.24045pt too high) detected at line 491
  []
 
 [33
@@ -1223,27 +1297,27 @@ Overfull \vbox (89.24045pt too high) detected at line 475
 <figures/old_report.pdf, id=1105, page=1, 597.50786pt x 845.04686pt>
 File: figures/old_report.pdf Graphic file (type pdf)
 <use figures/old_report.pdf, page 1>
-Package pdftex.def Info: figures/old_report.pdf , page1 used on input line 526.
+Package pdftex.def Info: figures/old_report.pdf , page1 used on input line 542.
 
 (pdftex.def)             Requested size: 208.00327pt x 281.35373pt.
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 526--526
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 542--542
  [] 
  []
 
 <figures/new_report.pdf, id=1107, page=1, 597.50786pt x 845.04686pt>
 File: figures/new_report.pdf Graphic file (type pdf)
 <use figures/new_report.pdf, page 1>
-Package pdftex.def Info: figures/new_report.pdf , page1 used on input line 526.
+Package pdftex.def Info: figures/new_report.pdf , page1 used on input line 542.
 
 (pdftex.def)             Requested size: 208.00327pt x 204.72041pt.
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 526--526
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 542--542
  [] 
  []
 
 
-Overfull \vbox (140.44667pt too high) detected at line 526
+Overfull \vbox (140.44667pt too high) detected at line 542
  []
 
 [36
@@ -1252,27 +1326,27 @@ Overfull \vbox (140.44667pt too high) detected at line 526
 <figures/old_report.pdf, id=1153, page=2, 597.50786pt x 845.04686pt>
 File: figures/old_report.pdf Graphic file (type pdf)
 <use figures/old_report.pdf, page 2>
-Package pdftex.def Info: figures/old_report.pdf , page2 used on input line 526.
+Package pdftex.def Info: figures/old_report.pdf , page2 used on input line 542.
 
 (pdftex.def)             Requested size: 208.00327pt x 281.35373pt.
 
-Overfull \hbox (9.23332pt too wide) in paragraph at lines 526--526
+Overfull \hbox (9.23332pt too wide) in paragraph at lines 542--542
   [] 
  []
 
 <figures/new_report.pdf, id=1155, page=2, 597.50786pt x 845.04686pt>
 File: figures/new_report.pdf Graphic file (type pdf)
 <use figures/new_report.pdf, page 2>
-Package pdftex.def Info: figures/new_report.pdf , page2 used on input line 526.
+Package pdftex.def Info: figures/new_report.pdf , page2 used on input line 542.
 
 (pdftex.def)             Requested size: 208.00327pt x 204.72041pt.
 
-Overfull \hbox (9.23332pt too wide) in paragraph at lines 526--526
+Overfull \hbox (9.23332pt too wide) in paragraph at lines 542--542
   [] 
  []
 
 
-Overfull \vbox (130.24666pt too high) detected at line 526
+Overfull \vbox (130.24666pt too high) detected at line 542
  []
 
 [37
@@ -1294,40 +1368,40 @@ Overfull \vbox (130.24666pt too high) detected at line 526
 <generated_report.pdf, id=1343, page=1, 597.50786pt x 845.04686pt>
 File: generated_report.pdf Graphic file (type pdf)
 <use generated_report.pdf, page 1>
-Package pdftex.def Info: generated_report.pdf , page1 used on input line 654.
+Package pdftex.def Info: generated_report.pdf , page1 used on input line 671.
 (pdftex.def)             Requested size: 141.2805pt x 199.81512pt.
 <generated_report.pdf, id=1344, page=2, 597.50786pt x 845.04686pt>
 File: generated_report.pdf Graphic file (type pdf)
 <use generated_report.pdf, page 2>
-Package pdftex.def Info: generated_report.pdf , page2 used on input line 654.
+Package pdftex.def Info: generated_report.pdf , page2 used on input line 671.
 (pdftex.def)             Requested size: 141.2805pt x 199.81512pt.
 
-Overfull \vbox (8.457pt too high) detected at line 654
+Overfull \vbox (8.457pt too high) detected at line 671
  []
 
 [44
 
  <./generated_report.pdf> <./generated_report.pdf>]
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <9> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 697.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 714.
 
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <5> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 697.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 714.
 
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <10> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 697.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 714.
 
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <7> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 697.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 714.
 
 
-Overfull \vbox (9.49837pt too high) detected at line 697
+Overfull \vbox (9.49837pt too high) detected at line 714
  []
 
 [45
 
 ]
-Overfull \vbox (23.35684pt too high) detected at line 733
+Overfull \vbox (23.35684pt too high) detected at line 750
  []
 
 [46
@@ -1392,13 +1466,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 3B357F955481EEE719651CBF8A65892E;782.
  ) 
 Here is how much of TeX's memory you used:
- 24528 strings out of 467871
- 472822 string characters out of 5418377
- 849761 words of memory out of 5000000
- 52756 multiletter control sequences out of 15000+600000
+ 27594 strings out of 467871
+ 545552 string characters out of 5418377
+ 917111 words of memory out of 5000000
+ 55781 multiletter control sequences out of 15000+600000
  645469 words of font info for 102 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,14n,123p,408b,770s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 128i,14n,123p,408b,766s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\pprav\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcsx
 1000.pk> <C:\Users\pprav\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
 0\tcss1000.pk> <C:\Users\pprav\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
@@ -1425,7 +1499,7 @@ fb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
 fonts/cm/cmsy9.pfb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/type1/pu
 blic/amsfonts/cm/cmtt10.pfb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts
 /type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (61 pages, 4141914 bytes).
+Output written on main.pdf (61 pages, 4143572 bytes).
 PDF statistics:
  1979 PDF objects out of 2073 (max. 8388607)
  153 named destinations out of 1000 (max. 500000)

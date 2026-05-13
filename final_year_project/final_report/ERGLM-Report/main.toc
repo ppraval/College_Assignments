@@ -10,25 +10,25 @@
 \contentsline {chapter}{\numberline {4}Methodology}{10}{}%
 \contentsline {section}{\numberline {4.1}Method}{10}{}%
 \contentsline {subsection}{\numberline {4.1.1}Overview}{10}{}%
-\contentsline {subsection}{\numberline {4.1.2}Two-stage fine-tuning strategy}{11}{}%
-\contentsline {subsection}{\numberline {4.1.3}P-LoRA method}{13}{}%
-\contentsline {subsection}{\numberline {4.1.4}Data optimization and filtering}{16}{}%
-\contentsline {subsection}{\numberline {4.1.5}Data Augmentation}{19}{}%
-\contentsline {subsubsection}{Rotation Augmentation}{19}{}%
-\contentsline {subsubsection}{Stochastic Translation Augmentation}{19}{}%
-\contentsline {subsubsection}{Combined Dataset Size}{20}{}%
-\contentsline {subsection}{\numberline {4.1.6}Chain-of-Thought Integration}{20}{}%
-\contentsline {subsubsection}{The Interpretability Problem and Motivation}{20}{}%
-\contentsline {subsubsection}{CoT Implementation}{21}{}%
-\contentsline {subsubsection}{Impact on Clinical Utility}{22}{}%
-\contentsline {chapter}{\numberline {5}Results}{23}{}%
-\contentsline {section}{\numberline {5.1}Experiments and discussion}{23}{}%
-\contentsline {subsection}{\numberline {5.1.1}Datasets}{23}{}%
-\contentsline {subsection}{\numberline {5.1.2}Implementation details}{26}{}%
-\contentsline {subsection}{\numberline {5.1.3}Evaluation metrics}{29}{}%
-\contentsline {subsection}{\numberline {5.1.4}Experimental results}{30}{}%
-\contentsline {subsubsection}{Comparison of different models}{30}{}%
+\contentsline {subsection}{\numberline {4.1.2}Two-Stage Fine-Tuning Strategy}{12}{}%
+\contentsline {subsection}{\numberline {4.1.3}P-LoRA Method}{13}{}%
+\contentsline {subsection}{\numberline {4.1.4}Data Optimisation and Filtering with GPT-5}{16}{}%
+\contentsline {subsection}{\numberline {4.1.5}Data Augmentation}{18}{}%
+\contentsline {subsubsection}{Rotation Augmentation}{18}{}%
+\contentsline {subsubsection}{Stochastic Translation Augmentation}{18}{}%
+\contentsline {subsubsection}{Combined Dataset Size}{19}{}%
+\contentsline {subsection}{\numberline {4.1.6}Chain-of-Thought Integration}{19}{}%
+\contentsline {subsubsection}{The Interpretability Problem and Motivation}{19}{}%
+\contentsline {subsubsection}{CoT Implementation}{20}{}%
+\contentsline {subsubsection}{Impact on Clinical Utility}{21}{}%
+\contentsline {chapter}{\numberline {5}Results}{22}{}%
+\contentsline {section}{\numberline {5.1}Experiments and discussion}{22}{}%
+\contentsline {subsection}{\numberline {5.1.1}Datasets}{22}{}%
+\contentsline {subsection}{\numberline {5.1.2}Implementation details}{25}{}%
+\contentsline {subsection}{\numberline {5.1.3}Evaluation metrics}{27}{}%
+\contentsline {subsection}{\numberline {5.1.4}Experimental results}{28}{}%
+\contentsline {subsubsection}{Comparison of different models}{28}{}%
 \contentsline {chapter}{\numberline {6}Conclusion and Future work}{32}{}%
 \contentsline {section}{\numberline {6.1}Limitations and future work}{32}{}%
-\contentsline {section}{\numberline {6.2}Conclusion}{36}{}%
+\contentsline {section}{\numberline {6.2}Conclusion}{34}{}%
 \contentsline {chapter}{References}{37}{}%
