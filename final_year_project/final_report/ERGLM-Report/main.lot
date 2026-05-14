@@ -3,7 +3,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.2}{\ignorespaces Training hyperparameters for Phase~1 and Phase~2 fine-tuning runs.}}{27}{}%
-\contentsline {table}{\numberline {5.1}{\ignorespaces Training data composition across both fine-tuning phases. For each source, the table identifies the dataset origin, content modality, record volume, and a concise characterisation of its role in the training curriculum.}}{30}{}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces Quantitative comparison of MVLMERG against baseline vision-language models. All scores are computed on a randomly sampled subset of 100 held-out validation cases across five automated metrics: BLEU-4, METEOR, ROUGE-L, CIDEr, and BERTScore.}}{31}{}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Training hyperparameters for Phase~1 and Phase~2 fine-tuning runs.}}{28}{}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Training data composition across both fine-tuning phases. For each source, the table identifies the dataset origin, content modality, record volume, and a concise characterisation of its role in the training curriculum.}}{31}{}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Quantitative comparison of MVLMERG against baseline vision-language models. All scores are computed on a randomly sampled subset of 100 held-out validation cases across five automated metrics: BLEU-4, METEOR, ROUGE-L, CIDEr, and BERTScore.}}{32}{}%
 \addvspace {10\p@ }

@@ -19,20 +19,20 @@
 \@writefile{toc}{\contentsline {section}{\numberline {2.1}Evolution of Medical Documentation Burden}{5}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2.2}Multimodal Large Language Models (MLLMs)}{6}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2.3}Medical MLLMs}{7}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.4}Fine-tuning methods}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}Fine-tuning methods for LLMs}{7}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{\numberline {3}Problem Definition}{9}{}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Methodology}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Methodology for MVLMERG}{10}{}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {4.1}Method}{10}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Overview}{10}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Overall architecture of the proposed two-phase fine-tuning pipeline. The left portion depicts Phase~1 (public-dataset domain injection) and Phase~2 (private clinical fine-tuning); the right portion provides a detailed view of the P-LoRA adaptation module. Green-highlighted components indicate the elements introduced in this work.}}{11}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Overall architecture of the proposed two-phase fine-tuning pipeline. The left portion depicts Phases 1 (public-dataset domain injection) and 2 (private clinical fine-tuning); the right portion provides a detailed view of the P-LoRA adaptation module. Green-highlighted components indicate the elements introduced in this work.}}{11}{}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:arch}{{4.1}{11}{}{figure.4.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Two-Phase Fine-Tuning Strategy}{12}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}Prompt-LoRA (P-LoRA) Method}{13}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Two-Phase Fine-Tuning Strategy of MVLMERG}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}Prompt-LoRA (P-LoRA) Method for MVLMERG}{13}{}\protected@file@percent }
 \newlabel{eq:lora}{{4.1}{15}{}{equation.4.1}{}}
 \newlabel{eq:autoregressive}{{4.2}{15}{}{equation.4.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Schematic of the P-LoRA adaptation strategy. Panel~(a) depicts the soft-prompt insertion applied to intermediate transformer layers; panel~(b) shows the selective LoRA injection applied at the initial, intermediate, and terminal layers of the language model backbone.}}{16}{}\protected@file@percent }
@@ -49,30 +49,31 @@
 \newlabel{fig:augmentation}{{4.3}{20}{}{figure.4.3}{}}
 \@writefile{toc}{\contentsline {subsubsection}{CoT Implementation}{20}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{Impact on Clinical Utility}{21}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Results}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Ethical Considerations}{21}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Results}{23}{}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Experiments and discussion}{22}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Datasets}{22}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Automated PHI removal pipeline for GMC Calicut clinical records. Prior to any use in model training, the system irreversibly suppresses all identifying fields, including Patient ID, full name, age and gender, procedure dates, and UGI-OGD reference numbers, to satisfy the requirements of India's Digital Personal Data Protection (DPDP) Act.}}{24}{}\protected@file@percent }
-\newlabel{fig:deidentification}{{5.1}{24}{}{figure.5.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Implementation details}{25}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces Training hyperparameters for Phase~1 and Phase~2 fine-tuning runs.}}{27}{}\protected@file@percent }
-\newlabel{tab:hyperparams}{{5.2}{27}{}{table.5.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Evaluation metrics}{27}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.4}Experimental results}{28}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Comparison of different models}{28}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Training data composition across both fine-tuning phases. For each source, the table identifies the dataset origin, content modality, record volume, and a concise characterisation of its role in the training curriculum.}}{30}{}\protected@file@percent }
-\newlabel{tab:data-distribution}{{5.1}{30}{}{table.5.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces Quantitative comparison of MVLMERG against baseline vision-language models. All scores are computed on a randomly sampled subset of 100 held-out validation cases across five automated metrics: BLEU-4, METEOR, ROUGE-L, CIDEr, and BERTScore.}}{31}{}\protected@file@percent }
-\newlabel{tab:model-comparison}{{5.3}{31}{}{table.5.3}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Conclusion and Future work}{32}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Experiments and discussion}{23}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Datasets}{23}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Automated PHI removal pipeline for the GMC Calicut clinical records. Prior to any use in model training, the system irreversibly suppresses all identifying fields, including Patient ID, full name, age and gender, procedure dates, and UGI-OGD reference numbers, to satisfy the requirements of India's DPDP Act.}}{25}{}\protected@file@percent }
+\newlabel{fig:deidentification}{{5.1}{25}{}{figure.5.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Implementation details}{26}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces Training hyperparameters for Phase~1 and Phase~2 fine-tuning runs.}}{28}{}\protected@file@percent }
+\newlabel{tab:hyperparams}{{5.2}{28}{}{table.5.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Evaluation metrics}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.4}Experimental results}{29}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Comparison of different models}{29}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Training data composition across both fine-tuning phases. For each source, the table identifies the dataset origin, content modality, record volume, and a concise characterisation of its role in the training curriculum.}}{31}{}\protected@file@percent }
+\newlabel{tab:data-distribution}{{5.1}{31}{}{table.5.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces Quantitative comparison of MVLMERG against baseline vision-language models. All scores are computed on a randomly sampled subset of 100 held-out validation cases across five automated metrics: BLEU-4, METEOR, ROUGE-L, CIDEr, and BERTScore.}}{32}{}\protected@file@percent }
+\newlabel{tab:model-comparison}{{5.3}{32}{}{table.5.3}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Conclusion and Future Work}{33}{}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}Limitations and future work}{32}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces Intended deployment workflow for MVLMERG in a clinical setting: an endoscopic image is ingested by the system, which produces a structured draft report; a reviewing clinician edits and approves the draft before it is committed to the electronic medical record (EMR).}}{35}{}\protected@file@percent }
-\newlabel{fig:workflow}{{6.1}{35}{}{figure.6.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}Conclusion}{35}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Limitations and future work}{33}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces Intended deployment workflow for MVLMERG in a clinical setting: an endoscopic image is ingested by the system, which produces a structured draft report; a reviewing clinician edits and approves the draft before it is committed to the electronic medical record (EMR).}}{36}{}\protected@file@percent }
+\newlabel{fig:workflow}{{6.1}{36}{}{figure.6.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Conclusion}{36}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{References}{37}{}\protected@file@percent }
 \bibcite{ref1}{1}
 \bibcite{ref2}{2}

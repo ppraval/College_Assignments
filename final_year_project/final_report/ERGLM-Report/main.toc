@@ -5,13 +5,13 @@
 \contentsline {section}{\numberline {2.1}Evolution of Medical Documentation Burden}{5}{}%
 \contentsline {section}{\numberline {2.2}Multimodal Large Language Models (MLLMs)}{6}{}%
 \contentsline {section}{\numberline {2.3}Medical MLLMs}{7}{}%
-\contentsline {section}{\numberline {2.4}Fine-tuning methods}{7}{}%
+\contentsline {section}{\numberline {2.4}Fine-tuning methods for LLMs}{7}{}%
 \contentsline {chapter}{\numberline {3}Problem Definition}{9}{}%
-\contentsline {chapter}{\numberline {4}Methodology}{10}{}%
+\contentsline {chapter}{\numberline {4}Methodology for MVLMERG}{10}{}%
 \contentsline {section}{\numberline {4.1}Method}{10}{}%
 \contentsline {subsection}{\numberline {4.1.1}Overview}{10}{}%
-\contentsline {subsection}{\numberline {4.1.2}Two-Phase Fine-Tuning Strategy}{12}{}%
-\contentsline {subsection}{\numberline {4.1.3}Prompt-LoRA (P-LoRA) Method}{13}{}%
+\contentsline {subsection}{\numberline {4.1.2}Two-Phase Fine-Tuning Strategy of MVLMERG}{12}{}%
+\contentsline {subsection}{\numberline {4.1.3}Prompt-LoRA (P-LoRA) Method for MVLMERG}{13}{}%
 \contentsline {subsection}{\numberline {4.1.4}Data Optimisation and Filtering with GPT-5}{16}{}%
 \contentsline {subsection}{\numberline {4.1.5}Data Augmentation}{18}{}%
 \contentsline {subsubsection}{Rotation Augmentation}{18}{}%
@@ -21,14 +21,15 @@
 \contentsline {subsubsection}{The Interpretability Problem and Motivation}{19}{}%
 \contentsline {subsubsection}{CoT Implementation}{20}{}%
 \contentsline {subsubsection}{Impact on Clinical Utility}{21}{}%
-\contentsline {chapter}{\numberline {5}Results}{22}{}%
-\contentsline {section}{\numberline {5.1}Experiments and discussion}{22}{}%
-\contentsline {subsection}{\numberline {5.1.1}Datasets}{22}{}%
-\contentsline {subsection}{\numberline {5.1.2}Implementation details}{25}{}%
-\contentsline {subsection}{\numberline {5.1.3}Evaluation metrics}{27}{}%
-\contentsline {subsection}{\numberline {5.1.4}Experimental results}{28}{}%
-\contentsline {subsubsection}{Comparison of different models}{28}{}%
-\contentsline {chapter}{\numberline {6}Conclusion and Future work}{32}{}%
-\contentsline {section}{\numberline {6.1}Limitations and future work}{32}{}%
-\contentsline {section}{\numberline {6.2}Conclusion}{35}{}%
+\contentsline {section}{\numberline {4.2}Ethical Considerations}{21}{}%
+\contentsline {chapter}{\numberline {5}Results}{23}{}%
+\contentsline {section}{\numberline {5.1}Experiments and discussion}{23}{}%
+\contentsline {subsection}{\numberline {5.1.1}Datasets}{23}{}%
+\contentsline {subsection}{\numberline {5.1.2}Implementation details}{26}{}%
+\contentsline {subsection}{\numberline {5.1.3}Evaluation metrics}{28}{}%
+\contentsline {subsection}{\numberline {5.1.4}Experimental results}{29}{}%
+\contentsline {subsubsection}{Comparison of different models}{29}{}%
+\contentsline {chapter}{\numberline {6}Conclusion and Future Work}{33}{}%
+\contentsline {section}{\numberline {6.1}Limitations and future work}{33}{}%
+\contentsline {section}{\numberline {6.2}Conclusion}{36}{}%
 \contentsline {chapter}{References}{37}{}%
