@@ -28,14 +28,14 @@
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {4.1}Method}{10}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Overview}{10}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Overall architecture of the proposed two-stage fine-tuning pipeline. The left portion depicts Stage~1 (public-dataset domain injection) and Stage~2 (private clinical fine-tuning); the right portion provides a detailed view of the P-LoRA adaptation module. Green-highlighted components indicate the elements introduced in this work.}}{11}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Overall architecture of the proposed two-phase fine-tuning pipeline. The left portion depicts Phase~1 (public-dataset domain injection) and Phase~2 (private clinical fine-tuning); the right portion provides a detailed view of the P-LoRA adaptation module. Green-highlighted components indicate the elements introduced in this work.}}{11}{}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:arch}{{4.1}{11}{}{figure.4.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Two-Stage Fine-Tuning Strategy}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Two-Phase Fine-Tuning Strategy}{12}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}P-LoRA Method}{13}{}\protected@file@percent }
 \newlabel{eq:lora}{{4.1}{15}{}{equation.4.1}{}}
 \newlabel{eq:autoregressive}{{4.2}{15}{}{equation.4.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Schematic of the P-LoRA adaptation strategy. Panel~(a) depicts the soft-prompt insertion applied to intermediate transformer layers; panel~(b) shows the selective LoRA injection used in the first, middle, and final layers of the language model backbone.}}{16}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Schematic of the P-LoRA adaptation strategy. Panel~(a) depicts the soft-prompt insertion applied to intermediate transformer layers; panel~(b) shows the selective LoRA injection applied at the initial, intermediate, and terminal layers of the language model backbone.}}{16}{}\protected@file@percent }
 \newlabel{fig:plora}{{4.2}{16}{}{figure.4.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1.4}Data Optimisation and Filtering with GPT-5}{16}{}\protected@file@percent }
 \newlabel{eq:cosine}{{4.3}{17}{}{equation.4.3}{}}
@@ -57,7 +57,7 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Automated PHI removal pipeline for GMC Calicut clinical records. Prior to any use in model training, the system irreversibly suppresses all identifying fields, including Patient ID, full name, age and gender, procedure dates, and UGI-OGD reference numbers, to satisfy the requirements of India's Digital Personal Data Protection (DPDP) Act.}}{24}{}\protected@file@percent }
 \newlabel{fig:deidentification}{{5.1}{24}{}{figure.5.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Implementation details}{25}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces Training hyperparameters for Stage~1 and Stage~2 fine-tuning runs.}}{27}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces Training hyperparameters for Phase~1 and Phase~2 fine-tuning runs.}}{27}{}\protected@file@percent }
 \newlabel{tab:hyperparams}{{5.2}{27}{}{table.5.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Evaluation metrics}{27}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1.4}Experimental results}{28}{}\protected@file@percent }
@@ -70,9 +70,9 @@
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {6.1}Limitations and future work}{32}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}Conclusion}{34}{}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces Intended deployment workflow for MVLMERG in a clinical setting: an endoscopic image is ingested by the system, which produces a structured draft report; a reviewing clinician edits and approves the draft before it is committed to the electronic medical record (EMR).}}{35}{}\protected@file@percent }
 \newlabel{fig:workflow}{{6.1}{35}{}{figure.6.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Conclusion}{35}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{References}{37}{}\protected@file@percent }
 \bibcite{ref1}{1}
 \bibcite{ref2}{2}
