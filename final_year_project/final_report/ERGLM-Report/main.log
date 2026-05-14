@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.3)  13 MAY 2026 23:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.3)  14 MAY 2026 10:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -559,12 +559,12 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 60.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 61.
 
  (C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 60.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 61.
 
 
 (C:\Users\pprav\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
@@ -573,7 +573,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 <nitc-logo.png, id=1, 680.5425pt x 808.01875pt>
 File: nitc-logo.png Graphic file (type png)
 <use nitc-logo.png>
-Package pdftex.def Info: nitc-logo.png  used on input line 69.
+Package pdftex.def Info: nitc-logo.png  used on input line 70.
 (pdftex.def)             Requested size: 77.99881pt x 92.6058pt.
 
 [1
@@ -584,14 +584,34 @@ Package pdftex.def Info: nitc-logo.png  used on input line 69.
 png>]
 File: nitc-logo.png Graphic file (type png)
 <use nitc-logo.png>
-Package pdftex.def Info: nitc-logo.png  used on input line 90.
+Package pdftex.def Info: nitc-logo.png  used on input line 91.
 (pdftex.def)             Requested size: 77.99881pt x 92.6058pt.
- [1] [2]
-Underfull \hbox (badness 10000) in paragraph at lines 122--123
+
+Overfull \hbox (150.17917pt too wide) in paragraph at lines 113--123
+ []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--123
 
  []
 
-[3
+[1]
+Underfull \hbox (badness 10000) in paragraph at lines 124--125
+
+ []
+
+
+Overfull \hbox (34.94965pt too wide) in paragraph at lines 127--140
+ []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 127--140
+
+ []
+
+[2
 
 ] [1] [1
 
@@ -629,24 +649,19 @@ No file main.gls.
 
 ]
 Chapter 1.
-
-Underfull \hbox (badness 10000) in paragraph at lines 173--178
-
- []
-
 [2
 
 ] [3] [4]
 Chapter 2.
 
-Overfull \hbox (5.55975pt too wide) in paragraph at lines 196--196
+Overfull \hbox (5.55975pt too wide) in paragraph at lines 186--186
 []\OT1/cmr/bx/n/17.28 Evolution of Med-i-cal Doc-u-men-ta-tion Bur-
  []
 
 [5
 
 ]
-Overfull \hbox (0.97511pt too wide) in paragraph at lines 205--206
+Overfull \hbox (0.97511pt too wide) in paragraph at lines 195--196
 \OT1/cmr/m/n/12 Parallel to the growth of general-purpose vision-language re-se
 arch, the health-
  []
@@ -660,37 +675,37 @@ Chapter 4.
 [10
 
 ]
-<Fig-1.png, id=75, 907.13907pt x 411.03563pt>
+<Fig-1.png, id=71, 907.13907pt x 411.03563pt>
 File: Fig-1.png Graphic file (type png)
 <use Fig-1.png>
-Package pdftex.def Info: Fig-1.png  used on input line 224.
+Package pdftex.def Info: Fig-1.png  used on input line 214.
 (pdftex.def)             Requested size: 331.50238pt x 150.2055pt.
  [11 <./Fig-1.png>] [12] [13] [14]
-<Fig-2.png, id=93, 495.35063pt x 338.76563pt>
+<Fig-2.png, id=90, 495.35063pt x 338.76563pt>
 File: Fig-2.png Graphic file (type png)
 <use Fig-2.png>
-Package pdftex.def Info: Fig-2.png  used on input line 262.
+Package pdftex.def Info: Fig-2.png  used on input line 252.
 (pdftex.def)             Requested size: 331.50238pt x 226.71332pt.
  [15] [16 <./Fig-2.png>] [17] [18
 
 ]
-<aug_original.jpg, id=110, 481.8pt x 423.5825pt>
+<aug_original.jpg, id=107, 481.8pt x 423.5825pt>
 File: aug_original.jpg Graphic file (type jpg)
 <use aug_original.jpg>
-Package pdftex.def Info: aug_original.jpg  used on input line 314.
+Package pdftex.def Info: aug_original.jpg  used on input line 304.
 (pdftex.def)             Requested size: 120.89905pt x 106.28963pt.
-<aug_rotated_90.jpg, id=111, 481.8pt x 423.5825pt>
+<aug_rotated_90.jpg, id=108, 481.8pt x 423.5825pt>
 File: aug_rotated_90.jpg Graphic file (type jpg)
 <use aug_rotated_90.jpg>
-Package pdftex.def Info: aug_rotated_90.jpg  used on input line 319.
+Package pdftex.def Info: aug_rotated_90.jpg  used on input line 309.
 (pdftex.def)             Requested size: 120.89905pt x 106.28963pt.
-<aug_translated.png, id=112, 488.42474pt x 370.986pt>
+<aug_translated.png, id=109, 488.42474pt x 370.986pt>
 File: aug_translated.png Graphic file (type png)
 <use aug_translated.png>
-Package pdftex.def Info: aug_translated.png  used on input line 324.
+Package pdftex.def Info: aug_translated.png  used on input line 314.
 (pdftex.def)             Requested size: 120.89905pt x 91.82921pt.
 
-Underfull \hbox (badness 3690) in paragraph at lines 325--325
+Underfull \hbox (badness 3690) in paragraph at lines 315--315
 []\OT1/cmr/m/n/10.95 (c) |Stochas-tic Trans-la-
  []
 
@@ -700,224 +715,224 @@ Chapter 5.
 [22
 
 ]
-<deidentification_diagram.jpeg, id=129, 986.68625pt x 307.1475pt>
+<deidentification_diagram.jpeg, id=126, 986.68625pt x 307.1475pt>
 File: deidentification_diagram.jpeg Graphic file (type jpg)
 <use deidentification_diagram.jpeg>
-Package pdftex.def Info: deidentification_diagram.jpeg  used on input line 371.
+Package pdftex.def Info: deidentification_diagram.jpeg  used on input line 361.
 
 (pdftex.def)             Requested size: 331.50238pt x 103.19617pt.
  [23] [24 <./deidentification_diagram.jpeg>]
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 376--376
 []|\OT1/cmr/m/n/12 Training
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 376--376
 []|\OT1/cmr/m/n/12 Sample
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 388--388
+Underfull \hbox (badness 10000) in paragraph at lines 378--378
 []|\OT1/cmr/m/n/12 Phase 1
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 388--388
+Underfull \hbox (badness 10000) in paragraph at lines 378--378
 \OT1/cmr/m/n/12 (Gen-eral
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 388--388
+Underfull \hbox (badness 10000) in paragraph at lines 378--378
 \OT1/cmr/m/n/12 Pre-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 388--388
+Underfull \hbox (badness 10000) in paragraph at lines 378--378
 []|\OT1/cmr/m/n/12 PubMed;
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 388--388
+Underfull \hbox (badness 10000) in paragraph at lines 378--378
 \OT1/cmr/m/n/12 MedTrinity-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 388--388
+Underfull \hbox (badness 10000) in paragraph at lines 378--378
 \OT1/cmr/m/n/12 25M; VQA-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 388--388
+Underfull \hbox (badness 10000) in paragraph at lines 378--378
 []|\OT1/cmr/m/n/12 GI-domain
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 388--388
+Underfull \hbox (badness 10000) in paragraph at lines 378--378
 \OT1/cmr/m/n/12 knowl-edge:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 388--388
+Underfull \hbox (badness 10000) in paragraph at lines 378--378
 \OT1/cmr/m/n/12 image--
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 388--388
+Underfull \hbox (badness 10000) in paragraph at lines 378--378
 \OT1/cmr/m/n/12 caption and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 388--389
+Underfull \hbox (badness 10000) in paragraph at lines 378--379
 []|\OT1/cmr/m/n/12 Open-source med-i-
  []
 
 
-Underfull \hbox (badness 2020) in paragraph at lines 388--389
+Underfull \hbox (badness 2020) in paragraph at lines 378--379
 \OT1/cmr/m/n/12 cal cor-pora cov-er-ing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 388--389
+Underfull \hbox (badness 10000) in paragraph at lines 378--379
 \OT1/cmr/m/n/12 broad gas-troin-testi-
  []
 
 
-Underfull \hbox (badness 3826) in paragraph at lines 388--389
+Underfull \hbox (badness 3826) in paragraph at lines 378--379
 \OT1/cmr/m/n/12 nal anatomy, le-sion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 388--389
+Underfull \hbox (badness 10000) in paragraph at lines 378--379
 \OT1/cmr/m/n/12 se-man-tics, and di-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 388--389
+Underfull \hbox (badness 10000) in paragraph at lines 378--379
 \OT1/cmr/m/n/12 ag-nos-tic vo-cab-u-lary;
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--389
+Underfull \hbox (badness 10000) in paragraph at lines 379--379
 []|\OT1/cmr/m/n/12 Phase 2
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--389
+Underfull \hbox (badness 10000) in paragraph at lines 379--379
 \OT1/cmr/m/n/12 (Clin-i-cal
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--389
+Underfull \hbox (badness 10000) in paragraph at lines 379--379
 \OT1/cmr/m/n/12 Fine-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--389
+Underfull \hbox (badness 10000) in paragraph at lines 379--379
 []|\OT1/cmr/m/n/12 Physician-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--389
+Underfull \hbox (badness 10000) in paragraph at lines 379--379
 \OT1/cmr/m/n/12 annotated
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--389
+Underfull \hbox (badness 10000) in paragraph at lines 379--379
 \OT1/cmr/m/n/12 en-doscopy
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--389
+Underfull \hbox (badness 10000) in paragraph at lines 379--379
 \OT1/cmr/m/n/12 records, Gov-
  []
 
 
-Underfull \hbox (badness 4995) in paragraph at lines 389--389
+Underfull \hbox (badness 4995) in paragraph at lines 379--379
 \OT1/cmr/m/n/12 ern-ment Med-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--389
+Underfull \hbox (badness 10000) in paragraph at lines 379--379
 \OT1/cmr/m/n/12 i-cal Col-lege
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--389
+Underfull \hbox (badness 10000) in paragraph at lines 379--379
 []|\OT1/cmr/m/n/12 Institution-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--389
+Underfull \hbox (badness 10000) in paragraph at lines 379--379
 \OT1/cmr/m/n/12 specific
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--389
+Underfull \hbox (badness 10000) in paragraph at lines 379--379
 \OT1/cmr/m/n/12 en-do-scopic
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--389
+Underfull \hbox (badness 10000) in paragraph at lines 379--379
 []|\OT1/cmr/m/n/12 6.5k
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--389
+Underfull \hbox (badness 10000) in paragraph at lines 379--379
 \OT1/cmr/m/n/12 (base);
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--389
+Underfull \hbox (badness 10000) in paragraph at lines 379--379
 \OMS/cmsy/m/n/12 ^^X$\OT1/cmr/m/n/12 31k
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--389
+Underfull \hbox (badness 10000) in paragraph at lines 379--379
 \OT1/cmr/m/n/12 (aug-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--390
+Underfull \hbox (badness 10000) in paragraph at lines 379--380
 []|\OT1/cmr/m/n/12 De-identified, pro-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--390
+Underfull \hbox (badness 10000) in paragraph at lines 379--380
 \OT1/cmr/m/n/12 fes-sion-ally val-i-dated
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--390
+Underfull \hbox (badness 10000) in paragraph at lines 379--380
 \OT1/cmr/m/n/12 reg-is-ter and di-ag-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--390
+Underfull \hbox (badness 10000) in paragraph at lines 379--380
 \OT1/cmr/m/n/12 nos-tic con-ven-tions
  []
 
 
-Underfull \hbox (badness 3291) in paragraph at lines 389--390
+Underfull \hbox (badness 3291) in paragraph at lines 379--380
 \OT1/cmr/m/n/12 of trained gas-troen-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--390
+Underfull \hbox (badness 10000) in paragraph at lines 379--380
 \OT1/cmr/m/n/12 atic ro-ta-tion and
  []
 
 
-Overfull \hbox (28.50487pt too wide) in paragraph at lines 384--392
+Overfull \hbox (28.50487pt too wide) in paragraph at lines 374--382
  [][] 
  []
 
 [25]
-Overfull \hbox (17.37009pt too wide) in paragraph at lines 402--403
+Overfull \hbox (17.37009pt too wide) in paragraph at lines 392--393
 []\OT1/cmr/m/n/12 bfloat16 (BF16). BF16 cuts mem-ory con-sump-tion roughly
  []
 
 
-Overfull \hbox (14.38332pt too wide) in paragraph at lines 406--407
+Overfull \hbox (14.38332pt too wide) in paragraph at lines 396--397
 []\OT1/cmr/m/n/12 All ex-per-i-ments are ex-e-cuted on a Linux ma-chine run-nin
 g Py-Torch, equipped
  []
@@ -927,19 +942,19 @@ Chapter 6.
 [32
 
 ] [33]
-<Fig-10.png, id=165, 940.26282pt x 68.50594pt>
+<Fig-10.png, id=161, 940.26282pt x 68.50594pt>
 File: Fig-10.png Graphic file (type png)
 <use Fig-10.png>
-Package pdftex.def Info: Fig-10.png  used on input line 473.
+Package pdftex.def Info: Fig-10.png  used on input line 463.
 (pdftex.def)             Requested size: 331.50238pt x 24.152pt.
  [34] [35 <./Fig-10.png>] [36] [37]
-Underfull \hbox (badness 3375) in paragraph at lines 505--506
+Underfull \hbox (badness 3375) in paragraph at lines 495--496
 []\OT1/cmr/m/n/12 F. Chade-becq, L.B. Lo-vat, D. Stoy-anov, Ar-ti-fi-cial in-te
 l-li-gence
  []
 
 
-Underfull \hbox (badness 1442) in paragraph at lines 505--506
+Underfull \hbox (badness 1442) in paragraph at lines 495--496
 \OT1/cmr/m/n/12 and au-toma-tion in en-doscopy and surgery, Nat. Rev. Gas-troen
 -
  []
@@ -947,7 +962,7 @@ Underfull \hbox (badness 1442) in paragraph at lines 505--506
 [38
 
 ] [39]
-Underfull \hbox (badness 7397) in paragraph at lines 522--523
+Underfull \hbox (badness 7397) in paragraph at lines 512--513
 \OT1/cmr/m/n/12 efficient fine-tuning of llama for the clin-i-cal do-main, 2023
 ,
  []
@@ -961,11 +976,11 @@ L3 programming layer <2025-12-24>
 Here is how much of TeX's memory you used:
  13715 strings out of 467871
  278124 string characters out of 5418377
- 725966 words of memory out of 5000000
+ 724966 words of memory out of 5000000
  42427 multiletter control sequences out of 15000+600000
  636957 words of font info for 73 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 83i,11n,131p,2494b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 83i,11n,131p,2494b,608s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\pprav\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
 1095.pk> <C:\Users\pprav\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
 0\tcrm1200.pk><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/type1/public/
@@ -984,9 +999,9 @@ blic/amsfonts/cm/cmsy8.pfb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/
 type1/public/amsfonts/cm/cmti12.pfb><C:/Users/pprav/AppData/Local/Programs/MiKT
 eX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/pprav/AppData/Local/Prog
 rams/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (54 pages, 1841697 bytes).
+Output written on main.pdf (53 pages, 1839251 bytes).
 PDF statistics:
- 271 PDF objects out of 1000 (max. 8388607)
+ 268 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

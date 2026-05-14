@@ -49,26 +49,27 @@
 
 \begin{titlepage}
 \begin{center}
-\vspace{1cm}
+\vspace{0.4cm}
 \huge
 \textbf{Medical Diagnosis and Report Generation for Endoscopic Procedures Using Vision-Language Models}\\
 
 \normalsize
+\textbf{CS4099 Project Final Report}\\
 \vspace{1cm}
 \emph{Submitted by}\\
 \vspace{0.5cm}
-\begin{tabular}{ll}
-\textbf{Praval Pattam} & \textbf{B220057CS}\\
-\textbf{Theenesh Potluri} & \textbf{B221121CS}\\
-\textbf{Pranav Sai Sarvepalli} & \textbf{B220055CS}\\
+\begin{tabular}{ccc}
+\textbf{Praval Pattam} && \textbf{Reg No: B220057CS}\\
+\textbf{Theenesh Potluri} && \textbf{Reg No: B221121CS}\\
+\textbf{Pranav Sai Sarvepalli} && \textbf{Reg No: B220055CS}\\
 \end{tabular}\\
-\vspace{0.8cm}
-\textbf{Under the Guidance of: Dr. Jayaraj PB \& Srinivasa TM}\\
-\vspace{0.8cm}
+\vspace{0.6cm}
+\textbf{Under the Guidance of\\Dr. Jayaraj PB \& Srinivasa TM}\\
+\vspace{0.6cm}
 \begin{center}
-\IfFileExists{nitc-logo.png}{\includegraphics[width=0.2\textwidth]{nitc-logo.png}}{}
+\includegraphics[width=0.2\textwidth]{nitc-logo.png}
 \end{center}
-\vspace{0.8cm}
+\vspace{0.6cm}
 \textbf{Department of Computer Science and Engineering}\\
 \textbf{National Institute of Technology Calicut}\\
 \textbf{Calicut, Kerala, India - 673 601}\\
@@ -83,64 +84,59 @@
 
 \fontsize{14}{14}\selectfont
 \centering{\MakeUppercase{\textbf{National Institute of Technology Calicut, Kerala, India - 673 601}}} \\
-\vspace*{0.5cm}
+\vspace*{0.2cm}
 \fontsize{12}{12}\selectfont
 \centering{\MakeUppercase{\textbf{Department of Computer Science and Engineering}}} \\
-\begin{figure}[ht]
-{\centering {\IfFileExists{nitc-logo.png}{\includegraphics[width=0.2\textwidth]{nitc-logo.png}}{}}\par}
-\end{figure}
+\vspace*{0.2cm}
+{\centering\includegraphics[width=0.2\textwidth]{nitc-logo.png}\par}
+\vspace*{0.1cm}
 2025\\
-\vspace{0.5cm}
+\vspace{0.3cm}
 \fontsize{14}{14}\selectfont
 \textbf{\centering{CERTIFICATE}}\\
-\vspace{0.25cm}
+\vspace{0.2cm}
 \fontsize{12}{12}\selectfont
 \onehalfspacing{\textit{Certified that this is a bonafide record of the project work titled}}\\
-\vspace*{0.25cm}
+\vspace*{0.2cm}
 \textbf{\MakeUppercase{Medical Diagnosis and Report Generation for Endoscopic Procedures Using Vision-Language Models}}\\
-\vspace*{0.25cm}
+\vspace*{0.2cm}
 \onehalfspacing{\centering{\textit{done by}}}\\
-\vspace*{0.25cm}
+\vspace*{0.2cm}
 \begin{tabular}{c}
 \textbf{Praval Pattam}\\
 \textbf{Theenesh Potluri}\\
 \textbf{Pranav Sai Sarvepalli}\\
 \end{tabular}\\
-\vspace*{0.25cm}
+\vspace*{0.2cm}
 \onehalfspacing{ \textit{\centering{of eighth semester B. Tech in partial fulfillment of the requirements for the award of the degree of Bachelor of Technology in Computer Science and Engineering of the National Institute of Technology Calicut}}}\\
-\vspace*{0.75cm}
+\vspace*{0.5cm}
 \noindent{
-\begin{tabular}{p{6.5cm}p{5.5cm}}
-\textbf{Project Guides} & \textbf{Head of Department} \\[2.5cm]
-\textbf{Dr. Jayaraj PB} \newline Associate Professor &
-\textbf{Dr. Subashini R} \newline Associate Professor \\[2.5cm]
-\textbf{Srinivasa TM} \newline Assistant Professor & \\
+\begin{tabular}{p{4.5cm}cp{4.5cm}}
+\textbf{Project Guides} & \hfill \textbf{Head of Department} \\
+Dr. Jayaraj PB & \hspace{5cm} Dr. Subashini R\\
+Associate Professor & \hspace{5cm} Associate Professor\\
+Srinivasa TM & & \\
+Assistant Professor & & \\
 \end{tabular}
 }
 }
 \chapter*{DECLARATION}
 We hereby declare that the project titled, \textbf{Medical Diagnosis and Report Generation for Endoscopic Procedures Using Vision-Language Models}, is our own work and that, to the best of our knowledge and belief, it contains no material previously published or written by another person nor material which has been accepted for the award of any other degree or diploma of the university or any other institute of higher learning, except where due acknowledgement and reference has been made in the text.\\
 
-\vspace{1.5cm}
-\noindent
-\begin{minipage}[t]{0.4\textwidth}
-\vspace{0pt}
-Place: \underline{\hspace{3cm}}\\[1.2cm]
-Date: \underline{\hspace{3cm}}
-\end{minipage}%
-\hfill
-\begin{minipage}[t]{0.52\textwidth}
-\vspace{0pt}
-Name: Praval Pattam\\
-Reg. No.: B220057CS\\
-Signature: \underline{\hspace{3.5cm}}\\[1cm]
-Name: Theenesh Potluri\\
-Reg. No.: B221121CS\\
-Signature: \underline{\hspace{3.5cm}}\\[1cm]
-Name: Pranav Sai Sarvepalli\\
-Reg. No.: B220055CS\\
-Signature: \underline{\hspace{3.5cm}}
-\end{minipage}
+\vspace{2cm}
+\noindent{
+\begin{tabular}{p{8cm}p{6cm}}
+Place : & Signature : \\
+Date : & Name : Praval Pattam \\
+ & Reg. No. : B220057CS \\[1cm]
+ & Signature : \\
+ & Name : Theenesh Potluri \\
+ & Reg. No. : B221121CS \\[1cm]
+ & Signature : \\
+ & Name : Pranav Sai Sarvepalli \\
+ & Reg. No. : B220055CS
+\end{tabular}
+}
 \newpage 
 
 \begin{abstract}
@@ -169,12 +165,6 @@ We are deeply grateful to the following investigators from \textbf{Government Me
 \pagenumbering{arabic}
 
 \chapter{Introduction}
-\section*{Project Information}
-\textbf{Title:} Medical Diagnosis and Report Generation for Endoscopic Procedures Using Vision-Language Models.\\
-\textbf{Authors:} Praval Pattam\textsuperscript{B220057CS}, Theenesh Potluri\textsuperscript{B221121CS}, Pranav Sai Sarvepalli\textsuperscript{B220055CS}.\\
-\textbf{Affiliations:}\\
-Department of Computer Science and Engineering, National Institute of Technology Calicut, Calicut, Kerala, India - 673 601.\\
-\textbf{Keywords:} Multimodality; Large language models; Fine-tuning; Vision-language models; Endoscopic report generation.\\
 
 \section{Introduction}
 Endoscopic examinations occupy a central role in the early identification, diagnosis, and clinical management of gastrointestinal conditions [3,4], and a growing body of work has continually advanced the state of the art for associated computational tasks [1,2]. Every procedure produces substantial volumes of visual data that clinicians must interpret meticulously before composing accurate written reports, a process that is simultaneously cognitively demanding and time-intensive. Multimodal large language models (MLLMs) offer a compelling path forward: by pre-training on broad-scale corpora, they acquire transferable general knowledge that can subsequently be directed toward narrow specialised domains, making them well-suited to bridging the gap between raw endoscopic imagery and structured diagnostic text [5].
@@ -198,7 +188,7 @@ Over recent decades, administrative documentation tasks have come to occupy a gr
 
 The effects reach further than time loss alone. Surveys indicate that 75\% of healthcare providers consider current documentation demands to be actively harmful to the quality of care they can deliver [40]. At a more granular level, 58.1\% of physicians reject the view that their documentation workload is appropriately sized or that it preserves sufficient time for patient interaction, and 84.7\% acknowledge that record-keeping driven purely by billing obligations inflates their total documentation hours [40,41]. Collectively, these figures make a compelling case for intelligent automation tools that can absorb documentation overhead while maintaining the accuracy and professional standards required in clinical records.
 
-\section{MLLMs}
+\section[Multimodal Large Language Models (MLLMs)]{Multimodal Large Language Models \\ (MLLMs)}
 Large-scale pretraining has given rise to multimodal large language models (MLLMs) that jointly process visual and textual information, dramatically broadening the scope of AI perception and generation. A central design challenge in this area is achieving deep, rather than superficial, coupling between vision and language components. Wang et al. [13] tackled this problem through CogVLM, which inserts trainable visual expert modules directly into the attention and FFN layers of a frozen language backbone, enabling parameter-level fusion of visual and linguistic representations without degrading natural language processing behaviour. Approaching the same challenge from a different angle, Bai et al. [14] introduced the Qwen-VL model family to remedy the difficulty that standard language models face when interpreting raw visual signals; a three-stage curriculum training procedure applied to multilingual data allowed Qwen-VL to set new performance marks on image captioning, visual question answering, and visual grounding evaluations. Liu et al. [15] pursued yet another strategy, exploiting GPT-4's text-only reasoning capacity to synthesise multimodal instruction-following data, yielding LLaVA, a system that couples a vision encoder with a large language model backbone and achieves comparable results to multimodal GPT-4 on images unseen during training. Despite these advances, clinical data constitute only a small fraction of the corpora used to train such systems, leaving general-purpose models poorly equipped to characterise lesion morphology accurately or to produce outputs that conform to the structured conventions of professional diagnostic reporting.
 
 \section{Medical MLLMs}
@@ -241,7 +231,7 @@ In Phase 2, physician-annotated records from Government Medical College, Calicut
 
 
 
-\subsection{P-LoRA Method}
+\subsection{Prompt-LoRA (P-LoRA) Method}
 While LoRA achieves broad generalisation across tasks, its adaptation performance on narrow domain-specific problems can be insufficient when applied in isolation~[11]. As proposed by Zhang et al.~[42], our P-LoRA method addresses this limitation by coupling learnable soft prompt tokens with layer-selective LoRA weight updates within a unified parameter-efficient framework. Soft prompts are continuous, task-optimised embedding vectors prepended to the input sequence; unlike hard prompts, which encode manually crafted discrete tokens, soft prompts reside directly in the embedding space and are refined end-to-end through gradient descent with no manual engineering required. This mechanism guides the model toward domain-appropriate representations at minimal parameter cost. Selective LoRA weight increments then provide complementary, targeted adjustments that sharpen feature extraction across both visual and textual streams. Neither component alone is sufficient: soft prompts without weight updates may fail to reshape deep internal representations, whereas unrestricted LoRA incurs higher parameter overhead. Following Zhang et al.~[42], LoRA is applied selectively at three structural positions in the network: the initial layer, the intermediate layers, and the terminal layer. This reflects the empirically observed principle that initial layers encode general low-level features, intermediate layers mediate cross-modal interactions, and terminal layers specialise for task-specific output.
 Learnable soft prompt tokens~[28] are prepended to the input at every attention layer and initialised from the same distribution as the pretrained token embeddings. Let $\mathbf{e} = (e_1, e_2, \ldots, e_m)$ denote the trainable prompt tokens and $\mathbf{h} = (h_1, h_2, \ldots, h_n)$ the original input embeddings, where each $h_i \in \mathbb{R}^{d}$ and $d$ is the hidden dimension. The augmented sequence $\mathbf{z} = (e_1, \ldots, e_m, h_1, \ldots, h_n)$ is fed into the attention layer, where queries, keys, and values are computed jointly over all positions. The prompt tokens steer attention toward domain-relevant features while leaving the pretrained backbone weights unchanged; they are optimised exclusively through gradient descent on the task objective.
 Low-rank weight updates via LoRA are subsequently applied to the feed-forward layers. Restricting LoRA to the first, middle, and final Transformer layers serves distinct functional purposes: the initial layer is adapted to realign the model's sensitivity to novel domain-specific input patterns; the intermediate layers are updated to recalibrate attention over gastroenterological features; and the terminal layer is tuned to condition output generation on task-specific requirements. Within each selected feed-forward block, the first linear projection expands the representation from $d_{model}$ to $d_{ff}$, and a low-rank increment is introduced at this weight matrix. Rather than updating the full weight matrix $W \in \mathbb{R}^{m \times n}$ as in conventional fine-tuning, the pretrained weights are frozen and only an additive term $\Delta W$ is learned, giving the adjusted matrix shown in Formula (1).
