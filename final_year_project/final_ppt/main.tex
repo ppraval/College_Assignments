@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169]{beamer}
+﻿\documentclass[aspectratio=169]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{hyperref}
@@ -13,9 +13,9 @@
 % Post-Mid badge helper
 \newcommand{\postmidbadge}{%
   \begin{tikzpicture}[remember picture, overlay]
-    \node[anchor=north east, xshift=-0.3cm, yshift=-0.05cm,
-          fill=orange!20, draw=orange, rounded corners=2pt,
-          font=\tiny\bfseries, text=orange!80!black, inner sep=2pt]
+    \node[anchor=north east, xshift=-0.3cm, yshift=-0.1cm,
+          fill=orange!20, draw=orange, rounded corners=3pt,
+          font=\small\bfseries, text=orange!80!black, inner sep=4pt]
       at (current page.north east) {[Post-Mid]};
   \end{tikzpicture}%
 }
@@ -29,7 +29,7 @@
 
 % Title – Final Evaluation
 \title{Medical Diagnosis and Report Generation for Endoscopic Procedures Using Vision-Language Models}
-\author{Praval Pattam, Theenesh Potluri, Pranav Sai Sarvepalli \\ \small Under the Guidance of: Jayaraj PB, Srinivasa TM \\ National Institute of Technology Calicut}
+\author{Praval Pattam, Theenesh Potluri, Pranav Sai Sarvepalli \\ \small Under the Guidance of: Dr.\ Jayaraj P B, Srinivasa T M \\ National Institute of Technology Calicut}
 \date{B.Tech CSE Semester 8 Final Evaluation}
 
 \setbeamertemplate{footline}[frame number]
@@ -56,9 +56,9 @@
 % --- The Clinical Burden ---
 \begin{frame}{The Clinical Burden}
 \begin{itemize}
-    \item Each endoscopic procedure requires a \textbf{detailed written report} — findings, diagnosis, and treatment recommendations
+    \item Each endoscopic procedure requires a \textbf{detailed written report} --- findings, diagnosis, and treatment recommendations
     \item Manual report writing takes \textbf{3--5 minutes per procedure}: a major bottleneck in high-volume GI units performing 30--50 cases per day
-    \item A unit performing 40 procedures/day spends \textbf{$\sim$3.3 hours daily} on documentation alone — time taken directly away from patient care
+    \item A unit performing 40 procedures/day spends \textbf{$\sim$3.3 hours daily} on documentation alone --- time taken directly away from patient care
     \item Repetitive documentation contributes to \textbf{physician burnout} and diagnostic fatigue \scite{jama2024burden,bmj2024impact,nat2024burden}
     \item Documentation load has grown substantially with electronic health record requirements, doubling in the past decade \scite{nat2024burden}
 \end{itemize}
@@ -75,7 +75,7 @@
         \item Unfamiliar with endoscopic grading systems (Paris classification, Barrett's Prague criteria, ESGE grades)
         \item Produce generic descriptions rather than \textbf{structured clinical reports}
     \end{itemize}
-    \item Existing medical MLLMs (LLaVA-Med, HuatuoGPT-Vision) are trained on broad biomedical data — \textbf{not} on physician-annotated endoscopic reports
+    \item Existing medical MLLMs (LLaVA-Med, HuatuoGPT-Vision) are trained on broad biomedical data --- \textbf{not} on physician-annotated endoscopic reports
     \item \textbf{No model existed} trained on GMC Calicut physician-annotated GI endoscopic data, leaving a critical gap for Indian clinical settings
 \end{itemize}
 \end{frame}
@@ -88,11 +88,11 @@ Fine-tune a vision-language model to automatically generate professional-grade G
 \vspace{0.5em}
 \begin{itemize}
     \item \textbf{Architecture:} LLaVA-4 base with CLIP-ViT-L/14 vision encoder + Vicuna-7B-v1.5 LLM backbone
-    \item \textbf{Fine-tuning strategy:} P-LoRA — soft prompt tuning + selective LoRA
+    \item \textbf{Fine-tuning strategy:} P-LoRA --- soft prompt tuning + selective LoRA
     \item \textbf{Two-stage training:}
     \begin{enumerate}
         \item Stage 1: Medical domain knowledge injection (MedTrinity-25M,$\sim$160K Medical records)
-        \item Stage 2: Physician-style report generation (GMC Calicut, $\sim$~37K annotated samples)
+        \item Stage 2: Physician-style report generation (GMC Calicut, $\sim$31,200 augmented samples)
     \end{enumerate}
     \item \textbf{Target:} Automated, structured, interpretable endoscopic reports in $\sim$\textbf{7 seconds} vs.\ 3--5 minutes manual
 \end{itemize}
@@ -105,19 +105,19 @@ Fine-tune a vision-language model to automatically generate professional-grade G
     \item Writing endoscopic image reports requires deep domain expertise in gastroenterological terminology, lesion morphology, and clinical logic
     \item General Multimodal Large Language Models (MLLMs) exhibit critical knowledge gaps: they struggle with specialised endoscopy terminology, pathological feature descriptions, and complex medical reasoning
     \item Existing fine-tuning methods suffer from \textbf{limited domain adaptability} and \textbf{insufficient endoscopic-specific knowledge}
-    \item High-quality physician-annotated endoscopic data is scarce — publicly available medical datasets (PubMed) cover general medicine but lack the specificity needed for endoscopic report generation
+    \item High-quality physician-annotated endoscopic data is scarce --- publicly available medical datasets (PubMed) cover general medicine but lack the specificity needed for endoscopic report generation
 \end{itemize}
 \vspace{0.8em}
-\textbf{Goal:} Develop \textbf{MVLMERG} — a fine-tuned vision-language model that bridges the domain gap, producing professional-grade endoscopic reports matching the standard of intermediate-level physicians. \scite{pmc2024endo,frontiers2024survey}
+\textbf{Goal:} Develop \textbf{MVLMERG} --- a fine-tuned vision-language model that bridges the domain gap, producing professional-grade endoscopic reports matching the standard of intermediate-level physicians. \scite{pmc2024endo,frontiers2024survey}
 \end{frame}
 
 % --- Related Work: General Medical MLLMs ---
 \begin{frame}{Related Work: General Medical MLLMs}
 \begin{itemize}
-    \item \textbf{LLaVA-Med} \scite{neurips2023llava} — aligns PMC-15M biomedical image-text pairs in Stage 1; uses GPT-4-generated instruction data \scite{openai2023gpt4} for end-to-end fine-tuning in Stage 2; strong generalization but \textbf{lacks endoscopy-specific terminology}
-    \item \textbf{HuatuoGPT-Vision} \scite{chen2024huatuo} — refines medical image-text pairs from PubMed; MLLM-based denoising to build PubMedVision dataset; strong on broad medical VQA but \textbf{insufficient for detailed GI endoscopic findings}
-    \item \textbf{BiomedGPT} \scite{zhang2024biomedgpt} — unified generative pre-trained transformer across vision, language, and multimodal biomedical tasks; \textbf{broad coverage but weak on GI endoscopic report generation}
-    \item \textbf{PeFoMed} \scite{frontiers2024survey} — parameter-efficient fine-tuning framework for medical MLLMs; improves performance on medical imaging tasks but \textbf{not endoscopy-specific}
+    \item \textbf{LLaVA-Med} \scite{neurips2023llava} --- aligns PMC-15M biomedical image-text pairs in Stage 1; uses GPT-4-generated instruction data \scite{openai2023gpt4} for end-to-end fine-tuning in Stage 2; strong generalization but \textbf{lacks endoscopy-specific terminology}
+    \item \textbf{HuatuoGPT-Vision} \scite{chen2024huatuo} --- refines medical image-text pairs from PubMed; MLLM-based denoising to build PubMedVision dataset; strong on broad medical VQA but \textbf{insufficient for detailed GI endoscopic findings}
+    \item \textbf{BiomedGPT} \scite{zhang2024biomedgpt} --- unified generative pre-trained transformer across vision, language, and multimodal biomedical tasks; \textbf{broad coverage but weak on GI endoscopic report generation}
+    \item \textbf{PeFoMed} \scite{frontiers2024survey} --- parameter-efficient fine-tuning framework for medical MLLMs; improves performance on medical imaging tasks but \textbf{not endoscopy-specific}
 \end{itemize}
 \vspace{0.3em}
 \textbf{Common gap:} Broad biomedical pre-training cannot substitute for \textbf{physician-annotated, domain-specific} endoscopic training data.
@@ -126,9 +126,9 @@ Fine-tune a vision-language model to automatically generate professional-grade G
 % --- Related Work: Surgical / GI-specific Models ---
 \begin{frame}{Related Work: Surgical / GI-Specific Models}
 \begin{itemize}
-    \item \textbf{SurgicalGPT} — fine-tuned GPT for surgical visual Q\&A; 3--5\% accuracy gain over generalist models but focuses on \textbf{surgical scenes}, not endoscopic mucosal analysis
-    \item \textbf{ColonGPT / ColonINST} — colonoscopy instruction tuning with polyp detection focus; good for classification but \textbf{not designed for full report generation}
-    \item \textbf{EndoChat} — endoscopy dialogue system; limited to conversational Q\&A format, \textbf{cannot produce structured clinical reports}
+    \item \textbf{SurgicalGPT} --- fine-tuned GPT for surgical visual Q\&A; 3--5\% accuracy gain over generalist models but focuses on \textbf{surgical scenes}, not endoscopic mucosal analysis
+    \item \textbf{ColonGPT / ColonINST} --- colonoscopy instruction tuning with polyp detection focus; good for classification but \textbf{not designed for full report generation}
+    \item \textbf{EndoChat} --- endoscopy dialogue system; limited to conversational Q\&A format, \textbf{cannot produce structured clinical reports}
 \end{itemize}
 \vspace{0.8em}
 \textbf{What all GI-specific models lack:}
@@ -142,13 +142,13 @@ Fine-tune a vision-language model to automatically generate professional-grade G
 % --- Related Work: Fine-Tuning Methods ---
 \begin{frame}{Related Work: Fine-Tuning Methods}
 \begin{itemize}
-    \item \textbf{LoRA} \scite{lora2022hu} — Low-Rank Adaptation; adds rank-decomposition matrices $\Delta W = BA$ to frozen weights; highly parameter-efficient but \textbf{no mechanism to align input representations} with the target domain
-    \item \textbf{Prefix / P-Tuning} \scite{plora2022liu} — soft prompt tokens prepended to input; aligns context but \textbf{without weight adaptation the model's knowledge remains unchanged}
-    \item \textbf{PeFoMed} — parameter-efficient fine-tuning for medical LLMs; effective for general medical Q\&A but \textbf{not evaluated on endoscopic scenarios}
-    \item \textbf{MISS} — parameter-efficient medical MLLM fine-tuning; covers multiple imaging modalities but \textbf{not endoscopy-specific}
+    \item \textbf{LoRA} \scite{lora2022hu} --- Low-Rank Adaptation; adds rank-decomposition matrices $\Delta W = BA$ to frozen weights; highly parameter-efficient but \textbf{no mechanism to align input representations} with the target domain
+    \item \textbf{Prefix / P-Tuning} \scite{plora2022liu} --- soft prompt tokens prepended to input; aligns context but \textbf{without weight adaptation the model's knowledge remains unchanged}
+    \item \textbf{PeFoMed} --- parameter-efficient fine-tuning for medical LLMs; effective for general medical Q\&A but \textbf{not evaluated on endoscopic scenarios}
+    \item \textbf{MISS} --- parameter-efficient medical MLLM fine-tuning; covers multiple imaging modalities but \textbf{not endoscopy-specific}
 \end{itemize}
 \vspace{0.5em}
-\textbf{Key insight:} Neither prompt tuning nor LoRA alone is sufficient — their \textbf{combination (P-LoRA)} addresses both input representation alignment \textit{and} weight-space domain adaptation simultaneously.
+\textbf{Key insight:} Neither prompt tuning nor LoRA alone is sufficient --- their \textbf{combination (P-LoRA)} addresses both input representation alignment \textit{and} weight-space domain adaptation simultaneously.
 \end{frame}
 
 % --- Gap MVLMERG Fills ---
@@ -158,9 +158,9 @@ No existing model combines (1) prompt-based input alignment, (2) selective weigh
 \end{block}
 \vspace{0.5em}
 \begin{itemize}
-    \item \textbf{P-LoRA} — unifies soft prompt tuning + selective LoRA: addresses both input alignment and domain knowledge injection in a single fine-tuning strategy
-    \item \textbf{GMC Calicut physician-annotated data} — 6,500 real procedures annotated by senior endoscopists, augmented to $\sim$31,200 samples; reflects actual Indian clinical practice and terminology
-    \item \textbf{Chain-of-Thought integration} — anatomical $\to$ visual $\to$ diagnostic reasoning baked into training data; produces interpretable, verifiable reports
+    \item \textbf{P-LoRA} --- unifies soft prompt tuning + selective LoRA: addresses both input alignment and domain knowledge injection in a single fine-tuning strategy
+    \item \textbf{GMC Calicut physician-annotated data} --- 6,500 real procedures annotated by senior endoscopists, augmented to $\sim$31,200 samples; reflects actual Indian clinical practice and terminology
+    \item \textbf{Chain-of-Thought integration} --- anatomical $\to$ visual $\to$ diagnostic reasoning baked into training data; produces interpretable, verifiable reports
     \item \textbf{First model} targeting professional Indian GI endoscopic report generation in a real hospital deployment setting
 \end{itemize}
 \end{frame}
@@ -345,7 +345,7 @@ No existing model combines (1) prompt-based input alignment, (2) selective weigh
 \end{frame}
 
 % --- Two‑Stage Training Framework (all original citations restored, now \scite) ---
-\begin{frame}{Two‑Stage Training Framework — MVLMERG}
+\begin{frame}{Two‑Stage Training Framework --- MVLMERG}
     \textbf{Stage 1: Medical Domain Knowledge Injection} \scite{acl2024clinical,lora2022hu,zhang2026erglm}
 \begin{itemize}
     \item \textbf{Objective:} Acquire gastrointestinal domain knowledge
@@ -358,7 +358,7 @@ No existing model combines (1) prompt-based input alignment, (2) selective weigh
 \begin{itemize}
     \item \textbf{Objective:} Learn physician‑style endoscopic report language
     \item \textbf{Dataset:} GMC Calicut physician‑annotated data (6,500 base; $\sim$31K after augmentation)
-        \item \textbf{Strategy:} P-LoRA — prompt tokens + selective LoRA on key layers \scite{lora2022hu,plora2022liu,zhang2026erglm}
+        \item \textbf{Strategy:} P-LoRA --- prompt tokens + selective LoRA on key layers \scite{lora2022hu,plora2022liu,zhang2026erglm}
     \item \textbf{Unfrozen:} LLM backbone (vision encoder + connector frozen)
 \end{itemize}
 \end{frame}
@@ -372,12 +372,12 @@ P-LoRA combines \textbf{two complementary adaptation mechanisms}:
 \begin{columns}[T]
 \begin{column}{0.48\textwidth}
 \begin{block}{Soft Prompt Tuning \scite{plora2022liu,zhang2026erglm}}
-Prepends $m = 64$ learnable tokens to the input embedding sequence — steers the model's \textit{attention} toward endoscopic domain context before any weight computation.
+Prepends $m = 64$ learnable tokens to the input embedding sequence --- steers the model's \textit{attention} toward endoscopic domain context before any weight computation.
 \end{block}
 \end{column}
 \begin{column}{0.48\textwidth}
 \begin{block}{Selective LoRA \scite{lora2022hu,zhang2026erglm}}
-Injects low-rank adapter matrices $\Delta W = BA$ into the \textit{first, middle, and last} transformer layers — adapts the model's \textit{knowledge} to endoscopic terminology and clinical report style.
+Injects low-rank adapter matrices $\Delta W = BA$ into the \textit{first, middle, and last} transformer layers --- adapts the model's \textit{knowledge} to endoscopic terminology and clinical report style.
 \end{block}
 \end{column}
 \end{columns}
@@ -394,16 +394,16 @@ Injects low-rank adapter matrices $\Delta W = BA$ into the \textit{first, middle
 \textbf{What it is:} \scite{plora2022liu}
 \begin{itemize}
     \item $m = 64$ learnable embedding vectors $\{p_1, p_2, \ldots, p_{64}\}$ prepended to the input token sequence
-    \item Updated via gradient descent during training — \textbf{no manual prompt crafting required}
+    \item Updated via gradient descent during training --- \textbf{no manual prompt crafting required}
     \item At inference, the same learned tokens are prepended before every input
 \end{itemize}
 \vspace{0.5em}
 \textbf{Why we use it:}
 \begin{itemize}
     \item Manual prompts (e.g., ``You are a gastroenterologist\ldots'') are brittle and cannot encode fine-grained domain nuances
-    \item Learnable tokens capture \textbf{implicit domain knowledge} — endoscopic terminology, physician report style, grading conventions — purely through the training signal
+    \item Learnable tokens capture \textbf{implicit domain knowledge} --- endoscopic terminology, physician report style, grading conventions --- purely through the training signal
     \item The tokens guide the LLM's attention toward the clinical domain \textit{before} image and text tokens are processed
-    \item Adds only $64 \times 4096 \approx 262$K parameters — negligible overhead with significant domain alignment benefit
+    \item Adds only $64 \times 4096 \approx 262$K parameters --- negligible overhead with significant domain alignment benefit
 \end{itemize}
 \end{frame}
 
@@ -421,28 +421,28 @@ Injects low-rank adapter matrices $\Delta W = BA$ into the \textit{first, middle
 \begin{itemize}
     \item Transformer layers \textbf{specialise} at different levels of abstraction:
     \begin{itemize}
-        \item \textbf{Early layers} — low-level syntax and token patterns; minimal domain shift needed
-        \item \textbf{Middle layers} — semantic composition and concept associations; \textbf{critical for medical terminology}
-        \item \textbf{Last layers} — task-specific output formatting and clinical report style
+        \item \textbf{Early layers} --- low-level syntax and token patterns; minimal domain shift needed
+        \item \textbf{Middle layers} --- semantic composition and concept associations; \textbf{critical for medical terminology}
+        \item \textbf{Last layers} --- task-specific output formatting and clinical report style
     \end{itemize}
     \item Targeting only these three groups \textbf{captures all domain adaptation needs} while training far fewer parameters
-    \item Result: only \textbf{0.343\%} trainable parameters vs.\ $\sim$1\% for full LoRA — same quality, faster training, lower GPU memory
+    \item Result: only \textbf{0.343\%} trainable parameters vs.\ $\sim$1\% for full LoRA --- same quality, faster training, lower GPU memory
 \end{itemize}
 \end{frame}
 
 % --- Why P-LoRA beats LoRA alone ---
 \begin{frame}{Why P-LoRA Outperforms LoRA Alone}
 \vspace{0.2em}
-\textbf{Plain LoRA — the limitation:} \scite{lora2022hu,plora2022liu,zhang2026erglm}
+\textbf{Plain LoRA --- the limitation:} \scite{lora2022hu,plora2022liu,zhang2026erglm}
 \begin{itemize}
     \item Adapts weight matrices but does not change how the model \textit{interprets the input context}
-    \item For highly specialised domains like GI endoscopy, the model still ``reads'' input through a generic lens — producing suboptimal attention over clinical features
+    \item For highly specialised domains like GI endoscopy, the model still ``reads'' input through a generic lens --- producing suboptimal attention over clinical features
 \end{itemize}
 \vspace{0.4em}
-\textbf{P-LoRA — the combination advantage:}
+\textbf{P-LoRA --- the combination advantage:}
 \begin{itemize}
     \item \textbf{Prompt tokens} shift input representations toward the endoscopic domain \textit{before} attention is computed
-    \item \textbf{LoRA adapters} then operate on already-domain-aligned representations — more efficient weight updates with less training signal wasted
+    \item \textbf{LoRA adapters} then operate on already-domain-aligned representations --- more efficient weight updates with less training signal wasted
     \item The two mechanisms are \textbf{orthogonal}: prompt tuning acts at the input embedding level; LoRA acts at the weight matrix level
 \end{itemize}
 \vspace{0.4em}
@@ -482,7 +482,7 @@ Injects low-rank adapter matrices $\Delta W = BA$ into the \textit{first, middle
 \end{frame}
 
 % --- Vicuna Architecture ---
-\begin{frame}{LLM Backbone — Vicuna-7B-v1.5}
+\begin{frame}{LLM Backbone --- Vicuna-7B-v1.5}
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{figures/llama_architecture.png}
@@ -509,7 +509,7 @@ Injects low-rank adapter matrices $\Delta W = BA$ into the \textit{first, middle
 \begin{itemize}
     \item Integrated rigorous \textbf{System Prompts} directly into the training dataset.
     \item \textbf{Role Assignment:} Instructed the model to assume a specific clinical persona (e.g., ``You are an expert gastroenterologist...'').
-    \item \textbf{Output Constraints:} Provided explicit instructions to prioritise direct, concise, and structured answers mirroring real GMC Kozhikode reports.
+    \item \textbf{Output Constraints:} Provided explicit instructions to prioritise direct, concise, and structured answers mirroring real GMC Calicut reports.
 \end{itemize}
 
 \vspace{0.5em}
@@ -717,29 +717,29 @@ Semantic similarity via contextual BERT token embeddings.
 \begin{frame}{Why These Evaluation Metrics?}
 \begin{columns}[T]
 \begin{column}{0.48\textwidth}
-\small\textbf{CIDEr} — \textit{primary metric}
+\small\textbf{CIDEr} --- \textit{primary metric}
 \begin{itemize}\setlength\itemsep{0pt}
     \item Designed for report generation; TF-IDF up-weights \textit{discriminative} n-grams, penalising generic filler
     \item Best reflects domain-specific clinical term quality
 \end{itemize}
-\textbf{ROUGE-L} — \textit{clinical structure}
+\textbf{ROUGE-L} --- \textit{clinical structure}
 \begin{itemize}\setlength\itemsep{0pt}
     \item LCS-based: captures correct finding sequence (anatomy $\to$ observation $\to$ diagnosis)
     \item Robust to paraphrasing
 \end{itemize}
-\textbf{METEOR} — \textit{linguistic fluency}
+\textbf{METEOR} --- \textit{linguistic fluency}
 \begin{itemize}\setlength\itemsep{0pt}
-    \item Handles synonyms and stemming — physicians use varied clinical vocabulary
+    \item Handles synonyms and stemming --- physicians use varied clinical vocabulary
     \item Fragmentation penalty discourages incoherent output
 \end{itemize}
 \end{column}
 \begin{column}{0.48\textwidth}
-\small\textbf{BLEU-4} — \textit{n-gram precision}
+\small\textbf{BLEU-4} --- \textit{n-gram precision}
 \begin{itemize}\setlength\itemsep{0pt}
     \item 4-gram precision captures multi-word phrases (e.g., ``Grade II esophageal varices'')
     \item Included for comparability with prior medical NLG literature
 \end{itemize}
-\textbf{BERTScore} — \textit{semantic correctness}
+\textbf{BERTScore} --- \textit{semantic correctness}
 \begin{itemize}\setlength\itemsep{0pt}
     \item Contextual BERT embeddings measure semantic similarity beyond surface overlap
     \item Handles spelling variants (``oesophageal'' vs.\ ``esophageal'')
@@ -750,7 +750,7 @@ Semantic similarity via contextual BERT token embeddings.
 \end{frame}
 
 % --- Quantitative Comparison ---
-\begin{frame}{Quantitative Comparison — MVLMERG vs. Baselines}
+\begin{frame}{Quantitative Comparison --- MVLMERG vs. Baselines}
 \centering
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lccccc}
@@ -765,7 +765,8 @@ InstructBLIP & 0.0088 & 0.0320 & 0.0583 & 0.0004 & 0.8196 \\
 \end{tabular}%
 }
 \vspace{0.4em}
-\small Evaluated on 100 samples. MVLMERG outperforms all baselines across all 5 metrics.
+\small Evaluated on 100 samples. MVLMERG leads on 4 of 5 metrics (CIDEr, ROUGE-L, METEOR, BERTScore). \\
+\footnotesize\textit{Note: BLEU-4 (0.0006) is marginally below Qwen2-VL (0.0009); all other metrics show clear improvement.}
 \end{frame}
 
 % --- Expert Physician Evaluation ---
@@ -847,6 +848,8 @@ Q3\_K\_L & Mobile deployments & Ultra‑compact \\
 \bottomrule
 \end{tabular}
 \end{table}
+\vspace{0.5em}
+\textbf{Site-Specific Adaptation:} Brief P-LoRA fine-tuning at each new hospital site to adapt to local reporting vocabulary and endoscope characteristics --- measuring adaptation cost across $\geq$2 hospitals.
 \end{frame}
 
 % --- Deployment Planning (original citations restored) ---
@@ -874,6 +877,22 @@ Q3\_K\_L & Mobile deployments & Ultra‑compact \\
     \item RESTful API architecture (secure, authenticated endpoints)
     \item Real‑time synchronization with patient records
 \end{itemize}
+\vspace{0.5em}
+\textbf{Regulatory Pathway:}
+\begin{itemize}
+    \item Pending IEC approval and \textbf{CDSCO SaMD} (Software as a Medical Device) compliance before live clinical use
+\end{itemize}
+\end{frame}
+
+% --- Limitations ---
+\begin{frame}{Limitations}
+\begin{itemize}
+    \item \textbf{Single-institution data:} Trained on GMC Calicut data only; performance may vary across hospitals with different endoscope models, lighting, and reporting vocabulary.
+    \item \textbf{Single-frame input:} Processes individual frames in isolation; clinicians review multiple sequential images before reporting --- temporal context is lost.
+    \item \textbf{No uncertainty quantification:} Model does not communicate its own confidence level; rare but clinically relevant errors do occur.
+    \item \textbf{Under-represented categories:} Early Barrett's oesophagus, post-ESD healing patterns, and rare lesion types are sparse in the training set.
+    \item \textbf{Mandatory physician review:} All generated reports must be reviewed and approved by a qualified endoscopist before influencing any patient care decision.
+\end{itemize}
 \end{frame}
 
 % ========== Conclusion (original citations restored) ==========
@@ -884,7 +903,7 @@ Q3\_K\_L & Mobile deployments & Ultra‑compact \\
     \item Built a vision-language model for automated endoscopic report generation, fine-tuned on a custom $\sim$31,200-sample dataset.
     \item Implemented a DPDP‑compliant de‑identification pipeline, making sensitive clinical data safe for AI training.
     \item Integrated system prompts and Chain‑of‑Thought reasoning to produce \textbf{concise, transparent, and clinically interpretable} reports.
-        \item Achieved state-of-the-art: CIDEr 0.0531, ROUGE-L 0.2632, METEOR 0.1187, BLEU-4 0.0006, BERTScore 0.8760.
+        \item Achieved state-of-the-art on 4/5 metrics --- CIDEr \textbf{0.0531}, ROUGE-L \textbf{0.2632}, METEOR \textbf{0.1187}, BERTScore \textbf{0.8760}; BLEU-4 0.0006 (slightly below Qwen baseline 0.0009).
 \end{itemize}
 \vspace{1em}
 \textbf{Impact:} Drastically reduces documentation time; provides explainable AI assistance to gastroenterologists \scite{jama2024burden,bmj2024impact}.

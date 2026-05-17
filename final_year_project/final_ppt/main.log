@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.3)  13 MAY 2026 12:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.3)  17 MAY 2026 14:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1422,15 +1422,14 @@ Overfull \vbox (23.35684pt too high) detected at line 750
 
 ] [54
 
+] [55
+
 ] (main.bbl
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\translate ' on input line 1.
 
-) [55
-
-] [56
-
+) [56
 
 ] [57
 
@@ -1442,9 +1441,6 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 
 ] [60
-
-
-] [61
 
 
 ]
@@ -1466,11 +1462,11 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 3B357F955481EEE719651CBF8A65892E;782.
  ) 
 Here is how much of TeX's memory you used:
- 27594 strings out of 467871
- 545552 string characters out of 5418377
- 917111 words of memory out of 5000000
- 55781 multiletter control sequences out of 15000+600000
- 645469 words of font info for 102 fonts, out of 8000000 for 9000
+ 27590 strings out of 467871
+ 545512 string characters out of 5418377
+ 914206 words of memory out of 5000000
+ 55779 multiletter control sequences out of 15000+600000
+ 645658 words of font info for 102 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,14n,123p,408b,766s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\pprav\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcsx
@@ -1497,11 +1493,10 @@ ers/pprav/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.p
 fb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
 /cmsy8.pfb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmsy9.pfb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/amsfonts/cm/cmtt10.pfb><C:/Users/pprav/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (61 pages, 4143572 bytes).
+blic/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (60 pages, 4121553 bytes).
 PDF statistics:
- 1979 PDF objects out of 2073 (max. 8388607)
- 153 named destinations out of 1000 (max. 500000)
+ 1931 PDF objects out of 2073 (max. 8388607)
+ 151 named destinations out of 1000 (max. 500000)
  420 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -28,7 +28,6 @@ Lisa~S. Rotenstein, Melisa Abola, Sachin~H. Jain, and Christine~K. Cassel.
 \newblock \emph{Reducing Administrative Burden in Health Care: Strategies to
   Improve Clinician Well-Being}.
 \newblock National Academies Press, 2024.
-\newblock URL \url{https://www.ncbi.nlm.nih.gov/books/NBK608542/}.
 
 \bibitem[Ali et~al.(2024)Ali, Muzammil, Dahiya, Ali, Yasin, Hanif, Gangwani,
   Aziz, Khalaf, Basuli, and Al-Haddad]{pmc2024endo}
@@ -38,7 +37,6 @@ Heya Ali, Muhammad~A. Muzammil, Dushyant~S. Dahiya, Fawad Ali, Shanza Yasin,
 \newblock Artificial intelligence in gastrointestinal endoscopy: A
   comprehensive review.
 \newblock \emph{Annals of Gastroenterology}, 2024.
-\newblock URL \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC11842897/}.
 
 \bibitem[Haghighi et~al.(2024)Haghighi, Hosseinzadeh~Taher, Zhou, Gotway, and
   Liang]{frontiers2024survey}
@@ -46,8 +44,6 @@ Fatemeh Haghighi, Mohammad~Reza Hosseinzadeh~Taher, Zongwei Zhou, Michael~B.
   Gotway, and Jianming Liang.
 \newblock Medical vision-language models: A survey.
 \newblock \emph{Frontiers in Artificial Intelligence}, 2024.
-\newblock URL
-  \url{https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2024.1430984/full}.
 
 \bibitem[Li et~al.(2023)Li, Wong, Zhang, Usuyama, Liu, Yang, Naumann, Poon, and
   Gao]{neurips2023llava}
@@ -56,21 +52,17 @@ Chunyuan Li, Cliff Wong, Steven Zhang, Naoto Usuyama, Haotian Liu, Jianwei
 \newblock Llava-med: Training a large language and vision assistant for
   biomedicine.
 \newblock In \emph{NeurIPS}, 2023.
-\newblock URL
-  \url{https://papers.neurips.cc/paper_files/paper/2023/file/5abcdf8ecdcacba028c6662789194572-Paper-Datasets_and_Benchmarks.pdf}.
 
 \bibitem[{OpenAI}(2023)]{openai2023gpt4}
 {OpenAI}.
 \newblock {GPT-4} technical report.
 \newblock \emph{arXiv preprint arXiv:2303.08774}, 2023.
-\newblock URL \url{https://arxiv.org/abs/2303.08774}.
 
 \bibitem[Chen et~al.(2024)Chen, Li, Wang, Liu, Li, et~al.]{chen2024huatuo}
 Jiarong Chen, Junying Li, Weichen Wang, Zhenyang Liu, Guiming~Hardy Li, et~al.
 \newblock Huatuogpt-vision, towards injecting medical visual knowledge into
   multimodal {LLMs} at scale.
 \newblock \emph{arXiv preprint arXiv:2406.19280}, 2024.
-\newblock URL \url{https://arxiv.org/abs/2406.19280}.
 
 \bibitem[Zhang et~al.(2023)Zhang, Yu, Yan, Liu, Adhikarla, Fu, Chen, Zhou, Li,
   Jiang, et~al.]{zhang2024biomedgpt}
@@ -79,7 +71,6 @@ Kai Zhang, Jun Yu, Zhiling Yan, Yixin Liu, Eashan Adhikarla, Sunyang Fu, Ying
 \newblock Biomedgpt: A unified and generalist biomedical generative pre-trained
   transformer for vision, language, and multimodal tasks.
 \newblock \emph{arXiv preprint arXiv:2305.17100}, 2023.
-\newblock URL \url{https://arxiv.org/abs/2305.17100}.
 
 \bibitem[Hu et~al.(2022)Hu, Shen, Wallis, Allen-Zhu, Li, Wang, Wang, and
   Chen]{lora2022hu}
@@ -88,7 +79,6 @@ Edward~J. Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean
 \newblock Lora: Low-rank adaptation of large language models.
 \newblock In \emph{International Conference on Learning Representations
   (ICLR)}, 2022.
-\newblock URL \url{https://openreview.net/forum?id=nZeVKeeFYf9}.
 
 \bibitem[Liu et~al.(2022)Liu, Ji, Fu, Tam, Du, Yang, and Tang]{plora2022liu}
 Xiao Liu, Kaixuan Ji, Yicheng Fu, Weng~Lam Tam, Zhengxiao Du, Zhilin Yang, and
@@ -96,26 +86,22 @@ Xiao Liu, Kaixuan Ji, Yicheng Fu, Weng~Lam Tam, Zhengxiao Du, Zhilin Yang, and
 \newblock P-tuning v2: Prompt tuning can be comparable to fine-tuning
   universally across scales and tasks.
 \newblock In \emph{Proceedings of the ACL}, 2022.
-\newblock URL \url{https://aclanthology.org/2022.acl-short.8}.
 
 \bibitem[Wang et~al.(2024)Wang, Peng, Lu, Lu, and
   Summers]{arxiv2024qageneration}
 Xiaosong Wang, Yifan Peng, Le~Lu, Zhiyong Lu, and Ronald~M. Summers.
 \newblock Automated medical qa generation: A review.
 \newblock \emph{arXiv preprint}, 2024.
-\newblock URL \url{https://arxiv.org/abs/1811.00681}.
 
 \bibitem[Zhang and et~al.(2024)]{jmir2024instruction}
 Yuhao Zhang and et~al.
 \newblock Medical instruction datasets for large language models.
 \newblock \emph{JMIR}, 2024.
-\newblock URL \url{https://www.jmir.org/2025/1/e70481}.
 
 \bibitem[Pogorelov and et~al.(2024)]{arxiv2024kvasir}
 Konstantin Pogorelov and et~al.
 \newblock Kvasir-vqa-x1: Medical visual question answering dataset.
 \newblock \emph{arXiv preprint}, 2024.
-\newblock URL \url{https://arxiv.org/html/2506.09958v1}.
 
 \bibitem[Reimers and Gurevych(2019)]{reimers2019sbert}
 Nils Reimers and Iryna Gurevych.
@@ -129,7 +115,6 @@ Nils Reimers and Iryna Gurevych.
 Robert Leaman and Zhiyong Lu.
 \newblock Clinical applications of large language models.
 \newblock \emph{ACL Anthology}, 2024.
-\newblock URL \url{https://aclanthology.org/2024.clinicalnlp-1.21.pdf}.
 
 \bibitem[Zhang et~al.(2026)Zhang, Zheng, Li, Ma, Liang, Ren, and
   Zhang]{zhang2026erglm}
@@ -147,7 +132,6 @@ Yunfei Xie, Ce~Wu, Pengfei He, et~al.
   annotations for medicine.
 \newblock In \emph{International Conference on Learning Representations
   (ICLR)}, 2025.
-\newblock URL \url{https://arxiv.org/abs/2408.02900}.
 
 \bibitem[Ben~Abacha et~al.(2019)Ben~Abacha, Hasan, Datla, Liu, Demner-Fushman,
   and M{\"u}ller]{vqamed2019abacha}
@@ -156,7 +140,6 @@ Asma Ben~Abacha, Sadid~A. Hasan, Vivek~V. Datla, Joey Liu, Dina Demner-Fushman,
 \newblock Vqa-med: Overview of the medical visual question answering task at
   imageclef 2019.
 \newblock In \emph{CLEF 2019 Working Notes}, 2019.
-\newblock URL \url{https://ceur-ws.org/Vol-2380/paper_272.pdf}.
 
 \bibitem[Dettmers et~al.(2023)Dettmers, Pagnoni, Holtzman, and
   Zettlemoyer]{dettmers2023qlora}
@@ -164,7 +147,6 @@ Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, and Luke Zettlemoyer.
 \newblock {QLoRA}: Efficient finetuning of quantized {LLMs}.
 \newblock In \emph{Advances in Neural Information Processing Systems
   (NeurIPS)}, 2023.
-\newblock URL \url{https://arxiv.org/abs/2305.14314}.
 
 \bibitem[Frantar et~al.(2023)Frantar, Ashkboos, Hoefler, and
   Alistarh]{frantar2023gptq}
@@ -173,7 +155,6 @@ Elias Frantar, Saleh Ashkboos, Torsten Hoefler, and Dan Alistarh.
   pre-trained transformers.
 \newblock In \emph{International Conference on Learning Representations
   (ICLR)}, 2023.
-\newblock URL \url{https://openreview.net/forum?id=tcbBPnfwxS}.
 
 \bibitem[Kwon et~al.(2023)Kwon, Li, Zhuang, Sheng, Zheng, Yu, Gonzalez, Zhang,
   and Stoica]{kwon2023vllm}
@@ -183,6 +164,5 @@ Woosuk Kwon, Zhuohan Li, Siyuan Zhuang, Ying Sheng, Lianmin Zheng, Cody~Hao Yu,
   {PagedAttention}.
 \newblock In \emph{Proceedings of the 29th ACM Symposium on Operating Systems
   Principles (SOSP)}, 2023.
-\newblock URL \url{https://arxiv.org/abs/2309.06180}.
 
 \end{thebibliography}
